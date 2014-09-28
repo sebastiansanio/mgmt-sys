@@ -1,5 +1,5 @@
+import mgmt.payment.Invoice
 import mgmt.persons.Supplier
-import mgmt.procurement.Invoice
 import mgmt.security.Requestmap
 import mgmt.security.SecAuthority
 import mgmt.security.SecUser

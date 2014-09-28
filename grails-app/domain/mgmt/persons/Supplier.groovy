@@ -5,12 +5,16 @@ import java.util.Date;
 class Supplier {
 	Date dateCreated
 	Date lastUpdated
+	
 	String name
-	String cuit
+	String address
+	String location
+	String province
+	String zipCode
+	String note
 	
     static constraints = {
 		name unique:true
-		cuit unique:true
     }
 	
 	String toString(){
