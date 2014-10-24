@@ -8,4 +8,8 @@ class Work {
     static constraints = {
 		name unique: true
     }
+	
+	String toString(){
+		return name
+	}
 }
