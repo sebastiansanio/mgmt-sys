@@ -6,6 +6,7 @@ class Supplier {
 	Date dateCreated
 	Date lastUpdated
 	
+	String cuit
 	String name
 	String address
 	String location
@@ -14,7 +15,13 @@ class Supplier {
 	String note
 	
     static constraints = {
-		name unique:true
+		name unique: true
+		cuit unique: true
+		address blank:true, nullable:true
+		location blank:true, nullable:true
+		province blank:true, nullable:true
+		zipCode blank:true, nullable:true
+		note blank:true, nullable:true
     }
 	
 	String toString(){
