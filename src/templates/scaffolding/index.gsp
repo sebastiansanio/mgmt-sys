@@ -16,6 +16,7 @@
 	<table class="table table-bordered margin-top-medium">
 		<thead>
 			<tr>
+				<th>\${message(code:'default.show.label')}</th>
 			<%  excludedProps = Event.allEvents.toList() << 'id' << 'version'
 				allowedNames = domainClass.persistentProperties*.name << 'dateCreated' << 'lastUpdated'
 				props = domainClass.properties.findAll { allowedNames.contains(it.name) && !excludedProps.contains(it.name) && !Collection.isAssignableFrom(it.type) && (domainClass.constrainedProperties[it.name] ? domainClass.constrainedProperties[it.name].display : true) }
@@ -32,17 +33,15 @@
 		<tbody>
 		<g:each in="\${${propertyName}List}" status="i" var="${propertyName}">
 			<tr class="\${(i % 2) == 0 ? 'odd' : 'even'}">
+				<td><g:link action="show" id="\${${propertyName}.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
 			<%  props.eachWithIndex { p, i ->
-					if (i == 0) { %>
-				<td><g:link action="show" id="\${${propertyName}.id}">\${fieldValue(bean: ${propertyName}, field: "${p.name}")}</g:link></td>
-			<%	  } else if (i < 6) {
 						if (p.type == Boolean || p.type == boolean) { %>
 				<td><g:formatBoolean boolean="\${${propertyName}.${p.name}}" /></td>
 			<%		  } else if (p.type == Date || p.type == java.sql.Date || p.type == java.sql.Time || p.type == Calendar) { %>
 				<td><g:formatDate date="\${${propertyName}.${p.name}}" /></td>
 			<%		  } else { %>
 				<td>\${fieldValue(bean: ${propertyName}, field: "${p.name}")}</td>
-			<%  }   }   } %>
+			<%  }   } %>
 			</tr>
 		</g:each>
 		</tbody>

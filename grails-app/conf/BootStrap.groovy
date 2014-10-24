@@ -14,10 +14,10 @@ class BootStrap {
 		SecUserSecAuthority.create(user,authority,true)
 		
 		for (String url in [
-      '/', '/index', '/index.gsp', '/**/favicon.ico',
-      '/assets/**', '/**/js/**', '/**/css/**', '/**/images/**',
-      '/login', '/login.*', '/login/*',
-      '/logout', '/logout.*', '/logout/*', '/dbconsole/**', '/fonts/**']) {
+	      '/', '/index', '/index.gsp', '/**/favicon.ico',
+	      '/assets/**', '/**/js/**', '/**/css/**', '/**/images/**',
+	      '/login', '/login.*', '/login/*',
+	      '/logout', '/logout.*', '/logout/*', '/dbconsole/**', '/fonts/**']) {
 			new Requestmap(url: url, configAttribute: 'permitAll').save(flush: true)
 		}
 		

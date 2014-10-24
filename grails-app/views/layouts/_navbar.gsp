@@ -10,15 +10,8 @@
           <a class="navbar-brand" href="#">${message(code:'appName.label')}</a>
         </div>
         <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right"><%--
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            --%><li><a href="#">Salir</a></li>
-          </ul><%--
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
-        --%></div>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Salir</a></li>
+          </ul></div>
       </div>
 </nav>
