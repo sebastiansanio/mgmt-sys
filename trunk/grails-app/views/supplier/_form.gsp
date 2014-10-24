@@ -8,6 +8,13 @@
 					<g:textField class="form-control" name="name" value="${supplierInstance?.name}"/>
 				</div>
 			</div>
+			
+			<div class="${hasErrors(bean: supplierInstance, field: 'cuit', 'has-error')} ">
+				<label for="name" class="control-label"><g:message code="supplier.cuit.label" default="Cuit" /></label>
+				<div>
+					<g:textField class="form-control" name="cuit" value="${supplierInstance?.cuit}"/>
+				</div>
+			</div>
 
 			<div class="${hasErrors(bean: supplierInstance, field: 'address', 'has-error')} ">
 				<label for="address" class="control-label"><g:message code="supplier.address.label" default="Address" /></label>

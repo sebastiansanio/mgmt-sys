@@ -21,14 +21,9 @@
 				<g:sortableColumn property="name" title="${message(code: 'supplier.name.label', default: 'Name')}" />
 			
 				<g:sortableColumn property="address" title="${message(code: 'supplier.address.label', default: 'Address')}" />
+		
+				<g:sortableColumn property="cuit" title="${message(code: 'supplier.cuit.label', default: 'Cuit')}" />
 			
-				<g:sortableColumn property="dateCreated" title="${message(code: 'supplier.dateCreated.label', default: 'Date Created')}" />
-			
-				<g:sortableColumn property="lastUpdated" title="${message(code: 'supplier.lastUpdated.label', default: 'Last Updated')}" />
-			
-				<g:sortableColumn property="location" title="${message(code: 'supplier.location.label', default: 'Location')}" />
-			
-				<g:sortableColumn property="note" title="${message(code: 'supplier.note.label', default: 'Note')}" />
 			
 			</tr>
 		</thead>
@@ -41,17 +36,8 @@
 			
 				<td>${fieldValue(bean: supplierInstance, field: "address")}</td>
 			
-				<td><g:formatDate date="${supplierInstance.dateCreated}" /></td>
+				<td>${fieldValue(bean: supplierInstance, field: "cuit")}</td>
 			
-				<td><g:formatDate date="${supplierInstance.lastUpdated}" /></td>
-			
-				<td>${fieldValue(bean: supplierInstance, field: "location")}</td>
-			
-				<td>${fieldValue(bean: supplierInstance, field: "note")}</td>
-			
-				<td>${fieldValue(bean: supplierInstance, field: "province")}</td>
-			
-				<td>${fieldValue(bean: supplierInstance, field: "zipCode")}</td>
 			
 			</tr>
 		</g:each>

@@ -19,16 +19,14 @@
 				<th>${message(code:'default.show.label')}</th>
 			
 				<g:sortableColumn property="date" title="${message(code: 'invoice.date.label', default: 'Date')}" />
-			
-				<g:sortableColumn property="dateCreated" title="${message(code: 'invoice.dateCreated.label', default: 'Date Created')}" />
-			
-				<g:sortableColumn property="lastUpdated" title="${message(code: 'invoice.lastUpdated.label', default: 'Last Updated')}" />
-			
+
 				<g:sortableColumn property="number" title="${message(code: 'invoice.number.label', default: 'Number')}" />
 			
 				<th><g:message code="invoice.supplier.label" default="Supplier" /></th>
 			
 				<th><g:message code="invoice.type.label" default="Type" /></th>
+				
+				<th><g:message code="invoice.work.label" default="Work" /></th>
 			
 			</tr>
 		</thead>
@@ -38,11 +36,7 @@
 				<td><g:link action="show" id="${invoiceInstance.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
 			
 				<td><g:formatDate date="${invoiceInstance.date}" /></td>
-			
-				<td><g:formatDate date="${invoiceInstance.dateCreated}" /></td>
-			
-				<td><g:formatDate date="${invoiceInstance.lastUpdated}" /></td>
-			
+
 				<td>${fieldValue(bean: invoiceInstance, field: "number")}</td>
 			
 				<td>${fieldValue(bean: invoiceInstance, field: "supplier")}</td>

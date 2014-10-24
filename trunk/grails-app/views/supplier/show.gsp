@@ -22,7 +22,13 @@
 				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "name")}</td>
 				
 			</tr>
-		
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="supplier.cuit.label" default="Cuit" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: supplierInstance, field: "cuit")}</td>
+				
+			</tr>
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="supplier.address.label" default="Address" /></td>
 				
