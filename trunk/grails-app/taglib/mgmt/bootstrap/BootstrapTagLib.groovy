@@ -81,7 +81,7 @@ class BootstrapTagLib {
 				writer << "<li>"
 				writer << link(linkTagAttrs.clone()) {firststep.toString()}
 				writer << "</li>"
-				writer << '<li class="disabled"><a href="#">…</a></li>'
+				writer << '<li class="disabled"><a href="#"></a></li>'
 			}
 
 			// display paginate steps
@@ -100,7 +100,7 @@ class BootstrapTagLib {
 			// display laststep link when endstep is not laststep
 			if (endstep < laststep) {
 				linkParams.offset = (laststep -1) * max
-				writer << '<li class="disabled"><a href="#">…</a></li>'
+				writer << '<li class="disabled"><a href="#"></a></li>'
 				writer << "<li>"
 				writer << link(linkTagAttrs.clone()) { laststep.toString() }
 				writer << "</li>"
@@ -250,7 +250,7 @@ class BootstrapTagLib {
 				.toLowerCase()
 		}
 		String formattedDate = g.formatDate(format: dateFormat.replace('m', 'M'), date: c?.getTime())
-		out.println "	<input id=\"${id}\" name=\"${name}\" class=\"datepicker ${inputClasses}\" size=\"16\" type=\"text\" value=\"${formattedDate}\" data-date-format=\"${dateFormat}\"/>"
+		out.println "	<input id=\"${id}\" data-provide=\"datepicker\" name=\"${name}\" class=\"${inputClasses}\" size=\"16\" type=\"text\" value=\"${formattedDate}\" data-date-format=\"${dateFormat}\"/>"
 	}
 
 	/**
@@ -399,14 +399,10 @@ class BootstrapTagLib {
 	*/
 	private void booleanToAttribute(attrs, String attrName) {
 		def attrValue = attrs.remove(attrName)
-		// If the value is the same as the name or if it is a boolean value,
-		// reintroduce the attribute to the map according to the w3c rules, so it is output later
 		if (Boolean.valueOf(attrValue) ||
 		  (attrValue instanceof String && attrValue?.equalsIgnoreCase(attrName))) {
 			attrs.put(attrName, attrName)
 		} else if (attrValue instanceof String && !attrValue?.equalsIgnoreCase('false')) {
-			// If the value is not the string 'false', then we should just pass it on to
-			// keep compatibility with existing code
 			attrs.put(attrName, attrValue)
 		}
 	}

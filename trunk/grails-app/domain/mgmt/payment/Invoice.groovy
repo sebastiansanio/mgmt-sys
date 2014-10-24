@@ -11,11 +11,10 @@ class Invoice {
 	Date date
 	Work work
 	Supplier supplier
-	
-	String type
+		
+	InvoiceType type
 	long number
 		
     static constraints = {
-		type inList: ['A','B','C','D','S/D']
 	}
 }
