@@ -1,3 +1,4 @@
+<sec:ifLoggedIn>
 <g:if
 	test="${	params.controller != null
 			&&	params.controller != ''
@@ -27,3 +28,4 @@
 		</g:if>
 	</ul>
 </g:if>
+</sec:ifLoggedIn>

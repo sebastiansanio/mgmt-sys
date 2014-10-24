@@ -1,20 +1,20 @@
-<%@ page import="mgmt.persons.Supplier" %>
+<%@ page import="mgmt.core.Work" %>
 <!DOCTYPE html>
 <html>
 
 <head>
 	<meta name="layout" content="main" />
-	<g:set var="entityName" value="${message(code: 'supplier.label', default: 'Supplier')}" />
+	<g:set var="entityName" value="${message(code: 'work.label', default: 'Work')}" />
 	<title><g:message code="default.create.label" args="[entityName]" /></title>
 </head>
 
 <body>
 
-	<section id="create-supplier" class="first">
+	<section id="create-work" class="first">
 
-		<g:hasErrors bean="${supplierInstance}">
+		<g:hasErrors bean="${workInstance}">
 		<div class="alert alert-danger">
-			<g:renderErrors bean="${supplierInstance}" as="list" />
+			<g:renderErrors bean="${workInstance}" as="list" />
 		</div>
 		</g:hasErrors>
 

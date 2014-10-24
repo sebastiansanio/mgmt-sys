@@ -6,5 +6,6 @@ class Work {
 	boolean finished
 	
     static constraints = {
+		name unique: true
     }
 }
