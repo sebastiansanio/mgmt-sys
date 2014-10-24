@@ -1,3 +1,5 @@
+import java.text.DecimalFormat
+
 import mgmt.core.Work
 import mgmt.payment.Invoice
 import mgmt.payment.InvoiceType
@@ -39,9 +41,9 @@ class BootStrap {
 		new InvoiceType(code:'B').save(flush:true)
 				
 		def work = new Work(name: 'Obra X').save(flush:true)
-		
+		DecimalFormat decimalFormat = new DecimalFormat("000")
 		for(int i=1;i<=100;i++){
-			def supplier = new Supplier(cuit:i.hashCode().toString(),name:"Proveedor "+i)
+			def supplier = new Supplier(cuit:"30-00000"+decimalFormat.format(i)+"-4",name:"Proveedor "+i)
 			supplier.save(flush:true)
 			for(int j=1;j<=50;j++){
 				def invoice = new Invoice(date: new Date(),work:work,type:invoiceTypeA,number:j,description:supplier.toString() +': factura '+j,supplier:supplier)
