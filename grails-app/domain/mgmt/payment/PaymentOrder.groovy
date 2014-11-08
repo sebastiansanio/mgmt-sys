@@ -1,19 +1,20 @@
 package mgmt.payment
 
-import java.util.Date;
 
 class PaymentOrder {
 
 	Date dateCreated
 	Date lastUpdated
-	
+
 	String type
-	Date date
 	long number
+	Date date
+	List items
 	
-	
-    static constraints = {
-		type inList: ['op','os']
+	static hasMany = [items: PaymentOrderItem]
+
+	static constraints = {
+		type inList: ['op', 'os']
 		number unique: 'type'
-    }
+	}
 }
