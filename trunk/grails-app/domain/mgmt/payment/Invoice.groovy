@@ -14,7 +14,10 @@ class Invoice {
 		
 	InvoiceType type
 	long number
+	
+	static belongsTo = [paymentOrder: PaymentOrder]
 		
     static constraints = {
+		paymentOrder nullable:true
 	}
 }

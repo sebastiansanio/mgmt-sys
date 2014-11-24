@@ -1,5 +1,6 @@
 import java.text.DecimalFormat
 
+import mgmt.core.Concept
 import mgmt.core.Work
 import mgmt.payment.Invoice
 import mgmt.payment.InvoiceType
@@ -31,16 +32,20 @@ class BootStrap {
 		}
 		
 		new Requestmap(url: '/supplier/**', configAttribute: "hasRole('AUTH_USER')").save(flush: true)
-		new Requestmap(url: '/invoice/**', configAttribute: "hasRole('AUTH_USER')").save(flush: true)
+		//Snew Requestmap(url: '/invoice/**', configAttribute: "hasRole('AUTH_USER')").save(flush: true)
 		new Requestmap(url: '/invoiceType/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
 		new Requestmap(url: '/work/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
+		new Requestmap(url: '/concept/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
+		new Requestmap(url: '/paymentOrder/**', configAttribute: "hasRole('AUTH_USER')").save(flush: true)
 		new Requestmap(url: '/', configAttribute: "isAuthenticated()").save(flush: true)
 		 
 		
 		def invoiceTypeA = new InvoiceType(code:'A').save(flush:true)
 		new InvoiceType(code:'B').save(flush:true)
 				
-		def work = new Work(name: 'Obra X').save(flush:true)
+		def work = new Work(name: 'Obra 1').save(flush:true)
+		new Work(name: 'Obra 2').save(flush:true)
+		new Work(name: 'Obra 3').save(flush:true)
 		DecimalFormat decimalFormat = new DecimalFormat("000")
 		for(int i=1;i<=100;i++){
 			def supplier = new Supplier(cuit:"30-00000"+decimalFormat.format(i)+"-4",name:"Proveedor "+i)
@@ -50,6 +55,9 @@ class BootStrap {
 				invoice.save(flush:true)
 			}
 		}
+		
+		new Concept(code:"A01",description:"Concepto A01").save(flush:true)
+		new Concept(code:"A02",description:"Concepto A02").save(flush:true)
 	}
 	def destroy = {
 	}
