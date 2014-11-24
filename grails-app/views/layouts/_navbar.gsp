@@ -8,7 +8,7 @@
 		<sec:ifLoggedIn>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><g:form controller="logout"><g:submitButton name="Submit" value="Salir" class="btn btn-primary" /></g:form></li>
+					<li><g:form controller="logout"><g:submitButton name="Submit" value="Salir" class="btn btn-default" /></g:form></li>
 				</ul>
 			</div>
 		</sec:ifLoggedIn>

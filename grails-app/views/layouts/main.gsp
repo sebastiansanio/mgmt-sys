@@ -21,12 +21,15 @@
 
 	<g:render template="/layouts/navbar" />
 	<div class="container-fluid">
-		<div class="row row-offcanvas row-offcanvas-left">
-			<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
-				<g:render template="/layouts/menu" />
-			</div>
-			<div class="col-sm-8 col-md-8 main">
-				<g:render template="/layouts/submenu" />
+		<div class="row">
+			<g:render template="/layouts/menu" />
+		</div>
+		<div class="row">
+			<div class="col-md-offset-1" >
+				<g:if test="${!noSubMenu}" >
+					<g:render template="/layouts/submenu" />
+				</g:if>
+				
 				<g:layoutBody />
 			</div>
 		</div>
