@@ -30,6 +30,10 @@
 					<g:render template="/layouts/submenu" />
 				</g:if>
 				
+				<g:if test="${flash.error}">
+					<div class="alert alert-danger">${flash.error}</div>
+				</g:if>
+				
 				<g:layoutBody />
 			</div>
 		</div>

@@ -1,8 +1,6 @@
 import java.text.DecimalFormat
 
-import mgmt.core.Concept
 import mgmt.core.Work
-import mgmt.payment.Invoice
 import mgmt.payment.InvoiceType
 import mgmt.persons.Supplier
 import mgmt.security.Requestmap
@@ -22,6 +20,10 @@ class BootStrap {
 		SecAuthority authorityAdmin = new SecAuthority(authority: 'AUTH_ADMIN').save(flush: true)
 		SecUserSecAuthority.create(admin,authorityAdmin,true)
 		
+		SecUser developer = new SecUser(username: 'dev' ,password: 'dev',name: 'Developer').save(flush: true)
+		SecAuthority authorityDeveloper = new SecAuthority(authority: 'AUTH_DEVELOPER').save(flush: true)
+		SecUserSecAuthority.create(developer,authorityDeveloper,true)
+
 				
 		for (String url in [
 	      '/**/favicon.ico',
@@ -32,13 +34,14 @@ class BootStrap {
 		}
 		
 		new Requestmap(url: '/supplier/**', configAttribute: "hasRole('AUTH_USER')").save(flush: true)
-		//Snew Requestmap(url: '/invoice/**', configAttribute: "hasRole('AUTH_USER')").save(flush: true)
 		new Requestmap(url: '/invoiceType/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
 		new Requestmap(url: '/work/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
 		new Requestmap(url: '/concept/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
 		new Requestmap(url: '/paymentOrder/**', configAttribute: "hasRole('AUTH_USER')").save(flush: true)
 		new Requestmap(url: '/', configAttribute: "isAuthenticated()").save(flush: true)
-		 
+		new Requestmap(url: '/concept/**', configAttribute: "hasRole('AUTH_DEVELOPER')").save(flush: true)
+		new Requestmap(url: '/import/**', configAttribute: "hasRole('AUTH_DEVELOPER')").save(flush: true)
+		new Requestmap(url: '/**/**/**', configAttribute: "hasRole('AUTH_DEVELOPER')").save(flush: true)
 		
 		def invoiceTypeA = new InvoiceType(code:'A').save(flush:true)
 		new InvoiceType(code:'B').save(flush:true)
@@ -46,18 +49,8 @@ class BootStrap {
 		def work = new Work(name: 'Obra 1').save(flush:true)
 		new Work(name: 'Obra 2').save(flush:true)
 		new Work(name: 'Obra 3').save(flush:true)
-		DecimalFormat decimalFormat = new DecimalFormat("000")
-		for(int i=1;i<=100;i++){
-			def supplier = new Supplier(cuit:"30-00000"+decimalFormat.format(i)+"-4",name:"Proveedor "+i)
-			supplier.save(flush:true)
-			for(int j=1;j<=50;j++){
-				def invoice = new Invoice(date: new Date(),work:work,type:invoiceTypeA,number:j,description:supplier.toString() +': factura '+j,supplier:supplier)
-				invoice.save(flush:true)
-			}
-		}
 		
-		new Concept(code:"A01",description:"Concepto A01").save(flush:true)
-		new Concept(code:"A02",description:"Concepto A02").save(flush:true)
+		
 	}
 	def destroy = {
 	}
