@@ -1,6 +1,6 @@
 package mgmt.payment
 
-import mgmt.core.Concept
+import mgmt.concept.Concept
 import mgmt.core.Work
 import mgmt.persons.Supplier
 

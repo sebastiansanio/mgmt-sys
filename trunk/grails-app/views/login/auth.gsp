@@ -9,7 +9,7 @@
 <body>
 
 	<hr/>
-	<div class="col-md-offset-4 col-md-3 text-center">
+	<div class="col-md-offset-4 col-md-2 text-center">
 		<form action='/mgmt/j_spring_security_check' method='POST'
 			id='loginForm'>
 			<p>

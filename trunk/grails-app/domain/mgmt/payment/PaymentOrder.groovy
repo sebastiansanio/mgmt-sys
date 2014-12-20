@@ -14,7 +14,7 @@ class PaymentOrder {
 	List payments
 	boolean checked
 
-	static hasMany = [items: PaymentOrderItem, invoices: Invoice, payments: Payment]
+	static hasMany = [items: PaymentOrderItem, payments: Payment]
 
 	static constraints = {
 		type inList: ['op', 'os']

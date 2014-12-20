@@ -1,10 +1,13 @@
-package mgmt.core
+package mgmt.concept
 
 class Concept {
 	
+	ConceptAccount conceptAccount
+	ConceptGroup conceptGroup
 	String code
 	String description
-
+	
+	
     static constraints = {
     }
 	
