@@ -1,14 +1,13 @@
-package mgmt.income
+package mgmt.account
 
 import java.util.Date;
 
-class IncomeOrder {
-
+class AccountType {
+	
 	Date dateCreated
 	Date lastUpdated
-	
-	Date date
-	long number
+
+	String name
 	
     static constraints = {
     }

@@ -8,6 +8,7 @@ class Supplier {
 	
 	String cuit
 	String name
+	String businessName
 	String address
 	String location
 	String province
@@ -16,6 +17,7 @@ class Supplier {
 	
     static constraints = {
 		name unique: true
+		businessName unique: true
 		cuit unique: true
 		address blank:true, nullable:true
 		location blank:true, nullable:true

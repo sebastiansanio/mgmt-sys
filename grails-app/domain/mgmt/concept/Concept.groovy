@@ -1,6 +1,11 @@
 package mgmt.concept
 
+import java.util.Date;
+
 class Concept {
+	
+	Date dateCreated
+	Date lastUpdated
 	
 	ConceptAccount conceptAccount
 	ConceptGroup conceptGroup
@@ -9,6 +14,7 @@ class Concept {
 	
 	
     static constraints = {
+		code unique:true
     }
 	
 	String toString(){
