@@ -1,12 +1,12 @@
 import java.text.DecimalFormat
 
-import mgmt.core.Work
 import mgmt.payment.InvoiceType
 import mgmt.persons.Supplier
 import mgmt.security.Requestmap
 import mgmt.security.SecAuthority
 import mgmt.security.SecUser
 import mgmt.security.SecUserSecAuthority
+import mgmt.work.Work;
 
 class BootStrap {
 
@@ -41,15 +41,7 @@ class BootStrap {
 		new Requestmap(url: '/', configAttribute: "isAuthenticated()").save(flush: true)
 		new Requestmap(url: '/concept/**', configAttribute: "hasRole('AUTH_DEVELOPER')").save(flush: true)
 		new Requestmap(url: '/import/**', configAttribute: "hasRole('AUTH_DEVELOPER')").save(flush: true)
-		new Requestmap(url: '/**/**/**', configAttribute: "hasRole('AUTH_DEVELOPER')").save(flush: true)
-		
-		def invoiceTypeA = new InvoiceType(code:'A').save(flush:true)
-		new InvoiceType(code:'B').save(flush:true)
-				
-		def work = new Work(name: 'Obra 1').save(flush:true)
-		new Work(name: 'Obra 2').save(flush:true)
-		new Work(name: 'Obra 3').save(flush:true)
-		
+		new Requestmap(url: '/**', configAttribute: "hasRole('AUTH_DEVELOPER')").save(flush: true)
 		
 	}
 	def destroy = {

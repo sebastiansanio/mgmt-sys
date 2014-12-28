@@ -10,14 +10,13 @@ class PaymentOrder {
 	long number
 	Date date
 	List items
-	List invoices
 	List payments
 	boolean checked
 
 	static hasMany = [items: PaymentOrderItem, payments: Payment]
 
 	static constraints = {
-		type inList: ['op', 'os']
+		type inList: ['op', 'os', 'in', 'tr', 'fi']
 		number unique: 'type'
 	}
 }

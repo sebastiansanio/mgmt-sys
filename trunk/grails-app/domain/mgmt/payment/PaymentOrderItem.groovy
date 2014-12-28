@@ -1,10 +1,15 @@
 package mgmt.payment
 
+import java.util.Date;
+
 import mgmt.concept.Concept
-import mgmt.core.Work
 import mgmt.persons.Supplier
+import mgmt.work.Work;
 
 class PaymentOrderItem {
+	
+	Date dateCreated
+	Date lastUpdated
 	
 	Work work
 	Supplier supplier

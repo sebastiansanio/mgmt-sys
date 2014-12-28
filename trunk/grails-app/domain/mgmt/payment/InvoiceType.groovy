@@ -1,6 +1,11 @@
 package mgmt.payment
 
+import java.util.Date;
+
 class InvoiceType {
+	
+	Date dateCreated
+	Date lastUpdated
 	
 	String code
 
