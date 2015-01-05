@@ -45,7 +45,7 @@
 		<tbody id="items-table">
 			<g:each var="paymentOrderItemInstance" in="${paymentOrderInstance?.items}" status="i">
 				<tr class="form-inline">
-					<td><g:select class="form-control" id="items[${i}].work" name="items[${i}].work.id" from="${mgmt.core.Work.list()}" optionKey="id" required="" value="${paymentOrderItemInstance?.work?.id}"/></td>
+					<td><g:select class="form-control" id="items[${i}].work" name="items[${i}].work.id" from="${mgmt.work.Work.list()}" optionKey="id" required="" value="${paymentOrderItemInstance?.work?.id}"/></td>
 					<td><g:select class="form-control" id="items[${i}].supplier" name="items[${i}].supplier.id" from="${mgmt.persons.Supplier.list()}" optionKey="id" required="" value="${paymentOrderItemInstance?.supplier?.id}"/></td>
 					<td><g:select class="form-control" id="items[${i}].concept" name="items[${i}].concept.id" from="${mgmt.concept.Concept.list()}" optionKey="id" required="" value="${paymentOrderItemInstance?.concept?.id}"/></td>
 					<td><g:textField class="form-control" name="items[${i}].description" value="${paymentOrderItemInstance?.description}"/></td>
@@ -66,7 +66,7 @@
 <div class="hide" >
 <table>
 	<tr class="form-inline" id="item-model">
-		<td><g:select disabled="disabled" class="form-control" name="items[xyz].work.id" from="${mgmt.core.Work.list()}" optionKey="id" required="" value=""/></td>
+		<td><g:select disabled="disabled" class="form-control" name="items[xyz].work.id" from="${mgmt.work.Work.list()}" optionKey="id" required="" value=""/></td>
 		<td><g:select disabled="disabled" class="form-control" name="items[xyz].supplier.id" from="${mgmt.persons.Supplier.list()}" optionKey="id" required="" value=""/></td>
 		<td><g:select disabled="disabled" class="form-control" name="items[xyz].concept.id" from="${mgmt.concept.Concept.list()}" optionKey="id" required="" value=""/></td>
 		<td><g:textField disabled="disabled" class="form-control" name="items[xyz].description" value=""/></td>
