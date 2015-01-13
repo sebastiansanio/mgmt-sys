@@ -8,7 +8,6 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class MovementController {
 	
-	def movementNumberGeneratorService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -31,8 +30,6 @@ class MovementController {
             notFound()
             return
         }
-		movementInstance.number = movementNumberGeneratorService.getNextNumber(movementInstance.type)
-
         if (movementInstance.hasErrors()) {
             respond movementInstance.errors, view:'create'
             return

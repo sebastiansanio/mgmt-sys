@@ -20,7 +20,7 @@ class Movement {
 	}
 
 	def beforeValidate() {
-		if(this.number == null){
+		if(this.number == 0){
 			Long number = Movement.createCriteria().get {
 				projections { max "number" }
 				eq("type", type)

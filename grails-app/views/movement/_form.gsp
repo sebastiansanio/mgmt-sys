@@ -94,9 +94,9 @@
 	<tr class="form-inline" id="payment-model">
 		<td><g:select disabled="disabled" class="form-control" name="payments[xyz].account.id" from="${mgmt.account.Account.list()}" optionKey="id" required="" value=""/></td>
 		<td><g:field type="number" disabled="disabled" class="form-control" name="payments[xyz].amount" value="" required=""/></td>
-		<td><bs:datePicker class="form-control" name="payments[xyz].paymentDate" precision="day"  value=""  /> </td>
-		<td><g:textField class="form-control" name="payments[xyz].checkNumber" value=""/></td>
-		<td><g:textField class="form-control" name="payments[xyz].note" value=""/></td>
+		<td><bs:datePicker disabled="true" class="form-control" name="payments[xyz].paymentDate" precision="day"  value=""  /> </td>
+		<td><g:textField disabled="disabled" class="form-control" name="payments[xyz].checkNumber" value=""/></td>
+		<td><g:textField disabled="disabled" class="form-control" name="payments[xyz].note" value=""/></td>
 	
 	</tr>
 </table>
