@@ -232,7 +232,6 @@ class BootstrapTagLib {
 			}
 		}
 
-		booleanToAttribute(attrs, 'disabled')
 		booleanToAttribute(attrs, 'readonly')
 
 		// get the localized format for dates. NOTE: datepicker only uses Lowercase syntax and does not understand hours, seconds, etc. (it uses: dd, d, mm, m, yyyy, yy)
@@ -249,8 +248,9 @@ class BootstrapTagLib {
 				.trim()\
 				.toLowerCase()
 		}
+		String disabled = attrs.disabled?'disabled="disabled"':''
 		String formattedDate = g.formatDate(format: dateFormat.replace('m', 'M'), date: c?.getTime())
-		out.println "	<input id=\"${id}\" data-provide=\"datepicker\" name=\"${name}\" class=\"${inputClasses}\" size=\"16\" type=\"text\" value=\"${formattedDate}\" data-date-format=\"${dateFormat}\"/>"
+		out.println "	<input id=\"${id}\" ${disabled} data-provide=\"datepicker\" name=\"${name}\" class=\"${inputClasses}\" size=\"16\" type=\"text\" value=\"${formattedDate}\" data-date-format=\"${dateFormat}\"/>"
 	}
 
 	/**
@@ -309,14 +309,6 @@ class BootstrapTagLib {
 		value = processFormFieldValueIfNecessary(name, value,"checkbox")
 		hiddenValue = processFormFieldValueIfNecessary("_${name}", hiddenValue, "hidden")
 
-//		out << """
-//		<div>
-//			<label for=\"_${name}\" class="control-label">
-//				${messageSource.getMessage(name + '.label', null, '', locale)}
-//			</label>
-//
-//			<div class="">
-//"""
 
 		out << "				<input type=\"hidden\" name=\"_${name}\""
 		if(hiddenValue != "") {
