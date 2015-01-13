@@ -5,7 +5,6 @@
 <head>
 	<meta name="layout" content="main" />
 	<g:set var="entityName" value="\${message(code: '${domainClass.propertyName}.label', default: '${className}')}" />
-	<title><g:message code="default.edit.label" args="[entityName]" /></title>
 </head>
 
 <body>
@@ -22,8 +21,9 @@
 			<g:hiddenField name="id" value="\${${propertyName}?.id}" />
 			<g:hiddenField name="version" value="\${${propertyName}?.version}" />
 			<g:hiddenField name="_method" value="PUT" />
-			
+			<div class="row">
 			<g:render template="form"/>
+			</div>
 			<hr/>
 			<div class="form-actions margin-top-medium">
 				<g:actionSubmit class="btn btn-primary" action="update" value="\${message(code: 'default.button.update.label', default: 'Update')}" />

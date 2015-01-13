@@ -1,6 +1,7 @@
 package mgmt.account
 
-import java.util.Date;
+import mgmt.movement.Payment
+
 
 class Account {
 	
@@ -11,7 +12,11 @@ class Account {
 	String code
 	AccountType type
 	BigDecimal balance
+	
+	static hasMany = [payments: Payment]
 
     static constraints = {
+		code unique: true
+		name unique: true
     }
 }

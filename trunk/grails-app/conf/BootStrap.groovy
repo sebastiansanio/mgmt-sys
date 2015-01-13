@@ -1,12 +1,7 @@
-import java.text.DecimalFormat
-
-import mgmt.payment.InvoiceType
-import mgmt.persons.Supplier
 import mgmt.security.Requestmap
 import mgmt.security.SecAuthority
 import mgmt.security.SecUser
 import mgmt.security.SecUserSecAuthority
-import mgmt.work.Work;
 
 class BootStrap {
 
@@ -21,8 +16,8 @@ class BootStrap {
 		SecUserSecAuthority.create(admin,authorityAdmin,true)
 		
 		SecUser developer = new SecUser(username: 'dev' ,password: 'dev',name: 'Developer').save(flush: true)
-		SecAuthority authorityDeveloper = new SecAuthority(authority: 'AUTH_DEVELOPER').save(flush: true)
-		SecUserSecAuthority.create(developer,authorityDeveloper,true)
+		SecUserSecAuthority.create(developer,authorityUser,true)
+		SecUserSecAuthority.create(developer,authorityAdmin,true)
 
 				
 		for (String url in [
@@ -32,15 +27,27 @@ class BootStrap {
 	      '/logout', '/logout.*', '/logout/*', '/dbconsole/**', '/fonts/**']) {
 			new Requestmap(url: url, configAttribute: 'permitAll').save(flush: true)
 		}
-		
-		new Requestmap(url: '/supplier/**', configAttribute: "hasRole('AUTH_USER')").save(flush: true)
-		new Requestmap(url: '/invoiceType/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
-		new Requestmap(url: '/work/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
-		new Requestmap(url: '/concept/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
-		new Requestmap(url: '/paymentOrder/**', configAttribute: "hasRole('AUTH_USER')").save(flush: true)
+		  
 		new Requestmap(url: '/', configAttribute: "isAuthenticated()").save(flush: true)
-		new Requestmap(url: '/concept/**', configAttribute: "hasRole('AUTH_DEVELOPER')").save(flush: true)
-		new Requestmap(url: '/import/**', configAttribute: "hasRole('AUTH_DEVELOPER')").save(flush: true)
+		  
+		new Requestmap(url: '/account/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
+		new Requestmap(url: '/accountType/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
+		
+		new Requestmap(url: '/concept/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
+		new Requestmap(url: '/conceptAccount/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
+		new Requestmap(url: '/conceptGroup/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
+		
+		new Requestmap(url: '/invoiceType/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
+		
+		new Requestmap(url: '/movement/**', configAttribute: "hasRole('AUTH_USER')").save(flush: true)
+
+		new Requestmap(url: '/client/**', configAttribute: "hasRole('AUTH_USER')").save(flush: true)
+		new Requestmap(url: '/supplier/**', configAttribute: "hasRole('AUTH_USER')").save(flush: true)
+		
+		new Requestmap(url: '/budget/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
+		new Requestmap(url: '/work/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
+		
+		new Requestmap(url: '/import/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
 		new Requestmap(url: '/**', configAttribute: "hasRole('AUTH_DEVELOPER')").save(flush: true)
 		
 	}

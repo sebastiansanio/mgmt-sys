@@ -5,7 +5,6 @@
 <head>
 	<meta name="layout" content="main" />
 	<g:set var="entityName" value="\${message(code: '${domainClass.propertyName}.label', default: '${className}')}" />
-	<title><g:message code="default.create.label" args="[entityName]" /></title>
 </head>
 
 <body>
@@ -19,7 +18,9 @@
 		</g:hasErrors>
 
 		<g:form action="save" class="form-horizontal" role="form" <%= multiPart ? ' enctype="multipart/form-data"' : '' %>>
+			<div class="row">
 			<g:render template="form"/>
+			</div>
 			<hr/>
 			<div class="form-actions margin-top-medium">
 				<g:submitButton name="create" class="btn btn-primary" value="\${message(code: 'default.button.create.label', default: 'Create')}" />

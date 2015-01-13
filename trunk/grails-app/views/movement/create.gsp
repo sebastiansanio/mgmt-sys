@@ -1,20 +1,21 @@
-<%@ page import="mgmt.payment.Invoice" %>
+<%@ page import="mgmt.movement.Movement" %>
 <!DOCTYPE html>
 <html>
 
 <head>
 	<meta name="layout" content="main" />
-	<g:set var="entityName" value="${message(code: 'invoice.label', default: 'Invoice')}" />
+	<g:set var="entityName" value="${message(code: 'movement.label', default: 'Movement')}" />
 	<title><g:message code="default.create.label" args="[entityName]" /></title>
 </head>
 
 <body>
 
-	<section id="create-invoice" class="first">
 
-		<g:hasErrors bean="${invoiceInstance}">
+	<section id="create-movement" class="first">
+
+		<g:hasErrors bean="${movementInstance}">
 		<div class="alert alert-danger">
-			<g:renderErrors bean="${invoiceInstance}" as="list" />
+			<g:renderErrors bean="${movementInstance}" as="list" />
 		</div>
 		</g:hasErrors>
 
