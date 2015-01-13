@@ -1,4 +1,4 @@
-package mgmt.payment
+package mgmt.movement
 
 import mgmt.account.Account
 
@@ -13,7 +13,7 @@ class Payment {
 	String checkNumber
 	String note
 
-	static belongsTo = [paymentOrder: PaymentOrder]
+	static belongsTo = [movement: Movement]
 
 	static constraints = {
 	}

@@ -1,28 +1,26 @@
-<%@ page import="mgmt.payment.PaymentOrder" %>
+<%@ page import="mgmt.account.AccountType" %>
 <!DOCTYPE html>
 <html>
 
 <head>
 	<meta name="layout" content="main" />
-	<g:set var="entityName" value="${message(code: 'paymentOrder.label', default: 'PaymentOrder')}" />
-	<title><g:message code="default.create.label" args="[entityName]" /></title>
-	<g:set var="noSubMenu" value="${true}" scope="request" />
+	<g:set var="entityName" value="${message(code: 'accountType.label', default: 'AccountType')}" />
 </head>
 
 <body>
 
-<g:render template="submenu"/>
+	<section id="create-accountType" class="first">
 
-	<section id="create-paymentOrder" class="first">
-
-		<g:hasErrors bean="${paymentOrderInstance}">
+		<g:hasErrors bean="${accountTypeInstance}">
 		<div class="alert alert-danger">
-			<g:renderErrors bean="${paymentOrderInstance}" as="list" />
+			<g:renderErrors bean="${accountTypeInstance}" as="list" />
 		</div>
 		</g:hasErrors>
 
 		<g:form action="save" class="form-horizontal" role="form" >
+			<div class="row">
 			<g:render template="form"/>
+			</div>
 			<hr/>
 			<div class="form-actions margin-top-medium">
 				<g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />

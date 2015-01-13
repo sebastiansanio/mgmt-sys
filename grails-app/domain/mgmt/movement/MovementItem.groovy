@@ -1,12 +1,11 @@
-package mgmt.payment
-
-import java.util.Date;
+package mgmt.movement
 
 import mgmt.concept.Concept
+import mgmt.invoice.InvoiceType
 import mgmt.persons.Supplier
-import mgmt.work.Work;
+import mgmt.work.Work
 
-class PaymentOrderItem {
+class MovementItem {
 	
 	Date dateCreated
 	Date lastUpdated
@@ -23,7 +22,7 @@ class PaymentOrderItem {
 	BigDecimal iibb
 	BigDecimal total
 	
-	static belongsTo = [paymentOrder: PaymentOrder]
+	static belongsTo = [paymentOrder: Movement]
 	
     static constraints = {
 		description nullable:true,blank:true

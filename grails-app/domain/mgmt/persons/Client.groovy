@@ -1,6 +1,5 @@
 package mgmt.persons
 
-import java.util.Date;
 
 class Client {
 	

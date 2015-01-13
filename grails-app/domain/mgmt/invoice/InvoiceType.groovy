@@ -1,6 +1,4 @@
-package mgmt.payment
-
-import java.util.Date;
+package mgmt.invoice
 
 class InvoiceType {
 	

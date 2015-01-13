@@ -6,7 +6,6 @@
 <head>
 	<meta name="layout" content="main" />
 	<g:set var="entityName" value="\${message(code: '${domainClass.propertyName}.label', default: '${className}')}" />
-	<title><g:message code="default.index.label" args="[entityName]" /></title>
 </head>
 
 <body>
@@ -17,8 +16,8 @@
 		<thead>
 			<tr>
 				<th>\${message(code:'default.show.label')}</th>
-			<%  excludedProps = Event.allEvents.toList() << 'id' << 'version'
-				allowedNames = domainClass.persistentProperties*.name << 'dateCreated' << 'lastUpdated'
+			<%  excludedProps = Event.allEvents.toList() << 'id' << 'version' << 'dateCreated' << 'lastUpdated'
+				allowedNames = domainClass.persistentProperties*.name 
 				props = domainClass.properties.findAll { allowedNames.contains(it.name) && !excludedProps.contains(it.name) && !Collection.isAssignableFrom(it.type) && (domainClass.constrainedProperties[it.name] ? domainClass.constrainedProperties[it.name].display : true) }
 				Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
 				props.eachWithIndex { p, i ->
