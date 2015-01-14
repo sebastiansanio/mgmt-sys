@@ -35,6 +35,8 @@ grails.project.dependency.resolution = {
     repositories {
         inherits true // Whether to inherit repository definitions from plugins
 
+		mavenRepo "http://repo.grails.org/grails/core"
+		
 		mavenCentral()
 		grailsPlugins()
         grailsHome()
@@ -45,6 +47,8 @@ grails.project.dependency.resolution = {
 
     dependencies {
         test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
+		runtime 'mysql:mysql-connector-java:5.1.34'
+		compile 'commons-beanutils:commons-beanutils:1.8.3'
 		
     }
 
@@ -59,6 +63,7 @@ grails.project.dependency.resolution = {
         runtime ":hibernate4:4.3.5.5" 
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
+		compile ":export:1.6"
 		
 		
     }

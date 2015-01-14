@@ -4,7 +4,7 @@ import mgmt.persons.Client
 
 class Work {
 	
-	Date dateCrated
+	Date dateCreated
 	Date lastUpdated
 
 	Client client
@@ -16,12 +16,11 @@ class Work {
 	
     static constraints = {
 		client nullable: true
-		name unique: true
 		type inList: ["building","asset"]
 		budget nullable: true
     }
 	
 	String toString(){
-		return name
+		return code + " - " + name
 	}
 }

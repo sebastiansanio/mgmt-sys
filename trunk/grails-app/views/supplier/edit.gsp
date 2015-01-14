@@ -5,7 +5,6 @@
 <head>
 	<meta name="layout" content="main" />
 	<g:set var="entityName" value="${message(code: 'supplier.label', default: 'Supplier')}" />
-	<title><g:message code="default.edit.label" args="[entityName]" /></title>
 </head>
 
 <body>
@@ -22,12 +21,13 @@
 			<g:hiddenField name="id" value="${supplierInstance?.id}" />
 			<g:hiddenField name="version" value="${supplierInstance?.version}" />
 			<g:hiddenField name="_method" value="PUT" />
-			
+			<div class="row">
 			<g:render template="form"/>
+			</div>
 			<hr/>
 			<div class="form-actions margin-top-medium">
 				<g:actionSubmit class="btn btn-primary" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-	            <button class="btn" type="reset"><g:message code="default.button.reset.label" default="Reset" /></button>
+				<g:link action="index" class="btn" ><g:message code="default.button.cancel.label" default="Cancelar" /></g:link>
 			</div>
 		</g:form>
 

@@ -1,6 +1,7 @@
 <%@ page import="mgmt.movement.Movement" %>
 
-<div class="row">
+<div class="container-fluid">
+
 <div class="col-md-3 ${hasErrors(bean: movementInstance, field: 'type', 'has-error')} ">
 	<label for="type" class="control-label"><g:message code="movement.type.label" default="Type" /></label>
 	<div>
@@ -19,8 +20,8 @@
 
 <hr/>
 <h4><g:message code="movement.items.label" /></h4>
-<div id="items">
-	<table class="table table-condensed">
+<div id="items" class="table-responsive">
+	<table class="table table-condensed table-bordered">
 		<thead>
 			<tr>
 				<th>${message(code: 'movementItem.work.label')}</th>
@@ -38,16 +39,16 @@
 		<tbody id="items-table">
 			<g:each var="movementItemInstance" in="${movementInstance?.items}" status="i">
 				<tr class="form-inline">
-					<td><g:select class="form-control" id="items[${i}].work" name="items[${i}].work.id" from="${mgmt.work.Work.list()}" optionKey="id" required="" value="${movementItemInstance?.work?.id}"/></td>
-					<td><g:select class="form-control" id="items[${i}].supplier" name="items[${i}].supplier.id" from="${mgmt.persons.Supplier.list()}" optionKey="id" required="" value="${movementItemInstance?.supplier?.id}"/></td>
-					<td><g:select class="form-control" id="items[${i}].concept" name="items[${i}].concept.id" from="${mgmt.concept.Concept.list()}" optionKey="id" required="" value="${movementItemInstance?.concept?.id}"/></td>
-					<td><g:textField class="form-control" name="items[${i}].description" value="${movementItemInstance?.description}"/></td>
-					<td><g:select class="form-control" id="items[${i}].invoiceType" name="items[${i}].invoiceType.id" from="${mgmt.invoice.InvoiceType.list()}" optionKey="id" required="" value="${movementItemInstance?.invoiceType?.id}"/></td>
-					<td><g:textField class="form-control" name="items[${i}].invoiceNumber" value="${movementItemInstance?.invoiceNumber}"/></td>
-					<td><g:field type="number" class="form-control" name="items[${i}].amount" value="${fieldValue(bean: movementItemInstance, field: 'amount')}" required=""/></td>
-					<td><g:field type="number" class="form-control" name="items[${i}].iva" value="${fieldValue(bean: movementItemInstance, field: 'iva')}" required=""/></td>
-					<td><g:field type="number" class="form-control" name="items[${i}].iibb" value="${fieldValue(bean: movementItemInstance, field: 'iibb')}" required=""/></td>
-					<td><g:field type="number" class="form-control" name="items[${i}].total" value="${fieldValue(bean: movementItemInstance, field: 'total')}" required=""/></td>
+					<td class="td-intableform"><g:select class="input-intableform form-control" id="items[${i}].work" name="items[${i}].work.id" from="${mgmt.work.Work.list()}" optionKey="id" required="" value="${movementItemInstance?.work?.id}"/></td>
+					<td class="td-intableform"><g:select class="input-intableform form-control" id="items[${i}].supplier" name="items[${i}].supplier.id" from="${mgmt.persons.Supplier.list()}" optionKey="id" required="" value="${movementItemInstance?.supplier?.id}"/></td>
+					<td class="td-intableform"><g:select class="input-intableform form-control" id="items[${i}].concept" name="items[${i}].concept.id" from="${mgmt.concept.Concept.list()}" optionKey="id" required="" value="${movementItemInstance?.concept?.id}"/></td>
+					<td class="td-intableform"><g:textField class="input-intableform form-control" name="items[${i}].description" value="${movementItemInstance?.description}"/></td>
+					<td class="td-intableform"><g:select class="input-intableform form-control" id="items[${i}].invoiceType" name="items[${i}].invoiceType.id" from="${mgmt.invoice.InvoiceType.list()}" optionKey="id" required="" value="${movementItemInstance?.invoiceType?.id}"/></td>
+					<td class="td-intableform"><g:textField class="input-intableform form-control" name="items[${i}].invoiceNumber" value="${movementItemInstance?.invoiceNumber}"/></td>
+					<td class="td-intableform"><g:field type="number" class="input-intableform form-control" name="items[${i}].amount" value="${fieldValue(bean: movementItemInstance, field: 'amount')}" required=""/></td>
+					<td class="td-intableform"><g:field type="number" class="input-intableform form-control" name="items[${i}].iva" value="${fieldValue(bean: movementItemInstance, field: 'iva')}" required=""/></td>
+					<td class="td-intableform"><g:field type="number" class="input-intableform form-control" name="items[${i}].iibb" value="${fieldValue(bean: movementItemInstance, field: 'iibb')}" required=""/></td>
+					<td class="td-intableform"><g:field type="number" class="input-intableform form-control" name="items[${i}].total" value="${fieldValue(bean: movementItemInstance, field: 'total')}" required=""/></td>
 				</tr>
 			</g:each>
 		</tbody>
@@ -60,7 +61,7 @@
 
 <h4><g:message code="movement.payments.label" /></h4>
 <div id="items">
-	<table class="table table-condensed">
+	<table class="table table-condensed table-bordered">
 		<thead>
 			<tr>
 				<th>${message(code: 'payment.account.label')}</th>
@@ -73,11 +74,11 @@
 		<tbody id="payments-table">
 			<g:each var="paymentInstance" in="${movementInstance?.payments}" status="i">
 				<tr class="form-inline">
-					<td><g:select class="form-control" id="payments[${i}].account" name="payments[${i}].account" from="${mgmt.account.Account.list()}" optionKey="id" required="" value="${paymentInstance?.account?.id}"/></td>
-					<td><g:field type="number" class="form-control" name="payments[${i}].amount" value="${fieldValue(bean: paymentInstance, field: 'amount')}" required=""/></td>
-					<td><bs:datePicker class="form-control" name="payments[${i}].paymentDate" precision="day"  value="${paymentInstance?.paymentDate}"  /> </td>
-					<td><g:textField class="form-control" name="payments[${i}].checkNumber" value="${paymentInstance?.checkNumber}"/></td>
-					<td><g:textField class="form-control" name="payments[${i}].note" value="${paymentInstance?.note}"/></td>
+					<td class="td-intableform"><g:select class="input-intableform form-control" id="payments[${i}].account" name="payments[${i}].account" from="${mgmt.account.Account.list()}" optionKey="id" required="" value="${paymentInstance?.account?.id}"/></td>
+					<td class="td-intableform"><g:field type="number" class="input-intableform form-control" name="payments[${i}].amount" value="${fieldValue(bean: paymentInstance, field: 'amount')}" required=""/></td>
+					<td class="td-intableform"><bs:datePicker class="input-intableform form-control" name="payments[${i}].paymentDate" precision="day"  value="${paymentInstance?.paymentDate}"  /> </td>
+					<td class="td-intableform"><g:textField class="input-intableform form-control" name="payments[${i}].checkNumber" value="${paymentInstance?.checkNumber}"/></td>
+					<td class="td-intableform"><g:textField class="input-intableform form-control" name="payments[${i}].note" value="${paymentInstance?.note}"/></td>
 				</tr>
 			</g:each>
 		</tbody>
@@ -92,29 +93,31 @@
 
 <table>
 	<tr class="form-inline" id="payment-model">
-		<td><g:select disabled="disabled" class="form-control" name="payments[xyz].account.id" from="${mgmt.account.Account.list()}" optionKey="id" required="" value=""/></td>
-		<td><g:field type="number" disabled="disabled" class="form-control" name="payments[xyz].amount" value="" required=""/></td>
-		<td><bs:datePicker disabled="true" class="form-control" name="payments[xyz].paymentDate" precision="day"  value=""  /> </td>
-		<td><g:textField disabled="disabled" class="form-control" name="payments[xyz].checkNumber" value=""/></td>
-		<td><g:textField disabled="disabled" class="form-control" name="payments[xyz].note" value=""/></td>
+		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" name="payments[xyz].account.id" from="${mgmt.account.Account.list()}" optionKey="id" required="" value=""/></td>
+		<td class="td-intableform"><g:field type="number" disabled="disabled" class="input-intableform form-control" name="payments[xyz].amount" value="" required=""/></td>
+		<td class="td-intableform"><bs:datePicker disabled="true" class="input-intableform form-control" name="payments[xyz].paymentDate" precision="day"  value=""  /> </td>
+		<td class="td-intableform"><g:textField disabled="disabled" class="input-intableform form-control" name="payments[xyz].checkNumber" value=""/></td>
+		<td class="td-intableform"><g:textField disabled="disabled" class="input-intableform form-control" name="payments[xyz].note" value=""/></td>
 	
 	</tr>
 </table>
 
+
 <table>
 	<tr class="form-inline" id="item-model">
-		<td><g:select disabled="disabled" class="form-control" name="items[xyz].work.id" from="${mgmt.work.Work.list()}" optionKey="id" required="" value=""/></td>
-		<td><g:select disabled="disabled" class="form-control" name="items[xyz].supplier.id" from="${mgmt.persons.Supplier.list()}" optionKey="id" required="" value=""/></td>
-		<td><g:select disabled="disabled" class="form-control" name="items[xyz].concept.id" from="${mgmt.concept.Concept.list()}" optionKey="id" required="" value=""/></td>
-		<td><g:textField disabled="disabled" class="form-control" name="items[xyz].description" value=""/></td>
-		<td><g:select disabled="disabled" class="form-control" name="items[xyz].invoiceType.id" from="${mgmt.invoice.InvoiceType.list()}" optionKey="id" required="" value=""/></td>
-		<td><g:textField disabled="disabled" class="form-control" name="items[xyz].invoiceNumber" value=""/></td>
-		<td><g:field type="number" disabled="disabled" class="form-control" name="items[xyz].amount" value="" required=""/></td>
-		<td><g:field type="number" disabled="disabled" class="form-control" name="items[xyz].iva" value="" required=""/></td>
-		<td><g:field type="number" disabled="disabled" class="form-control" name="items[xyz].iibb" value="" required=""/></td>
-		<td><g:field type="number" disabled="disabled" class="form-control" name="items[xyz].total" value="" required=""/></td>
+		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" name="items[xyz].work.id" from="${mgmt.work.Work.list()}" optionKey="id" required="" value=""/></td>
+		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" name="items[xyz].supplier.id" from="${mgmt.persons.Supplier.list()}" optionKey="id" required="" value=""/></td>
+		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" name="items[xyz].concept.id" from="${mgmt.concept.Concept.list()}" optionKey="id" required="" value=""/></td>
+		<td class="td-intableform"><g:textArea rows="2" cols="60" disabled="disabled" class="input-intableform form-control" name="items[xyz].description" value=""/></td>
+		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" name="items[xyz].invoiceType.id" from="${mgmt.invoice.InvoiceType.list()}" optionKey="id" required="" value=""/></td>
+		<td class="td-intableform"><g:textField disabled="disabled" class="input-intableform form-control" name="items[xyz].invoiceNumber" value=""/></td>
+		<td class="td-intableform"><g:field type="number" disabled="disabled" class="input-intableform form-control" name="items[xyz].amount" value="" required=""/></td>
+		<td class="td-intableform"><g:field type="number" disabled="disabled" class="input-intableform form-control" name="items[xyz].iva" value="" required=""/></td>
+		<td class="td-intableform"><g:field type="number" disabled="disabled" class="input-intableform form-control" name="items[xyz].iibb" value="" required=""/></td>
+		<td class="td-intableform"><g:field type="number" disabled="disabled" class="input-intableform form-control" name="items[xyz].total" value="" required=""/></td>
 	</tr>
 </table>
+
 </div>
 
 
@@ -136,6 +139,11 @@ function addItem(){
 		$(this).attr('id',$(this).attr('id').replace('xyz',itemsQuantity));	
 		$(this).prop("disabled", false);
 	});
+	$("textarea", $tmc).each(function(){
+		$(this).attr('name',$(this).attr('name').replace('xyz',itemsQuantity));
+		$(this).attr('id',$(this).attr('id').replace('xyz',itemsQuantity));		
+		$(this).prop("disabled", false);
+	});
 	
 	$tmc.appendTo("#items-table");
 	itemsQuantity = itemsQuantity + 1;
@@ -153,6 +161,11 @@ function addPayment(){
 		$(this).prop("disabled", false);
 	});
 	$("select", $tmc).each(function(){
+		$(this).attr('name',$(this).attr('name').replace('xyz',paymentsQuantity));	
+		$(this).attr('id',$(this).attr('id').replace('xyz',paymentsQuantity));	
+		$(this).prop("disabled", false);
+	});
+	$("textarea", $tmc).each(function(){
 		$(this).attr('name',$(this).attr('name').replace('xyz',paymentsQuantity));	
 		$(this).attr('id',$(this).attr('id').replace('xyz',paymentsQuantity));	
 		$(this).prop("disabled", false);

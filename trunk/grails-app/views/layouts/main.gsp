@@ -25,7 +25,7 @@
 			<g:render template="/layouts/menu" />
 		</div>
 		<div class="row">
-			<div class="col-md-offset-1" >
+			<div class="col-margin-left col-margin-right" >
 				<g:if test="${!noSubMenu}" >
 					<g:render template="/layouts/submenu" />
 				</g:if>
