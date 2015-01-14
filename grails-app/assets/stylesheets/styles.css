@@ -75,3 +75,8 @@ footer {
 .main .page-header {
   margin-top: 0;
 }
+
+.input-intableform {display: block !important; padding: 0 !important; margin: 0 !important; border: 0 !important; width: 100% !important; border-radius: 0 !important; line-height: 1 !important;}
+.td-intableform {margin: 0 !important; padding: 0 !important;}
+.col-margin-left{margin-left:3%}
+.col-margin-right{margin-right:3%}

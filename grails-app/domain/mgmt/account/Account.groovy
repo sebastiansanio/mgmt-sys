@@ -11,12 +11,14 @@ class Account {
 	String name
 	String code
 	AccountType type
-	BigDecimal balance
 	
 	static hasMany = [payments: Payment]
 
     static constraints = {
 		code unique: true
-		name unique: true
     }
+	
+	String toString(){
+		return code + " - " + name
+	}
 }

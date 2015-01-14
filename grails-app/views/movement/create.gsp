@@ -24,7 +24,7 @@
 			<hr/>
 			<div class="form-actions margin-top-medium">
 				<g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-	            <button class="btn" type="reset"><g:message code="default.button.reset.label" default="Reset" /></button>
+	            <g:link action="index" class="btn" ><g:message code="default.button.cancel.label" default="Cancelar" /></g:link>
 			</div>
 		</g:form>
 

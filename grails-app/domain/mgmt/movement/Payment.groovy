@@ -16,5 +16,7 @@ class Payment {
 	static belongsTo = [movement: Movement]
 
 	static constraints = {
+		note blank:true, nullable:true
+		checkNumber blank:true, nullable:true
 	}
 }
