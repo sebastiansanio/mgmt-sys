@@ -12,7 +12,10 @@ class Payment {
 	Date paymentDate
 	String checkNumber
 	String note
-
+	
+	boolean deleted
+	
+	static transients = [ 'deleted' ]
 	static belongsTo = [movement: Movement]
 
 	static constraints = {

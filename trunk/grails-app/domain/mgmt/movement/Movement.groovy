@@ -19,6 +19,11 @@ class Movement {
 		number unique: 'type'
 	}
 
+	static mapping = { 
+		items cascade:"all-delete-orphan" 
+		payments cascade:"all-delete-orphan" 
+	}
+
 	def beforeValidate() {
 		if(this.number == 0){
 			Long number = Movement.createCriteria().get {

@@ -22,11 +22,15 @@ class MovementItem {
 	BigDecimal iibb
 	BigDecimal total
 	
-	static belongsTo = [paymentOrder: Movement]
+	boolean deleted
+	
+	static transients = [ 'deleted' ]
+	static belongsTo = [movement: Movement]
 	
     static constraints = {
 		description nullable:true,blank:true
 		invoiceNumber nullable:true,blank:true
+		deleted bindable:true
     }
 	
 }
