@@ -34,11 +34,12 @@
 				<th>${message(code: 'movementItem.iva.label')}</th>
 				<th>${message(code: 'movementItem.iibb.label')}</th>
 				<th>${message(code: 'movementItem.total.label')}</th>
+				<th>${message(code: 'default.button.delete.label')}</th>
 			</tr>
 		</thead>
 		<tbody id="items-table">
 			<g:each var="movementItemInstance" in="${movementInstance?.items}" status="i">
-				<tr class="form-inline">
+				<tr class="form-inline" id="items-${i}">
 					<td class="td-intableform"><g:select class="input-intableform form-control" id="items[${i}].work" name="items[${i}].work.id" from="${mgmt.work.Work.list()}" optionKey="id" required="" value="${movementItemInstance?.work?.id}"/></td>
 					<td class="td-intableform"><g:select class="input-intableform form-control" id="items[${i}].supplier" name="items[${i}].supplier.id" from="${mgmt.persons.Supplier.list()}" optionKey="id" required="" value="${movementItemInstance?.supplier?.id}"/></td>
 					<td class="td-intableform"><g:select class="input-intableform form-control" id="items[${i}].concept" name="items[${i}].concept.id" from="${mgmt.concept.Concept.list()}" optionKey="id" required="" value="${movementItemInstance?.concept?.id}"/></td>
@@ -49,6 +50,7 @@
 					<td class="td-intableform"><g:field type="text" class="input-intableform form-control" name="items[${i}].iva" value="${fieldValue(bean: movementItemInstance, field: 'iva')}" required=""/></td>
 					<td class="td-intableform"><g:field type="text" class="input-intableform form-control" name="items[${i}].iibb" value="${fieldValue(bean: movementItemInstance, field: 'iibb')}" required=""/></td>
 					<td class="td-intableform"><g:field type="text" class="input-intableform form-control" name="items[${i}].total" value="${fieldValue(bean: movementItemInstance, field: 'total')}" required=""/></td>
+					<td><button type="button" onclick="$('#items-${i}').addClass('hide');$('#deleted-${i}').val(true)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button><g:field type="hidden" name="items[${i}].deleted" id="deleted-${i}"/></td>
 				</tr>
 			</g:each>
 		</tbody>

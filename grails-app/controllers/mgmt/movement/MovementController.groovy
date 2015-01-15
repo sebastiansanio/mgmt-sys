@@ -30,6 +30,8 @@ class MovementController {
             notFound()
             return
         }
+		movementInstance.items?.removeAll{ it.deleted }
+		movementInstance.payments?.removeAll{ it.deleted }
         if (movementInstance.hasErrors()) {
             respond movementInstance.errors, view:'create'
             return
@@ -56,6 +58,8 @@ class MovementController {
             notFound()
             return
         }
+		movementInstance.items?.removeAll{ it.deleted }
+		movementInstance.payments?.removeAll{ it.deleted }
 
         if (movementInstance.hasErrors()) {
             respond movementInstance.errors, view:'edit'
