@@ -41,7 +41,9 @@ class ImportController {
 					conceptGroup = new ConceptGroup(name: fields[2].trim())
 					conceptGroup.save(flush:true,failOnError:true)
 				}
-				new Concept(conceptAccount:conceptAccount,conceptGroup:conceptGroup,code:fields[3],description:fields[4]).save(flush:true,failOnError:true)
+				new Concept(conceptAccount:conceptAccount,conceptGroup:conceptGroup,code:fields[3],description:fields[4],
+						validInFiWork:fields[12]?true:false, validInOpWork:fields[7]?true:false, validInOsWork:fields[9]?true:false, 
+						validInInWork:fields[11]?true:false,validInOpNoWork:fields[6]?true:false,validInOsNoWork:fields[8]?true:false, validInInNoWork:fields[10]?true:false).save(flush:true,failOnError:true)
 			}
 		} else if (datatype == "suppliers"){
 			file.inputStream.splitEachLine(delimiter) { fields ->
