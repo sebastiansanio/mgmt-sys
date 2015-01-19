@@ -13,9 +13,6 @@ class Payment {
 	String checkNumber
 	String note
 	
-	boolean deleted
-	
-	static transients = [ 'deleted' ]
 	static belongsTo = [movement: Movement]
 
 	static constraints = {

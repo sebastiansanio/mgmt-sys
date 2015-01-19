@@ -16,21 +16,20 @@ class MovementItem {
 	String description
 	InvoiceType invoiceType
 	String invoiceNumber
+	Date date
 	
 	BigDecimal amount
 	BigDecimal iva
 	BigDecimal iibb
 	BigDecimal total
+	BigDecimal otherPerceptions
 	
-	boolean deleted
-	
-	static transients = [ 'deleted' ]
 	static belongsTo = [movement: Movement]
 	
     static constraints = {
+		work nullable:true
 		description nullable:true,blank:true
 		invoiceNumber nullable:true,blank:true
-		deleted bindable:true
     }
 	
 }

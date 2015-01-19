@@ -7,7 +7,6 @@ class Movement {
 
 	String type
 	long number
-	Date date
 	List items
 	List payments
 	boolean checked
@@ -19,9 +18,7 @@ class Movement {
 		number unique: 'type'
 	}
 
-	static mapping = { 
-		items cascade:"all-delete-orphan" 
-		payments cascade:"all-delete-orphan" 
+	static mapping = {
 	}
 
 	def beforeValidate() {

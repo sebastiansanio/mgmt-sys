@@ -52,7 +52,12 @@ class BootStrap {
 			new Requestmap(url: '/invoiceType/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
 
 			new Requestmap(url: '/movement/**', configAttribute: "hasRole('AUTH_USER')").save(flush: true)
-
+			new Requestmap(url: '/op/**', configAttribute: "hasRole('AUTH_USER')").save(flush: true)
+			new Requestmap(url: '/os/**', configAttribute: "hasRole('AUTH_USER')").save(flush: true)
+			new Requestmap(url: '/tr/**', configAttribute: "hasRole('AUTH_USER')").save(flush: true)
+			new Requestmap(url: '/fi/**', configAttribute: "hasRole('AUTH_USER')").save(flush: true)
+			new Requestmap(url: '/in/**', configAttribute: "hasRole('AUTH_USER')").save(flush: true)
+	 
 			new Requestmap(url: '/client/**', configAttribute: "hasRole('AUTH_USER')").save(flush: true)
 			new Requestmap(url: '/supplier/**', configAttribute: "hasRole('AUTH_USER')").save(flush: true)
 
