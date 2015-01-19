@@ -3,7 +3,7 @@ dataSource {
 }
 hibernate {
     cache.use_second_level_cache = true
-    cache.use_query_cache = false
+    cache.use_query_cache = true
     cache.region.factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
     singleSession = true 
     flush.mode = 'manual' 
@@ -12,7 +12,6 @@ hibernate {
 environments {
     development {
         dataSource {
-			logSql = true
             dbCreate = "update"
 			driverClassName = "com.mysql.jdbc.Driver"
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
