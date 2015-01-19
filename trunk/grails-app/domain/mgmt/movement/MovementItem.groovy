@@ -5,6 +5,8 @@ import mgmt.invoice.InvoiceType
 import mgmt.persons.Supplier
 import mgmt.work.Work
 
+import org.grails.databinding.BindUsing
+
 class MovementItem {
 	
 	Date dateCreated
@@ -18,11 +20,26 @@ class MovementItem {
 	String invoiceNumber
 	Date date
 	
+	@BindUsing({
+		obj, source -> new BigDecimal(source['amount'])
+	})
 	BigDecimal amount
+	@BindUsing({
+		obj, source -> new BigDecimal(source['iva'])
+	})
 	BigDecimal iva
+	@BindUsing({
+		obj, source -> new BigDecimal(source['iibb'])
+	})
 	BigDecimal iibb
-	BigDecimal total
+	@BindUsing({
+		obj, source -> new BigDecimal(source['otherPerceptions'])
+	})
 	BigDecimal otherPerceptions
+	@BindUsing({
+		obj, source -> new BigDecimal(source['total'])
+	})
+	BigDecimal total
 	
 	static belongsTo = [movement: Movement]
 	
