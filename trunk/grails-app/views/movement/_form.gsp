@@ -9,13 +9,6 @@
 	</div>
 </div>
 
-<div class="col-md-3 ${hasErrors(bean: movementInstance, field: 'date', 'has-error')} required">
-	<label for="date" class="control-label"><g:message code="movement.date.label" default="Date" /><span class="required-indicator">*</span></label>
-	<div>
-		<bs:datePicker class="form-control" name="date" precision="day"  value="${movementInstance?.date}"  />
-	</div>
-</div>
-
 </div>
 
 <hr/>
@@ -30,9 +23,11 @@
 				<th>${message(code: 'movementItem.description.label')}</th>
 				<th>${message(code: 'movementItem.invoiceType.label')}</th>
 				<th>${message(code: 'movementItem.invoiceNumber.label')}</th>
+				<th>${message(code: 'movementItem.date.label')}</th>
 				<th>${message(code: 'movementItem.amount.label')}</th>
 				<th>${message(code: 'movementItem.iva.label')}</th>
 				<th>${message(code: 'movementItem.iibb.label')}</th>
+				<th>${message(code: 'movementItem.otherPerceptions.label')}</th>
 				<th>${message(code: 'movementItem.total.label')}</th>
 				<th>${message(code: 'default.button.delete.label')}</th>
 			</tr>
@@ -40,17 +35,19 @@
 		<tbody id="items-table">
 			<g:each var="movementItemInstance" in="${movementInstance?.items}" status="i">
 				<tr class="form-inline" id="items-${i}">
-					<td class="td-intableform"><g:select class="input-intableform form-control" id="items[${i}].work" name="items[${i}].work.id" from="${mgmt.work.Work.list()}" optionKey="id" required="" value="${movementItemInstance?.work?.id}"/></td>
+					<td class="td-intableform"><g:select noSelection="${['null':'00 - Gastos generales']}" class="input-intableform form-control" id="items[${i}].work" name="items[${i}].work.id" from="${mgmt.work.Work.list()}" optionKey="id" required="" value="${movementItemInstance?.work?.id}"/></td>
 					<td class="td-intableform"><g:select class="input-intableform form-control" id="items[${i}].supplier" name="items[${i}].supplier.id" from="${mgmt.persons.Supplier.list()}" optionKey="id" required="" value="${movementItemInstance?.supplier?.id}"/></td>
 					<td class="td-intableform"><g:select class="input-intableform form-control" id="items[${i}].concept" name="items[${i}].concept.id" from="${mgmt.concept.Concept.list()}" optionKey="id" required="" value="${movementItemInstance?.concept?.id}"/></td>
 					<td class="td-intableform"><g:textArea rows="2" cols="60" class="input-intableform form-control" name="items[${i}].description" value="${movementItemInstance?.description}"/></td>
 					<td class="td-intableform"><g:select class="input-intableform form-control" id="items[${i}].invoiceType" name="items[${i}].invoiceType.id" from="${mgmt.invoice.InvoiceType.list()}" optionKey="id" required="" value="${movementItemInstance?.invoiceType?.id}"/></td>
 					<td class="td-intableform"><g:textField class="input-intableform form-control" name="items[${i}].invoiceNumber" value="${movementItemInstance?.invoiceNumber}"/></td>
+					<td class="td-intableform"><bs:datePicker class="input-intableform form-control" name="items[${i}].date" precision="day"  value="${movementItemInstance?.date}"  /> </td>
 					<td class="td-intableform"><g:field type="text" class="input-intableform form-control" name="items[${i}].amount" value="${fieldValue(bean: movementItemInstance, field: 'amount')}" required=""/></td>
 					<td class="td-intableform"><g:field type="text" class="input-intableform form-control" name="items[${i}].iva" value="${fieldValue(bean: movementItemInstance, field: 'iva')}" required=""/></td>
 					<td class="td-intableform"><g:field type="text" class="input-intableform form-control" name="items[${i}].iibb" value="${fieldValue(bean: movementItemInstance, field: 'iibb')}" required=""/></td>
+					<td class="td-intableform"><g:field type="text" class="input-intableform form-control" name="items[${i}].otherPerceptions" value="${fieldValue(bean: movementItemInstance, field: 'otherPerceptions')}" required=""/></td>
 					<td class="td-intableform"><g:field type="text" class="input-intableform form-control" name="items[${i}].total" value="${fieldValue(bean: movementItemInstance, field: 'total')}" required=""/></td>
-					<td><button type="button" onclick="$('#items-${i}').addClass('hide');$('#deleted-${i}').val(true)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button><g:field type="hidden" name="items[${i}].deleted" id="deleted-${i}"/></td>
+					<td><button type="button" onclick="$('#items-${i}').remove();"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
 				</tr>
 			</g:each>
 		</tbody>
@@ -107,15 +104,17 @@
 
 <table>
 	<tr class="form-inline" id="item-model">
-		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" name="items[xyz].work.id" from="${mgmt.work.Work.list()}" optionKey="id" required="" value=""/></td>
+		<td class="td-intableform"><g:select noSelection="${['null':'00 - Gastos generales']}" disabled="disabled" class="input-intableform form-control" name="items[xyz].work.id" from="${mgmt.work.Work.list()}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" name="items[xyz].supplier.id" from="${mgmt.persons.Supplier.list()}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" name="items[xyz].concept.id" from="${mgmt.concept.Concept.list()}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:textArea rows="2" cols="60" disabled="disabled" class="input-intableform form-control" name="items[xyz].description" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" name="items[xyz].invoiceType.id" from="${mgmt.invoice.InvoiceType.list()}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:textField disabled="disabled" class="input-intableform form-control" name="items[xyz].invoiceNumber" value=""/></td>
+		<td class="td-intableform"><bs:datePicker disabled="true" class="input-intableform form-control" name="items[xyz].date" precision="day"  value=""  /> </td>
 		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-intableform form-control" name="items[xyz].amount" value="" required=""/></td>
 		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-intableform form-control" name="items[xyz].iva" value="" required=""/></td>
 		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-intableform form-control" name="items[xyz].iibb" value="" required=""/></td>
+		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-intableform form-control" name="items[xyz].otherPerceptions" value="" required=""/></td>
 		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-intableform form-control" name="items[xyz].total" value="" required=""/></td>
 	</tr>
 </table>

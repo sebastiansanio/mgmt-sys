@@ -10,13 +10,16 @@
 
 <body>
 
+<hr/>
 <div>
 <g:form action="search" method="get" >
-<g:textField name="name" value="${params.name}" />
+<g:textField placeholder="Nombre" name="name" value="${params.name}" />
 
-<g:actionSubmit value="search"/>
+<g:actionSubmit value="${message(code:'default.search.label')}" action="search" />
 </g:form>
 </div>
+
+<hr/>
 
 <section id="index-supplier" class="first">
 
@@ -55,10 +58,6 @@
 				<td>${fieldValue(bean: supplierInstance, field: "location")}</td>
 			
 				<td>${fieldValue(bean: supplierInstance, field: "province")}</td>
-			
-				<td>${fieldValue(bean: supplierInstance, field: "zipCode")}</td>
-			
-				<td>${fieldValue(bean: supplierInstance, field: "note")}</td>
 			
 			</tr>
 		</g:each>

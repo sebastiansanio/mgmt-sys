@@ -18,7 +18,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="movement.type.label" default="Type" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: movementInstance, field: "type")}</td>
+				<td valign="top" class="value"><g:message code="movement.type.${movementInstance.type}" /></td>
 				
 			</tr>
 		
@@ -26,13 +26,6 @@
 				<td valign="top" class="name"><g:message code="movement.number.label" default="Number" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: movementInstance, field: "number")}</td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="movement.date.label" default="Date" /></td>
-				
-				<td valign="top" class="value"><g:formatDate date="${movementInstance?.date}" /></td>
 				
 			</tr>
 		

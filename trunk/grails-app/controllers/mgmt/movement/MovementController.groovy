@@ -13,6 +13,8 @@ class MovementController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
+		params.sort = params.sort ?: 'id'
+		params.order = params.order ?: 'desc'
         respond Movement.list(params), model:[movementInstanceCount: Movement.count()]
     }
 
@@ -30,8 +32,6 @@ class MovementController {
             notFound()
             return
         }
-		movementInstance.items?.removeAll{ it.deleted }
-		movementInstance.payments?.removeAll{ it.deleted }
         if (movementInstance.hasErrors()) {
             respond movementInstance.errors, view:'create'
             return
@@ -58,16 +58,12 @@ class MovementController {
             notFound()
             return
         }
-		movementInstance.items?.removeAll{ it.deleted }
-		movementInstance.payments?.removeAll{ it.deleted }
 
         if (movementInstance.hasErrors()) {
             respond movementInstance.errors, view:'edit'
             return
         }
-
         movementInstance.save flush:true
-
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Movement.label', default: 'Movement'), movementInstance.id])

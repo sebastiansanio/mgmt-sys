@@ -12,6 +12,17 @@ class Concept {
 	String code
 	String description
 	
+	boolean validInFiWork
+	boolean validInTrWork
+	boolean validInOpWork
+	boolean validInOsWork
+	boolean validInInWork
+	boolean validInFiNoWork
+	boolean validInTrNoWork
+	boolean validInOpNoWork
+	boolean validInOsNoWork
+	boolean validInInNoWork
+
 	
     static constraints = {
 		code unique:true

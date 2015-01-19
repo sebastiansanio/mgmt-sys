@@ -12,6 +12,7 @@ hibernate {
 environments {
     development {
         dataSource {
+			logSql = true
             dbCreate = "update"
 			driverClassName = "com.mysql.jdbc.Driver"
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"

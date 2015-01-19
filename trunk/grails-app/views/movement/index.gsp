@@ -18,13 +18,12 @@
 		<thead>
 			<tr>
 				<th>${message(code:'default.show.label')}</th>
-			
-				<g:sortableColumn property="type" title="${message(code: 'movement.type.label', default: 'Type')}" />
 				
-				<g:sortableColumn property="date" title="${message(code: 'movement.date.label', default: 'Date')}" />
-			
-				<g:sortableColumn property="number" title="${message(code: 'movement.number.label', default: 'Number')}" />
-			
+				<g:sortableColumn property="dateCreated" title="${message(code: 'movement.dateCreated.label')}" />
+							
+				<g:sortableColumn property="type" title="${message(code: 'movement.type.label')}" />
+				
+				<g:sortableColumn property="number" title="${message(code: 'movement.number.label')}" />
 				
 				
 			</tr>
@@ -33,11 +32,11 @@
 		<g:each in="${movementInstanceList}" status="i" var="movementInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 				<td><g:link action="show" id="${movementInstance.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
+
+				<td><g:formatDate date="${movementInstance.dateCreated}"/></td>
 			
-				<td>${fieldValue(bean: movementInstance, field: "type")}</td>
+				<td><g:message code="movement.type.${movementInstance.type}" /></td>
 				
-				<td><g:formatDate date="${movementInstance.date}" /></td>
-			
 				<td>${fieldValue(bean: movementInstance, field: "number")}</td>
 			
 			</tr>
