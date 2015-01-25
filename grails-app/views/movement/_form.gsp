@@ -47,7 +47,7 @@
 					<td class="td-intableform"><g:field onchange="refreshTotal('${i}');" type="text" class="input-intableform form-control" id="iibb-${i}" name="items[${i}].iibb" value="${movementItemInstance.iibb}" required=""/></td>
 					<td class="td-intableform"><g:field onchange="refreshTotal('${i}');" type="text" class="input-intableform form-control" id="otherPerceptions-${i}" name="items[${i}].otherPerceptions" value="${movementItemInstance.otherPerceptions}" required=""/></td>
 					<td class="td-intableform"><g:field type="text" class="input-intableform form-control" name="items[${i}].total" id="total-${i}" value="${movementItemInstance.total}" required=""/></td>
-					<td><button type="button" onclick="$('#items-${i}').remove();"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
+					<td><button type="button" onclick="$('#items-${i}').hide();$('#items-deleted-${i}').val(true);"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button><g:hiddenField id="items-deleted-${i}" name="items[${i}].deleted" value="${movementItemInstance.deleted}" /></td>
 				</tr>
 			</g:each>
 		</tbody>
