@@ -58,7 +58,12 @@ class MovementController {
             notFound()
             return
         }
-
+		def movementItemList = movementInstance.items?.find{it.deleted}
+		for (movementItem in movementItemList) {
+			movementInstance.items.remove(movementItem)
+			movementItem.delete()
+		}
+		
         if (movementInstance.hasErrors()) {
             respond movementInstance.errors, view:'edit'
             return
