@@ -36,7 +36,7 @@
 			<g:each var="movementItemInstance" in="${movementInstance?.items}" status="i">
 				<tr class="form-inline" id="items-${i}">
 					<td class="td-intableform"><g:select noSelection="${['null':'00 - Gastos generales']}" class="input-intableform form-control" id="items[${i}].work" name="items[${i}].work.id" from="${mgmt.work.Work.list()}" optionKey="id" required="" value="${movementItemInstance?.work?.id}"/></td>
-					<td class="td-intableform"><g:select class="supplier-select input-intableform form-control" id="items[${i}].supplier" name="items[${i}].supplier.id" from="${[movementItemInstance?.supplier]}" optionKey="id" required="" value="${movementItemInstance?.supplier?.id}"/></td>
+					<td class="td-intableform"><g:select class="select-chosen supplier-select form-control" id="supplier-${i}" name="items[${i}].supplier.id" from="${[movementItemInstance?.supplier]}" optionKey="id" required="" value="${movementItemInstance?.supplier?.id}"/></td>
 					<td class="td-intableform"><g:select class="input-intableform form-control" id="items[${i}].concept" name="items[${i}].concept.id" from="${mgmt.concept.Concept.list()}" optionKey="id" required="" value="${movementItemInstance?.concept?.id}"/></td>
 					<td class="td-intableform"><g:textArea cols="60" class="input-intableform form-control" name="items[${i}].description" value="${movementItemInstance?.description}"/></td>
 					<td class="td-intableform"><g:select class="input-intableform form-control" id="items[${i}].invoiceType" name="items[${i}].invoiceType.id" from="${mgmt.invoice.InvoiceType.list()}" optionKey="id" required="" value="${movementItemInstance?.invoiceType?.id}"/></td>
@@ -95,7 +95,7 @@
 <table>
 	<tr class="form-inline" id="item-model">
 		<td class="td-intableform"><g:select noSelection="${['null':'00 - Gastos generales']}" disabled="disabled" class="input-intableform form-control" name="items[xyz].work.id" from="${mgmt.work.Work.list()}" optionKey="id" required="" value=""/></td>
-		<td class="td-intableform"><g:select disabled="disabled" class="supplier-select-model input-intableform form-control" name="items[xyz].supplier.id" from="${mgmt.persons.Supplier.list()}" optionKey="id" required="" value=""/></td>
+		<td class="td-intableform"><g:select disabled="disabled" class="supplier-select-model form-control" id="supplier-xyz" name="items[xyz].supplier.id" from="${mgmt.persons.Supplier.list()}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" name="items[xyz].concept.id" from="${mgmt.concept.Concept.list()}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:textArea cols="60" disabled="disabled" class="input-intableform form-control" name="items[xyz].description" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" name="items[xyz].invoiceType.id" from="${mgmt.invoice.InvoiceType.list()}" optionKey="id" required="" value=""/></td>
@@ -144,9 +144,10 @@ function addItem(){
 		$('#items-'+currentItemQuantity).remove();
 	});
 	
+	
 	$tmc.appendTo("#items-table");
 	itemsQuantity = itemsQuantity + 1;
-	
+	$('#supplier-'+currentItemQuantity).chosen();
 }
 
 var paymentsQuantity = ${movementInstance?.payments?.size()?:0};
@@ -154,19 +155,9 @@ var paymentsQuantity = ${movementInstance?.payments?.size()?:0};
 function addPayment(){
 	$tmc = $("#payment-model").clone();
 	$tmc.attr('id', 'payments-'+ paymentsQuantity);
-	$("input", $tmc).each(function(){
+	$("input, select, textarea", $tmc).each(function(){
 		$(this).attr('name',$(this).attr('name').replace('xyz',paymentsQuantity));
 		$(this).attr('id',$(this).attr('id').replace('xyz',paymentsQuantity));		
-		$(this).prop("disabled", false);
-	});
-	$("select", $tmc).each(function(){
-		$(this).attr('name',$(this).attr('name').replace('xyz',paymentsQuantity));	
-		$(this).attr('id',$(this).attr('id').replace('xyz',paymentsQuantity));	
-		$(this).prop("disabled", false);
-	});
-	$("textarea", $tmc).each(function(){
-		$(this).attr('name',$(this).attr('name').replace('xyz',paymentsQuantity));	
-		$(this).attr('id',$(this).attr('id').replace('xyz',paymentsQuantity));	
 		$(this).prop("disabled", false);
 	});
 	var currentPaymentsQuantity = paymentsQuantity;
@@ -194,9 +185,7 @@ function safeParseFloat(inputString){
 
 $(function() {
 	$('.supplier-select').append($(".supplier-select-model > option").clone());
-	
+	$(".select-chosen").chosen();
 });
 
-
 </script>
-
