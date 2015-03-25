@@ -32,10 +32,14 @@ class MovementController {
             notFound()
             return
         }
+		movementInstance.items = movementInstance.items - [null]
+		movementInstance.payments = movementInstance.payments - [null]
+		movementInstance.validate()
+		
         if (movementInstance.hasErrors()) {
             respond movementInstance.errors, view:'create'
             return
-        }
+        }																									
 
         movementInstance.save flush:true
 
@@ -74,6 +78,7 @@ class MovementController {
 		movementInstance.items = movementInstance.items - [null]
 		movementInstance.payments = movementInstance.payments - [null]
 
+		movementInstance.validate()
 		if (movementInstance.hasErrors()) {
             respond movementInstance.errors, view:'edit'
             return
