@@ -53,25 +53,35 @@ class MovementController {
     }
 
     @Transactional
-    def update(Movement movementInstance) {
+    def update() {
+		
+		def movementInstance = Movement.get(params.id.toLong())
         if (movementInstance == null) {
             notFound()
             return
         }
-		def movementItemList = movementInstance.items?.find{it.deleted}
-		for (movementItem in movementItemList) {
-			movementInstance.items.remove(movementItem)
+				
+		for (movementItem in movementInstance.items) {
 			movementItem.delete()
 		}
+		movementInstance.items.clear()
+		for (payment in movementInstance.payments) {
+			payment.delete()
+		}
+		movementInstance.payments.clear()
 		
-        if (movementInstance.hasErrors()) {
+		movementInstance.properties = params
+		movementInstance.items = movementInstance.items - [null]
+		movementInstance.payments = movementInstance.payments - [null]
+
+		if (movementInstance.hasErrors()) {
             respond movementInstance.errors, view:'edit'
             return
         }
         movementInstance.save flush:true
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Movement.label', default: 'Movement'), movementInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'movement.label', default: 'Movement'), movementInstance.id])
                 redirect movementInstance
             }
             '*'{ respond movementInstance, [status: OK] }

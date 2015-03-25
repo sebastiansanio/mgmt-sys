@@ -19,7 +19,6 @@ class MovementItem {
 	InvoiceType invoiceType
 	String invoiceNumber
 	Date date
-	boolean deleted
 	
 	@BindUsing({
 		obj, source -> new BigDecimal(source['amount'])

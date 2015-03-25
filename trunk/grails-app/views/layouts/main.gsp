@@ -12,9 +12,11 @@
 <asset:stylesheet src="datepicker3.css" />
 <asset:stylesheet src="styles.css" />
 
+
 <asset:javascript src="bootstrap.min.js" />
 <asset:javascript src="bootstrap-datepicker.js" />
 <asset:javascript src="scripts.js" />
+<asset:javascript src="jquery.autocomplete.min.js" />
 <g:layoutHead />
 </head>
 <body>
