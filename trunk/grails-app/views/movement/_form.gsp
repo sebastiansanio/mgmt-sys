@@ -144,10 +144,9 @@ function addItem(){
 		$('#items-'+currentItemQuantity).remove();
 	});
 	
-	
 	$tmc.appendTo("#items-table");
 	itemsQuantity = itemsQuantity + 1;
-	$('#supplier-'+currentItemQuantity).chosen();
+	$('#supplier-'+currentItemQuantity).chosen({width: "200px"});
 }
 
 var paymentsQuantity = ${movementInstance?.payments?.size()?:0};
@@ -185,7 +184,7 @@ function safeParseFloat(inputString){
 
 $(function() {
 	$('.supplier-select').append($(".supplier-select-model > option").clone());
-	$(".select-chosen").chosen();
+	$(".select-chosen").chosen({width: "200px"});
 });
 
 </script>
