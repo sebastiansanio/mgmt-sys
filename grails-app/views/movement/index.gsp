@@ -11,9 +11,7 @@
 
 <body>
 
-
 <section id="index-movement" class="first">
-
 	<table class="table table-bordered margin-top-medium">
 		<thead>
 			<tr>
@@ -59,7 +57,7 @@
 		</tbody>
 	</table>
 	<div>
-		<bs:paginate total="${movementInstanceCount}" />
+		<bs:paginate total="${movementInstanceCount}" params="${params}" />
 	</div>
 </section>
 
