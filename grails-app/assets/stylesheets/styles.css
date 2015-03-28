@@ -80,3 +80,9 @@ footer {
 .td-intableform {margin: 0 !important; padding: 0 !important;}
 .col-margin-left{margin-left:3%}
 .col-margin-right{margin-right:3%}
+.right-aligned {
+	text-align: right;
+}
+.mayus {
+	text-transform: uppercase;
+}
