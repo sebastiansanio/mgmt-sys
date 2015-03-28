@@ -11,12 +11,12 @@ class SupplierController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 200, 1000)
+        params.max = Math.min(max ?: 50, 1000)
         respond Supplier.list(params), model:[supplierInstanceCount: Supplier.count()]
     }
 	
 	def search(Integer max) {
-		params.max = Math.min(max ?: 200, 1000)
+		params.max = Math.min(max ?: 50, 1000)
 		String nameQuery = "%"+params.name+"%"
 		respond Supplier.findAllByNameLike(nameQuery,params), model:[supplierInstanceCount: Supplier.countByNameLike(nameQuery)],  view:'index'
 	}

@@ -64,8 +64,12 @@ class BootStrap {
 
 			new Requestmap(url: '/budget/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
 			new Requestmap(url: '/work/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
-
+			new Requestmap(url: '/supplierBudget/**', configAttribute: "hasRole('AUTH_USER')").save(flush: true)
+			 
 			new Requestmap(url: '/import/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
+
+			new Requestmap(url: '/secUser/**', configAttribute: "hasRole('AUTH_ADMIN')").save(flush: true)
+			 
 		}
 	}
 	def destroy = {

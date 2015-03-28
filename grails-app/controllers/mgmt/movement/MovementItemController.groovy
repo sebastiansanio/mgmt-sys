@@ -9,12 +9,12 @@ import grails.transaction.Transactional
 class MovementItemController {
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 50, 1000)
         respond MovementItem.list(params), model:[movementItemInstanceCount: MovementItem.count()]
     }
 	
 	def search(Integer max) {
-		params.max = Math.min(max ?: 200, 1000)
+		params.max = Math.min(max ?: 50, 1000)
 		String nameQuery = "%"+params.description+"%"
 		respond MovementItem.findAllByDescriptionLike(nameQuery,params), model:[movementItemInstanceCount: MovementItem.countByDescriptionLike(nameQuery)],  view:'index'
 	}

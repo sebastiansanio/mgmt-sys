@@ -1,11 +1,10 @@
-<%@ page import="mgmt.payment.InvoiceType" %>
+<%@ page import="mgmt.invoice.InvoiceType" %>
 <!DOCTYPE html>
 <html>
 
 <head>
 	<meta name="layout" content="main" />
 	<g:set var="entityName" value="${message(code: 'invoiceType.label', default: 'InvoiceType')}" />
-	<title><g:message code="default.edit.label" args="[entityName]" /></title>
 </head>
 
 <body>
@@ -22,8 +21,11 @@
 			<g:hiddenField name="id" value="${invoiceTypeInstance?.id}" />
 			<g:hiddenField name="version" value="${invoiceTypeInstance?.version}" />
 			<g:hiddenField name="_method" value="PUT" />
-			
+			<div class="row">
+			<div class="col-md-4">
 			<g:render template="form"/>
+			</div>
+			</div>
 			<hr/>
 			<div class="form-actions margin-top-medium">
 				<g:actionSubmit class="btn btn-primary" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />

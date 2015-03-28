@@ -19,7 +19,9 @@
 
 		<g:form action="save" class="form-horizontal" role="form" >
 			<div class="row">
+			<div class="col-md-4">
 			<g:render template="form"/>
+			</div>
 			</div>
 			<hr/>
 			<div class="form-actions margin-top-medium">

@@ -1,4 +1,4 @@
-<%@ page import="mgmt.payment.InvoiceType" %>
+<%@ page import="mgmt.invoice.InvoiceType" %>
 
 
 
