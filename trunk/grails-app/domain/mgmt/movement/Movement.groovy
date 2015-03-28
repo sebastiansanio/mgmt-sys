@@ -11,6 +11,8 @@ class Movement {
 	List payments = new ArrayList()
 	boolean checked
 	Integer year
+	String note
+	
 
 	static hasMany = [items: MovementItem, payments: Payment]
 
@@ -19,6 +21,12 @@ class Movement {
 		number unique: ['type','year'], nullable: false
 		year nullable: false, min: 1900, max:9999
 		items minSize: 1
+		note nullable: true, blank: true, maxSize: 4000
+		items validator: {value, object ->
+			if (!(object.calculateItemsTotal() == object.calculatePaymentsTotal())){
+				return ["movement.amountsNotEqual.error"]
+			}
+        }
 	}
 
 	static mapping = {
@@ -40,5 +48,21 @@ class Movement {
 				number = calculatedNumber + 1
 			}
 		}
+	}
+	
+	BigDecimal calculateItemsTotal(){
+		BigDecimal itemsTotal = BigDecimal.valueOf(0)
+		for(MovementItem item in items){
+			itemsTotal += item.total
+		}
+		return itemsTotal
+	}
+	
+	BigDecimal calculatePaymentsTotal(){
+		BigDecimal paymentsTotal = BigDecimal.valueOf(0)
+		for(Payment payment in payments){
+			paymentsTotal += payment.amount
+		}
+		return paymentsTotal
 	}
 }
