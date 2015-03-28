@@ -12,4 +12,8 @@ class ConceptGroup {
     static constraints = {
 		name unique:true
     }
+	
+	String toString(){
+		return name
+	}
 }
