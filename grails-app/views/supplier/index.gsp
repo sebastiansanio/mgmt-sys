@@ -10,19 +10,22 @@
 
 <body>
 
-<hr/>
-<div>
-<g:form action="search" method="get" >
-<g:textField placeholder="Nombre" name="name" value="${params.name}" />
 
-<g:actionSubmit value="${message(code:'default.search.label')}" action="search" />
+<div class="row-fluid">
+<g:form action="search" method="get" >
+<div class="col-md-2">
+<g:textField placeholder="Nombre" class="form-control" name="name" value="${params.name}" />
+</div>
+<div class="col-md-2">
+<g:actionSubmit class="btn btn-default" value="${message(code:'default.search.label')}" action="search" />
+</div>
+
 </g:form>
 </div>
 
-<hr/>
 
 <section id="index-supplier" class="first">
-
+<hr/>
 	<table class="table table-bordered margin-top-medium">
 		<thead>
 			<tr>
@@ -30,7 +33,7 @@
 			
 				<g:sortableColumn property="name" title="${message(code: 'supplier.name.label', default: 'Name')}" />
 			
-				<g:sortableColumn property="businessName" title="${message(code: 'supplier.businessName.label', default: 'Business Name')}" />
+				<g:sortableColumn property="businessName" title="${message(code: 'supplier.businessName.label')}" />
 			
 				<g:sortableColumn property="cuit" title="${message(code: 'supplier.cuit.label', default: 'Cuit')}" />
 			
