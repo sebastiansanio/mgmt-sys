@@ -1,11 +1,9 @@
-
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta name="layout" content="main" />
+<g:set var="noSubMenu" value="${true}" scope="request" />
 </head>
-
 <body>
 
 	<hr/>

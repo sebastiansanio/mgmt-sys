@@ -1,6 +1,7 @@
 <sec:ifLoggedIn>
-<g:if test="${	params.controller != null &&	params.controller != ''	&&	params.controller != 'home'}">
+<g:if test="${params.controller	&& !(params.controller in ['home','login'])}" >
 	<g:set var="menuName" value="${message(code: 'menu.'+params.controller+'.label')}" />
+	<g:set var="validUris" value="${grailsApplication.controllerClasses.find{it.logicalPropertyName == params.controller}.uris}" />
 	<h4>${menuName}</h4>
 	<ul id="Menu" class="nav nav-pills margin-top-small">
 		<li class="${ params.action == "index" ? 'active' : '' }">
@@ -17,6 +18,7 @@
 				</a>
 			</g:else>
 		</li>
+		<g:if test="${validUris.contains('/'+params.controller+'/create')}" >
 		<li class="${ params.action == "create" ? 'active' : '' }">
 			<g:if test="${ params.action != "create"}">
 				<g:link	action="create">
@@ -31,6 +33,7 @@
 				</a>
 			</g:else>
 		</li>
+		</g:if>
 		<g:if test="${ params.action == 'show' || params.action == 'edit' }">
 		<sec:access url="/${params.controller}/edit">
 		<li class="${ params.action == "edit" ? 'active' : '' }">

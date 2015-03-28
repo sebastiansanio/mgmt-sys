@@ -12,7 +12,7 @@ class MovementController {
     static allowedMethods = [save: "POST", check: "POST", uncheck: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 200, 1000)
 		params.sort = params.sort ?: 'id'
 		params.order = params.order ?: 'desc'
         respond Movement.list(params), model:[movementInstanceCount: Movement.count()]
