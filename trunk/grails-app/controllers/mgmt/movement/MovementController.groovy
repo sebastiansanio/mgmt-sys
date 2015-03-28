@@ -9,7 +9,7 @@ import grails.transaction.Transactional
 class MovementController {
 	
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", check: "POST", uncheck: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -53,6 +53,11 @@ class MovementController {
     }
 
     def edit(Movement movementInstance) {
+		if(movementInstance.checked){
+			flash.error = message(code: 'movement.isChecked.error')
+			redirect movementInstance
+		}
+		
         respond movementInstance
     }
 
@@ -64,6 +69,10 @@ class MovementController {
             notFound()
             return
         }
+		if(movementInstance.checked){
+			flash.message = message(code: 'movement.isChecked.error')
+			redirect movementInstance
+		}
 				
 		for (movementItem in movementInstance.items) {
 			movementItem.delete()
@@ -111,6 +120,23 @@ class MovementController {
             '*'{ render status: NO_CONTENT }
         }
     }
+	@Transactional
+	def check(){
+		def movementInstance = Movement.get(params.id.toLong())
+		movementInstance.checked = true
+		movementInstance.save flush: true
+		flash.message = message(code: 'movement.checked.message')
+		redirect movementInstance
+		
+	}
+	@Transactional
+	def uncheck(){
+		def movementInstance = Movement.get(params.id.toLong())
+		movementInstance.checked = false
+		movementInstance.save flush: true
+		flash.message = message(code: 'movement.unchecked.message')
+		redirect movementInstance
+	}
 
     protected void notFound() {
         request.withFormat {

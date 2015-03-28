@@ -30,6 +30,35 @@
 			</tr>
 		
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="movement.year.label" /></td>
+				
+				<td valign="top" class="value">${movementInstance.year}</td>
+				
+			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="movement.checked.label" /></td>
+				
+				<td valign="top" class="value"><g:formatBoolean boolean="${movementInstance.checked}" /></td>
+				
+			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="movement.amount.label" /></td>
+				
+				<td valign="top" class="value">${movementInstance.calculateItemsTotal()}</td>
+				
+			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="movement.note.label" /></td>
+				
+				<td valign="top" class="value">${movementInstance.note}</td>
+				
+			</tr>
+		
+		
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="movement.dateCreated.label" default="Date Created" /></td>
 				
 				<td valign="top" class="value"><g:formatDate date="${movementInstance?.dateCreated}" /></td>
@@ -46,6 +75,25 @@
 		
 		</tbody>
 	</table>
+	
+	<g:if test="${!movementInstance.checked}">
+		<sec:access url="/movement/check">
+			<g:form action="check">
+				<g:hiddenField name="id" value="${movementInstance.id}" />
+				<g:submitButton class="btn btn-primary" name="check" value="${message(code:'movement.check.label') }" /> 
+			</g:form>
+		</sec:access>
+	</g:if>
+	<g:else>
+		<sec:access url="/movement/uncheck">
+			<g:form action="uncheck">
+				<g:hiddenField name="id" value="${movementInstance.id}" />
+				<g:submitButton class="btn btn-warning" name="uncheck" value="${message(code:'movement.uncheck.label') }" /> 
+			</g:form>
+		</sec:access>
+	</g:else>
+	
+	
 </section>
 
 </body>
