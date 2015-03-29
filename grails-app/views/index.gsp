@@ -6,7 +6,7 @@
 	<body>
 		<div>
 			<h3>
-			Bienvenido <sec:loggedInUserInfo field="name"/>
+			Bienvenido ${mgmt.security.SecUser.findByUsername(sec.loggedInUserInfo(field:"username")).name}
 			</h3>
 		</div>
 	</body>
