@@ -1,25 +1,25 @@
-<%@ page import="mgmt.persons.Supplier" %>
+<%@ page import="mgmt.security.Requestmap" %>
 <!DOCTYPE html>
 <html>
 
 <head>
 	<meta name="layout" content="main" />
-	<g:set var="entityName" value="${message(code: 'supplier.label', default: 'Supplier')}" />
+	<g:set var="entityName" value="${message(code: 'requestmap.label', default: 'Requestmap')}" />
 </head>
 
 <body>
 
-	<section id="edit-supplier" class="first">
+	<section id="edit-requestmap" class="first">
 
-		<g:hasErrors bean="${supplierInstance}">
+		<g:hasErrors bean="${requestmapInstance}">
 		<div class="alert alert-danger">
-			<g:renderErrors bean="${supplierInstance}" as="list" />
+			<g:renderErrors bean="${requestmapInstance}" as="list" />
 		</div>
 		</g:hasErrors>
 
 		<g:form method="post" class="form-horizontal" role="form" >
-			<g:hiddenField name="id" value="${supplierInstance?.id}" />
-			<g:hiddenField name="version" value="${supplierInstance?.version}" />
+			<g:hiddenField name="id" value="${requestmapInstance?.id}" />
+			<g:hiddenField name="version" value="${requestmapInstance?.version}" />
 			<g:hiddenField name="_method" value="PUT" />
 			<div class="row">
 			<div class="col-md-4">
@@ -29,7 +29,7 @@
 			<hr/>
 			<div class="form-actions margin-top-medium">
 				<g:actionSubmit class="btn btn-primary" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-				<g:link action="index" class="btn" ><g:message code="default.button.cancel.label" default="Cancelar" /></g:link>
+	            <button class="btn" type="reset"><g:message code="default.button.reset.label" default="Reset" /></button>
 			</div>
 		</g:form>
 
