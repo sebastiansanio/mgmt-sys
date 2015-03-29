@@ -2,12 +2,7 @@
 
 <div class="container-fluid">
 
-<div class="col-md-3 ${hasErrors(bean: movementInstance, field: 'type', 'has-error')} ">
-	<label for="type" class="control-label"><g:message code="movement.type.label" default="Type" /></label>
-	<div>
-		<g:select class="form-control" name="type" from="${movementInstance.constraints.type.inList}" value="${movementInstance?.type}" valueMessagePrefix="movement.type" noSelection="['': '']"/>
-	</div>
-</div>
+<g:hiddenField name="type" value="os" />
 
 <div class="col-md-3 ${hasErrors(bean: movementInstance, field: 'note', 'has-error')} ">
 	<label for="type" class="control-label"><g:message code="movement.note.label" default="Note" /></label>

@@ -3,6 +3,7 @@ package mgmt.movement
 import mgmt.concept.Concept
 import mgmt.invoice.InvoiceType
 import mgmt.persons.Supplier
+import mgmt.products.UnitOfMeasurement
 import mgmt.work.Work
 
 import org.grails.databinding.BindUsing
@@ -19,6 +20,16 @@ class MovementItem {
 	InvoiceType invoiceType
 	String invoiceNumber
 	Date date
+	int multiplier
+	UnitOfMeasurement unit
+	@BindUsing({
+		obj, source -> new BigDecimal(source['quantity'])
+	})
+	BigDecimal quantity
+	@BindUsing({
+		obj, source -> new BigDecimal(source['unitPrice'])
+	})
+	BigDecimal unitPrice
 	
 	@BindUsing({
 		obj, source -> new BigDecimal(source['amount'])
@@ -41,12 +52,37 @@ class MovementItem {
 	})
 	BigDecimal total
 	
+	
 	static belongsTo = [movement: Movement]
 	
     static constraints = {
 		work nullable:true
 		description nullable:true,blank:true
+		invoiceType nullable:true
 		invoiceNumber nullable:true,blank:true
+		iibb nullable: true, validator: {value, object ->
+			if (object.movement.type in ['op','os'] && value == null){
+				return ["default.null.message"]
+			}
+        }
+		otherPerceptions nullable: true, validator: {value, object ->
+			if (object.movement.type in ['op','os'] && value == null){
+				return ["default.null.message"]
+			}
+        }
+		iva nullable: true, validator: {value, object ->
+			if (object.movement.type in ['op','os','in'] && value == null){
+				return ["default.null.message"]
+			}
+		}
+		supplier nullable: true, validator: {value, object ->
+			if (object.movement.type in ['op','os'] && value == null){
+				return ["default.null.message"]
+			}
+        }
+		unit nullable: true
+		quantity nullable: true
+		unitPrice nullable: true
     }
 	
 }

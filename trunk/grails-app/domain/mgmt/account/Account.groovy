@@ -11,6 +11,7 @@ class Account {
 	String name
 	String code
 	AccountType type
+	boolean secured
 	
 	static hasMany = [payments: Payment]
 

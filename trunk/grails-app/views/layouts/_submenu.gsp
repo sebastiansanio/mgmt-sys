@@ -46,6 +46,13 @@
 		</li>
 		</sec:access>
 		</g:if>
+		<g:if test ="${validUris.contains('/'+params.controller+'/download')}">
+			<sec:access url="/${params.controller}/download">
+			<li>
+				<g:link action="download"><i class="glyphicon glyphicon-download-alt"></i> <g:message code="default.download.label"></g:message></g:link>
+			</li>
+			</sec:access>
+		</g:if>
 	</ul>
 </g:if>
 </sec:ifLoggedIn>

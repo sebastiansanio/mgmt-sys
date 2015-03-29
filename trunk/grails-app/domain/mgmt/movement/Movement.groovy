@@ -20,10 +20,19 @@ class Movement {
 		type inList: ['op', 'os', 'in', 'tr', 'fi']
 		number unique: ['type','year'], nullable: false
 		year nullable: false, min: 1900, max:9999
-		items minSize: 1
+		items validator: {value, object ->
+			if (object.type in ['op','os','in','fi'] && !value){
+				return ["default.invalid.min.size.message"]
+			}
+        }
+		payments validator: {value, object ->
+			if (object.type in ['op','os','in','tr'] && !value){
+				return ["default.invalid.min.size.message"]
+			}
+        }
 		note nullable: true, blank: true, maxSize: 4000
 		items validator: {value, object ->
-			if (!(object.calculateItemsTotal() == object.calculatePaymentsTotal())){
+			if (object.type in ['op','os','in'] && !(object.calculateItemsTotal() == object.calculatePaymentsTotal())){
 				return ["movement.amountsNotEqual.error"]
 			}
         }
@@ -64,5 +73,21 @@ class Movement {
 			paymentsTotal += payment.amount
 		}
 		return paymentsTotal
+	}
+	
+	BigDecimal getAmount(){
+		if(type in ['op','os','in']){
+			return calculateItemsTotal()
+		} else if (type == 'tr'){
+			return payments[0].amount	
+		} else if (type == 'fi'){
+			BigDecimal calculatedAmount = BigDecimal.valueOf(0)
+			for(MovementItem item in items){
+				if(item.multiplier == 1){
+					calculatedAmount += item.total
+				}
+			}
+			return calculatedAmount
+		}
 	}
 }
