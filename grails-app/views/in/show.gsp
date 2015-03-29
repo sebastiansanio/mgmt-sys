@@ -77,7 +77,7 @@
 	</table>
 	
 	<g:if test="${!movementInstance.checked}">
-		<sec:access url="/movement/check">
+		<sec:access url="/in/check">
 			<g:form action="check">
 				<g:hiddenField name="id" value="${movementInstance.id}" />
 				<g:submitButton class="btn btn-primary" name="check" value="${message(code:'movement.check.label') }" /> 
@@ -85,7 +85,7 @@
 		</sec:access>
 	</g:if>
 	<g:else>
-		<sec:access url="/movement/uncheck">
+		<sec:access url="/in/uncheck">
 			<g:form action="uncheck">
 				<g:hiddenField name="id" value="${movementInstance.id}" />
 				<g:submitButton class="btn btn-warning" name="uncheck" value="${message(code:'movement.uncheck.label') }" /> 

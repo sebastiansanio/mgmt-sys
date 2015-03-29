@@ -16,7 +16,8 @@ class Payment {
 	BigDecimal amount
 	Date paymentDate
 	String checkNumber
-	String note
+	String note	
+	int multiplier
 	
 	static belongsTo = [movement: Movement]
 
