@@ -3,7 +3,7 @@
 			<div class="${hasErrors(bean: workInstance, field: 'name', 'has-error')} ">
 				<label for="name" class="control-label"><g:message code="work.name.label" default="Name" /></label>
 				<div>
-					<g:textField required="" class="form-control" name="name" value="${workInstance?.name}"/>
+					<g:textField required="" class="mayus form-control" name="name" value="${workInstance?.name}"/>
 				</div>
 			</div>
 			
@@ -35,7 +35,15 @@
 					<g:select class="form-control" id="budget" name="budget.id" from="${mgmt.work.Budget.list()}" optionKey="id" value="${workInstance?.budget?.id}" noSelection="['null': '']"/>
 				</div>
 			</div>
-
+			
+<script>
+	$("form").submit(function( event ) {
+		$(".mayus" ).each(function( index ) {
+			$(this).val($(this).val().toUpperCase());
+		});
+	
+	});
+</script>
 
 
 

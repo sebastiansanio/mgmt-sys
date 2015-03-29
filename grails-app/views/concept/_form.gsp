@@ -26,7 +26,7 @@
 			<div class="${hasErrors(bean: conceptInstance, field: 'description', 'has-error')} ">
 				<label for="description" class="control-label"><g:message code="concept.description.label" default="Description" /></label>
 				<div>
-					<g:textField class="form-control" name="description" value="${conceptInstance?.description}"/>
+					<g:textField class="mayus form-control" name="description" value="${conceptInstance?.description}"/>
 				</div>
 			</div>
 
@@ -78,3 +78,12 @@
 					<g:checkBox name="validInOsWork" value="${conceptInstance?.validInOsWork}" />
 				</div>
 			</div>
+			
+<script>
+	$("form").submit(function( event ) {
+		$(".mayus" ).each(function( index ) {
+			$(this).val($(this).val().toUpperCase());
+		});
+	
+	});
+</script>

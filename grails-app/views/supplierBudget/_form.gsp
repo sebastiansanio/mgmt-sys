@@ -38,7 +38,7 @@
 			<div class="${hasErrors(bean: supplierBudgetInstance, field: 'note', 'has-error')} ">
 				<label for="note" class="control-label"><g:message code="supplierBudget.note.label" default="Note" /></label>
 				<div>
-					<g:textArea class="form-control" name="note" cols="40" rows="5" maxlength="4000" value="${supplierBudgetInstance?.note}"/>
+					<g:textArea class="mayus form-control" name="note" cols="40" rows="5" maxlength="4000" value="${supplierBudgetInstance?.note}"/>
 				</div>
 			</div>
 			
@@ -47,6 +47,13 @@
 
 $(function() {
 	$(".select-chosen").chosen();
+});
+
+$("form").submit(function( event ) {
+	$(".mayus" ).each(function( index ) {
+		$(this).val($(this).val().toUpperCase());
+	});
+
 });
 
 </script>	
