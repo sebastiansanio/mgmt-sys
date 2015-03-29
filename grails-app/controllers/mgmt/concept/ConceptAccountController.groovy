@@ -66,7 +66,7 @@ class ConceptAccountController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'ConceptAccount.label', default: 'ConceptAccount'), conceptAccountInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'conceptAccount.label', default: 'ConceptAccount'), conceptAccountInstance.id])
                 redirect conceptAccountInstance
             }
             '*'{ respond conceptAccountInstance, [status: OK] }
@@ -85,7 +85,7 @@ class ConceptAccountController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'ConceptAccount.label', default: 'ConceptAccount'), conceptAccountInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'conceptAccount.label', default: 'ConceptAccount'), conceptAccountInstance.id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }

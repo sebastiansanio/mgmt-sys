@@ -66,7 +66,7 @@ class BudgetController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Budget.label', default: 'Budget'), budgetInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'budget.label', default: 'Budget'), budgetInstance.id])
                 redirect budgetInstance
             }
             '*'{ respond budgetInstance, [status: OK] }
@@ -85,7 +85,7 @@ class BudgetController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Budget.label', default: 'Budget'), budgetInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'budget.label', default: 'Budget'), budgetInstance.id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }

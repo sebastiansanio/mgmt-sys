@@ -72,7 +72,7 @@ class RequestmapController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Requestmap.label', default: 'Requestmap'), requestmapInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'requestmap.label', default: 'Requestmap'), requestmapInstance.id])
                 redirect requestmapInstance
             }
             '*'{ respond requestmapInstance, [status: OK] }
@@ -91,7 +91,7 @@ class RequestmapController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Requestmap.label', default: 'Requestmap'), requestmapInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'requestmap.label', default: 'Requestmap'), requestmapInstance.id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }

@@ -66,7 +66,7 @@ class SecAuthorityController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'SecAuthority.label', default: 'SecAuthority'), secAuthorityInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'secAuthority.label', default: 'SecAuthority'), secAuthorityInstance.id])
                 redirect secAuthorityInstance
             }
             '*'{ respond secAuthorityInstance, [status: OK] }
@@ -85,7 +85,7 @@ class SecAuthorityController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'SecAuthority.label', default: 'SecAuthority'), secAuthorityInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'secAuthority.label', default: 'SecAuthority'), secAuthorityInstance.id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }

@@ -66,7 +66,7 @@ class UnitOfMeasurementController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'UnitOfMeasurement.label', default: 'UnitOfMeasurement'), unitOfMeasurementInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'unitOfMeasurement.label', default: 'UnitOfMeasurement'), unitOfMeasurementInstance.id])
                 redirect unitOfMeasurementInstance
             }
             '*'{ respond unitOfMeasurementInstance, [status: OK] }
@@ -85,7 +85,7 @@ class UnitOfMeasurementController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'UnitOfMeasurement.label', default: 'UnitOfMeasurement'), unitOfMeasurementInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'unitOfMeasurement.label', default: 'UnitOfMeasurement'), unitOfMeasurementInstance.id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }

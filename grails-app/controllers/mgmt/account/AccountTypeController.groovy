@@ -70,7 +70,7 @@ class AccountTypeController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'AccountType.label', default: 'AccountType'), accountTypeInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'accountType.label', default: 'AccountType'), accountTypeInstance.id])
                 redirect accountTypeInstance
             }
             '*'{ respond accountTypeInstance, [status: OK] }
@@ -89,7 +89,7 @@ class AccountTypeController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'AccountType.label', default: 'AccountType'), accountTypeInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'accountType.label', default: 'AccountType'), accountTypeInstance.id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
