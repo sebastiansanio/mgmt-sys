@@ -12,7 +12,7 @@
 			<div class="${hasErrors(bean: accountInstance, field: 'name', 'has-error')} ">
 				<label for="name" class="control-label"><g:message code="account.name.label" default="Name" /></label>
 				<div>
-					<g:textField class="form-control" name="name" value="${accountInstance?.name}"/>
+					<g:textField class="mayus form-control" name="name" value="${accountInstance?.name}"/>
 				</div>
 			</div>
 
@@ -22,3 +22,13 @@
 					<g:select class="form-control" id="type" name="type.id" from="${mgmt.account.AccountType.list()}" optionKey="id" required="" value="${accountInstance?.type?.id}"/>
 				</div>
 			</div>
+
+			
+<script>
+	$("form").submit(function( event ) {
+		$(".mayus" ).each(function( index ) {
+			$(this).val($(this).val().toUpperCase());
+		});
+	
+	});
+</script>

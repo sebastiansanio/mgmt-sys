@@ -6,7 +6,7 @@
 	<body>
 		<div>
 			<h3>
-			Bienvenido <sec:loggedInUserInfo field="username"/>
+			Bienvenido <sec:loggedInUserInfo field="name"/>
 			</h3>
 		</div>
 	</body>
