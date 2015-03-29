@@ -66,7 +66,7 @@ class WorkController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Work.label', default: 'Work'), workInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'work.label', default: 'Work'), workInstance.id])
                 redirect workInstance
             }
             '*'{ respond workInstance, [status: OK] }
@@ -85,7 +85,7 @@ class WorkController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Work.label', default: 'Work'), workInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'work.label', default: 'Work'), workInstance.id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }

@@ -66,7 +66,7 @@ class InvoiceTypeController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'InvoiceType.label', default: 'InvoiceType'), invoiceTypeInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'invoiceType.label', default: 'InvoiceType'), invoiceTypeInstance.id])
                 redirect invoiceTypeInstance
             }
             '*'{ respond invoiceTypeInstance, [status: OK] }
@@ -85,7 +85,7 @@ class InvoiceTypeController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'InvoiceType.label', default: 'InvoiceType'), invoiceTypeInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'invoiceType.label', default: 'InvoiceType'), invoiceTypeInstance.id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }

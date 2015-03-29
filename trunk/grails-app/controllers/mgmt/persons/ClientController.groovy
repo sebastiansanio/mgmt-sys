@@ -66,7 +66,7 @@ class ClientController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Client.label', default: 'Client'), clientInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'client.label', default: 'Client'), clientInstance.id])
                 redirect clientInstance
             }
             '*'{ respond clientInstance, [status: OK] }
@@ -85,7 +85,7 @@ class ClientController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Client.label', default: 'Client'), clientInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'client.label', default: 'Client'), clientInstance.id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }

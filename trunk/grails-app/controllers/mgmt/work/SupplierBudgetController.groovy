@@ -66,7 +66,7 @@ class SupplierBudgetController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'SupplierBudget.label', default: 'SupplierBudget'), supplierBudgetInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'upplierBudget.label', default: 'SupplierBudget'), supplierBudgetInstance.id])
                 redirect supplierBudgetInstance
             }
             '*'{ respond supplierBudgetInstance, [status: OK] }
@@ -85,7 +85,7 @@ class SupplierBudgetController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'SupplierBudget.label', default: 'SupplierBudget'), supplierBudgetInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'supplierBudget.label', default: 'SupplierBudget'), supplierBudgetInstance.id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
