@@ -1,7 +1,26 @@
 <%@ page import="mgmt.work.Work" %>
 
-
-
+			<div class="${hasErrors(bean: workInstance, field: 'name', 'has-error')} ">
+				<label for="name" class="control-label"><g:message code="work.name.label" default="Name" /></label>
+				<div>
+					<g:textField required="" class="form-control" name="name" value="${workInstance?.name}"/>
+				</div>
+			</div>
+			
+			<div class="${hasErrors(bean: workInstance, field: 'type', 'has-error')} ">
+				<label for="type" class="control-label"><g:message code="work.type.label" default="Type" /></label>
+				<div>
+					<g:select required="" class="form-control" name="type" from="${workInstance.constraints.type.inList}" value="${workInstance?.type}" valueMessagePrefix="work.type" noSelection="['': '']"/>
+				</div>
+			</div>
+			
+			<div class="${hasErrors(bean: workInstance, field: 'finished', 'has-error')} ">
+				<label for="finished" class="control-label"><g:message code="work.finished.label" default="Finished" /></label>
+				<div>
+					<g:checkBox name="finished" value="${workInstance?.finished}" />
+				</div>
+			</div>
+			
 			<div class="${hasErrors(bean: workInstance, field: 'client', 'has-error')} ">
 				<label for="client" class="control-label"><g:message code="work.client.label" default="Client" /></label>
 				<div>
@@ -9,12 +28,6 @@
 				</div>
 			</div>
 
-			<div class="${hasErrors(bean: workInstance, field: 'type', 'has-error')} ">
-				<label for="type" class="control-label"><g:message code="work.type.label" default="Type" /></label>
-				<div>
-					<g:select class="form-control" name="type" from="${workInstance.constraints.type.inList}" value="${workInstance?.type}" valueMessagePrefix="work.type" noSelection="['': '']"/>
-				</div>
-			</div>
 
 			<div class="${hasErrors(bean: workInstance, field: 'budget', 'has-error')} ">
 				<label for="budget" class="control-label"><g:message code="work.budget.label" default="Budget" /></label>
@@ -23,23 +36,7 @@
 				</div>
 			</div>
 
-			<div class="${hasErrors(bean: workInstance, field: 'code', 'has-error')} required">
-				<label for="code" class="control-label"><g:message code="work.code.label" default="Code" /><span class="required-indicator">*</span></label>
-				<div>
-					<g:field class="form-control" name="code" type="number" value="${workInstance.code}" required=""/>
-				</div>
-			</div>
 
-			<div class="${hasErrors(bean: workInstance, field: 'finished', 'has-error')} ">
-				<label for="finished" class="control-label"><g:message code="work.finished.label" default="Finished" /></label>
-				<div>
-					<g:checkBox name="finished" value="${workInstance?.finished}" />
-				</div>
-			</div>
 
-			<div class="${hasErrors(bean: workInstance, field: 'name', 'has-error')} ">
-				<label for="name" class="control-label"><g:message code="work.name.label" default="Name" /></label>
-				<div>
-					<g:textField class="form-control" name="name" value="${workInstance?.name}"/>
-				</div>
-			</div>
+
+

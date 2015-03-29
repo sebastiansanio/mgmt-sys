@@ -54,7 +54,7 @@ environments {
 	//grant all privileges on urbatec.* to 'urbatec'@'localhost' with grant option;
     production {
         dataSource {
-            dbCreate = "update"
+            dbCreate = "validate"
 			driverClassName = "com.mysql.jdbc.Driver"
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
 			username = "urbatec"

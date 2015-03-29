@@ -1,19 +1,19 @@
-<%@ page import="mgmt.work.SupplierBudget" %>
+<%@ page import="mgmt.security.Requestmap" %>
 <!DOCTYPE html>
 <html>
 
 <head>
 	<meta name="layout" content="main" />
-	<g:set var="entityName" value="${message(code: 'supplierBudget.label', default: 'SupplierBudget')}" />
+	<g:set var="entityName" value="${message(code: 'requestmap.label', default: 'Requestmap')}" />
 </head>
 
 <body>
 
-	<section id="create-supplierBudget" class="first">
+	<section id="create-requestmap" class="first">
 
-		<g:hasErrors bean="${supplierBudgetInstance}">
+		<g:hasErrors bean="${requestmapInstance}">
 		<div class="alert alert-danger">
-			<g:renderErrors bean="${supplierBudgetInstance}" as="list" />
+			<g:renderErrors bean="${requestmapInstance}" as="list" />
 		</div>
 		</g:hasErrors>
 
