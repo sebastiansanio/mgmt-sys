@@ -3,17 +3,38 @@ package mgmt.concept
 
 
 import static org.springframework.http.HttpStatus.*
+
+import java.util.List;
+
 import grails.transaction.Transactional
+import pl.touk.excel.export.WebXlsxExporter
 
 @Transactional(readOnly = true)
 class ConceptController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+	private static List FIELDS = ["code","description","conceptAccount","conceptGroup","dateCreated","lastUpdated"]
+	
+	
     def index(Integer max) {
         params.max = Math.min(max ?: 50, 1000)
         respond Concept.list(params), model:[conceptInstanceCount: Concept.count()]
     }
+	
+	def download(){
+		response.setContentType("application/ms-excel");
+		response.setHeader("Content-Disposition", "attachment; filename='${message(code:'menu.concept.label')}.xlsx'");
+		
+		def headers = FIELDS.collect{
+			message(code:'concept.'+it+'.label')
+		}
+		new WebXlsxExporter().with {
+			fillHeader(headers)
+			add(Concept.list(), FIELDS)
+			save(response.outputStream)
+		}
+	}
 
     def show(Concept conceptInstance) {
         respond conceptInstance

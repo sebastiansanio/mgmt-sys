@@ -22,6 +22,8 @@
 				<g:sortableColumn property="name" title="${message(code: 'account.name.label', default: 'Name')}" />
 			
 				<th><g:message code="account.type.label" default="Type" /></th>
+
+				<th><g:message code="account.currentBalance.label" /></th>
 			
 			</tr>
 		</thead>
@@ -36,6 +38,7 @@
 			
 				<td>${fieldValue(bean: accountInstance, field: "type")}</td>
 			
+				<td>${accountInstance.currentBalance}</td>
 			</tr>
 		</g:each>
 		</tbody>

@@ -1,6 +1,7 @@
 package mgmt.concept
 
-import java.util.Date;
+import mgmt.movement.MovementItem
+import pl.touk.excel.export.WebXlsxExporter
 
 class Concept {
 	
@@ -19,6 +20,8 @@ class Concept {
 	boolean validInOpNoWork
 	boolean validInOsNoWork
 	boolean validInInNoWork
+	
+	static hasMany = [movements: MovementItem]
 
 	
     static constraints = {

@@ -37,6 +37,13 @@
 				<td valign="top" class="value"><g:link controller="accountType" action="show" id="${accountInstance?.type?.id}">${accountInstance?.type?.encodeAsHTML()}</g:link></td>
 				
 			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="account.currentBalance.label" /></td>
+				
+				<td valign="top" class="value">${accountInstance.currentBalance}</td>
+				
+			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="account.dateCreated.label" default="Date Created" /></td>
@@ -53,13 +60,15 @@
 			</tr>
 		</tbody>
 	</table>
-	
+
 <sec:access url="/account/delete">
+<g:if test="${!accountInstance.payments}">
 	<g:form action="delete">
 		<g:hiddenField name="_method" value="DELETE" />
 		<g:hiddenField name="id" value="${accountInstance.id}" />
 		<g:submitButton class="btn btn-danger" name="delete" value="${message(code:'default.button.delete.label') }" /> 
 	</g:form>
+</g:if>
 </sec:access>
 </section>
 

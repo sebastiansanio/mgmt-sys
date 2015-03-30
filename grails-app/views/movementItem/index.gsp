@@ -10,6 +10,7 @@
 
 <body>
 
+<hr/>
 <div class="row-fluid">
 <g:form action="search" method="get" >
 <div class="col-md-2">
