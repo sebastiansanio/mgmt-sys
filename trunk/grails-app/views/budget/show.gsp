@@ -29,13 +29,6 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="budget.dateCreated.label" default="Date Created" /></td>
-				
-				<td valign="top" class="value"><g:formatDate date="${budgetInstance?.dateCreated}" /></td>
-				
-			</tr>
-		
-			<tr class="prop">
 				<td valign="top" class="name"><g:message code="budget.directCosts.label" default="Direct Costs" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: budgetInstance, field: "directCosts")}</td>
@@ -64,18 +57,25 @@
 				
 			</tr>
 		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="budget.lastUpdated.label" default="Last Updated" /></td>
-				
-				<td valign="top" class="value"><g:formatDate date="${budgetInstance?.lastUpdated}" /></td>
-				
-			</tr>
-		
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="budget.profitPercentage.label" default="Profit Percentage" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: budgetInstance, field: "profitPercentage")}</td>
+				
+			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="budget.dateCreated.label" default="Date Created" /></td>
+				
+				<td valign="top" class="value"><g:formatDate date="${budgetInstance?.dateCreated}" /></td>
+				
+			</tr>
+			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="budget.lastUpdated.label" default="Last Updated" /></td>
+				
+				<td valign="top" class="value"><g:formatDate date="${budgetInstance?.lastUpdated}" /></td>
 				
 			</tr>
 		
