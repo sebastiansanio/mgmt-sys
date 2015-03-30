@@ -22,20 +22,18 @@ class Movement {
 		year nullable: false, min: 1900, max:9999
 		items validator: {value, object ->
 			if (object.type in ['op','os','in','fi'] && !value){
-				return ["default.invalid.min.size.message"]
+				return ["default.invalid.min.size.message",1]
 			}
-        }
-		payments validator: {value, object ->
-			if (object.type in ['op','os','in','tr'] && !value){
-				return ["default.invalid.min.size.message"]
-			}
-        }
-		note nullable: true, blank: true, maxSize: 4000
-		items validator: {value, object ->
 			if (object.type in ['op','os','in'] && !(object.calculateItemsTotal() == object.calculatePaymentsTotal())){
 				return ["movement.amountsNotEqual.error"]
 			}
         }
+		payments validator: {value, object ->
+			if (object.type in ['op','os','in','tr'] && !value){
+				return ["default.invalid.min.size.message",1]
+			}
+        }
+		note nullable: true, blank: true, maxSize: 4000
 	}
 
 	static mapping = {

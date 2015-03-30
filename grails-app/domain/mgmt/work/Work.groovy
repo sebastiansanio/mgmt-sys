@@ -1,5 +1,6 @@
 package mgmt.work
 
+import mgmt.movement.MovementItem
 import mgmt.persons.Client
 
 class Work {
@@ -13,6 +14,8 @@ class Work {
 	String type
 	Long code
 	Budget budget
+	
+	static hasMany = [movements: MovementItem]
 	
     static constraints = {
 		client nullable: true
