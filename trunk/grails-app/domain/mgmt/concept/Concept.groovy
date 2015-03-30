@@ -26,7 +26,7 @@ class Concept {
     }
 	
 	String toString(){
-		return code
+		return code + " - " + description
 	}
 	
 }

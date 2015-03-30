@@ -22,4 +22,18 @@ class Account {
 	String toString(){
 		return code + " - " + name
 	}
+	
+	BigDecimal getCurrentBalance(){
+		return getBalance(new Date().clearTime())
+	}
+	
+	BigDecimal getBalance(Date date){
+		BigDecimal calculatedBalance = BigDecimal.valueOf(0)
+		for(payment in payments){
+			if(payment.date <= date){
+				calculatedBalance = calculatedBalance + (payment.amount * payment.multiplier)
+			}
+		}
+		return calculatedBalance
+	}
 }
