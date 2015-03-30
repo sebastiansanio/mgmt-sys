@@ -3,18 +3,38 @@ package mgmt.account
 
 
 import static org.springframework.http.HttpStatus.*
+
+import java.util.List;
+
 import grails.transaction.Transactional
+import pl.touk.excel.export.WebXlsxExporter
 
 @Transactional(readOnly = true)
 class AccountController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+	private static List FIELDS = ["name","code","type","currentBalance","dateCreated","lastUpdated"]
+	
     def index(Integer max) {
         params.max = Math.min(max ?: 50, 1000)
         respond Account.list(params), model:[accountInstanceCount: Account.count()]
     }
 
+	def download(){
+		response.setContentType("application/ms-excel");
+		response.setHeader("Content-Disposition", "attachment; filename='${message(code:'menu.account.label')}.xlsx'");
+		
+		def headers = FIELDS.collect{
+			message(code:'account.'+it+'.label')
+		}
+		new WebXlsxExporter().with {
+			fillHeader(headers)
+			add(Account.list(), FIELDS)
+			save(response.outputStream)
+		}
+	}
+	
     def show(Account accountInstance) {
         respond accountInstance
     }

@@ -14,6 +14,12 @@
 
 	<table class="table">
 		<tbody>
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="budget.name.label" default="Name" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: budgetInstance, field: "name")}</td>
+				
+			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="budget.client.label" default="Client" /></td>
@@ -23,9 +29,9 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="budget.dateCrated.label" default="Date Crated" /></td>
+				<td valign="top" class="name"><g:message code="budget.dateCreated.label" default="Date Created" /></td>
 				
-				<td valign="top" class="value"><g:formatDate date="${budgetInstance?.dateCrated}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${budgetInstance?.dateCreated}" /></td>
 				
 			</tr>
 		
@@ -50,18 +56,6 @@
 				
 			</tr>
 		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="budget.items.label" default="Items" /></td>
-				
-				<td valign="top" style="text-align: left;" class="value">
-					<ul>
-					<g:each in="${budgetInstance.items}" var="i">
-						<li><g:link controller="budgetItem" action="show" id="${i.id}">${i?.encodeAsHTML()}</g:link></li>
-					</g:each>
-					</ul>
-				</td>
-				
-			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="budget.ivaPercentage.label" default="Iva Percentage" /></td>
@@ -77,12 +71,6 @@
 				
 			</tr>
 		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="budget.name.label" default="Name" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: budgetInstance, field: "name")}</td>
-				
-			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="budget.profitPercentage.label" default="Profit Percentage" /></td>

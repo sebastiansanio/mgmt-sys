@@ -25,7 +25,7 @@ class SupplierController {
 	
 	def download(){
 		response.setContentType("application/ms-excel");
-		response.setHeader("Content-Disposition", "attachment; filename='${message(code:'menu.supplier.label')}.xls'");
+		response.setHeader("Content-Disposition", "attachment; filename='${message(code:'menu.supplier.label')}.xlsx'");
 		
 		def headers = FIELDS.collect{
 			message(code:'supplier.'+it+'.label')

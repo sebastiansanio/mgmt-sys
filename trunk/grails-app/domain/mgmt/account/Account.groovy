@@ -30,7 +30,7 @@ class Account {
 	BigDecimal getBalance(Date date){
 		BigDecimal calculatedBalance = BigDecimal.valueOf(0)
 		for(payment in payments){
-			if(payment.date <= date){
+			if(payment.paymentDate <= date){
 				calculatedBalance = calculatedBalance + (payment.amount * payment.multiplier)
 			}
 		}

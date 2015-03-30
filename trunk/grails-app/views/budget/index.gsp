@@ -19,8 +19,6 @@
 			
 				<th><g:message code="budget.client.label" default="Client" /></th>
 			
-				<g:sortableColumn property="dateCrated" title="${message(code: 'budget.dateCrated.label', default: 'Date Crated')}" />
-			
 				<g:sortableColumn property="directCosts" title="${message(code: 'budget.directCosts.label', default: 'Direct Costs')}" />
 			
 				<g:sortableColumn property="iibbPercentage" title="${message(code: 'budget.iibbPercentage.label', default: 'Iibb Percentage')}" />
@@ -28,6 +26,8 @@
 				<g:sortableColumn property="indirectOverheadPercentage" title="${message(code: 'budget.indirectOverheadPercentage.label', default: 'Indirect Overhead Percentage')}" />
 			
 				<g:sortableColumn property="ivaPercentage" title="${message(code: 'budget.ivaPercentage.label', default: 'Iva Percentage')}" />
+			
+				<g:sortableColumn property="dateCreated" title="${message(code: 'budget.dateCreated.label', default: 'Date Created')}" />
 			
 			</tr>
 		</thead>
@@ -38,7 +38,6 @@
 			
 				<td>${fieldValue(bean: budgetInstance, field: "client")}</td>
 			
-				<td><g:formatDate date="${budgetInstance.dateCrated}" /></td>
 			
 				<td>${fieldValue(bean: budgetInstance, field: "directCosts")}</td>
 			
@@ -52,6 +51,7 @@
 			
 				<td>${fieldValue(bean: budgetInstance, field: "profitPercentage")}</td>
 			
+				<td><g:formatDate date="${budgetInstance.dateCreated}" /></td>
 			</tr>
 		</g:each>
 		</tbody>
