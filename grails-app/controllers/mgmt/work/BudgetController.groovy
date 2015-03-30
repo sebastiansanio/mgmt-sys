@@ -29,6 +29,9 @@ class BudgetController {
             notFound()
             return
         }
+		
+		budgetInstance.items = budgetInstance.items - [null]
+		budgetInstance.validate()
 
         if (budgetInstance.hasErrors()) {
             respond budgetInstance.errors, view:'create'
@@ -51,12 +54,20 @@ class BudgetController {
     }
 
     @Transactional
-    def update(Budget budgetInstance) {
+    def update() {
+		Budget budgetInstance = Budget.get(params.id.toLong())
         if (budgetInstance == null) {
             notFound()
             return
         }
-
+				
+		for (item in budgetInstance.items) {
+			item.delete()
+		}
+		budgetInstance.items.clear()
+		budgetInstance.properties = params
+		budgetInstance.items = budgetInstance.items - [null]
+		budgetInstance.validate()
         if (budgetInstance.hasErrors()) {
             respond budgetInstance.errors, view:'edit'
             return

@@ -32,6 +32,8 @@ class Budget {
 	})
 	BigDecimal ivaPercentage
 	
+	List items = new ArrayList()
+
 	static hasMany = [items: BudgetItem]
 
     static constraints = {
