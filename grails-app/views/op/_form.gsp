@@ -172,7 +172,7 @@ function addItem(){
 	
 	$tmc.appendTo("#items-table");
 	itemsQuantity = itemsQuantity + 1;
-	$('#supplier-'+currentItemQuantity).chosen({width: "200px"});
+	$('#supplier-'+currentItemQuantity).chosen({search_contains: true, width: "200px"});
 }
 
 var paymentsQuantity = ${movementInstance?.payments?.size()?:0};
@@ -263,7 +263,7 @@ $(function() {
 	$('.supplier-select').append($(".supplier-select-model > option").clone());
 	$('.conceptsWork').append($("#conceptsWork > option").clone());
 	$('.conceptsNoWork').append($("#conceptsNoWork > option").clone());
-	$(".select-chosen").chosen({width: "200px"});
+	$(".select-chosen").chosen({search_contains: true, width: "200px"});
 	refreshTotals();
 	refreshPaymentTotal();
 

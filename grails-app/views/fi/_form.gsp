@@ -139,6 +139,10 @@ $(function() {
 		});
 
 	});
+
+	if(itemsQuantity == 0){
+		addItem();
+	}
 });
 
 </script>

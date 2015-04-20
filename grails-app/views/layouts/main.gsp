@@ -52,7 +52,6 @@
 $(function() {
 	$('form:not(".noblock")').submit(function() { 
 	    $.blockUI({ message: '<h4>${message(code:'default.wait.message')}</h4>' }); 
-	    test(); 
 	}); 
 });
 
