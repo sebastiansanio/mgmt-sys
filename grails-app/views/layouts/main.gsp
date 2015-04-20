@@ -18,6 +18,8 @@
 <asset:javascript src="bootstrap-datepicker.js" />
 <asset:javascript src="scripts.js" />
 <asset:javascript src="chosen.jquery.min.js" />
+<asset:javascript src="jquery.blockUI.js" />
+
 <g:layoutHead />
 </head>
 <body>
@@ -44,6 +46,18 @@
 			</div>
 		</div>
 	</div>
+	
+<script>
+
+$(function() {
+	$('form:not(".noblock")').submit(function() { 
+	    $.blockUI({ message: '<h4>${message(code:'default.wait.message')}</h4>' }); 
+	    test(); 
+	}); 
+});
+
+
+</script>
 
 </body>
 </html>
