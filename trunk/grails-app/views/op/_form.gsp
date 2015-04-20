@@ -37,7 +37,7 @@
 		<tbody id="items-table">
 			<g:each var="movementItemInstance" in="${movementInstance?.items}" status="i">
 				<tr class="form-inline" id="items-${i}">
-					<td class="td-intableform"><g:select onchange="refreshConcepts('${i}');" noSelection="${['null':'00 - Gastos generales']}" class="input-intableform form-control" id="work-${i}" name="items[${i}].work.id" from="${mgmt.work.Work.findAllByFinishedOrId(false,movementItemInstance?.work?.id)}" optionKey="id" required="" value="${movementItemInstance?.work?.id}"/></td>
+					<td class="td-intableform"><g:select onchange="refreshConcepts('${i}');" noSelection="${['null':'00 - Gastos generales']}" class="input-intableform form-control" id="work-${i}" name="items[${i}].work.id" from="${mgmt.work.Work.findAllByFinishedOrId(false,movementItemInstance?.work?.id,[sort:'code'])}" optionKey="id" required="" value="${movementItemInstance?.work?.id}"/></td>
 					<td class="td-intableform"><g:select class="select-chosen supplier-select form-control" id="supplier-${i}" name="items[${i}].supplier.id" from="${[movementItemInstance?.supplier]}" optionKey="id" required="" value="${movementItemInstance?.supplier?.id}"/></td>
 					<td class="td-intableform"><g:select class="input-intableform form-control ${movementItemInstance.work?'conceptsWork':'conceptsNoWork'}" id="concept-${i}" name="items[${i}].concept.id" from="${[movementItemInstance?.concept]}" optionKey="id" required="" value="${movementItemInstance?.concept?.id}"/></td>
 					<td class="td-intableform"><g:textArea cols="60" class="mayus input-intableform form-control" name="items[${i}].description" value="${movementItemInstance?.description}"/></td>
@@ -113,9 +113,9 @@
 
 <table>
 	<tr class="form-inline" id="item-model">
-		<td class="td-intableform"><g:select noSelection="${['null':'00 - Gastos generales']}" disabled="disabled" class="work-model input-intableform form-control" id="work-xyz" name="items[xyz].work.id" from="${mgmt.work.Work.findAllByFinished(false)}" optionKey="id" required="" value=""/></td>
-		<td class="td-intableform"><g:select disabled="disabled" class="supplier-select-model form-control" id="supplier-xyz" name="items[xyz].supplier.id" from="${mgmt.persons.Supplier.list()}" optionKey="id" required="" value=""/></td>
-		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" id="concept-xyz" name="items[xyz].concept.id" from="${mgmt.concept.Concept.findAllByValidInOpNoWork(true)}" optionKey="id" required="" value=""/></td>
+		<td class="td-intableform"><g:select noSelection="${['null':'00 - Gastos generales']}" disabled="disabled" class="work-model input-intableform form-control" id="work-xyz" name="items[xyz].work.id" from="${mgmt.work.Work.findAllByFinished(false,[sort:'code'])}" optionKey="id" required="" value=""/></td>
+		<td class="td-intableform"><g:select disabled="disabled" class="supplier-select-model form-control" id="supplier-xyz" name="items[xyz].supplier.id" from="${mgmt.persons.Supplier.list(sort:'name')}" optionKey="id" required="" value=""/></td>
+		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" id="concept-xyz" name="items[xyz].concept.id" from="${mgmt.concept.Concept.findAllByValidInOpNoWork(true,[sort:'code'])}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:textArea cols="60" disabled="disabled" class="mayus input-intableform form-control" name="items[xyz].description" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" name="items[xyz].invoiceType.id" from="${mgmt.invoice.InvoiceType.list()}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:textField disabled="disabled" class="input-intableform form-control" name="items[xyz].invoiceNumber" value=""/></td>
@@ -131,7 +131,7 @@
 
 <table>
 	<tr class="form-inline" id="payment-model">
-		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" name="payments[xyz].account.id" from="${mgmt.account.Account.list()}" optionKey="id" required="" value=""/></td>
+		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" name="payments[xyz].account.id" from="${mgmt.account.Account.list(sort:'code')}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:field type="text" onchange="refreshPaymentTotal();" disabled="disabled" class="input-intableform form-control field-payment-amount right-aligned" name="payments[xyz].amount" value="" required=""/></td>
 		<td class="td-intableform"><bs:datePicker disabled="true" class="input-intableform form-control" name="payments[xyz].paymentDate" precision="day"  value=""  /> </td>
 		<td class="td-intableform"><g:textField disabled="disabled" class="input-intableform form-control" name="payments[xyz].checkNumber" value=""/></td>
@@ -192,6 +192,12 @@ function addPayment(){
 	});
 	
 	$tmc.appendTo("#payments-table");
+
+	if(paymentsQuantity == 0){
+		$(".field-payment-amount",$tmc).val($("#total-total").text());
+		refreshPaymentTotal();
+	}
+	
 	paymentsQuantity = paymentsQuantity + 1;
 	
 }
@@ -271,6 +277,10 @@ $(function() {
 		});
 
 	});
+
+	if(itemsQuantity == 0){
+		addItem();
+	}
 });
 
 </script>
