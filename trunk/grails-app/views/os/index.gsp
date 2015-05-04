@@ -31,6 +31,8 @@
 				
 				<th>${message(code:'movement.note.label')}</th>
 				
+				<th>${message(code:'default.download.label')}</th>
+				
 			</tr>
 		</thead>
 		<tbody>
@@ -51,6 +53,7 @@
 				<td><g:formatBoolean boolean="${movementInstance.checked}" /></td>
 			
 				<td>${movementInstance.note}</td>
+				<td><g:link controller="report" action="downloadReport" id="${mgmt.reports.Report.findByCode("os").id}" params="${[movement_id:movementInstance.id]}"><span class="glyphicon glyphicon-download-alt"></span></g:link></td>
 			
 			</tr>
 		</g:each>

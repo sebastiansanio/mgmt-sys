@@ -26,8 +26,10 @@ grails.project.dependency.resolution = {
         inherits true 
 
 		mavenRepo "http://repo.grails.org/grails/core"
+		mavenRepo "http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/"
+		mavenRepo "http://jasperreports.sourceforge.net/maven2/"
 		
-		mavenCentral()
+		mavenCentral()																								
 		grailsPlugins()
         grailsHome()
         mavenLocal()
@@ -39,6 +41,7 @@ grails.project.dependency.resolution = {
         test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
 		runtime 'mysql:mysql-connector-java:5.1.34'
 		compile 'commons-beanutils:commons-beanutils:1.8.3'
+		compile "net.sf.jasperreports:jasperreports:6.0.4"
 		
     }
 
@@ -54,7 +57,6 @@ grails.project.dependency.resolution = {
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
 		compile ":excel-export:0.2.1"
-		
 		
     }
 }
