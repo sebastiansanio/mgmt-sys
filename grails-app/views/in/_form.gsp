@@ -240,7 +240,7 @@ $(function() {
 	refreshTotals();
 	refreshPaymentTotal();
 
-	$("form").submit(function( event ) {
+	$('input[type="submit"]').click(function( event ) {
 		if($('#total-total').text() != $('#total-payment-amount').text()){
 			alert('${message(code:'movement.amountsNotEqual.error')}');
 			event.preventDefault();
