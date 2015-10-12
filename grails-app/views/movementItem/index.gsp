@@ -10,7 +10,7 @@
 
 <body>
 
-<hr/>
+<br/>
 <div class="row-fluid">
 <g:form action="search" method="get" >
 <div class="col-md-2">
@@ -23,7 +23,6 @@
 </div>
 
 <section id="index-movementItem" class="first">
-<hr/>
 	<table class="table table-bordered margin-top-medium">
 		<thead>
 			<tr>
