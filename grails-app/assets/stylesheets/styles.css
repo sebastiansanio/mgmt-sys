@@ -86,3 +86,6 @@ footer {
 .mayus {
 	text-transform: uppercase;
 }
+.readonly {
+	background-color:#F2F5A9 !important;
+}

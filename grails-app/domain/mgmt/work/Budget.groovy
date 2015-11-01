@@ -20,13 +20,25 @@ class Budget {
 	})
 	BigDecimal iibbPercentage
 	@BindUsing({
+		obj, source -> new BigDecimal(source['iibbAmount'])
+	})
+	BigDecimal iibbAmount
+	@BindUsing({
 		obj, source -> new BigDecimal(source['indirectOverheadPercentage'])
 	})
 	BigDecimal indirectOverheadPercentage
 	@BindUsing({
+		obj, source -> new BigDecimal(source['indirectOverheadAmount'])
+	})
+	BigDecimal indirectOverheadAmount
+	@BindUsing({
 		obj, source -> new BigDecimal(source['profitPercentage'])
 	})
 	BigDecimal profitPercentage
+	@BindUsing({
+		obj, source -> new BigDecimal(source['profitAmount'])
+	})
+	BigDecimal profitAmount
 	@BindUsing({
 		obj, source -> new BigDecimal(source['ivaPercentage'])
 	})

@@ -22,7 +22,7 @@
 			<g:hiddenField name="version" value="${budgetInstance?.version}" />
 			<g:hiddenField name="_method" value="PUT" />
 			<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-9">
 			<g:render template="form"/>
 			</div>
 			</div>
