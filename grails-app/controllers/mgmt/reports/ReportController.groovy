@@ -4,6 +4,10 @@ package mgmt.reports
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+
 import net.sf.jasperreports.engine.JasperCompileManager
 import net.sf.jasperreports.engine.JasperExportManager
 import net.sf.jasperreports.engine.JasperFillManager
@@ -13,6 +17,8 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader
 
 @Transactional(readOnly = true)
 class ReportController {
+	
+	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy")
 	
 	def dataSource
 
@@ -62,6 +68,9 @@ class ReportController {
 		for(variable in reportInstance.variablesAsList()){
 			if(variable.type == "number"){
 				variablesValues[variable.jasperVariable] = params[variable.jasperVariable].toLong()
+			}
+			if(variable.type == "date"){
+				variablesValues[variable.jasperVariable] = params[variable.jasperVariable]?DATE_FORMAT.parse(params[variable.jasperVariable]):null
 			}
 		}
 		
