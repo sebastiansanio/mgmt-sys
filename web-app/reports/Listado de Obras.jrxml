@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Listado de Obras" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="478cda5d-fc14-4e00-bc34-c2e74c540d58">
+	<property name="ireport.zoom" value="1.771561000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     work.`id` AS work_id,
+     work.`version` AS work_version,
+     work.`budget_id` AS work_budget_id,
+     work.`client_id` AS work_client_id,
+     work.`code` AS work_code,
+     work.`finished` AS work_finished,
+     work.`last_updated` AS work_last_updated,
+     work.`name` AS work_name,
+     work.`type` AS work_type,
+     work.`date_created` AS work_date_created
+FROM
+     `work` work]]>
+	</queryString>
+	<field name="work_id" class="java.lang.Long"/>
+	<field name="work_version" class="java.lang.Long"/>
+	<field name="work_budget_id" class="java.lang.Long"/>
+	<field name="work_client_id" class="java.lang.Long"/>
+	<field name="work_code" class="java.lang.Long"/>
+	<field name="work_finished" class="java.lang.Boolean"/>
+	<field name="work_last_updated" class="java.sql.Timestamp"/>
+	<field name="work_name" class="java.lang.String"/>
+	<field name="work_type" class="java.lang.String"/>
+	<field name="work_date_created" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="167" height="46" uuid="9d3c148e-3d95-4e78-98fe-e3af876e2954"/>
+				<imageExpression><![CDATA["C:\\Users\\Fran\\Desktop\\Captura.JPG"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="196" y="36" width="142" height="20" uuid="7aefbec0-f2b2-440e-b8f0-04b6615a9da3"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Listado de Obras]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="99" y="0" width="36" height="20" uuid="fef781a6-ebee-405c-a5e1-14f7e139c9ce"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Obra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="136" y="0" width="211" height="20" uuid="d8df9078-350e-47e0-aad4-f8f34cc566b3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre de Obra]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement x="105" y="0" width="27" height="13" uuid="0a0ca71b-16d2-43ab-b9e0-9945ecafa71c"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{work_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="0" width="211" height="13" uuid="e228fb69-3702-4b0a-8c7b-7eedb8a2b536"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{work_name}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="94" y="0" width="260" height="1" forecolor="#999999" uuid="78ab7f95-cd4e-4ced-887b-93dff127a5cc"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
