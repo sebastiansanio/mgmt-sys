@@ -79,12 +79,23 @@ class BudgetController {
     }
 
     def edit(Budget budgetInstance) {
+		if(budgetInstance.hasWork){
+			flash.error = message(code: 'budget.closed.error')
+			redirect budgetInstance
+			return
+		}
         respond budgetInstance
     }
 
     @Transactional
     def update() {
 		Budget budgetInstance = Budget.get(params.id.toLong())
+		if(budgetInstance.hasWork){
+			flash.error = message(code: 'budget.closed.error')
+			redirect budgetInstance
+			return
+		}
+		
         if (budgetInstance == null) {
             notFound()
             return

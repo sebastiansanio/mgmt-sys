@@ -11,7 +11,6 @@ class WorkController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-     
 		params.sort = params.sort?:'dateCreated'
 		params.order = params.order?:'desc'
 		params.max = Math.min(max ?: 50, 1000)
