@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Estado de Cuentas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8c2bce1f-7619-427b-8bad-1904e5becdf2">
+	<property name="ireport.zoom" value="1.331000000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     account.`id` AS account_id,
+     account.`version` AS account_version,
+     account.`code` AS account_code,
+     account.`date_created` AS account_date_created,
+     account.`last_updated` AS account_last_updated,
+     account.`name` AS account_name,
+     account.`type_id` AS account_type_id,
+     account.`secured` AS account_secured,
+     payment.`id` AS payment_id,
+     payment.`version` AS payment_version,
+     payment.`account_id` AS payment_account_id,
+     payment.`amount` AS payment_amount,
+     payment.`check_number` AS payment_check_number,
+     payment.`date_created` AS payment_date_created,
+     payment.`last_updated` AS payment_last_updated,
+     payment.`movement_id` AS payment_movement_id,
+     payment.`note` AS payment_note,
+     payment.`payment_date` AS payment_payment_date,
+     payment.`payments_idx` AS payment_payments_idx,
+     payment.`multiplier` AS payment_multiplier,
+sum(if(multiplier=-1,amount*-1,0)) as Debito,
+sum(if(multiplier=1,amount,0)) as Credito
+FROM
+     `account` account INNER JOIN `payment` payment ON account.`id` = payment.`account_id`
+group by account_name, account_type_id
+ORDER BY
+     account_name ASC]]>
+	</queryString>
+	<field name="account_id" class="java.lang.Long"/>
+	<field name="account_version" class="java.lang.Long"/>
+	<field name="account_code" class="java.lang.String"/>
+	<field name="account_date_created" class="java.sql.Timestamp"/>
+	<field name="account_last_updated" class="java.sql.Timestamp"/>
+	<field name="account_name" class="java.lang.String"/>
+	<field name="account_type_id" class="java.lang.Long"/>
+	<field name="account_secured" class="java.lang.Boolean"/>
+	<field name="payment_id" class="java.lang.Long"/>
+	<field name="payment_version" class="java.lang.Long"/>
+	<field name="payment_account_id" class="java.lang.Long"/>
+	<field name="payment_amount" class="java.math.BigDecimal"/>
+	<field name="payment_check_number" class="java.lang.String"/>
+	<field name="payment_date_created" class="java.sql.Timestamp"/>
+	<field name="payment_last_updated" class="java.sql.Timestamp"/>
+	<field name="payment_movement_id" class="java.lang.Long"/>
+	<field name="payment_note" class="java.lang.String"/>
+	<field name="payment_payment_date" class="java.sql.Timestamp"/>
+	<field name="payment_payments_idx" class="java.lang.Integer"/>
+	<field name="payment_multiplier" class="java.lang.Integer"/>
+	<field name="Debito" class="java.math.BigDecimal"/>
+	<field name="Credito" class="java.math.BigDecimal"/>
+	<variable name="variable1" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[($F{Debito}+$F{Credito})]]></variableExpression>
+	</variable>
+	<variable name="variable1_1" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{Credito}]]></variableExpression>
+	</variable>
+	<variable name="variable1_1_2" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{Debito}]]></variableExpression>
+	</variable>
+	<group name="Gxtype">
+		<groupExpression><![CDATA[$F{account_type_id}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band height="6">
+				<line>
+					<reportElement x="26" y="1" width="506" height="1" uuid="b4650ef6-51f1-4449-bb3e-1c8996366da2"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="200" y="46" width="142" height="20" uuid="d2d129ec-b4ac-447e-bee7-b851194e569d"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estados de Cuentas]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="167" height="46" uuid="a4f9636e-ab1b-4643-bc1e-09561766be80"/>
+				<imageExpression><![CDATA["C:\\Users\\Fran\\Desktop\\Captura.JPG"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="29" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="200" y="1" width="87" height="20" uuid="6e6676fa-3e2a-45c9-998e-5aa39086a2fa"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Débito]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="287" y="1" width="87" height="20" uuid="e08ef482-055f-445c-8451-c70d0ea621bf"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Crédito]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="374" y="0" width="87" height="20" uuid="5fc397e5-ba03-4cd8-877f-2e1e1b64eccd"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="461" y="0" width="87" height="20" uuid="21abe33c-b6ff-4c15-8fa2-d7ef2af73206"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo en Dólares]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="138" height="20" uuid="078b1ea8-427a-4cb0-ba3a-e2ba8ab9330a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cuenta]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<elementGroup>
+				<textField>
+					<reportElement x="0" y="0" width="138" height="20" uuid="e9368da1-e5dc-430c-b38d-6e7489aa78cd"/>
+					<textFieldExpression><![CDATA[$F{account_name}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤ #,##0.00">
+					<reportElement x="200" y="0" width="87" height="20" uuid="242af687-edb2-43cb-8f49-c74d54914ae7"/>
+					<textFieldExpression><![CDATA[$F{Debito}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤ #,##0.00">
+					<reportElement x="374" y="0" width="87" height="20" uuid="73d465c5-3be8-4829-b143-9134574b6600"/>
+					<textFieldExpression><![CDATA[($F{Debito}+$F{Credito})]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤ #,##0.00">
+					<reportElement x="287" y="0" width="87" height="20" uuid="1fa80e65-2cf1-458f-b44b-fa9578be56ee"/>
+					<textFieldExpression><![CDATA[$F{Credito}]]></textFieldExpression>
+				</textField>
+			</elementGroup>
+			<textField>
+				<reportElement x="148" y="3" width="14" height="0" uuid="ed9f0c43-bd08-49f0-ad3e-eca52df54682"/>
+				<textFieldExpression><![CDATA[$F{account_type_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="100" height="20" uuid="2be53edc-4a68-4315-945e-099cecf22e60"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Urbatec]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="374" y="10" width="87" height="20" uuid="58e9ce71-6de3-468c-8fc0-2b45d4acb572"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="287" y="10" width="87" height="20" uuid="10c5cb07-ec8c-40a6-a398-2318d995a354"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable1_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="200" y="10" width="87" height="20" uuid="1d5333b8-8a0e-47af-ba5f-7783c7827ade"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable1_1_2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
