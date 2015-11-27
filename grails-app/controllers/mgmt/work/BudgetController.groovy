@@ -3,6 +3,7 @@ package mgmt.work
 
 
 import static org.springframework.http.HttpStatus.*
+import mgmt.persons.Client;
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
@@ -10,6 +11,33 @@ class BudgetController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+	@Transactional
+	def generateWork(Budget budgetInstance) {
+		if(budgetInstance.hasWork){
+			flash.error = message(code: 'default.hasWork.error')
+			redirect budgetInstance
+			return
+		}
+		
+		Work work = new Work()
+		work.client = budgetInstance.client
+		work.name = budgetInstance.name
+		work.type = 'building'
+		work.budget = budgetInstance
+		budgetInstance.hasWork = true
+		work.save flush:true
+		budgetInstance.save flush: true
+		
+		request.withFormat {
+			form multipartForm {
+				flash.message = message(code: 'default.created.message', args: [message(code: 'work.label'), work.id])
+				redirect work
+			}
+			'*' { respond work, [status: CREATED] }
+		}
+		
+	}
+	
     def index(Integer max) {
         params.max = Math.min(max ?: 50, 1000)
         respond Budget.list(params), model:[budgetInstanceCount: Budget.count()]

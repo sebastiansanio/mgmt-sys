@@ -43,6 +43,13 @@ class Budget {
 		obj, source -> new BigDecimal(source['ivaPercentage'])
 	})
 	BigDecimal ivaPercentage
+
+	@BindUsing({
+		obj, source -> new BigDecimal(source['totalAmount'])
+	})
+	BigDecimal totalAmount
+	boolean hasWork
+
 	
 	List items = new ArrayList()
 
@@ -51,4 +58,12 @@ class Budget {
     static constraints = {
 		client nullable: true
     }
+	
+	String toString(){
+		return name
+	}
+	
+	BigDecimal getTotalAmountWithIva(){
+		return totalAmount * (1+ ivaPercentage/100)
+	}
 }

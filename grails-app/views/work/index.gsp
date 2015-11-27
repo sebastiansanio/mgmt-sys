@@ -16,10 +16,10 @@
 		<thead>
 			<tr>
 				<th>${message(code:'default.show.label')}</th>
-				<g:sortableColumn property="name" title="${message(code: 'work.name.label', default: 'Name')}" />
-				<g:sortableColumn property="code" title="${message(code: 'work.code.label', default: 'Code')}" />
-				<g:sortableColumn property="type" title="${message(code: 'work.type.label', default: 'Type')}" />
-				<g:sortableColumn property="finished" title="${message(code: 'work.finished.label', default: 'Finished')}" />
+				<g:sortableColumn property="name" title="${message(code: 'work.name.label')}" />
+				<g:sortableColumn property="code" title="${message(code: 'work.code.label')}" />
+				<g:sortableColumn property="type" title="${message(code: 'work.type.label')}" />
+				<g:sortableColumn property="finished" title="${message(code: 'work.finished.label')}" />
 				<th><g:message code="work.client.label" default="Client" /></th>
 			</tr>
 		</thead>

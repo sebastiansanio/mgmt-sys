@@ -115,7 +115,7 @@
 		</tr>
 		<tr class="form-inline">
 			<td class="td-intableform"><g:message code="budget.pvai.label" /></td>
-			<td><g:field readonly="true" tabindex="-1" type="text" class="right-aligned form-control readonly" name="pvai" value=""/></td>
+			<td><g:field readonly="true" tabindex="-1" type="text" class="right-aligned form-control readonly" name="totalAmount" id="pvai" value=""/></td>
 			<td><g:field readonly="true" tabindex="-1" type="text" class="right-aligned form-control readonly" name="pvaiPercentageOfDirectCosts" value=""/></td>
 			<td><g:field readonly="true" tabindex="-1" type="text" class="right-aligned form-control readonly" name="pvaiPercentageOfSellPrice" value="" /></td>
 		</tr>
@@ -257,6 +257,7 @@ $(function() {
 
 $( "form" ).submit(function( event ) {
 	$(".readonly").prop( "disabled", true );
+	$("#pvai").prop("disabled", false);
 });
 
 </script>
