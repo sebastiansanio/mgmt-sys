@@ -99,7 +99,7 @@ ORDER BY
 					<reportElement x="8" y="0" width="219" height="20" forecolor="#666666" uuid="e9d19306-ef39-4f15-b045-a3d10b92519f"/>
 				</rectangle>
 				<textField>
-					<reportElement x="13" y="0" width="160" height="20" uuid="b6335013-1486-4dbe-97ac-8385f723d65b"/>
+					<reportElement x="13" y="0" width="214" height="20" uuid="b6335013-1486-4dbe-97ac-8385f723d65b"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
@@ -113,7 +113,7 @@ ORDER BY
 		<groupFooter>
 			<band height="27">
 				<textField pattern="¤ #,##0.00">
-					<reportElement x="429" y="4" width="60" height="20" uuid="f61a4cc4-6cec-44bb-87e8-b17faa003fe2"/>
+					<reportElement x="429" y="4" width="88" height="20" uuid="f61a4cc4-6cec-44bb-87e8-b17faa003fe2"/>
 					<textElement>
 						<font size="10" isBold="true"/>
 					</textElement>
@@ -145,7 +145,7 @@ ORDER BY
 	<title>
 		<band height="75" splitType="Stretch">
 			<staticText>
-				<reportElement x="173" y="46" width="207" height="20" uuid="99141cc7-0ef5-4ba4-8731-f92eae458552"/>
+				<reportElement x="167" y="46" width="260" height="20" uuid="99141cc7-0ef5-4ba4-8731-f92eae458552"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -170,21 +170,21 @@ ORDER BY
 				<text><![CDATA[Cuenta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="50" y="0" width="48" height="20" uuid="86c31710-27eb-40e4-8788-fda6bce47470"/>
+				<reportElement x="50" y="0" width="70" height="20" uuid="86c31710-27eb-40e4-8788-fda6bce47470"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Operación]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="120" y="0" width="67" height="20" uuid="6f5280fc-3007-460e-8d25-2cacdb24f272"/>
+				<reportElement x="120" y="0" width="91" height="20" uuid="6f5280fc-3007-460e-8d25-2cacdb24f272"/>
 				<textElement textAlignment="Justified" verticalAlignment="Top">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha Emisión]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="187" y="0" width="67" height="20" uuid="a6e76761-f4f8-4521-b767-15ec4f347ae3"/>
+				<reportElement x="211" y="0" width="67" height="20" uuid="a6e76761-f4f8-4521-b767-15ec4f347ae3"/>
 				<textElement textAlignment="Justified" verticalAlignment="Top">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -229,7 +229,7 @@ ORDER BY
 	<detail>
 		<band height="23" splitType="Stretch">
 			<textField>
-				<reportElement x="55" y="0" width="52" height="20" uuid="e6b35ad5-55e8-4fc4-8053-ed0ac3daa999"/>
+				<reportElement x="55" y="0" width="65" height="20" uuid="e6b35ad5-55e8-4fc4-8053-ed0ac3daa999"/>
 				<textFieldExpression><![CDATA[$F{movement_type}+" "+ $F{movement_number}+" / "+$F{movement_year}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -245,11 +245,11 @@ ORDER BY
 				<textFieldExpression><![CDATA[$F{Debito}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="187" y="0" width="67" height="20" uuid="3f907abf-a20f-47f1-940d-b75b796c847c"/>
+				<reportElement x="211" y="0" width="67" height="20" uuid="3f907abf-a20f-47f1-940d-b75b796c847c"/>
 				<textFieldExpression><![CDATA[$F{payment_payment_date}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="120" y="0" width="67" height="20" uuid="baade5aa-035a-4782-be51-f15610d859d4"/>
+				<reportElement x="120" y="0" width="91" height="20" uuid="baade5aa-035a-4782-be51-f15610d859d4"/>
 				<textFieldExpression><![CDATA[$F{payment_date_created}]]></textFieldExpression>
 			</textField>
 			<line>
