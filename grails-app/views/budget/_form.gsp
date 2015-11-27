@@ -59,9 +59,9 @@
 	<tbody>
 		<tr class="form-inline ${hasErrors(bean: budgetInstance, field: 'directCosts', 'has-error')} required">
 			<td class="td-intableform"><g:message code="budget.directCosts.label" /></td>
-			<td class="td-intableform"><g:field onchange="calculateBudget();" type="text" class="right-aligned form-control" name="directCosts" value="${fieldValue(bean: budgetInstance, field: 'directCosts')}" required=""/></td>
-			<td class="td-intableform"><g:field type="text" readonly="true" tabindex="-1" class="right-aligned form-control readonly" name="directCostsPercentageOfDirectCosts" value="${fieldValue(bean: budgetInstance, field: 'directCosts')}" required=""/></td>
-			<td class="td-intableform"><g:field type="text" readonly="true" tabindex="-1" class="right-aligned form-control readonly" name="directCostsPercentageOfSellPrice" value="${fieldValue(bean: budgetInstance, field: 'directCosts')}" required=""/></td>
+			<td class="td-intableform"><g:field onchange="calculateBudget();" type="text" class="right-aligned form-control" name="directCosts" value="${budgetInstance.directCosts}" required=""/></td>
+			<td class="td-intableform"><g:field type="text" readonly="true" tabindex="-1" class="right-aligned form-control readonly" name="directCostsPercentageOfDirectCosts" value="" required=""/></td>
+			<td class="td-intableform"><g:field type="text" readonly="true" tabindex="-1" class="right-aligned form-control readonly" name="directCostsPercentageOfSellPrice" value="" required=""/></td>
 
 		</tr>
 		<tr class="form-inline ${hasErrors(bean: budgetInstance, field: 'iibbAmount', 'has-error')} ${hasErrors(bean: budgetInstance, field: 'iibbPercentage', 'has-error')}">
@@ -69,8 +69,8 @@
 			<td><g:field readonly="true" tabindex="-1" type="text" class="right-aligned form-control readonly" name="iibbCalculatedAmount" value=""/></td>
 			<td><g:field readonly="true" tabindex="-1" type="text" class="right-aligned form-control readonly" name="iibbPercentageOfDirectCosts" value=""/></td>
 			<td><g:field readonly="true" tabindex="-1" type="text" class="right-aligned form-control readonly" name="iibbPercentageOfSellPrice" value="" /></td>
-			<td><g:field onchange="\$('#iibbPercentage').val(0); calculateBudget();" type="text" class="right-aligned form-control" name="iibbAmount" value="${fieldValue(bean: budgetInstance, field: 'iibbAmount')}" required=""/></td>
-			<td><g:field onchange="\$('#iibbAmount').val(0); calculateBudget();" type="text" class="right-aligned form-control" name="iibbPercentage" value="${fieldValue(bean: budgetInstance, field: 'iibbPercentage')}" required=""/></td>
+			<td><g:field onchange="\$('#iibbPercentage').val(0); calculateBudget();" type="text" class="right-aligned form-control" name="iibbAmount" value="${budgetInstance.iibbAmount}" required=""/></td>
+			<td><g:field onchange="\$('#iibbAmount').val(0); calculateBudget();" type="text" class="right-aligned form-control" name="iibbPercentage" value="${budgetInstance.iibbPercentage}" required=""/></td>
 
 		</tr>
 		<tr class="form-inline">
@@ -85,8 +85,8 @@
 			<td><g:field readonly="true" tabindex="-1" type="text" class="right-aligned form-control readonly" name="indirectOverheadCalculatedAmount" value=""/></td>
 			<td><g:field readonly="true" tabindex="-1" type="text" class="right-aligned form-control readonly" name="indirectOverheadCalculatedAmountPercentageOfDirectCosts" value=""/></td>
 			<td><g:field readonly="true" tabindex="-1" type="text" class="right-aligned form-control readonly" name="indirectOverheadCalculatedAmountPercentageOfSellPrice" value=""/></td>
-			<td><g:field onchange="\$('#indirectOverheadPercentage').val(0); calculateBudget();" type="text" class="right-aligned form-control" name="indirectOverheadAmount" value="${fieldValue(bean: budgetInstance, field: 'indirectOverheadAmount')}" required=""/></td>
-			<td><g:field onchange="\$('#indirectOverheadAmount').val(0); calculateBudget();" type="text" class="right-aligned form-control" name="indirectOverheadPercentage" value="${fieldValue(bean: budgetInstance, field: 'indirectOverheadPercentage')}" required=""/></td>
+			<td><g:field onchange="\$('#indirectOverheadPercentage').val(0); calculateBudget();" type="text" class="right-aligned form-control" name="indirectOverheadAmount" value="${budgetInstance.indirectOverheadAmount}" required=""/></td>
+			<td><g:field onchange="\$('#indirectOverheadAmount').val(0); calculateBudget();" type="text" class="right-aligned form-control" name="indirectOverheadPercentage" value="${budgetInstance.indirectOverheadPercentage}" required=""/></td>
 
 		</tr>
 		<tr class="form-inline">
@@ -102,8 +102,8 @@
 			<td><g:field readonly="true" tabindex="-1" type="text" class="right-aligned form-control readonly" name="profitCalculatedAmount" value=""/></td>
 			<td><g:field readonly="true" tabindex="-1" type="text" class="right-aligned form-control readonly" name="profitPercentageOfDirectCosts" value=""/></td>
 			<td><g:field readonly="true" tabindex="-1" type="text" class="right-aligned form-control readonly" name="profitPercentageOfSellPrice" value=""/></td>
-			<td><g:field onchange="\$('#profitPercentage').val(0); calculateBudget();" type="text" class="right-aligned form-control" name="profitAmount" value="${fieldValue(bean: budgetInstance, field: 'profitAmount')}" required=""/></td>
-			<td><g:field onchange="\$('#profitAmount').val(0); calculateBudget();" type="text" class="right-aligned form-control" name="profitPercentage" value="${fieldValue(bean: budgetInstance, field: 'profitPercentage')}" required=""/></td>
+			<td><g:field onchange="\$('#profitPercentage').val(0); calculateBudget();" type="text" class="right-aligned form-control" name="profitAmount" value="${budgetInstance.profitAmount}" required=""/></td>
+			<td><g:field onchange="\$('#profitAmount').val(0); calculateBudget();" type="text" class="right-aligned form-control" name="profitPercentage" value="${budgetInstance.profitPercentage}" required=""/></td>
 
 		</tr>
 		<tr class="form-inline">
@@ -125,7 +125,7 @@
 			<td></td>
 			<td></td>
 			<td></td>
-			<td><g:field onchange="calculateBudget();" type="text" class="right-aligned form-control" name="ivaPercentage" value="${fieldValue(bean: budgetInstance, field: 'ivaPercentage')?:21}" required=""/></td>
+			<td><g:field onchange="calculateBudget();" type="text" class="right-aligned form-control" name="ivaPercentage" value="${budgetInstance.ivaPercentage?:21}" required=""/></td>
 		</tr>
 		<tr class="form-inline">
 			<td class="td-intableform"><g:message code="budget.pvii.label" /></td>
@@ -245,18 +245,18 @@ function calculateBudget(){
 	$("#pvaiPercentageOfSellPrice").val((100 * pvai / pvai).toFixed(2));
 
 	for (i = 0; i < itemsQuantity; i++) { 
-
 		var amount = $("#amount-"+i).val();
 		$("#percentageOfDirectCosts-"+i).val((100*amount / directCosts).toFixed(2));
 		$("#percentageOfSellPrice-"+i).val((100*amount / pvai).toFixed(2));
-				
 	}
-	
-	
 }
 
 $(function() {
 	calculateBudget();
+});
+
+$( "form" ).submit(function( event ) {
+	$(".readonly").prop( "disabled", true );
 });
 
 </script>

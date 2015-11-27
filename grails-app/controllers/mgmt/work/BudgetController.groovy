@@ -24,7 +24,8 @@ class BudgetController {
     }
 
     @Transactional
-    def save(Budget budgetInstance) {
+    def save() {
+		Budget budgetInstance = new Budget(params)
         if (budgetInstance == null) {
             notFound()
             return
