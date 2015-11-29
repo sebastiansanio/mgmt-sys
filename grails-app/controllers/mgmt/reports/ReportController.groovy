@@ -66,11 +66,13 @@ class ReportController {
 		JasperReport jasperReport = JasperCompileManager.compileReport(JRXmlLoader.load(is))
 		Map variablesValues = new HashMap()
 		for(variable in reportInstance.variablesAsList()){
-			if(variable.type == "number"){
-				variablesValues[variable.jasperVariable] = params[variable.jasperVariable].toLong()
-			}
-			if(variable.type == "date"){
-				variablesValues[variable.jasperVariable] = params[variable.jasperVariable]?DATE_FORMAT.parse(params[variable.jasperVariable]):null
+			if(params[variable.jasperVariable]){
+				if(variable.type == "number"){
+					variablesValues[variable.jasperVariable] = params[variable.jasperVariable].toLong()
+				}
+				if(variable.type == "date"){
+					variablesValues[variable.jasperVariable] = DATE_FORMAT.parse(params[variable.jasperVariable])
+				}
 			}
 		}
 		

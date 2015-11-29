@@ -6,6 +6,9 @@
 	<parameter name="Payment_date" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="account_id" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT
      sum(if(payment.multiplier=-1,payment.amount,0)) AS Debito,
@@ -39,7 +42,7 @@
 FROM
      `account` account INNER JOIN `payment` payment ON account.`id` = payment.`account_id`
      INNER JOIN `movement` movement ON payment.`movement_id` = movement.`id`
-Where Payment_date <= $P{Payment_date}
+Where Payment_date <= $P{Payment_date} and ($P{account_id} is null or account.id = $P{account_id})
 GROUP BY
      account_name, movement.id
 ORDER BY
@@ -143,18 +146,31 @@ ORDER BY
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="75" splitType="Stretch">
+		<band height="97" splitType="Stretch">
 			<staticText>
-				<reportElement x="167" y="46" width="260" height="20" uuid="99141cc7-0ef5-4ba4-8731-f92eae458552"/>
+				<reportElement x="167" y="46" width="262" height="20" uuid="99141cc7-0ef5-4ba4-8731-f92eae458552"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Informe de Saldos a Futuro]]></text>
+				<text><![CDATA[Estado de cuentas]]></text>
 			</staticText>
 			<image>
 				<reportElement x="0" y="0" width="167" height="46" uuid="a6a15b92-1a90-4477-84e1-e7763758a80f"/>
-				<imageExpression><![CDATA["C:\\Users\\Fran\\Desktop\\Captura.JPG"]]></imageExpression>
+				<imageExpression><![CDATA["http://localhost:8080/mgmt/images/Logo%20Urbatec.jpg"]]></imageExpression>
 			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="421" y="71" width="92" height="20" uuid="47746761-cb66-45a5-9ec8-ce483469f211"/>
+				<textFieldExpression><![CDATA[$P{Payment_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="370" y="71" width="44" height="20" uuid="4841f44e-e7a3-46e1-8956-9e480118a79b"/>
+				<text><![CDATA[A fecha:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="427" y="0" width="128" height="20" uuid="8d633166-0110-431e-a3b4-21f824af47ba"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
@@ -184,7 +200,7 @@ ORDER BY
 				<text><![CDATA[Fecha Emisión]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="211" y="0" width="67" height="20" uuid="a6e76761-f4f8-4521-b767-15ec4f347ae3"/>
+				<reportElement x="211" y="0" width="80" height="20" uuid="a6e76761-f4f8-4521-b767-15ec4f347ae3"/>
 				<textElement textAlignment="Justified" verticalAlignment="Top">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -244,11 +260,11 @@ ORDER BY
 				<reportElement x="291" y="0" width="69" height="20" uuid="fe77675a-c49e-49c5-974d-dfdf465e614f"/>
 				<textFieldExpression><![CDATA[$F{Debito}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="211" y="0" width="67" height="20" uuid="3f907abf-a20f-47f1-940d-b75b796c847c"/>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="211" y="0" width="80" height="20" uuid="3f907abf-a20f-47f1-940d-b75b796c847c"/>
 				<textFieldExpression><![CDATA[$F{payment_payment_date}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="dd/MM/yyyy">
 				<reportElement x="120" y="0" width="91" height="20" uuid="baade5aa-035a-4782-be51-f15610d859d4"/>
 				<textFieldExpression><![CDATA[$F{payment_date_created}]]></textFieldExpression>
 			</textField>
