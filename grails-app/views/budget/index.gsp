@@ -21,7 +21,9 @@
 				<th><g:message code="budget.client.label" default="Client" /></th>
 				<g:sortableColumn property="hasWork" title="${message(code: 'budget.hasWork.label')}" />
 				<g:sortableColumn property="directCosts" title="${message(code: 'budget.directCosts.label', default: 'Direct Costs')}" />
+				<th><g:message code="budget.items.label" /></th>
 				<g:sortableColumn property="totalAmount" title="${message(code: 'budget.pvai.label')}" />
+				<th><g:message code="budget.iva.label" /></th>
 				<th><g:message code="budget.pvii.label" /></th>
 				<g:sortableColumn property="dateCreated" title="${message(code: 'budget.dateCreated.label', default: 'Date Created')}" />
 			</tr>
@@ -33,8 +35,10 @@
 				<td>${fieldValue(bean: budgetInstance, field: "name")}</td>
 				<td>${fieldValue(bean: budgetInstance, field: "client")}</td>
 				<td><g:formatBoolean boolean="${budgetInstance.hasWork}" /></td>
-				<td>${fieldValue(bean: budgetInstance, field: "directCosts")}</td>
+				<td class="right-aligned">${fieldValue(bean: budgetInstance, field: "directCosts")}</td>
+				<td class="right-aligned">${fieldValue(bean: budgetInstance, field: "generalExpendures")}</td>
 				<td class="right-aligned">${fieldValue(bean: budgetInstance, field: "totalAmount")}</td>
+				<td class="right-aligned">${fieldValue(bean: budgetInstance, field: "ivaAmount")}</td>
 				<td class="right-aligned">${fieldValue(bean: budgetInstance, field: "totalAmountWithIva")}</td>
 				<td><g:formatDate date="${budgetInstance.dateCreated}" /></td>
 			</tr>

@@ -8,7 +8,7 @@
 
 	<hr/>
 	<div class="col-md-offset-4 col-md-2 text-center">
-		<form action='/mgmt/j_spring_security_check' method='POST'
+		<form action='${request.contextPath}/j_spring_security_check' method='POST'
 			id='loginForm'>
 			<p>
 				<label class="control-label" for='username'>Usuario</label>

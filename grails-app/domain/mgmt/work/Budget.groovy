@@ -66,4 +66,17 @@ class Budget {
 	BigDecimal getTotalAmountWithIva(){
 		return totalAmount * (1+ ivaPercentage/100)
 	}
+	
+	BigDecimal getIvaAmount() {
+		return totalAmount * ivaPercentage/100
+	}
+	
+	BigDecimal getGeneralExpendures(){
+		BigDecimal calculatedGeneralExpendures = 0
+		items.each{
+			calculatedGeneralExpendures += it.amount
+		}
+		return calculatedGeneralExpendures
+	}
+	
 }

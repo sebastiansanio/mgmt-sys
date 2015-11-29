@@ -1,9 +1,9 @@
 <sec:ifLoggedIn>
 	<g:set var="menu" value="${
-	[movement: ["op", "os", "in", "fi", "tr", "movementItem", "netting" ],
+	[movement: ["op", "os", "in", "fi", "tr", "movementItem" ],
 	account: ["account","accountStatus"],
 	budget: ["budget","work","client"],
-	balance: ["income","expenses"],
+	balance: ["income","expenses","netting","balance"],
 	concept: ["concept","conceptGroup","conceptAccount"],
 	supplier: ["supplier","supplierBudget","expensesPerSupplier"],
 	configuration: ["accountType","unitOfMeasurement","invoiceType","requestmap","secAuthority","secUser","report","import" ]
