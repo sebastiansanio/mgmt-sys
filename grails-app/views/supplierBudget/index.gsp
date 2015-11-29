@@ -16,11 +16,15 @@
 		<thead>
 			<tr>
 				<th>${message(code:'default.show.label')}</th>
+				<th><g:message code="supplierBudget.work.label" default="Work" /></th>
 				<th><g:message code="supplierBudget.supplier.label" default="Supplier" /></th>
 				<th><g:message code="supplierBudget.concept.label" default="Concept" /></th>
 				<g:sortableColumn property="amount" title="${message(code: 'supplierBudget.amount.label', default: 'Amount')}" />
 				<g:sortableColumn property="iva" title="${message(code: 'supplierBudget.iva.label', default: 'Iva')}" />
-				<th><g:message code="supplierBudget.work.label" default="Work" /></th>
+				<th><g:message code="supplierBudget.expendedAmount.label" /></th>
+				<th><g:message code="supplierBudget.expendedIva.label" /></th>
+				<th><g:message code="supplierBudget.remainingAmount.label" /></th>
+				<th><g:message code="supplierBudget.remainingIva.label" /></th>
 				<th><g:message code="supplierBudget.note.label" /></th>
 				<g:sortableColumn property="dateCreated" title="${message(code: 'default.dateCreated.label')}" />
 			</tr>
@@ -29,13 +33,19 @@
 		<g:each in="${supplierBudgetInstanceList}" status="i" var="supplierBudgetInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 				<td><g:link action="show" id="${supplierBudgetInstance.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
+				<td>${fieldValue(bean: supplierBudgetInstance, field: "work")}</td>
 				<td>${fieldValue(bean: supplierBudgetInstance, field: "supplier")}</td>
 				<td>${fieldValue(bean: supplierBudgetInstance, field: "concept")}</td>
 				<td>${fieldValue(bean: supplierBudgetInstance, field: "amount")}</td>
 				<td>${fieldValue(bean: supplierBudgetInstance, field: "iva")}</td>
-				<td>${fieldValue(bean: supplierBudgetInstance, field: "work")}</td>
+				<g:set var="realExpendures" value="${supplierBudgetInstance.realExpendures }" />
+				<td>${realExpendures.expendedAmount}</td>
+				<td>${realExpendures.expendedIva}</td>
+				<td>${realExpendures.remainingAmount}</td>
+				<td>${realExpendures.remainingIva}</td>
 				<td>${fieldValue(bean: supplierBudgetInstance, field: "note")}</td>
-				<td><g:formatDate date="${supplierBudgetInstance.dateCreated}" /></td>
+				<td><g:formatDate date="${supplierBudgetInstance.dateCreated}" />
+				</td>
 			</tr>
 		</g:each>
 		</tbody>

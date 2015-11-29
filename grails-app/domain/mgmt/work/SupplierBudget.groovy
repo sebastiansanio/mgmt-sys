@@ -1,6 +1,7 @@
 package mgmt.work
 
 import mgmt.concept.Concept
+import mgmt.movement.MovementItem
 import mgmt.persons.Supplier
 
 import org.grails.databinding.BindUsing
@@ -25,6 +26,27 @@ class SupplierBudget {
 	
     static constraints = {
 		note blank: true, nullable: true, maxSize: 4000
-		
     }
+	
+	Map getRealExpendures(){
+		Map calculatedRealExpendures = new HashMap()
+		def results = MovementItem.createCriteria().get {
+			eq("work", work)
+			eq("supplier", supplier)
+			eq("concept", concept)
+			
+			projections {
+				sum 'amount'
+				sum 'iva'
+			}
+		}
+		calculatedRealExpendures.expendedAmount = results[0]?:0
+		calculatedRealExpendures.expendedIva = results[1]?:0
+		calculatedRealExpendures.remainingAmount = amount - calculatedRealExpendures.expendedAmount
+		calculatedRealExpendures.remainingIva = iva - calculatedRealExpendures.expendedIva
+		
+		return calculatedRealExpendures
+		
+	}
+	
 }

@@ -31,7 +31,7 @@
 			<div class="${hasErrors(bean: supplierBudgetInstance, field: 'work', 'has-error')} required">
 				<label for="work" class="control-label"><g:message code="supplierBudget.work.label" default="Work" /><span class="required-indicator">*</span></label>
 				<div>
-					<g:select noSelection="${['null':'00 - Gastos generales']}" class="form-control" id="work" name="work.id" from="${mgmt.work.Work.list()}" optionKey="id" required="" value="${supplierBudgetInstance?.work?.id}"/>
+					<g:select noSelection="${['null':'00 - Gastos generales']}" class="form-control" id="work" name="work.id" from="${mgmt.work.Work.findAllByFinished(false)}" optionKey="id" required="" value="${supplierBudgetInstance?.work?.id}"/>
 				</div>
 			</div>
 
