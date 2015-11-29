@@ -103,4 +103,8 @@ class WorkController {
             '*'{ render status: NOT_FOUND }
         }
     }
+	
+	def download(){
+		redirect controller: 'report', action: 'downloadReport', id: mgmt.reports.Report.findByCode('worksList').id
+	}
 }
