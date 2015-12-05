@@ -1,5 +1,7 @@
 package mgmt.work
 
+import java.util.Date;
+
 import mgmt.movement.MovementItem
 import mgmt.persons.Client
 
@@ -15,6 +17,8 @@ class Work {
 	Long code
 	Budget budget
 	
+	Date date
+	
 	static hasMany = [movements: MovementItem]
 	
     static constraints = {
@@ -22,6 +26,7 @@ class Work {
 		type inList: ["building","asset"]
 		budget nullable: true
 		code nullable:false, unique: 'type'
+		date nullable: true
     }
 	
 	String toString(){

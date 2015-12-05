@@ -24,8 +24,11 @@ class SupplierBudget {
 	Date dateCreated
 	Date lastUpdated
 	
+	Date date
+	
     static constraints = {
 		note blank: true, nullable: true, maxSize: 4000
+		date nullable: true
     }
 	
 	Map getRealExpendures(){

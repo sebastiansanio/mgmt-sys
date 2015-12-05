@@ -11,7 +11,7 @@
 
 <g:uploadForm action="importData">
 
-<g:select class="form-control" name="datatype" from="['concepts','suppliers','works','invoiceType','accounts']" />
+<g:select class="form-control" name="datatype" from="['concepts','suppliers','works','invoiceType','accounts','clients','budgetItems','movement','movementItems','payment','supplierBudget']" />
 
 <input class="form-control" type="file" name="file" />
 

@@ -39,10 +39,10 @@
 				<td>${fieldValue(bean: supplierBudgetInstance, field: "amount")}</td>
 				<td>${fieldValue(bean: supplierBudgetInstance, field: "iva")}</td>
 				<g:set var="realExpendures" value="${supplierBudgetInstance.realExpendures }" />
-				<td>${realExpendures.expendedAmount}</td>
-				<td>${realExpendures.expendedIva}</td>
-				<td>${realExpendures.remainingAmount}</td>
-				<td>${realExpendures.remainingIva}</td>
+				<td><g:formatNumber format="###,##0.##" number="${realExpendures.expendedAmount}" /></td>
+				<td><g:formatNumber format="###,##0.##" number="${realExpendures.expendedIva}" /></td>
+				<td><g:formatNumber format="###,##0.##" number="${realExpendures.remainingAmount}" /></td>
+				<td><g:formatNumber format="###,##0.##" number="${realExpendures.remainingIva}" /></td>
 				<td>${fieldValue(bean: supplierBudgetInstance, field: "note")}</td>
 				<td><g:formatDate date="${supplierBudgetInstance.dateCreated}" />
 				</td>

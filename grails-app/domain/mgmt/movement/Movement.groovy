@@ -13,6 +13,8 @@ class Movement {
 	Integer year
 	String note
 	
+	Date date
+	Date checkedDate
 
 	static hasMany = [items: MovementItem, payments: Payment]
 
@@ -28,6 +30,8 @@ class Movement {
 				return ["movement.amountsNotEqual.error"]
 			}
         }
+		date nullable: true
+		checkedDate nullable: true
 		payments validator: {value, object ->
 			if (object.type in ['op','os','in','tr'] && !value){
 				return ["default.invalid.min.size.message",1]
@@ -54,6 +58,9 @@ class Movement {
 			}else{
 				number = calculatedNumber + 1
 			}
+		}
+		if(checked && !checkedDate){
+			checkedDate = new Date()
 		}
 	}
 	
