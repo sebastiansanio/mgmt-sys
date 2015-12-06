@@ -25,6 +25,16 @@ class WorkController {
         respond new Work(params)
     }
 	
+	def search(Integer max) {
+		params.max = Math.min(max ?: 100, 1000)
+		Long code = params.long('code')
+		if(!code){
+			redirect action: 'index'
+		}
+		
+		respond Work.findAllByCode(code,params), model:[workInstanceCount: Work.countByCode(code)],  view:'index'
+	}
+	
     @Transactional
     def save(Work workInstance) {
         if (workInstance == null) {
@@ -53,11 +63,21 @@ class WorkController {
     }
 
     @Transactional
-    def update(Work workInstance) {
+    def update() {
+		Work workInstance = Work.get(params.id.toLong())
         if (workInstance == null) {
             notFound()
             return
         }
+		if (params.version) {
+			def version = params.version.toLong()
+			if (workInstance.version > version) {
+				flash.error = message(code: "default.optimistic.locking.failure")
+				redirect action: "edit", id: workInstance.id
+				return
+			}
+		}
+		workInstance.properties = params
 
         if (workInstance.hasErrors()) {
             respond workInstance.errors, view:'edit'

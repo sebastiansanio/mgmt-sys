@@ -17,6 +17,17 @@ class OsController {
 		params.order = params.order ?: 'desc'
         respond Movement.findAllByType('os',params), model:[movementInstanceCount: Movement.countByType('os')]
     }
+	
+	def search(Integer max) {
+		if(params.checked == "all"){
+			redirect action: 'index'
+		}
+		params.max = Math.min(max ?: 100, 1000)
+		params.sort = params.sort ?: 'id'
+		params.order = params.order ?: 'desc'
+		boolean checked = (params.checked == "checked")
+		respond Movement.findAllByCheckedAndType(checked,'os',params), model:[movementInstanceCount: Movement.countByCheckedAndType(checked,'os')],  view:'index'
+	}
 
     def show(Movement movementInstance) {
 		if (movementInstance == null || movementInstance.type != 'os') {
@@ -83,6 +94,14 @@ class OsController {
             notFound()
             return
         }
+		if (params.version) {
+			def version = params.version.toLong()
+			if (movementInstance.version > version) {
+				flash.error = message(code: "default.optimistic.locking.failure")
+				redirect action: "edit", id: movementInstance.id
+				return
+			}
+		}
 		if(movementInstance.checked){
 			flash.message = message(code: 'movement.isChecked.error')
 			redirect movementInstance

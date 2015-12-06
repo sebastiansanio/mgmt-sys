@@ -38,7 +38,7 @@ class SupplierController {
 	}
 	
 	def search(Integer max) {
-		params.max = Math.min(max ?: 50, 1000)
+		params.max = Math.min(max ?: 100, 1000)
 		String nameQuery = "%"+params.name+"%"
 		respond Supplier.findAllByNameLike(nameQuery,params), model:[supplierInstanceCount: Supplier.countByNameLike(nameQuery)],  view:'index'
 	}
@@ -79,11 +79,21 @@ class SupplierController {
     }
 
     @Transactional
-    def update(Supplier supplierInstance) {
+    def update() {
+		Supplier supplierInstance = Supplier.get(params.id.toLong())
         if (supplierInstance == null) {
             notFound()
             return
         }
+		if (params.version) {
+			def version = params.version.toLong()
+			if (supplierInstance.version > version) {
+				flash.error = message(code: "default.optimistic.locking.failure")
+				redirect action: "edit", id: supplierInstance.id
+				return
+			}
+		}
+		supplierInstance.properties = params
 
         if (supplierInstance.hasErrors()) {
             respond supplierInstance.errors, view:'edit'

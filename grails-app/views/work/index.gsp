@@ -10,6 +10,17 @@
 
 <body>
 
+<div class="row">
+<g:form action="search" method="get" >
+<div class="col-md-2">
+<g:field type="number" placeholder="${message(code:'work.code.label')}" class="form-control" name="code" value="${params.long('code')}" />
+</div>
+<div class="col-md-2">
+<g:actionSubmit class="btn btn-default" value="${message(code:'default.search.label')}" action="search" />
+</div>
+</g:form>
+</div>
+
 <section id="index-work" class="first">
 
 	<table class="table table-bordered margin-top-medium">

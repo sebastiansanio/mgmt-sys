@@ -17,6 +17,17 @@ class OpController {
 		params.order = params.order ?: 'desc'
         respond Movement.findAllByType('op',params), model:[movementInstanceCount: Movement.countByType('op')]
     }
+	
+	def search(Integer max) {
+		if(params.checked == "all"){
+			redirect action: 'index'
+		}
+		params.max = Math.min(max ?: 100, 1000)
+		params.sort = params.sort ?: 'id'
+		params.order = params.order ?: 'desc'
+		boolean checked = (params.checked == "checked")
+		respond Movement.findAllByCheckedAndType(checked,'op',params), model:[movementInstanceCount: Movement.countByCheckedAndType(checked,'op')],  view:'index'
+	}
 
     def show(Movement movementInstance) {
 		if (movementInstance == null || movementInstance.type != 'op') {
@@ -83,6 +94,14 @@ class OpController {
             notFound()
             return
         }
+		if (params.version) {
+			def version = params.version.toLong()
+			if (movementInstance.version > version) {
+				flash.error = message(code: "default.optimistic.locking.failure")
+				redirect action: "edit", id: movementInstance.id
+				return
+			}
+		}
 		if(movementInstance.checked){
 			flash.message = message(code: 'movement.isChecked.error')
 			redirect movementInstance

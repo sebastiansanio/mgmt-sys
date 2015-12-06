@@ -71,17 +71,27 @@ class AccountController {
     }
 
     @Transactional
-    def update(Account accountInstance) {
+    def update() {
+		Account accountInstance = Account.get(params.id.toLong())
         if (accountInstance == null) {
             notFound()
             return
         }
+		if (params.version) {
+			def version = params.version.toLong()
+			if (accountInstance.version > version) {
+				flash.error = message(code: "default.optimistic.locking.failure")
+				redirect action: "edit", id: accountInstance.id
+				return
+			}
+		}
+		accountInstance.properties = params
 
         if (accountInstance.hasErrors()) {
             respond accountInstance.errors, view:'edit'
             return
         }
-
+		
         accountInstance.save flush:true
 
         request.withFormat {

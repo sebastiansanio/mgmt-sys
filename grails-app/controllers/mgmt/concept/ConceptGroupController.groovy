@@ -51,11 +51,21 @@ class ConceptGroupController {
     }
 
     @Transactional
-    def update(ConceptGroup conceptGroupInstance) {
+    def update() {
+		ConceptGroup conceptGroupInstance = ConceptGroup.get(params.id.toLong())
         if (conceptGroupInstance == null) {
             notFound()
             return
         }
+		if (params.version) {
+			def version = params.version.toLong()
+			if (conceptGroupInstance.version > version) {
+				flash.error = message(code: "default.optimistic.locking.failure")
+				redirect action: "edit", id: conceptGroupInstance.id
+				return
+			}
+		}
+		conceptGroupInstance.properties = params
 
         if (conceptGroupInstance.hasErrors()) {
             respond conceptGroupInstance.errors, view:'edit'

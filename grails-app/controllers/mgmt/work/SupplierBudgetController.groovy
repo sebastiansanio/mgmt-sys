@@ -53,11 +53,21 @@ class SupplierBudgetController {
     }
 
     @Transactional
-    def update(SupplierBudget supplierBudgetInstance) {
+    def update() {
+		SupplierBudget supplierBudgetInstance = SupplierBudget.get(params.id.toLong())
         if (supplierBudgetInstance == null) {
             notFound()
             return
         }
+		if (params.version) {
+			def version = params.version.toLong()
+			if (supplierBudgetInstance.version > version) {
+				flash.error = message(code: "default.optimistic.locking.failure")
+				redirect action: "edit", id: supplierBudgetInstance.id
+				return
+			}
+		}
+		supplierBudgetInstance.properties = params
 
         if (supplierBudgetInstance.hasErrors()) {
             respond supplierBudgetInstance.errors, view:'edit'

@@ -17,6 +17,17 @@ class FiController {
 		params.order = params.order ?: 'desc'
         respond Movement.findAllByType('fi',params), model:[movementInstanceCount: Movement.countByType('fi')]
     }
+	
+	def search(Integer max) {
+		if(params.checked == "all"){
+			redirect action: 'index'
+		}
+		params.max = Math.min(max ?: 100, 1000)
+		params.sort = params.sort ?: 'id'
+		params.order = params.order ?: 'desc'
+		boolean checked = (params.checked == "checked")
+		respond Movement.findAllByCheckedAndType(checked,'fi',params), model:[movementInstanceCount: Movement.countByCheckedAndType(checked,'fi')],  view:'index'
+	}
 
     def show(Movement movementInstance) {
 		if (movementInstance == null || movementInstance.type != 'fi') {
@@ -97,6 +108,14 @@ class FiController {
             notFound()
             return
         }
+		if (params.version) {
+			def version = params.version.toLong()
+			if (movementInstance.version > version) {
+				flash.error = message(code: "default.optimistic.locking.failure")
+				redirect action: "edit", id: movementInstance.id
+				return
+			}
+		}
 		if(movementInstance.checked){
 			flash.message = message(code: 'movement.isChecked.error')
 			redirect movementInstance

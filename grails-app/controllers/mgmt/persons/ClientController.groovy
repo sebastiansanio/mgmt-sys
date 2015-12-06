@@ -51,11 +51,21 @@ class ClientController {
     }
 
     @Transactional
-    def update(Client clientInstance) {
+    def update() {
+		Client clientInstance = Client.get(params.id.toLong())
         if (clientInstance == null) {
             notFound()
             return
         }
+		if (params.version) {
+			def version = params.version.toLong()
+			if (clientInstance.version > version) {
+				flash.error = message(code: "default.optimistic.locking.failure")
+				redirect action: "edit", id: clientInstance.id
+				return
+			}
+		}
+		clientInstance.properties = params
 
         if (clientInstance.hasErrors()) {
             respond clientInstance.errors, view:'edit'

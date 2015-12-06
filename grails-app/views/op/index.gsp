@@ -11,6 +11,18 @@
 
 <body>
 
+
+<div class="row">
+<g:form action="search" method="get" >
+<div class="col-md-2">
+<g:select class="form-control" from="['all','checked','notChecked']" valueMessagePrefix="movement.checked" name="checked" value="${params.checked}" />
+</div>
+<div class="col-md-2">
+<g:actionSubmit class="btn btn-default" value="${message(code:'default.filter.label')}" action="search" />
+</div>
+</g:form>
+</div>
+
 <section id="index-movement" class="first">
 	<table class="table table-bordered margin-top-medium">
 		<thead>
@@ -27,7 +39,7 @@
 				
 				<th>${message(code:'movement.amount.label')}</th>
 				
-				<th>${message(code:'movement.checked.label')}</th>
+				<g:sortableColumn property="checked" title="${message(code: 'movement.checked.label')}" />
 				
 				<th>${message(code:'movement.note.label')}</th>
 				

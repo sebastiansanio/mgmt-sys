@@ -51,12 +51,21 @@ class UnitOfMeasurementController {
     }
 
     @Transactional
-    def update(UnitOfMeasurement unitOfMeasurementInstance) {
+    def update() {
+		UnitOfMeasurement unitOfMeasurementInstance = UnitOfMeasurement.get(params.id.toLong())
         if (unitOfMeasurementInstance == null) {
             notFound()
             return
         }
-
+		if (params.version) {
+			def version = params.version.toLong()
+			if (unitOfMeasurementInstance.version > version) {
+				flash.error = message(code: "default.optimistic.locking.failure")
+				redirect action: "edit", id: unitOfMeasurementInstance.id
+				return
+			}
+		}
+		unitOfMeasurementInstance.properties = params
         if (unitOfMeasurementInstance.hasErrors()) {
             respond unitOfMeasurementInstance.errors, view:'edit'
             return

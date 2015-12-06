@@ -90,16 +90,24 @@ class BudgetController {
     @Transactional
     def update() {
 		Budget budgetInstance = Budget.get(params.id.toLong())
+		if (budgetInstance == null) {
+			notFound()
+			return
+		}
 		if(budgetInstance.hasWork){
 			flash.error = message(code: 'budget.closed.error')
 			redirect budgetInstance
 			return
 		}
 		
-        if (budgetInstance == null) {
-            notFound()
-            return
-        }
+		if (params.version) {
+			def version = params.version.toLong()
+			if (budgetInstance.version > version) {
+				flash.error = message(code: "default.optimistic.locking.failure")
+				redirect action: "edit", id: budgetInstance.id
+				return
+			}
+		}
 				
 		for (item in budgetInstance.items) {
 			item.delete()

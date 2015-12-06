@@ -51,12 +51,21 @@ class InvoiceTypeController {
     }
 
     @Transactional
-    def update(InvoiceType invoiceTypeInstance) {
+    def update() {
+		InvoiceType invoiceTypeInstance = InvoiceType.get(params.id.toLong())
         if (invoiceTypeInstance == null) {
             notFound()
             return
         }
-
+		if (params.version) {
+			def version = params.version.toLong()
+			if (invoiceTypeInstance.version > version) {
+				flash.error = message(code: "default.optimistic.locking.failure")
+				redirect action: "edit", id: invoiceTypeInstance.id
+				return
+			}
+		}
+		invoiceTypeInstance.properties = params
         if (invoiceTypeInstance.hasErrors()) {
             respond invoiceTypeInstance.errors, view:'edit'
             return

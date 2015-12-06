@@ -72,11 +72,21 @@ class ConceptController {
     }
 
     @Transactional
-    def update(Concept conceptInstance) {
+    def update() {
+		Concept conceptInstance = Concept.get(params.id.toLong())
         if (conceptInstance == null) {
             notFound()
             return
         }
+		if (params.version) {
+			def version = params.version.toLong()
+			if (conceptInstance.version > version) {
+				flash.error = message(code: "default.optimistic.locking.failure")
+				redirect action: "edit", id: conceptInstance.id
+				return
+			}
+		}
+		conceptInstance.properties = params
 
         if (conceptInstance.hasErrors()) {
             respond conceptInstance.errors, view:'edit'
