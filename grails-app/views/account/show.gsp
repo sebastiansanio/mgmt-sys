@@ -66,7 +66,7 @@
 	<g:form action="delete">
 		<g:hiddenField name="_method" value="DELETE" />
 		<g:hiddenField name="id" value="${accountInstance.id}" />
-		<g:submitButton class="btn btn-danger" name="delete" value="${message(code:'default.button.delete.label') }" /> 
+		<g:submitButton onclick="if(!confirm('${message(code:'default.delete.confirm.message')}')) event.preventDefault();" class="btn btn-danger" name="delete" value="${message(code:'default.button.delete.label') }" /> 
 	</g:form>
 </g:if>
 </sec:access>

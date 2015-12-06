@@ -110,6 +110,11 @@ class AccountController {
             notFound()
             return
         }
+		if (accountInstance.payments){
+			flash.error = message(code: 'default.delete.hasMovements.error')
+			redirect action: "show", id: accountInstance.id
+			return
+		}
 
         accountInstance.delete flush:true
 

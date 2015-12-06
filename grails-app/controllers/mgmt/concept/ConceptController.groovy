@@ -111,7 +111,12 @@ class ConceptController {
             notFound()
             return
         }
-
+		if (conceptInstance.movements){
+			flash.error = message(code: 'default.delete.hasMovements.error')
+			redirect action: "show", id: conceptInstance.id
+			return
+		}
+		
         conceptInstance.delete flush:true
 
         request.withFormat {
