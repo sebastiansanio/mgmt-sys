@@ -19,7 +19,7 @@ class SupplierController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 50, 1000)
+        params.max = Math.min(max ?: 100, 1000)
         respond Supplier.list(params), model:[supplierInstanceCount: Supplier.count()]
     }
 	

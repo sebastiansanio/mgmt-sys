@@ -11,7 +11,7 @@ class ClientController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 50, 1000)
+        params.max = Math.min(max ?: 100, 1000)
         respond Client.list(params), model:[clientInstanceCount: Client.count()]
     }
 

@@ -13,7 +13,7 @@ class RequestmapController {
 	def springSecurityService
 	
     def index(Integer max) {
-        params.max = Math.min(max ?: 50, 1000)
+        params.max = Math.min(max ?: 100, 1000)
         respond Requestmap.list(params), model:[requestmapInstanceCount: Requestmap.count()]
     }
 

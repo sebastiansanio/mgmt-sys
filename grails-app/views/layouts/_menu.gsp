@@ -2,15 +2,15 @@
 	<g:set var="menu" value="${
 	[movement: ["op", "os", "in", "fi", "tr", "movementItem" ],
 	account: ["account","accountStatus"],
+	concept: ["concept","conceptGroup","conceptAccount"],
 	budget: ["budget","work","client"],
 	balance: ["income","expenses","netting","balance"],
-	concept: ["concept","conceptGroup","conceptAccount"],
 	supplier: ["supplier","supplierBudget","expensesPerSupplier"],
 	configuration: ["accountType","unitOfMeasurement","invoiceType","requestmap","secAuthority","secUser","report","import" ]
 	]}" />
 	
 	<g:set var="menuGroupPriorities" value="${
-	[movement: 1, account: 2, budget: 3, balance: 4, concept: 6, supplier: 5, configuration: 7	]}" />
+	[movement: 1, account: 2, budget: 4, balance: 5, concept: 3, supplier: 6, configuration: 7	]}" />
 	<g:set var="menuPriorities" value="${[op: 1,os: 2,in: 3,fi: 4,tr: 5,movementItem: 6,
 	netting: 7 
 	]}" />

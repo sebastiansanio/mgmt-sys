@@ -17,7 +17,7 @@ class AccountController {
 	private static List FIELDS = ["name","code","type","currentBalance","dateCreated","lastUpdated"]
 	
     def index(Integer max) {
-        params.max = Math.min(max ?: 50, 1000)
+        params.max = Math.min(max ?: 100, 1000)
         respond Account.list(params), model:[accountInstanceCount: Account.count()]
     }
 

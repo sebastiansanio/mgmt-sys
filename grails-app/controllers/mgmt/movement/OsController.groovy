@@ -12,7 +12,7 @@ class OsController {
     static allowedMethods = [save: "POST", check: "POST", uncheck: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 50, 1000)
+        params.max = Math.min(max ?: 100, 1000)
 		params.sort = params.sort ?: 'id'
 		params.order = params.order ?: 'desc'
         respond Movement.findAllByType('os',params), model:[movementInstanceCount: Movement.countByType('os')]

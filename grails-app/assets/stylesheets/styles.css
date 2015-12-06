@@ -92,3 +92,7 @@ footer {
 .readonly {
 	background-color:#F2F5A9 !important;
 }
+
+.checked-movement {
+	background-color:#CCCCCC !important;
+}

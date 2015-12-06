@@ -18,7 +18,7 @@ class MovementItemController {
 		"dateCreated","lastUpdated"]	
 	
     def index(Integer max) {
-        params.max = Math.min(max ?: 50, 1000)
+        params.max = Math.min(max ?: 100, 1000)
         respond MovementItem.list(params), model:[movementItemInstanceCount: MovementItem.count()]
     }
 	

@@ -36,7 +36,7 @@
 		</thead>
 		<tbody>
 		<g:each in="${movementInstanceList}" status="i" var="movementInstance">
-			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+			<tr class="${movementInstance.checked ? 'checked-movement' : ''}">
 				<td><g:link action="show" id="${movementInstance.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
 
 				<td><g:message code="movement.type.${movementInstance.type}" /></td>

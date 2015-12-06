@@ -18,7 +18,7 @@ class ConceptController {
 	
 	
     def index(Integer max) {
-        params.max = Math.min(max ?: 50, 1000)
+        params.max = Math.min(max ?: 100, 1000)
         respond Concept.list(params), model:[conceptInstanceCount: Concept.count()]
     }
 	

@@ -16,8 +16,8 @@
 		<thead>
 			<tr>
 				<th>${message(code:'default.show.label')}</th>
-				<g:sortableColumn property="name" title="${message(code: 'work.name.label')}" />
 				<g:sortableColumn property="code" title="${message(code: 'work.code.label')}" />
+				<g:sortableColumn property="name" title="${message(code: 'work.name.label')}" />
 				<g:sortableColumn property="type" title="${message(code: 'work.type.label')}" />
 				<g:sortableColumn property="finished" title="${message(code: 'work.finished.label')}" />
 				<th><g:message code="work.client.label" default="Client" /></th>
@@ -27,8 +27,8 @@
 		<g:each in="${workInstanceList}" status="i" var="workInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 				<td><g:link action="show" id="${workInstance.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
-				<td>${fieldValue(bean: workInstance, field: "name")}</td>
 				<td>${workInstance.code}</td>
+				<td>${fieldValue(bean: workInstance, field: "name")}</td>
 				<td>${message(code:'work.type.'+workInstance.type)}</td>
 				<td><g:formatBoolean boolean="${workInstance.finished}" /></td>
 				<td>${fieldValue(bean: workInstance, field: "client")}</td>
