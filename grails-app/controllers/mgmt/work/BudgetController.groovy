@@ -42,6 +42,12 @@ class BudgetController {
         params.max = Math.min(max ?: 100, 1000)
         respond Budget.list(params), model:[budgetInstanceCount: Budget.count()]
     }
+	
+	def search(Integer max) {
+		params.max = Math.min(max ?: 100, 1000)
+		String nameQuery = "%"+params.name+"%"
+		respond Budget.findAllByNameLike(nameQuery,params), model:[budgetInstanceCount: Budget.countByNameLike(nameQuery)],  view:'index'
+	}
 
     def show(Budget budgetInstance) {
         respond budgetInstance

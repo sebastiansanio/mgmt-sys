@@ -10,6 +10,17 @@
 
 <body>
 
+<div class="row">
+<g:form action="search" method="get" >
+<div class="col-md-2">
+<g:textField placeholder="${message(code:'budget.name.label')}" class="form-control" name="name" value="${params.name}" />
+</div>
+<div class="col-md-2">
+<g:actionSubmit class="btn btn-default" value="${message(code:'default.search.label')}" action="search" />
+</div>
+</g:form>
+</div>
+
 <section id="index-budget" class="first">
 
 	<table class="table table-bordered margin-top-medium">
