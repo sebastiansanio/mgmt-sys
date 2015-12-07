@@ -93,4 +93,8 @@ class Movement {
 			return calculatedAmount
 		}
 	}
+	
+	String toString(){
+		return type + " " + year + "/" + number
+	}
 }

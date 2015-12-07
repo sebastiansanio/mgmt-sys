@@ -60,7 +60,7 @@
 			
 				<td>${movementInstance.year}</td>
 			
-				<td>${movementInstance.calculateItemsTotal()}</td>
+				<td><g:formatNumber format="###,##0.##" number="${movementInstance.calculateItemsTotal()}" /></td>
 				
 				<td><g:formatBoolean boolean="${movementInstance.checked}" /></td>
 			

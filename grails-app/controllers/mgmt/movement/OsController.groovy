@@ -78,10 +78,6 @@ class OsController {
 			notFound()
 			return
 		}
-		if(movementInstance.checked){
-			flash.error = message(code: 'movement.isChecked.error')
-			redirect action: 'show', id: movementInstance.id
-		}
 		
         respond movementInstance
     }

@@ -15,18 +15,14 @@
 		<thead>
 			<tr>
 				<th>${message(code:'default.show.label')}</th>
-			
 				<g:sortableColumn property="name" title="${message(code: 'accountType.name.label', default: 'Name')}" />
-			
 			</tr>
 		</thead>
 		<tbody>
 		<g:each in="${accountTypeInstanceList}" status="i" var="accountTypeInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 				<td><g:link action="show" id="${accountTypeInstance.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
-			
 				<td>${fieldValue(bean: accountTypeInstance, field: "name")}</td>
-			
 			</tr>
 		</g:each>
 		</tbody>

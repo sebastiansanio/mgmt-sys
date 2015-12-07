@@ -1,7 +1,7 @@
 <sec:ifLoggedIn>
 	<g:set var="menu" value="${
 	[movement: ["op", "os", "in", "fi", "tr", "movementItem" ],
-	account: ["account","accountStatus"],
+	account: ["account","accountTypeStatus","accountStatus"],
 	concept: ["concept","conceptGroup","conceptAccount"],
 	budget: ["budget","work","client"],
 	balance: ["income","expenses","netting","balance"],

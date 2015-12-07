@@ -20,9 +20,9 @@
 				<g:sortableColumn property="code" title="${message(code: 'account.code.label', default: 'Code')}" />
 			
 				<g:sortableColumn property="name" title="${message(code: 'account.name.label', default: 'Name')}" />
-			
-				<th><g:message code="account.type.label" default="Type" /></th>
 
+				<g:sortableColumn property="type.name" title="${message(code: 'account.type.label')}" />
+			
 				<th><g:message code="account.currentBalance.label" /></th>
 			
 			</tr>
@@ -38,7 +38,7 @@
 			
 				<td>${fieldValue(bean: accountInstance, field: "type")}</td>
 			
-				<td>${accountInstance.currentBalance}</td>
+				<td><g:formatNumber format="###,##0.##" number="${accountInstance.currentBalance}" /></td>
 			</tr>
 		</g:each>
 		</tbody>

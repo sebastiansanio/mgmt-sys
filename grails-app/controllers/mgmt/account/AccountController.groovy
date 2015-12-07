@@ -18,6 +18,8 @@ class AccountController {
 	
     def index(Integer max) {
         params.max = Math.min(max ?: 100, 1000)
+		params.sort = params.sort ?: 'name'
+		params.order = params.order ?: 'asc'
         respond Account.list(params), model:[accountInstanceCount: Account.count()]
     }
 

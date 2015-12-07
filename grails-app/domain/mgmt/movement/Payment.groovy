@@ -25,4 +25,8 @@ class Payment {
 		note blank:true, nullable:true
 		checkNumber blank:true, nullable:true
 	}
+	
+	BigDecimal getSignedAmount(){
+		return amount * multiplier
+	}
 }
