@@ -79,6 +79,23 @@
 		
 		</tbody>
 	</table>
+	<g:if test="${!workInstance.finished}">
+		<sec:access url="/work/close">
+			<g:form action="close">
+				<g:hiddenField name="id" value="${workInstance.id}" />
+				<g:submitButton class="btn btn-warning" name="close" value="${message(code:'work.close.label') }" /> 
+			</g:form>
+		</sec:access>
+	</g:if>
+	<g:else>
+		<sec:access url="/work/open">
+			<g:form action="open">
+				<g:hiddenField name="id" value="${workInstance.id}" />
+				<g:submitButton class="btn btn-primary" name="open" value="${message(code:'work.open.label') }" /> 
+			</g:form>
+		</sec:access>
+	</g:else>
+	
 </section>
 
 </body>

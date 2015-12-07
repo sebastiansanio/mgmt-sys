@@ -127,4 +127,30 @@ class WorkController {
 	def download(){
 		redirect controller: 'report', action: 'downloadReport', id: mgmt.reports.Report.findByCode('worksList').id
 	}
+	
+	@Transactional
+	def close(){
+		def workInstance = Work.get(params.id.toLong())
+		if (workInstance == null) {
+			notFound()
+			return
+		}
+		workInstance.finished = true
+		workInstance.save flush: true
+		flash.message = message(code: 'work.close.message')
+		redirect action: 'show', id: workInstance.id
+		
+	}
+	@Transactional
+	def open(){
+		def workInstance = Work.get(params.id.toLong())
+		if (workInstance == null) {
+			notFound()
+			return
+		}
+		workInstance.finished = false
+		workInstance.save flush: true
+		flash.message = message(code: 'work.open.message')
+		redirect action: 'show', id: workInstance.id
+	}
 }

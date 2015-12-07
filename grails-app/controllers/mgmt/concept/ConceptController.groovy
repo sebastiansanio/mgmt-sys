@@ -24,7 +24,7 @@ class ConceptController {
 	
 	def download(){
 		response.setContentType("application/ms-excel");
-		response.setHeader("Content-Disposition", "attachment; filename='${message(code:'menu.concept.label')}.xlsx'");
+		response.setHeader("Content-Disposition", "attachment; filename='${message(code:'concepts.label')}.xlsx'");
 		
 		def headers = FIELDS.collect{
 			message(code:'concept.'+it+'.label')

@@ -3,17 +3,38 @@ package mgmt.persons
 
 
 import static org.springframework.http.HttpStatus.*
+
+import java.util.List;
+import pl.touk.excel.export.WebXlsxExporter
+
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class ClientController {
 
+	private static List FIELDS = ["name","businessName","cuit","address","location",
+		"province","zipCode","note","dateCreated","lastUpdated"]
+	
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 100, 1000)
         respond Client.list(params), model:[clientInstanceCount: Client.count()]
     }
+	
+	def download(){
+		response.setContentType("application/ms-excel");
+		response.setHeader("Content-Disposition", "attachment; filename='${message(code:'menu.client.label')}.xlsx'");
+		
+		def headers = FIELDS.collect{
+			message(code:'client.'+it+'.label')
+		}
+		new WebXlsxExporter().with {
+			fillHeader(headers)
+			add(Client.list(), FIELDS)
+			save(response.outputStream)
+		}
+	}
 
     def show(Client clientInstance) {
         respond clientInstance

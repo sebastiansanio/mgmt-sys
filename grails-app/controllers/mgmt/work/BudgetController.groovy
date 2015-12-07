@@ -3,12 +3,19 @@ package mgmt.work
 
 
 import static org.springframework.http.HttpStatus.*
+
+import java.util.List;
+
 import mgmt.persons.Client;
+import pl.touk.excel.export.WebXlsxExporter
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class BudgetController {
-
+	
+	private static List FIELDS = ["client","name","directCosts","iibbPercentage","iibbAmount",
+	"indirectOverheadPercentage","indirectOverheadAmount","profitPercentage","profitAmount",
+	"ivaPercentage","totalAmount","hasWork","dateCreated","lastUpdated"]
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
 	@Transactional
@@ -40,8 +47,24 @@ class BudgetController {
 	
     def index(Integer max) {
         params.max = Math.min(max ?: 100, 1000)
+		params.sort = params.sort ?: 'dateCreated'
+		params.order = params.order ?: 'desc'
         respond Budget.list(params), model:[budgetInstanceCount: Budget.count()]
     }
+	
+	def download(){
+		response.setContentType("application/ms-excel");
+		response.setHeader("Content-Disposition", "attachment; filename='${message(code:'menu.budget.label')}.xlsx'");
+		
+		def headers = FIELDS.collect{
+			message(code:'budget.'+it+'.label')
+		}
+		new WebXlsxExporter().with {
+			fillHeader(headers)
+			add(Budget.list(), FIELDS)
+			save(response.outputStream)
+		}
+	}
 	
 	def search(Integer max) {
 		params.max = Math.min(max ?: 100, 1000)

@@ -16,8 +16,8 @@
 	]}" />
 	
 	<g:set var="activeGroup" value="" />
-	<nav class="navbar navbar-default" role="navigation">
-		<ul class="nav nav-tabs navbar-nav" role="tablist">
+	<nav class="navbar navbar-default" >
+		<ul class="nav nav-tabs navbar-nav">
 		
 			<g:each var="menuItem" in="${menu.keySet().sort{menuGroupPriorities[it]}}">
 				
@@ -35,8 +35,8 @@
 				</g:each>
 				<g:if test="${itemsQuantity > 0}" >
 				
-				<li role="presentation" class="${activeMark}"><a href="#menuGroup${menuItem}"
-					aria-controls="menuGroup${menuItem}" role="tab" data-toggle="tab"><span
+				<li class="${activeMark}"><a href="#menuGroup${menuItem}"
+					aria-controls="menuGroup${menuItem}" data-toggle="tab"><span
 						class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
 						${message(code:'menuGroup.'+menuItem+'.label') }</a></li>
 						
@@ -44,7 +44,7 @@
 			</g:each>
 			<li class="tab-content col-md-12">
 				<g:each var="menuItem"	in="${menu.keySet().sort()}">
-					<ul role="tabpanel" class=" tab-pane nav navbar-nav ${menuItem == activeGroup?'active':''}" id="menuGroup${menuItem}">
+					<ul class=" tab-pane nav navbar-nav ${menuItem == activeGroup?'active':''}" id="menuGroup${menuItem}">
 						<g:each status="i" var="c" in="${menu[menuItem].sort{menuPriorities[it]?:0}}">
 							<sec:access url="/${c}/index">
 								<li class="${params.controller == c ? "active" : ""}">

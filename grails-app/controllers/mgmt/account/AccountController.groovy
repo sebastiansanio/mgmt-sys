@@ -23,7 +23,7 @@ class AccountController {
 
 	def download(){
 		response.setContentType("application/ms-excel");
-		response.setHeader("Content-Disposition", "attachment; filename='${message(code:'menu.account.label')}.xlsx'");
+		response.setHeader("Content-Disposition", "attachment; filename='${message(code:'accounts.label')}.xlsx'");
 		
 		def headers = FIELDS.collect{
 			message(code:'account.'+it+'.label')

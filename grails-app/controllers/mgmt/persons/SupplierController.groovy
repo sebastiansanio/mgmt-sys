@@ -118,6 +118,11 @@ class SupplierController {
             notFound()
             return
         }
+		if (supplierInstance.movements){
+			flash.error = message(code: 'default.delete.hasMovements.error')
+			redirect action: "show", id: supplierInstance.id
+			return
+		}
 
         supplierInstance.delete flush:true
 
