@@ -17,7 +17,6 @@ class Work {
 	Long code
 	Budget budget
 	
-	Date date
 	
 	static hasMany = [movements: MovementItem]
 	
@@ -26,7 +25,6 @@ class Work {
 		type inList: ["building","asset"]
 		budget nullable: true
 		code nullable:false, unique: 'type'
-		date nullable: true
     }
 	
 	String toString(){

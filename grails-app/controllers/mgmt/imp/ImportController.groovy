@@ -89,17 +89,22 @@ class ImportController {
 				
 			}
 		}else if (datatype == "budgetItems"){ 
+			List notFoundBudgets = new ArrayList()
 			file.inputStream.splitEachLine(delimiter) { fields ->
 				if(fields[3]){
-					System.out.println(fields[2].replaceAll("\"",""))
 					Budget budget = Budget.findByOldCode(fields[0].toLong())
-					BudgetItem item = new BudgetItem(budget:budget, concept: Concept.findByDescription(fields[2].replaceAll("\"","")),amount: new BigDecimal(fields[3].replace("+","").replace(",",".") ))
-					budget.addToItems(item)
-					budget.save(flush: true,failOnError: true)
+					if(budget){
+						
+						String conceptName = fields[2].replaceAll("\"","")
+						Concept concept = Concept.findByDescription(fields[2].replaceAll("\"",""))?:Concept.findByCode("L101")
+						BudgetItem item = new BudgetItem(budget:budget, concept: concept,amount: new BigDecimal(fields[3].replace("+","").replace(",",".") ))
+						budget.addToItems(item)
+						budget.save(flush: true,failOnError: true)
+					} else{
+						notFoundBudgets.add(fields[0].toLong())
+					}
 				}
 			}
-		
-		
 		}else if (datatype == "movement"){ 
 			file.inputStream.splitEachLine(delimiter) {fields  ->
 				String type = fields[2].toLowerCase().replace("\"","")
