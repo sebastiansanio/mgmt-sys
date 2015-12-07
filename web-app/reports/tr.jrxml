@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="op" language="groovy" pageWidth="595" pageHeight="842" columnWidth="589" leftMargin="3" rightMargin="3" topMargin="20" bottomMargin="20" uuid="8a7719ce-943e-4e58-bcc4-17a1c4039d85">
 	<property name="ireport.zoom" value="1.652892561983471"/>
-	<property name="ireport.x" value="414"/>
-	<property name="ireport.y" value="1026"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -258,7 +258,7 @@ from movement m where m.id = $P{movement_id}]]>
 		<band height="79" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="163" height="41" uuid="87be08e7-7872-431f-8171-bb83efafc0de"/>
-				<imageExpression><![CDATA["http://localhost:8080/mgmt/images/Logo%20Urbatec.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["http://localhost:8080/urbatec/images/Logo%20Urbatec.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="173" y="41" width="195" height="20" uuid="21804eb7-8644-45d3-97fa-3e3e04dea779"/>
@@ -288,7 +288,7 @@ from movement m where m.id = $P{movement_id}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{number}+" / "+$F{year}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd-MM-yyyy">
+			<textField pattern="dd/MM/yyyy">
 				<reportElement x="489" y="30" width="93" height="20" uuid="8de7cf2e-ef5f-4d2c-a83a-0e7941ce7231"/>
 				<textElement>
 					<font isBold="true"/>
@@ -350,17 +350,17 @@ from movement m where m.id = $P{movement_id}]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="90" uuid="ceeb32d4-4ce7-4cea-a0f6-38b92718b8e3">
+					<jr:column width="70" uuid="ceeb32d4-4ce7-4cea-a0f6-38b92718b8e3">
 						<jr:columnHeader style="table 9_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="90" height="30" uuid="50401615-6285-4739-9d9b-da028d2a52c6"/>
+								<reportElement x="0" y="0" width="70" height="30" uuid="50401615-6285-4739-9d9b-da028d2a52c6"/>
 								<textElement textAlignment="Center"/>
 								<text><![CDATA[Fecha de cobro]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="table 9_TD" height="20" rowSpan="1">
-							<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="90" height="20" uuid="6165cb42-ac35-4ab3-bc74-83b9778909e5"/>
+							<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="70" height="20" uuid="6165cb42-ac35-4ab3-bc74-83b9778909e5"/>
 								<textElement>
 									<paragraph leftIndent="1"/>
 								</textElement>
@@ -368,17 +368,17 @@ from movement m where m.id = $P{movement_id}]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="74" uuid="97de271c-bf2c-4fa2-9fc2-478ba99e3cff">
+					<jr:column width="80" uuid="97de271c-bf2c-4fa2-9fc2-478ba99e3cff">
 						<jr:columnHeader style="table 9_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="74" height="30" uuid="9f311bc9-43fb-4fba-bf4c-500e5ac87017"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="9f311bc9-43fb-4fba-bf4c-500e5ac87017"/>
 								<textElement textAlignment="Center"/>
 								<text><![CDATA[Monto]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="table 9_TD" height="20" rowSpan="1">
 							<textField pattern="$ #,##0.00" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="74" height="20" uuid="55c72a24-bcaa-420d-a7ba-24345e70f618"/>
+								<reportElement x="0" y="0" width="80" height="20" uuid="55c72a24-bcaa-420d-a7ba-24345e70f618"/>
 								<textElement textAlignment="Right"/>
 								<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
 							</textField>
@@ -421,7 +421,7 @@ from movement m where m.id = $P{movement_id}]]>
 				<reportElement x="232" y="15" width="100" height="20" uuid="351fca3e-8156-40ee-a53d-ebb0e842523b"/>
 				<text><![CDATA[Firma autorizante]]></text>
 			</staticText>
-			<textField pattern="dd-MM-yyyy">
+			<textField pattern="dd/MM/yyyy">
 				<reportElement x="434" y="44" width="55" height="10" uuid="c0d9fc3b-a07c-4deb-af56-c2ac962e5ba1"/>
 				<textElement>
 					<font size="8" isBold="false"/>

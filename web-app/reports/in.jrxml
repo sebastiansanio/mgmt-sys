@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="op" language="groovy" pageWidth="595" pageHeight="842" columnWidth="589" leftMargin="3" rightMargin="3" topMargin="20" bottomMargin="20" uuid="8a7719ce-943e-4e58-bcc4-17a1c4039d85">
 	<property name="ireport.zoom" value="1.652892561983471"/>
-	<property name="ireport.x" value="414"/>
-	<property name="ireport.y" value="1016"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="122"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -221,15 +221,15 @@ where movement_id = $P{movement_id_m}]]>
 		<field name="total" class="java.math.BigDecimal">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
-		<variable name="amount_tot" class="java.lang.Long" resetType="Group" resetGroup="movement_id" incrementType="Group" incrementGroup="movement_id" calculation="Sum">
+		<variable name="amount_tot" class="java.math.BigDecimal" resetType="Group" resetGroup="movement_id" incrementType="Group" incrementGroup="movement_id" calculation="Sum">
 			<variableExpression><![CDATA[$V{amount_tot} + $F{amount}]]></variableExpression>
 			<initialValueExpression><![CDATA[0]]></initialValueExpression>
 		</variable>
-		<variable name="iva_tot" class="java.lang.Long" resetType="Group" resetGroup="movement_id" incrementType="Group" incrementGroup="movement_id" calculation="Sum">
+		<variable name="iva_tot" class="java.math.BigDecimal" resetType="Group" resetGroup="movement_id" incrementType="Group" incrementGroup="movement_id" calculation="Sum">
 			<variableExpression><![CDATA[$V{iva_tot} + $F{iva}]]></variableExpression>
 			<initialValueExpression><![CDATA[0]]></initialValueExpression>
 		</variable>
-		<variable name="total_tot" class="java.lang.Long" resetType="Group" resetGroup="movement_id" incrementType="Group" incrementGroup="movement_id" calculation="Sum">
+		<variable name="total_tot" class="java.math.BigDecimal" resetType="Group" resetGroup="movement_id" incrementType="Group" incrementGroup="movement_id" calculation="Sum">
 			<variableExpression><![CDATA[$V{total_tot} + $F{total}]]></variableExpression>
 			<initialValueExpression><![CDATA[0]]></initialValueExpression>
 		</variable>
@@ -263,7 +263,7 @@ from movement m where m.id = $P{movement_id}]]>
 		<band height="79" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="163" height="41" uuid="87be08e7-7872-431f-8171-bb83efafc0de"/>
-				<imageExpression><![CDATA["http://localhost:8080/mgmt/images/Logo%20Urbatec.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["http://localhost:8080/urbatec/images/Logo%20Urbatec.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="206" y="41" width="142" height="20" uuid="21804eb7-8644-45d3-97fa-3e3e04dea779"/>
@@ -293,7 +293,7 @@ from movement m where m.id = $P{movement_id}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{number}+" / "+$F{year}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd-MM-yyyy">
+			<textField pattern="dd/MM/yyyy">
 				<reportElement x="489" y="30" width="93" height="20" uuid="8de7cf2e-ef5f-4d2c-a83a-0e7941ce7231"/>
 				<textElement>
 					<font isBold="true"/>
@@ -454,11 +454,11 @@ from movement m where m.id = $P{movement_id}]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="61" uuid="048775e5-71b0-41b5-84d0-35a14b6ad0a9">
+					<jr:column width="80" uuid="048775e5-71b0-41b5-84d0-35a14b6ad0a9">
 						<jr:groupFooter groupName="movement_id">
 							<jr:cell style="table 5_TH" height="20" rowSpan="1">
 								<textField pattern="$ #,##0.00">
-									<reportElement x="0" y="0" width="61" height="20" uuid="f091c4f8-f8eb-4db6-b1df-f91a398497d6"/>
+									<reportElement x="0" y="0" width="80" height="20" uuid="f091c4f8-f8eb-4db6-b1df-f91a398497d6"/>
 									<textElement textAlignment="Right"/>
 									<textFieldExpression><![CDATA[$V{amount_tot}]]></textFieldExpression>
 								</textField>
@@ -466,24 +466,24 @@ from movement m where m.id = $P{movement_id}]]>
 						</jr:groupFooter>
 						<jr:columnHeader style="table 5_CH" height="20" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="61" height="20" uuid="e824c27d-a71b-452a-911a-dcf0b1156cf7"/>
+								<reportElement x="0" y="0" width="80" height="20" uuid="e824c27d-a71b-452a-911a-dcf0b1156cf7"/>
 								<textElement textAlignment="Center"/>
 								<text><![CDATA[Monto]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
 							<textField pattern="$ #,##0.00" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="61" height="20" uuid="669ebf30-ff62-4f0c-824e-d2e9a7424f2f"/>
+								<reportElement x="0" y="0" width="80" height="20" uuid="669ebf30-ff62-4f0c-824e-d2e9a7424f2f"/>
 								<textElement textAlignment="Right"/>
 								<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="62" uuid="30ca54a4-e269-4946-a2b6-5f5edabb38af">
+					<jr:column width="75" uuid="30ca54a4-e269-4946-a2b6-5f5edabb38af">
 						<jr:groupFooter groupName="movement_id">
 							<jr:cell style="table 5_TH" height="20" rowSpan="1">
 								<textField pattern="$ #,##0.00">
-									<reportElement x="0" y="0" width="62" height="20" uuid="82f1c9c6-595c-4f43-be0c-a30bd2f4b8d9"/>
+									<reportElement x="0" y="0" width="75" height="20" uuid="82f1c9c6-595c-4f43-be0c-a30bd2f4b8d9"/>
 									<textElement textAlignment="Right"/>
 									<textFieldExpression><![CDATA[$V{iva_tot}]]></textFieldExpression>
 								</textField>
@@ -491,24 +491,24 @@ from movement m where m.id = $P{movement_id}]]>
 						</jr:groupFooter>
 						<jr:columnHeader style="table 5_CH" height="20" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="61" height="20" uuid="c2c5cd2b-b897-4991-a94b-5a0124cf6dbf"/>
+								<reportElement x="0" y="0" width="75" height="20" uuid="c2c5cd2b-b897-4991-a94b-5a0124cf6dbf"/>
 								<textElement textAlignment="Center"/>
 								<text><![CDATA[IVA]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
 							<textField pattern="$ #,##0.00" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="61" height="20" uuid="fefd92cc-dbd2-4047-a4f3-df806d2d81c9"/>
+								<reportElement x="0" y="0" width="75" height="20" uuid="fefd92cc-dbd2-4047-a4f3-df806d2d81c9"/>
 								<textElement textAlignment="Right"/>
 								<textFieldExpression><![CDATA[$F{iva}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="63" uuid="2ca38e14-2e9f-49f2-b3d2-1dba5de198e4">
+					<jr:column width="85" uuid="2ca38e14-2e9f-49f2-b3d2-1dba5de198e4">
 						<jr:groupFooter groupName="movement_id">
 							<jr:cell style="table 5_TH" height="20" rowSpan="1">
 								<textField pattern="$ #,##0.00">
-									<reportElement x="0" y="0" width="63" height="20" uuid="556863a0-08b0-412d-ab2b-5b6fd06c7d81"/>
+									<reportElement x="0" y="0" width="85" height="20" uuid="556863a0-08b0-412d-ab2b-5b6fd06c7d81"/>
 									<textElement textAlignment="Right">
 										<font isBold="true"/>
 									</textElement>
@@ -518,14 +518,14 @@ from movement m where m.id = $P{movement_id}]]>
 						</jr:groupFooter>
 						<jr:columnHeader style="table 5_CH" height="20" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="61" height="20" uuid="460ab3a7-f02a-4c55-96ef-3809c258b1e7"/>
+								<reportElement x="0" y="0" width="85" height="20" uuid="460ab3a7-f02a-4c55-96ef-3809c258b1e7"/>
 								<textElement textAlignment="Center"/>
 								<text><![CDATA[Total]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
 							<textField pattern="$ #,##0.00" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="61" height="20" uuid="88d36613-cd2c-416a-bd29-fcdaadc02fef"/>
+								<reportElement x="0" y="0" width="85" height="20" uuid="88d36613-cd2c-416a-bd29-fcdaadc02fef"/>
 								<textElement textAlignment="Right"/>
 								<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
 							</textField>
@@ -625,7 +625,7 @@ from movement m where m.id = $P{movement_id}]]>
 				<reportElement x="232" y="15" width="100" height="20" uuid="351fca3e-8156-40ee-a53d-ebb0e842523b"/>
 				<text><![CDATA[Firma autorizante]]></text>
 			</staticText>
-			<textField pattern="dd-MM-yyyy">
+			<textField pattern="dd/MM/yyyy">
 				<reportElement x="434" y="44" width="55" height="10" uuid="c0d9fc3b-a07c-4deb-af56-c2ac962e5ba1"/>
 				<textElement>
 					<font size="8" isBold="false"/>
