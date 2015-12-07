@@ -55,7 +55,7 @@
 			
 				<td><g:formatDate date="${movementInstance.dateCreated}"/></td>
 				
-				<td>${fieldValue(bean: movementInstance, field: "number")}</td>
+				<td>${movementInstance.number}</td>
 			
 				<td>${movementInstance.year}</td>
 			

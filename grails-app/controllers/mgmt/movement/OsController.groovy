@@ -13,7 +13,7 @@ class OsController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 100, 1000)
-		params.sort = params.sort ?: 'id'
+		params.sort = params.sort ?: 'dateCreated'
 		params.order = params.order ?: 'desc'
         respond Movement.findAllByType('os',params), model:[movementInstanceCount: Movement.countByType('os')]
     }
