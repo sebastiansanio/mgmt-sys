@@ -19,6 +19,10 @@
 			<td><label for="Work_id"><g:message code="work.label"/> </label></td>
 			<td><g:select class="select-chosen" noSelection="${['-1':'Todas las obras']}" name="Work_id" from="${mgmt.work.Work.list([sort:'code'])}" optionKey="id" value="" />
 		</tr>
+				<tr>
+			<td><label for="Supplier_id"><g:message code="supplier.label"/> </label></td>
+			<td><g:select class="select-chosen" noSelection="${['-1':'Todos los proveedores']}" name="Supplier_id" from="${mgmt.persons.Supplier.list([sort:'name'])}" optionKey="id" value="" />
+		</tr>
 		<tr>
 			<td><label for="account_id"><g:message code="default.dateFrom.label"/> </label></td>
 			<td><bs:datePicker name="Date_from" precision="day" value="${new Date()}" /> <g:checkBox onchange="dateFromCheckboxChanged();" name="dateFromEnabled" value="true" /></td>
