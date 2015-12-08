@@ -11,7 +11,7 @@
 <%@ page import="mgmt.work.Budget" %>
 
 <div class="col-md-4 ${hasErrors(bean: budgetInstance, field: 'name', 'has-error')} ">
-	<label for="name" class="control-label"><g:message code="budget.name.label" default="Name" /> <span class="required-indicator">*</span> </label>
+	<label for="name" class="control-label"><g:message code="budget.name.label" default="Name" /> </label>
 	<div>
 		<g:textField required="" class="form-control" name="name" value="${budgetInstance?.name}"/>
 	</div>
@@ -62,7 +62,7 @@
 				<td class="td-intableform"><g:field onchange="calculateBudget();" type="text" class="input-intableform form-control right-aligned field-item-amount" name="items[${i}].amount" id="amount-${i}" value="${budgetItemInstance.amount}" required=""/></td>
 				<td class="td-intableform"><g:field readonly="true" tabindex="-1" type="text" class="input-intableform form-control right-aligned readonly" name="items[${i}].percentageOfDirectCosts" id="percentageOfDirectCosts-${i}" value=""/></td>
 				<td class="td-intableform"><g:field readonly="true" tabindex="-1" type="text" class="input-intableform form-control right-aligned readonly" name="items[${i}].percentageOfSellPrice" id="percentageOfSellPrice-${i}" value=""/></td>
-				<td colspan="2" class="td-intableform center-aligned"><button type="button" onclick="$('#items-${i}').remove();refreshTotals();"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
+				<td colspan="2" class="td-intableform center-aligned"></td>
 			</tr>
 		</g:each>
 	</tbody>
@@ -160,14 +160,16 @@
 	</tr>
 </table>
 
-<g:if test="${!budgetInstance.hasWork}">
-	<g:form action="generateWork" id="${budgetInstance.id}">
-		<g:submitButton onclick="confirmGenerateWork(event);" class="btn btn-primary" name="generateWork" value="${message(code:'work.generateWork.message')}" />
-	</g:form>
-</g:if>
 
 </div>
 
+<g:if test="${!budgetInstance.hasWork}">
+	<sec:access url="/budget/generateWork">
+		<g:form action="generateWork" id="${budgetInstance.id}">
+			<g:submitButton onclick="confirmGenerateWork(event);" class="btn btn-primary" name="generateWork" value="${message(code:'work.generateWork.message')}" />
+		</g:form>
+	</sec:access>
+</g:if>
 
 <script>
 

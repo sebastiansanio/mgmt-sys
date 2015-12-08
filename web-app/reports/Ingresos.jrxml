@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Informe de Saldos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27b43501-3750-42ac-ad7d-c7726c3ab552">
 	<property name="ireport.zoom" value="1.6105100000000017"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="110"/>
 	<parameter name="Date_from" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -94,7 +94,7 @@ FROM
      INNER JOIN `concept` concept ON movement_item.`concept_id` = concept.`id`
      left JOIN `supplier` supplier ON movement_item.`supplier_id` = supplier.`id`
 where (movement.date_created >=  $P{Date_from} or $P{Date_from} is null ) and (movement.date_created < $P{Date_to} or $P{Date_to} is null) and (work.id = $P{Work_id} or $P{Work_id} = -1)
-and (concept.code between $P{Concept_code_from} and $P{Concept_code_to} or $P{Concept_code_from} = '' or $P{Concept_code_from} is null) and movement_item.multiplier = -1
+and (concept.code between $P{Concept_code_from} and $P{Concept_code_to} or $P{Concept_code_from} = '' or $P{Concept_code_from} is null) and movement_item.multiplier = 1
 
 ORDER BY
      work.id ASC, concept.id asc, movement.date_created desc]]>
@@ -311,7 +311,7 @@ ORDER BY
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Egresos]]></text>
+				<text><![CDATA[Ingresos]]></text>
 			</staticText>
 			<image>
 				<reportElement x="0" y="0" width="167" height="46" uuid="a6a15b92-1a90-4477-84e1-e7763758a80f"/>
@@ -340,13 +340,6 @@ ORDER BY
 				<text><![CDATA[Operación]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="192" y="4" width="80" height="20" uuid="a6e76761-f4f8-4521-b767-15ec4f347ae3"/>
-				<textElement textAlignment="Center" verticalAlignment="Top">
-					<font size="9" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Proveedor]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="88" y="4" width="46" height="20" uuid="f65c45cf-7d90-4b07-a9f1-2f0b69416acf"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="9" isBold="true"/>
@@ -354,7 +347,7 @@ ORDER BY
 				<text><![CDATA[Cuenta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="272" y="4" width="74" height="20" uuid="ac227f42-924e-4b57-8ace-c82fd138d2bc"/>
+				<reportElement x="191" y="4" width="155" height="20" uuid="ac227f42-924e-4b57-8ace-c82fd138d2bc"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -445,18 +438,11 @@ ORDER BY
 				<textFieldExpression><![CDATA[$F{movement_item_amount}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
-				<reportElement x="272" y="1" width="74" height="20" uuid="6aecc4d7-f8f8-4213-a6c1-06175f2f29f2"/>
+				<reportElement x="192" y="1" width="154" height="20" uuid="6aecc4d7-f8f8-4213-a6c1-06175f2f29f2"/>
 				<textElement verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{movement_item_description}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="192" y="0" width="80" height="20" uuid="682c06fa-4063-493a-b952-6bf5467fbfcb"/>
-				<textElement verticalAlignment="Top">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{supplier_name}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
