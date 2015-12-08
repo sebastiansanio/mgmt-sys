@@ -73,9 +73,11 @@ class ReportController {
 				if(variable.type == "date"){
 					variablesValues[variable.jasperVariable] = DATE_FORMAT.parse(params[variable.jasperVariable])
 				}
+				if(variable.type == "string"){
+					variablesValues[variable.jasperVariable] = params[variable.jasperVariable]
+				}
 			}
 		}
-		
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, variablesValues, dataSource.connection)
 		byte[] pdf = JasperExportManager.exportReportToPdf(jasperPrint)
 		response.setContentType("application/pdf");

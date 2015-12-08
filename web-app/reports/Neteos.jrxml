@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Informe de Saldos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27b43501-3750-42ac-ad7d-c7726c3ab552">
+	<property name="ireport.zoom" value="1.610510000000002"/>
+	<property name="ireport.x" value="210"/>
+	<property name="ireport.y" value="251"/>
+	<queryString>
+		<![CDATA[SELECT
+
+     movement_item.`id` AS movement_item_id,
+     movement_item.`version` AS movement_item_version,
+     movement_item.`amount` AS movement_item_amount,
+     movement_item.`concept_id` AS movement_item_concept_id,
+     movement_item.`date` AS movement_item_date,
+     movement_item.`date_created` AS movement_item_date_created,
+     movement_item.`description` AS movement_item_description,
+     movement_item.`iibb` AS movement_item_iibb,
+     movement_item.`invoice_number` AS movement_item_invoice_number,
+     movement_item.`invoice_type_id` AS movement_item_invoice_type_id,
+     movement_item.`iva` AS movement_item_iva,
+     movement_item.`last_updated` AS movement_item_last_updated,
+     movement_item.`movement_id` AS movement_item_movement_id,
+     movement_item.`other_perceptions` AS movement_item_other_perceptions,
+     movement_item.`supplier_id` AS movement_item_supplier_id,
+     movement_item.`total` AS movement_item_total,
+     movement_item.`work_id` AS movement_item_work_id,
+     movement_item.`items_idx` AS movement_item_items_idx,
+     movement_item.`multiplier` AS movement_item_multiplier,
+     movement_item.`quantity` AS movement_item_quantity,
+     movement_item.`unit_id` AS movement_item_unit_id,
+     movement_item.`unit_price` AS movement_item_unit_price,
+     concept.`id` AS concept_id,
+     concept.`version` AS concept_version,
+     concept.`code` AS concept_code,
+     concept.`concept_account_id` AS concept_concept_account_id,
+     concept.`concept_group_id` AS concept_concept_group_id,
+     concept.`date_created` AS concept_date_created,
+     concept.`description` AS concept_description,
+     concept.`last_updated` AS concept_last_updated,
+     concept.`valid_in_fi_work` AS concept_valid_in_fi_work,
+     concept.`valid_in_in_no_work` AS concept_valid_in_in_no_work,
+     concept.`valid_in_in_work` AS concept_valid_in_in_work,
+     concept.`valid_in_op_no_work` AS concept_valid_in_op_no_work,
+     concept.`valid_in_op_work` AS concept_valid_in_op_work,
+     concept.`valid_in_os_no_work` AS concept_valid_in_os_no_work,
+     concept.`valid_in_os_work` AS concept_valid_in_os_work,
+sum(if(concept.code="P800" or concept.code="P801" or concept.code="P802" or concept.code="P803"  or concept.code="P804"  or concept.code="P805" or concept.code="P806" or concept.code="P807"  or concept.code="P808" or concept.code="P809" or concept.code="P810",movement_item.amount,0)) AS Ingreso,
+
+sum(if(concept.code="M800" or concept.code="M801" or concept.code="M802" or concept.code="M803"  or concept.code="M804"  or concept.code="M805" or concept.code="M806" or concept.code="M807"  or concept.code="M808" or concept.code="M809" or concept.code="M810",movement_item.amount,0)) AS Pago,
+sum(if(concept.code="P800" or concept.code="P801" or concept.code="P802" or concept.code="P803"  or concept.code="P804"  or concept.code="P805" or concept.code="P806" or concept.code="P807"  or concept.code="P808" or concept.code="P809" or concept.code="P810",movement_item.iva,0)) AS IvaIngreso,
+
+sum(if(concept.code="M800" or concept.code="M801" or concept.code="M802" or concept.code="M803"  or concept.code="M804"  or concept.code="M805" or concept.code="M806" or concept.code="M807"  or concept.code="M808" or concept.code="M809" or concept.code="M810",movement_item.iva,0)) AS IvaPago
+
+FROM
+     `concept` concept inner JOIN `movement_item` movement_item ON concept.`id` = movement_item.`concept_id`]]>
+	</queryString>
+	<field name="movement_item_id" class="java.lang.Long"/>
+	<field name="movement_item_version" class="java.lang.Long"/>
+	<field name="movement_item_amount" class="java.math.BigDecimal"/>
+	<field name="movement_item_concept_id" class="java.lang.Long"/>
+	<field name="movement_item_date" class="java.sql.Timestamp"/>
+	<field name="movement_item_date_created" class="java.sql.Timestamp"/>
+	<field name="movement_item_description" class="java.lang.String"/>
+	<field name="movement_item_iibb" class="java.math.BigDecimal"/>
+	<field name="movement_item_invoice_number" class="java.lang.String"/>
+	<field name="movement_item_invoice_type_id" class="java.lang.Long"/>
+	<field name="movement_item_iva" class="java.math.BigDecimal"/>
+	<field name="movement_item_last_updated" class="java.sql.Timestamp"/>
+	<field name="movement_item_movement_id" class="java.lang.Long"/>
+	<field name="movement_item_other_perceptions" class="java.math.BigDecimal"/>
+	<field name="movement_item_supplier_id" class="java.lang.Long"/>
+	<field name="movement_item_total" class="java.math.BigDecimal"/>
+	<field name="movement_item_work_id" class="java.lang.Long"/>
+	<field name="movement_item_items_idx" class="java.lang.Integer"/>
+	<field name="movement_item_multiplier" class="java.lang.Integer"/>
+	<field name="movement_item_quantity" class="java.math.BigDecimal"/>
+	<field name="movement_item_unit_id" class="java.lang.Long"/>
+	<field name="movement_item_unit_price" class="java.math.BigDecimal"/>
+	<field name="concept_id" class="java.lang.Long"/>
+	<field name="concept_version" class="java.lang.Long"/>
+	<field name="concept_code" class="java.lang.String"/>
+	<field name="concept_concept_account_id" class="java.lang.Long"/>
+	<field name="concept_concept_group_id" class="java.lang.Long"/>
+	<field name="concept_date_created" class="java.sql.Timestamp"/>
+	<field name="concept_description" class="java.lang.String"/>
+	<field name="concept_last_updated" class="java.sql.Timestamp"/>
+	<field name="concept_valid_in_fi_work" class="java.lang.Boolean"/>
+	<field name="concept_valid_in_in_no_work" class="java.lang.Boolean"/>
+	<field name="concept_valid_in_in_work" class="java.lang.Boolean"/>
+	<field name="concept_valid_in_op_no_work" class="java.lang.Boolean"/>
+	<field name="concept_valid_in_op_work" class="java.lang.Boolean"/>
+	<field name="concept_valid_in_os_no_work" class="java.lang.Boolean"/>
+	<field name="concept_valid_in_os_work" class="java.lang.Boolean"/>
+	<field name="Ingreso" class="java.math.BigDecimal"/>
+	<field name="Pago" class="java.math.BigDecimal"/>
+	<field name="IvaIngreso" class="java.math.BigDecimal"/>
+	<field name="IvaPago" class="java.math.BigDecimal"/>
+	<variable name="Ingreso" class="java.lang.String"/>
+	<group name="OBRA"/>
+	<group name="Concepto"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="75" splitType="Stretch">
+			<staticText>
+				<reportElement x="212" y="46" width="109" height="20" uuid="99141cc7-0ef5-4ba4-8731-f92eae458552"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Neteo]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="167" height="46" uuid="a6a15b92-1a90-4477-84e1-e7763758a80f"/>
+				<imageExpression><![CDATA["http://localhost:8080/urbatec/images/Logo%20Urbatec.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="448" y="0" width="39" height="20" uuid="02482195-d74f-4b24-b0fd-021a5390ce41"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="487" y="0" width="59" height="20" uuid="3a30336f-6060-46d1-b242-5adbe161181b"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="151" y="5" width="100" height="20" uuid="a6e76761-f4f8-4521-b767-15ec4f347ae3"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[P 800 a 810]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="5" width="120" height="20" uuid="ac227f42-924e-4b57-8ace-c82fd138d2bc"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ordenes de Pago]]></text>
+			</staticText>
+			<line>
+				<reportElement x="5" y="3" width="538" height="1" forecolor="#666666" uuid="b5a6e0fa-acf3-4f6d-aaa9-60b25412c44e"/>
+			</line>
+			<staticText>
+				<reportElement x="19" y="5" width="120" height="19" uuid="c9382013-f8bb-49af-b9fd-e9f40fc51314"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ordenes de Ingreso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="5" width="100" height="20" uuid="57345698-3487-4440-b33c-5b604d4fda8f"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[M 800 a 810]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="5" splitType="Stretch">
+			<line>
+				<reportElement x="6" y="-2" width="538" height="1" forecolor="#666666" uuid="9e823950-0611-4ef0-a312-fa04be6c7aa6"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="80" splitType="Stretch">
+			<line>
+				<reportElement x="8" y="44" width="538" height="1" forecolor="#CCCCCC" uuid="36b24f24-f63d-480f-9b2d-9009b90bf244"/>
+			</line>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="19" y="21" width="120" height="20" uuid="b7faafa3-c721-4825-85f3-2fcd8a855ac5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{Ingreso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="291" y="21" width="120" height="20" uuid="d6527fd1-5df0-40c9-8f2f-a3e403be4d4b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{Pago}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="420" y="21" width="100" height="20" uuid="6a0b04da-c0a1-4cdb-97ea-a051d725bc84"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{IvaPago}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="152" y="21" width="100" height="20" uuid="adb7d2f7-8fe3-4154-9350-e5989517586d"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{IvaIngreso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="19" y="58" width="120" height="20" uuid="3b5efb4a-caa1-40b5-9654-308d5a121620"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Ingresado]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="152" y="58" width="100" height="20" uuid="58ef49f6-ba22-4f94-8989-ea0a02ce9e5e"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Ingreso}+$F{IvaIngreso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="420" y="58" width="100" height="20" uuid="23637b42-0f31-46dc-8e8f-27d522d44fb8"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Pago}+$F{IvaPago}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="291" y="58" width="120" height="20" uuid="69fbe70c-8f49-4c9f-ad4f-27a5351ccad8"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Pagado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="292" y="3" width="120" height="20" uuid="cd85c9d3-06be-4f27-b262-581bafefd578"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto Pagado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="152" y="3" width="100" height="20" uuid="9a749807-aa41-4b8a-9ec4-0646969457b2"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto IVA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="3" width="120" height="19" uuid="df9c95fe-6910-4100-9bfd-5d78fe3cc6fd"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto Ingresado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="3" width="100" height="20" uuid="133772e9-8643-423c-b07e-6eb27793de11"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto IVA]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="14" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="141" splitType="Stretch">
+			<staticText>
+				<reportElement x="19" y="34" width="132" height="59" uuid="d7549de2-afef-4ee6-b064-97f06d68f1bb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diferencia entre lo Pagado y lo Ingresado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="168" y="57" width="62" height="20" uuid="f5f3c11d-16cc-4a81-a0b3-3ed996b3dd34"/>
+				<textElement verticalAlignment="Top">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IVA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="168" y="90" width="62" height="20" uuid="cf66f360-0ac5-4c9f-80e2-455655de8ceb"/>
+				<textElement verticalAlignment="Top">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="168" y="26" width="62" height="20" uuid="ac086172-2cba-4cf0-bdd5-0a9ace97eea7"/>
+				<textElement verticalAlignment="Top">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Neto]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="232" y="26" width="138" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="a778ff90-431d-4304-bd46-6d8c366a3518"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Pago}-$F{Ingreso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="232" y="57" width="138" height="20" uuid="58f37d4a-8a7f-499d-a0ff-fff1e5a6aad6"/>
+				<textElement textAlignment="Right">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IvaPago}-$F{IvaIngreso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="232" y="90" width="138" height="20" uuid="57413494-e78c-4cc2-a6a6-91033f0a25a8"/>
+				<textElement textAlignment="Right">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IvaPago}-$F{IvaIngreso}+$F{Pago}-$F{Ingreso}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -47,11 +47,9 @@
 			</td>
 		</tr>
 		<tr>
-			<td><label for="account_id"><g:message code="payment.paymentDate.label"/> </label></td>
+			<td><label for="Payment_date"><g:message code="payment.paymentDate.label"/> </label></td>
 			<td><bs:datePicker name="Payment_date" precision="day" value="${new Date()}" /></td>
 		</tr>	
-		
-		
 		<tr>
 			<td colspan="2"><g:submitButton class="btn btn-default" name="download" value="${message(code:'default.download.label')}" /></td>
 		</tr>
