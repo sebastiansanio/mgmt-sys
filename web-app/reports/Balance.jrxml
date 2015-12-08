@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Informe de Saldos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27b43501-3750-42ac-ad7d-c7726c3ab552">
 	<property name="ireport.zoom" value="1.6105100000000017"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="48"/>
+	<property name="ireport.y" value="219"/>
 	<parameter name="Date_from" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -22,20 +22,20 @@
 		<![CDATA[SELECT
      movement_item.`id` AS movement_item_id,
      movement_item.`version` AS movement_item_version,
-     movement_item.`amount` AS movement_item_amount,
+     movement_item.`amount` * movement_item.multiplier AS movement_item_amount,
      movement_item.`concept_id` AS movement_item_concept_id,
      movement_item.`date` AS movement_item_date,
      movement_item.`date_created` AS movement_item_date_created,
      movement_item.`description` AS movement_item_description,
-     movement_item.`iibb` AS movement_item_iibb,
+     movement_item.`iibb` * movement_item.multiplier AS movement_item_iibb,
      movement_item.`invoice_number` AS movement_item_invoice_number,
      movement_item.`invoice_type_id` AS movement_item_invoice_type_id,
-     movement_item.`iva` AS movement_item_iva,
+     movement_item.`iva` * movement_item.multiplier AS movement_item_iva,
      movement_item.`last_updated` AS movement_item_last_updated,
      movement_item.`movement_id` AS movement_item_movement_id,
-     movement_item.`other_perceptions` AS movement_item_other_perceptions,
+     movement_item.`other_perceptions` * movement_item.multiplier AS movement_item_other_perceptions,
      movement_item.`supplier_id` AS movement_item_supplier_id,
-     movement_item.`total` AS movement_item_total,
+     movement_item.`total` * movement_item.multiplier AS movement_item_total,
      movement_item.`work_id` AS movement_item_work_id,
      movement_item.`items_idx` AS movement_item_items_idx,
      movement_item.`multiplier` AS movement_item_multiplier,
@@ -94,7 +94,7 @@ FROM
      INNER JOIN `concept` concept ON movement_item.`concept_id` = concept.`id`
      left JOIN `supplier` supplier ON movement_item.`supplier_id` = supplier.`id`
 where (movement.date_created >=  $P{Date_from} or $P{Date_from} is null ) and (movement.date_created < $P{Date_to} or $P{Date_to} is null) and (work.id = $P{Work_id} or $P{Work_id} = -1)
-and (concept.code between $P{Concept_code_from} and $P{Concept_code_to} or $P{Concept_code_from} = '' or $P{Concept_code_from} is null) and movement_item.multiplier = -1
+and (concept.code between $P{Concept_code_from} and $P{Concept_code_to} or $P{Concept_code_from} = '' or $P{Concept_code_from} is null)
 
 ORDER BY
      work.id ASC, concept.id asc, movement.date_created desc]]>
@@ -259,8 +259,8 @@ ORDER BY
 					</textElement>
 					<textFieldExpression><![CDATA[$F{concept_code}]]></textFieldExpression>
 				</textField>
-				<textField>
-					<reportElement x="71" y="0" width="207" height="20" uuid="66754be0-19d6-4a86-9eb7-11b6d83248eb"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="71" y="0" width="289" height="20" uuid="66754be0-19d6-4a86-9eb7-11b6d83248eb"/>
 					<textElement verticalAlignment="Top">
 						<font size="11" isBold="true"/>
 					</textElement>
@@ -278,21 +278,21 @@ ORDER BY
 					<textFieldExpression><![CDATA[$V{variable1_1_2}]]></textFieldExpression>
 				</textField>
 				<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
-					<reportElement x="420" y="0" width="74" height="20" uuid="f485b902-8d4b-4672-a570-aaf4bfafc762"/>
+					<reportElement x="412" y="0" width="82" height="20" uuid="f485b902-8d4b-4672-a570-aaf4bfafc762"/>
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="10" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{variable1_1}]]></textFieldExpression>
 				</textField>
 				<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
-					<reportElement x="335" y="0" width="85" height="20" uuid="a20fc5fd-63b0-444c-a414-b41f12e673be"/>
+					<reportElement x="321" y="0" width="91" height="20" uuid="a20fc5fd-63b0-444c-a414-b41f12e673be"/>
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="10" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{variable1}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="272" y="0" width="74" height="20" uuid="236689f5-32cb-4dd3-b1cc-6b6ca26a4f62"/>
+					<reportElement x="272" y="0" width="49" height="20" uuid="236689f5-32cb-4dd3-b1cc-6b6ca26a4f62"/>
 					<textElement>
 						<font isBold="true"/>
 					</textElement>
@@ -333,42 +333,42 @@ ORDER BY
 	<pageHeader>
 		<band height="27" splitType="Stretch">
 			<staticText>
-				<reportElement x="1" y="4" width="87" height="20" uuid="86c31710-27eb-40e4-8788-fda6bce47470"/>
+				<reportElement x="1" y="4" width="70" height="20" uuid="86c31710-27eb-40e4-8788-fda6bce47470"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Operación]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="192" y="4" width="80" height="20" uuid="a6e76761-f4f8-4521-b767-15ec4f347ae3"/>
+				<reportElement x="170" y="4" width="76" height="20" uuid="a6e76761-f4f8-4521-b767-15ec4f347ae3"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Proveedor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="88" y="4" width="46" height="20" uuid="f65c45cf-7d90-4b07-a9f1-2f0b69416acf"/>
+				<reportElement x="71" y="4" width="42" height="20" uuid="f65c45cf-7d90-4b07-a9f1-2f0b69416acf"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cuenta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="272" y="4" width="74" height="20" uuid="ac227f42-924e-4b57-8ace-c82fd138d2bc"/>
+				<reportElement x="246" y="4" width="89" height="20" uuid="ac227f42-924e-4b57-8ace-c82fd138d2bc"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Descripción]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="346" y="4" width="74" height="20" uuid="a87433e9-497d-4dcb-b4e6-56ddd42d7187"/>
+				<reportElement x="335" y="4" width="77" height="20" uuid="a87433e9-497d-4dcb-b4e6-56ddd42d7187"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Monto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="420" y="5" width="75" height="20" uuid="6ef21abf-1ace-40f0-8ab3-cf9ec3f1afbf"/>
+				<reportElement x="412" y="5" width="83" height="20" uuid="6ef21abf-1ace-40f0-8ab3-cf9ec3f1afbf"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -378,7 +378,7 @@ ORDER BY
 				<reportElement x="5" y="3" width="538" height="1" forecolor="#666666" uuid="b5a6e0fa-acf3-4f6d-aaa9-60b25412c44e"/>
 			</line>
 			<staticText>
-				<reportElement x="134" y="4" width="57" height="19" uuid="c9382013-f8bb-49af-b9fd-e9f40fc51314"/>
+				<reportElement x="113" y="4" width="57" height="19" uuid="c9382013-f8bb-49af-b9fd-e9f40fc51314"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -403,7 +403,7 @@ ORDER BY
 	<detail>
 		<band height="24" splitType="Stretch">
 			<textField pattern="">
-				<reportElement x="2" y="0" width="86" height="20" uuid="e6b35ad5-55e8-4fc4-8053-ed0ac3daa999"/>
+				<reportElement x="2" y="0" width="69" height="20" uuid="e6b35ad5-55e8-4fc4-8053-ed0ac3daa999"/>
 				<textElement verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
@@ -417,42 +417,42 @@ ORDER BY
 				<textFieldExpression><![CDATA[$F{movement_item_iibb}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
-				<reportElement x="420" y="2" width="75" height="20" uuid="fe77675a-c49e-49c5-974d-dfdf465e614f"/>
+				<reportElement x="412" y="2" width="83" height="20" uuid="fe77675a-c49e-49c5-974d-dfdf465e614f"/>
 				<textElement textAlignment="Right" verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{movement_item_iva}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="135" y="0" width="57" height="20" uuid="3f907abf-a20f-47f1-940d-b75b796c847c"/>
+				<reportElement x="113" y="0" width="57" height="20" uuid="3f907abf-a20f-47f1-940d-b75b796c847c"/>
 				<textElement verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{movement_date_created}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="88" y="0" width="47" height="20" uuid="baade5aa-035a-4782-be51-f15610d859d4"/>
+				<reportElement x="71" y="0" width="42" height="20" uuid="baade5aa-035a-4782-be51-f15610d859d4"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{concept_code}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
-				<reportElement x="346" y="1" width="74" height="20" uuid="2fd6ee93-b7ce-47c6-a5c2-a24c5a4e25aa"/>
+				<reportElement x="335" y="1" width="77" height="20" uuid="2fd6ee93-b7ce-47c6-a5c2-a24c5a4e25aa"/>
 				<textElement textAlignment="Right" verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{movement_item_amount}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
-				<reportElement x="272" y="1" width="74" height="20" uuid="6aecc4d7-f8f8-4213-a6c1-06175f2f29f2"/>
+				<reportElement x="246" y="1" width="89" height="20" uuid="6aecc4d7-f8f8-4213-a6c1-06175f2f29f2"/>
 				<textElement verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{movement_item_description}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="192" y="0" width="80" height="20" uuid="682c06fa-4063-493a-b952-6bf5467fbfcb"/>
+				<reportElement x="170" y="0" width="76" height="20" uuid="682c06fa-4063-493a-b952-6bf5467fbfcb"/>
 				<textElement verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
