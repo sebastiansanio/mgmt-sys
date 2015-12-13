@@ -2,5 +2,11 @@ package mgmt.balance
 
 class BalanceController {
 
-    def index() { }
+    def index() { 
+		
+	}
+	
+	def show(){
+		
+	}
 }

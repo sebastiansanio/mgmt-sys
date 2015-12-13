@@ -22,6 +22,18 @@ class ConceptController {
         respond Concept.list(params), model:[conceptInstanceCount: Concept.count()]
     }
 	
+	def search(Integer max) {
+		params.max = Math.min(max ?: 100, 1000)
+		String descriptionAdjusted = "%"+params.description+"%"
+		String codeAdjusted = "%"+params.code+"%"
+		def results = Concept.createCriteria().list () {
+			like("description", descriptionAdjusted)
+			like("code", codeAdjusted)
+			order("code", "asc")
+		}
+		respond results, model:[conceptInstanceCount: results.size() ],  view:'index'
+	}
+	
 	def download(){
 		response.setContentType("application/ms-excel");
 		response.setHeader("Content-Disposition", "attachment; filename='${message(code:'concepts.label')}.xlsx'");

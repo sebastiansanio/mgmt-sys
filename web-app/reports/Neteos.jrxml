@@ -43,9 +43,9 @@
      concept.`valid_in_op_work` AS concept_valid_in_op_work,
      concept.`valid_in_os_no_work` AS concept_valid_in_os_no_work,
      concept.`valid_in_os_work` AS concept_valid_in_os_work,
-sum(if(concept.code="P800" or concept.code="P801" or concept.code="P802" or concept.code="P803"  or concept.code="P804"  or concept.code="P805" or concept.code="P806" or concept.code="P807"  or concept.code="P808" or concept.code="P809" or concept.code="P810",movement_item.amount,0)) AS Ingreso,
+sum(if(concept.code="P800" or concept.code="P801" or concept.code="P802" or concept.code="P803"  or concept.code="P804"  or concept.code="P805" or concept.code="P806" or concept.code="P807"  or concept.code="P808" or concept.code="P809" or concept.code="P810",movement_item.amount+movement_item.iibb,0)) AS Ingreso,
 
-sum(if(concept.code="M800" or concept.code="M801" or concept.code="M802" or concept.code="M803"  or concept.code="M804"  or concept.code="M805" or concept.code="M806" or concept.code="M807"  or concept.code="M808" or concept.code="M809" or concept.code="M810",movement_item.amount,0)) AS Pago,
+sum(if(concept.code="M800" or concept.code="M801" or concept.code="M802" or concept.code="M803"  or concept.code="M804"  or concept.code="M805" or concept.code="M806" or concept.code="M807"  or concept.code="M808" or concept.code="M809" or concept.code="M810",movement_item.amount+movement_item.iibb,0)) AS Pago,
 sum(if(concept.code="P800" or concept.code="P801" or concept.code="P802" or concept.code="P803"  or concept.code="P804"  or concept.code="P805" or concept.code="P806" or concept.code="P807"  or concept.code="P808" or concept.code="P809" or concept.code="P810",movement_item.iva,0)) AS IvaIngreso,
 
 sum(if(concept.code="M800" or concept.code="M801" or concept.code="M802" or concept.code="M803"  or concept.code="M804"  or concept.code="M805" or concept.code="M806" or concept.code="M807"  or concept.code="M808" or concept.code="M809" or concept.code="M810",movement_item.iva,0)) AS IvaPago

@@ -29,6 +29,7 @@
 				<th>${message(code:'default.show.label')}</th>
 			
 				<g:sortableColumn property="name" title="${message(code: 'budget.name.label')}" />
+				<g:sortableColumn property="code" title="${message(code: 'budget.code.label')}" />
 				<th><g:message code="budget.client.label" default="Client" /></th>
 				<g:sortableColumn property="hasWork" title="${message(code: 'budget.hasWork.label')}" />
 				<g:sortableColumn property="directCosts" title="${message(code: 'budget.directCosts.label', default: 'Direct Costs')}" />
@@ -44,6 +45,7 @@
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 				<td><g:link action="show" id="${budgetInstance.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
 				<td>${fieldValue(bean: budgetInstance, field: "name")}</td>
+				<td>${fieldValue(bean: budgetInstance, field: "code")}</td>
 				<td>${fieldValue(bean: budgetInstance, field: "client")}</td>
 				<td><g:formatBoolean boolean="${budgetInstance.hasWork}" /></td>
 				<td class="right-aligned">${fieldValue(bean: budgetInstance, field: "directCosts")}</td>

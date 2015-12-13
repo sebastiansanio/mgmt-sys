@@ -17,12 +17,21 @@
 	</div>
 </div>
 
+<div class="col-md-4 ${hasErrors(bean: budgetInstance, field: 'code', 'has-error')} ">
+	<label for="code" class="control-label"><g:message code="budget.code.label" /> </label>
+	<div>
+		<g:field type="number" required="" class="form-control" name="code" value="${budgetInstance?.code}"/>
+	</div>
+</div>
+
 <div class="col-md-4 ${hasErrors(bean: budgetInstance, field: 'client', 'has-error')} ">
 	<label for="client" class="control-label"><g:message code="budget.client.label" default="Client" /></label>
 	<div>
 		<g:select class="form-control" id="client" name="client.id" from="${mgmt.persons.Client.list()}" optionKey="id" value="${budgetInstance?.client?.id}" noSelection="['null': '']"/>
 	</div>
 </div>
+
+
 
 <div class="col-md-12" >
 <hr/>

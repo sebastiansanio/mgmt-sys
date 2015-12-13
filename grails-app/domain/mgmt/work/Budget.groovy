@@ -52,13 +52,13 @@ class Budget {
 
 	
 	List items = new ArrayList()
-	Long oldCode
+	Long code
 	
 	static hasMany = [items: BudgetItem]
 
     static constraints = {
 		client nullable: true
-		oldCode nullable: true
+		code nullable: false, unique: true
     }
 	
 	String toString(){

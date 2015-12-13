@@ -3,14 +3,21 @@
 <div class="col-md-4 ${hasErrors(bean: budgetInstance, field: 'name', 'has-error')} ">
 	<label for="name" class="control-label"><g:message code="budget.name.label" default="Name" /> <span class="required-indicator">*</span> </label>
 	<div>
-		<g:textField required="" class="form-control" name="name" value="${budgetInstance?.name}"/>
+		<g:textField required="" class="mayusc form-control" name="name" value="${budgetInstance?.name}"/>
+	</div>
+</div>
+
+<div class="col-md-4 ${hasErrors(bean: budgetInstance, field: 'code', 'has-error')} ">
+	<label for="code" class="control-label"><g:message code="budget.code.label" /> <span class="required-indicator">*</span>  </label>
+	<div>
+		<g:field type="number" required="" class="form-control" name="code" value="${budgetInstance?.code?:Budget.createCriteria().get{lt("code",5000L); projections {max("code")}}+1 }"/>
 	</div>
 </div>
 
 <div class="col-md-4 ${hasErrors(bean: budgetInstance, field: 'client', 'has-error')} ">
 	<label for="client" class="control-label"><g:message code="budget.client.label" default="Client" /></label>
 	<div>
-		<g:select class="form-control" id="client" name="client.id" from="${mgmt.persons.Client.list()}" optionKey="id" value="${budgetInstance?.client?.id}" noSelection="['null': ' ']"/>
+		<g:select class="form-control select-chosen" id="client" name="client.id" from="${mgmt.persons.Client.list([sort:'name',order:'asc'])}" optionKey="id" value="${budgetInstance?.client?.id}" noSelection="['null': ' ']"/>
 	</div>
 </div>
 
@@ -250,11 +257,15 @@ function calculateBudget(){
 
 $(function() {
 	calculateBudget();
+	$(".select-chosen").chosen({search_contains: true});
 });
 
 $( "form" ).submit(function( event ) {
 	$(".readonly").prop( "disabled", true );
 	$("#pvai").prop("disabled", false);
+	
 });
+
+
 
 </script>
