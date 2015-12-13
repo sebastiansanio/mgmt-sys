@@ -14,25 +14,43 @@
 
 <div class="col-md-6">
 
-	<table class="table table-bordered margin-top-medium">
-		<thead>
+<div class="row">
+<g:form action="search" method="get" >
+<div class="col-md-3">
+<label for="dateTo"><g:message code="default.date.label" /> </label>
+<bs:datePicker class="form-control" name="dateTo" value="${params.dateTo}" />
+<g:hiddenField name="id" value="${accountTypeInstance.id}" />
+</div>
+<div class="col-md-3">
+<g:actionSubmit class="btn btn-default" value="${message(code:'default.refresh.label')}" action="show" />
+</div>
+</g:form>
+</div>
+
+
+<table class="table table-bordered margin-top-medium">
+	<thead>
+		<tr>
+			<g:sortableColumn property="name" title="${message(code: 'account.name.label')}" />
+			<th><g:message code="account.currentBalance.label" /></th>
+			<th>Ver movimientos</th>
+			<th>Descargar movimientos</th>
+		</tr>
+	</thead>
+	<tbody>
+	<g:each in="${accountTypeInstance.accounts.sort{it.name}}" status="i" var="account">
+		<g:set var="currentBalance" value="${balances[account.id]}" />
+		<g:if test="${currentBalance}" >
 			<tr>
-				<g:sortableColumn property="name" title="${message(code: 'account.name.label')}" />
-				<th><g:message code="account.currentBalance.label" /></th>
+				<td>${fieldValue(bean: account, field: "name")}</td>
+				<td><g:formatNumber format="###,##0.##" number="${currentBalance}"/></td>
+				<td><g:link action="showPayments" id="${account.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
+				<td><g:link action="download" id="${account.id}"><span class="glyphicon glyphicon-download"></span></g:link></td>
 			</tr>
-		</thead>
-		<tbody>
-		<g:each in="${accountTypeInstance.accounts.sort{it.name}}" status="i" var="account">
-			<g:set var="currentBalance" value="${account.currentBalance}" />
-			<g:if test="${currentBalance}" >
-				<tr>
-					<td><g:link action="download" id="${account.id}">${fieldValue(bean: account, field: "name")}</g:link></td>
-					<td><g:formatNumber format="###,##0.##" number="${currentBalance}"/></td>
-				</tr>
-			</g:if>
-		</g:each>
-		</tbody>
-	</table>
+		</g:if>
+	</g:each>
+	</tbody>
+</table>
 </div>
 
 

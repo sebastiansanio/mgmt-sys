@@ -29,38 +29,24 @@
 		<thead>
 			<tr>
 				<th>${message(code:'default.show.label')}</th>
-			
 				<g:sortableColumn property="name" title="${message(code: 'supplier.name.label', default: 'Name')}" />
-			
 				<g:sortableColumn property="businessName" title="${message(code: 'supplier.businessName.label')}" />
-			
 				<g:sortableColumn property="cuit" title="${message(code: 'supplier.cuit.label', default: 'Cuit')}" />
-			
 				<g:sortableColumn property="address" title="${message(code: 'supplier.address.label', default: 'Address')}" />
-			
 				<g:sortableColumn property="location" title="${message(code: 'supplier.location.label', default: 'Location')}" />
-			
 				<g:sortableColumn property="province" title="${message(code: 'supplier.province.label', default: 'Province')}" />
-			
 			</tr>
 		</thead>
 		<tbody>
 		<g:each in="${supplierInstanceList}" status="i" var="supplierInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 				<td><g:link action="show" id="${supplierInstance.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
-			
 				<td>${fieldValue(bean: supplierInstance, field: "name")}</td>
-			
 				<td>${fieldValue(bean: supplierInstance, field: "businessName")}</td>
-			
 				<td>${fieldValue(bean: supplierInstance, field: "cuit")}</td>
-			
 				<td>${fieldValue(bean: supplierInstance, field: "address")}</td>
-			
 				<td>${fieldValue(bean: supplierInstance, field: "location")}</td>
-			
 				<td>${fieldValue(bean: supplierInstance, field: "province")}</td>
-			
 			</tr>
 		</g:each>
 		</tbody>

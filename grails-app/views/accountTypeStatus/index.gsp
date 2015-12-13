@@ -21,7 +21,7 @@
 		</thead>
 		<tbody>
 		<g:each in="${accountTypeInstanceList}" status="i" var="accountTypeInstance">
-			<g:set var="currentBalance" value="${accountTypeInstance.currentBalance}" />
+			<g:set var="currentBalance" value="${balances[accountTypeInstance.id]}" />
 			<g:if test="${currentBalance}" >
 				<tr>
 					<td><g:link action="show" id="${accountTypeInstance.id}">${fieldValue(bean: accountTypeInstance, field: "name")}</g:link></td>
