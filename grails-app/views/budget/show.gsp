@@ -156,21 +156,6 @@
 </table>
 </div>
 
-<div class="hide" >
-<table>
-	<tr class="form-inline" id="item-model">
-		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" id="concept-xyz" name="items[xyz].concept.id" from="${mgmt.concept.Concept.findAllByCodeLike('L%')}" optionKey="id" required="" value=""/></td>
-		<td class="td-intableform"><g:field onchange="calculateBudget();" disabled="disabled" type="text" class="input-intableform form-control right-aligned field-item-amount" name="items[xyz].amount" id="amount-xyz" value="" required=""/></td>
-		
-		<td class="td-intableform"><g:field readonly="true" tabindex="-1" type="text" class="input-intableform form-control right-aligned readonly" name="items[xyz].percentageOfDirectCosts" id="percentageOfDirectCosts-xyz" value=""/></td>
-		<td class="td-intableform"><g:field readonly="true" tabindex="-1" type="text" class="input-intableform form-control right-aligned readonly" name="items[xyz].percentageOfSellPrice" id="percentageOfSellPrice-xyz" value=""/></td>
-		
-		<td colspan="2" class="td-intableform center-aligned"><button type="button" class="deleteButton"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
-	</tr>
-</table>
-
-
-</div>
 
 <g:if test="${!budgetInstance.hasWork}">
 	<sec:access url="/budget/generateWork">
@@ -179,6 +164,7 @@
 		</g:form>
 	</sec:access>
 </g:if>
+
 
 <script>
 
@@ -271,6 +257,7 @@ $(function() {
 });
 
 </script>
+
 </body>
 
 </html>

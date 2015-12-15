@@ -96,3 +96,6 @@ footer {
 .checked-movement {
 	background-color:#CCCCCC !important;
 }
+.important-bold {
+    font-weight: bold;
+}

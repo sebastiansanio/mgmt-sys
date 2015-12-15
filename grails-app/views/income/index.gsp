@@ -11,7 +11,7 @@
 <section id="index-accountStatus" class="first">
 <h4><g:message code="menu.income.label" /></h4>
 <div class="col-md-6">
-<g:form class="noblock" controller="report" action="downloadReport" id="${mgmt.reports.Report.findByCode('income').id}" >
+<g:form target="_blank" class="noblock" controller="report" action="downloadReport" id="${mgmt.reports.Report.findByCode('income').id}" >
 <table class="col-md-6 table table-bordered">
 	<tbody>
 		<tr>
