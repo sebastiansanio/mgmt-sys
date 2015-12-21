@@ -2,7 +2,6 @@
 <g:if test="${params.controller	&& !(params.controller in ['home','login','accountStatus','accountTypeStatus','income','expenses','balance','netting'])}" >
 	<g:set var="menuName" value="${message(code: 'menu.'+params.controller+'.label')}" />
 	<g:set var="validUris" value="${grailsApplication.controllerClasses.find{it.logicalPropertyName == params.controller}.uris}" />
-	<h4>${menuName}</h4>
 	<ul id="Menu" class="nav nav-pills margin-top-small">
 		<li class="${ params.action == "index" ? 'active' : '' }">
 			<g:if test="${ params.action != "index"}">

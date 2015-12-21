@@ -5,7 +5,7 @@
 <g:hiddenField name="type" value="op" />
 
 <div class="col-md-3 ${hasErrors(bean: movementInstance, field: 'note', 'has-error')} ">
-	<label for="type" class="control-label"><g:message code="movement.note.label" default="Note" /></label>
+	<label for="type" class="control-label"><g:message code="movement.note.label" /></label>
 	<div>
 		<g:textArea class="form-control mayus" name="note" value="${movementInstance.note}"/>
 	</div>
@@ -13,7 +13,6 @@
 
 </div>
 
-<hr/>
 <h4><g:message code="movement.items.label" /></h4>
 <div id="items" class="table-responsive">
 	<table class="table table-condensed table-bordered">
@@ -54,7 +53,7 @@
 			</g:each>
 		</tbody>
 		<tbody>
-			<tr>
+			<tr class="important-bold">
 				<td colspan="7">${message(code:'default.totals.label')}</td>
 				<td class="right-aligned" id="total-amount"></td>
 				<td class="right-aligned" id="total-iva"></td>
@@ -67,8 +66,6 @@
 	
 </div>
 <button type="button" class="btn btn-default" onclick="addItem();" >Agregar item</button>
-
-<hr/>
 
 <h4><g:message code="movement.payments.label" /></h4>
 <div id="items">
@@ -96,7 +93,7 @@
 			</g:each>
 		</tbody>
 		<tbody>
-			<tr>
+			<tr class="important-bold">
 				<td>${message(code:'default.totals.label')}</td>
 				<td class="right-aligned" id="total-payment-amount"></td>
 				<td colspan="3"></td>
@@ -121,10 +118,10 @@
 		<td class="td-intableform"><g:textField disabled="disabled" class="input-intableform form-control" name="items[xyz].invoiceNumber" value=""/></td>
 		<td class="td-intableform"><bs:datePicker disabled="true" class="input-intableform form-control" name="items[xyz].date" precision="day"  value=""  /> </td>
 		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-intableform form-control numberinput field-amount right-aligned" id="amount-xyz" name="items[xyz].amount" value="" required=""/></td>
-		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-intableform form-control numberinput field-iva right-aligned" id="iva-xyz" name="items[xyz].iva" value="" required=""/></td>
-		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-intableform form-control numberinput field-iibb right-aligned" id="iibb-xyz" name="items[xyz].iibb" value="" required=""/></td>
-		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-intableform form-control numberinput field-otherPerceptions right-aligned" id="otherPerceptions-xyz" name="items[xyz].otherPerceptions" value="" required=""/></td>
-		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-intableform form-control field-total right-aligned" id="total-xyz" name="items[xyz].total" value="" required=""/></td>
+		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-intableform form-control numberinput field-iva right-aligned" id="iva-xyz" name="items[xyz].iva" value="0" required=""/></td>
+		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-intableform form-control numberinput field-iibb right-aligned" id="iibb-xyz" name="items[xyz].iibb" value="0" required=""/></td>
+		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-intableform form-control numberinput field-otherPerceptions right-aligned" id="otherPerceptions-xyz" name="items[xyz].otherPerceptions" value="0" required=""/></td>
+		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-intableform form-control field-total right-aligned" id="total-xyz" name="items[xyz].total" value="0" required=""/></td>
 		<td><button type="button" class="deleteButton" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
 	</tr>
 </table>
@@ -204,7 +201,7 @@ function addPayment(){
 
 function refreshTotal(idx){
 	var total = safeParseFloat($('#amount-'+idx).val())+ safeParseFloat($('#iva-'+idx).val()) + safeParseFloat($('#iibb-'+idx).val()) + safeParseFloat($('#otherPerceptions-'+idx).val());
-	$('#total-'+idx).val(total);
+	$('#total-'+idx).val(total.toFixed(2));
 	refreshTotals();
 }
 
@@ -213,34 +210,34 @@ function refreshTotals(){
 	$(".field-amount" ).each(function( index ) {
 		amount = amount + safeParseFloat($(this ).val());
 	});
-	$('#total-amount').text(amount);
+	$('#total-amount').text(amount.toFixed(2));
 	var iva = 0;
 	$(".field-iva" ).each(function( index ) {
 		iva = iva + safeParseFloat($(this ).val());
 	});
-	$('#total-iva').text(iva);
+	$('#total-iva').text(iva.toFixed(2));
 	var iibb = 0;
 	$(".field-iibb" ).each(function( index ) {
 		iibb = iibb + safeParseFloat($(this ).val());
 	});
-	$('#total-iibb').text(iibb);
+	$('#total-iibb').text(iibb.toFixed(2));
 	var otherPerceptions = 0;
 	$(".field-otherPerceptions" ).each(function( index ) {
 		otherPerceptions = otherPerceptions + safeParseFloat($(this ).val());
 	});
-	$('#total-otherPerceptions').text(otherPerceptions);
+	$('#total-otherPerceptions').text(otherPerceptions.toFixed(2));
 	var total = 0;
 	$(".field-total" ).each(function( index ) {
 		total = total + safeParseFloat($(this ).val());
 	});
-	$('#total-total').text(total);
+	$('#total-total').text(total.toFixed(2));
 }
 function refreshPaymentTotal(){
 	var total = 0;
 	$(".field-payment-amount" ).each(function( index ) {
 		total = total + safeParseFloat($(this ).val());
 	});
-	$('#total-payment-amount').text(total);
+	$('#total-payment-amount').text(total.toFixed(2));
 }
 
 function safeParseFloat(inputString){

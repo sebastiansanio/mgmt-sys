@@ -13,7 +13,6 @@
 
 </div>
 
-<hr/>
 <h4><g:message code="movement.items.label" /></h4>
 <div id="items" class="table-responsive">
 	<table class="table table-condensed table-bordered">
@@ -48,7 +47,7 @@
 			</g:each>
 		</tbody>
 		<tbody>
-			<tr>
+			<tr class="important-bold">
 				<td colspan="6">${message(code:'default.totals.label')}</td>
 				<td class="right-aligned" id="total-amount"></td>
 				<td class="right-aligned" id="total-iva"></td>
@@ -59,8 +58,6 @@
 	
 </div>
 <button type="button" class="btn btn-default" onclick="addItem();" >Agregar item</button>
-
-<hr/>
 
 <h4><g:message code="movement.payments.label" /></h4>
 <div id="items">
@@ -86,7 +83,7 @@
 			</g:each>
 		</tbody>
 		<tbody>
-			<tr>
+			<tr class="important-bold">
 				<td>${message(code:'default.totals.label')}</td>
 				<td class="right-aligned" id="total-payment-amount"></td>
 				<td colspan="2"></td>
@@ -188,7 +185,7 @@ function addPayment(){
 
 function refreshTotal(idx){
 	var total = safeParseFloat($('#amount-'+idx).val())+ safeParseFloat($('#iva-'+idx).val());
-	$('#total-'+idx).val(total);
+	$('#total-'+idx).val(total.toFixed(2));
 	refreshTotals();
 }
 
@@ -197,24 +194,24 @@ function refreshTotals(){
 	$(".field-amount" ).each(function( index ) {
 		amount = amount + safeParseFloat($(this ).val());
 	});
-	$('#total-amount').text(amount);
+	$('#total-amount').text(amount.toFixed(2));
 	var iva = 0;
 	$(".field-iva" ).each(function( index ) {
 		iva = iva + safeParseFloat($(this ).val());
 	});
-	$('#total-iva').text(iva);
+	$('#total-iva').text(iva.toFixed(2));
 	var total = 0;
 	$(".field-total" ).each(function( index ) {
 		total = total + safeParseFloat($(this ).val());
 	});
-	$('#total-total').text(total);
+	$('#total-total').text(total.toFixed(2));
 }
 function refreshPaymentTotal(){
 	var total = 0;
 	$(".field-payment-amount" ).each(function( index ) {
 		total = total + safeParseFloat($(this ).val());
 	});
-	$('#total-payment-amount').text(total);
+	$('#total-payment-amount').text(total.toFixed(2));
 }
 
 function safeParseFloat(inputString){

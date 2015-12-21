@@ -21,7 +21,6 @@
 
 		<g:form action="save" class="form-horizontal" role="form" >
 			<g:render template="form"/>
-			<hr/>
 			<div class="form-actions margin-top-medium">
 				<g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
 	            <g:link action="index" class="btn" ><g:message code="default.button.cancel.label" default="Cancelar" /></g:link>

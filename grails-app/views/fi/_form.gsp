@@ -13,7 +13,6 @@
 
 </div>
 
-<hr/>
 <div id="items" class="table-responsive">
 	<table class="table table-condensed table-bordered">
 		<thead>
@@ -47,7 +46,7 @@
 			</g:if>
 		</tbody>
 		<tbody>
-			<tr>
+			<tr class="important-bold">
 				<td colspan="7">${message(code:'default.totals.label')}</td>
 				<td class="right-aligned" id="total-amount"></td>
 			</tr>
@@ -119,7 +118,7 @@ function refreshTotals(){
 	$(".field-amount" ).each(function( index ) {
 		amount = amount + safeParseFloat($(this ).val());
 	});
-	$('#total-amount').text(amount);
+	$('#total-amount').text(amount.toFixed(2));
 }
 
 function safeParseFloat(inputString){

@@ -25,7 +25,6 @@
 			<g:hiddenField name="_method" value="PUT" />
 			
 			<g:render template="form"/>
-			<hr/>
 			<div class="form-actions margin-top-medium">
 				<g:actionSubmit class="btn btn-primary" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
 	            <g:link action="index" class="btn" ><g:message code="default.button.cancel.label" default="Cancelar" /></g:link>

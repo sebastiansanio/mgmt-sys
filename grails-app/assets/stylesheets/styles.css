@@ -3,7 +3,7 @@
  * --------------------------------------------------
  */
 body {
-  padding-top: 50px;
+  padding-top: 32px;
   background-color: #f5f5f5;
 }
 footer {
@@ -78,8 +78,8 @@ footer {
 
 .input-intableform {display: block !important; padding: 0 !important; margin: 0 !important; border: 0 !important; width: 100% !important; border-radius: 0 !important; line-height: 1 !important;}
 .td-intableform {margin: 0 !important; padding: 0 !important;}
-.col-margin-left{margin-left:3%}
-.col-margin-right{margin-right:3%}
+.col-margin-left{margin-left:1%}
+.col-margin-right{margin-right:1%}
 .right-aligned {
 	text-align: right;
 }
@@ -98,4 +98,7 @@ footer {
 }
 .important-bold {
     font-weight: bold;
+}
+.margin-top-medium{
+	margin-top: 5px;
 }

@@ -13,8 +13,6 @@
 
 </div>
 
-<hr/>
-
 <h4><g:message code="movement.payments.label" /></h4>
 <div id="items">
 	<table class="table table-condensed table-bordered">
