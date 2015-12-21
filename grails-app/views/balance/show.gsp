@@ -28,24 +28,24 @@
 		<tr class="form-inline important-bold">
 			<td class="td-intableform"><g:message code="balance.income.label" /></td>
 			<td class="td-intableform center-aligned"><g:message code="balance.amountWithoutIva.label" /></td>
-			<td colspan="2" class="td-intableform"></td>
+			<td colspan="3" class="td-intableform"></td>
 			<td class="td-intableform center-aligned"><g:message code="balance.iva.label" /></td>
 		</tr>
 		<tr class="form-inline">
 			<td class="td-intableform"><g:message code="balance.clientPayment.label" /></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.income.amount}"/></td>
-			<td colspan="2" class="td-intableform"></td>
+			<td colspan="3" class="td-intableform"></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.income.iva}"/></td>
 		</tr>
 		<tr class="form-inline">
 			<td class="td-intableform"><g:message code="balance.otherIncome.label" /></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.otherIncome.amount}"/></td>
-			<td colspan="3" class="td-intableform"></td>
+			<td colspan="4" class="td-intableform"></td>
 		</tr>
 		<tr class="form-inline important-bold">
 			<td class="td-intableform"><g:message code="balance.totalIncome.label" /></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.sellPrice.amount}"/></td>
-			<td colspan="2" class="td-intableform"></td>
+			<td colspan="3" class="td-intableform"></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.income.iva}"/></td>
 		</tr>
 		
@@ -54,6 +54,7 @@
 			<td class="td-intableform"></td>
 			<td class="td-intableform center-aligned"><g:message code="balance.percentageOfDirectCosts.label" /></td>
 			<td class="td-intableform center-aligned"><g:message code="balance.percentageOfSellPrice.label" /></td>
+			<td class="td-intableform"></td>
 			<td class="td-intableform center-aligned"><g:message code="balance.iva.label" /></td>
 		</tr>
 		
@@ -62,6 +63,7 @@
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.directCosts.amount}"/></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.directCosts.amount?100 * amounts.directCosts.amount / amounts.directCosts.amount:0}"/></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.sellPrice.amount? 100 * amounts.directCosts.amount / amounts.sellPrice.amount:0}"/></td>
+			<td class="td-intableform"></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.directCosts.iva}"/></td>
 		</tr>
 		
@@ -70,15 +72,16 @@
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.generalExpenses.amount}"/></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.directCosts.amount?100 * amounts.generalExpenses.amount / amounts.directCosts.amount:0}"/></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.sellPrice.amount?100 * amounts.generalExpenses.amount / amounts.sellPrice.amount:0}"/></td>
+			<td class="td-intableform"></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.generalExpenses.iva}"/></td>
 		</tr>
 		
 		<tr class="form-inline">
-			<td class="td-intableform"><g:message code="balance.generalExpenses.label" /></td>
+			<td class="td-intableform"><g:message code="balance.indirectGeneralExpenses.label" /></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.indirectGeneralExpenses}"/></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.directCosts.amount?100 * amounts.indirectGeneralExpenses / amounts.directCosts.amount:0}"/></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.sellPrice.amount?100 * amounts.indirectGeneralExpenses / amounts.sellPrice.amount:0}"/></td>
-			<td class="td-intableform right-aligned"></td>
+			<td colspan="2" class="td-intableform right-aligned"></td>
 		</tr>
 		
 		<tr class="form-inline">
@@ -86,6 +89,7 @@
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.totalGeneralExpenses.amount}"/></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.directCosts.amount?100 * amounts.totalGeneralExpenses.amount / amounts.directCosts.amount:0}"/></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.sellPrice.amount?100 * amounts.totalGeneralExpenses.amount / amounts.sellPrice.amount:0}"/></td>
+			<td class="td-intableform"></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.totalGeneralExpenses.iva}"/></td>
 		</tr>
 		
@@ -94,6 +98,7 @@
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.totalExpenses.amount}"/></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.directCosts.amount?100 * amounts.totalExpenses.amount / amounts.directCosts.amount:0}"/></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.sellPrice.amount?100 * amounts.totalExpenses.amount / amounts.sellPrice.amount:0}"/></td>
+			<td class="td-intableform"></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.totalExpenses.iva}"/></td>
 		</tr>
 		
@@ -102,13 +107,14 @@
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.calculatedBenefits.amount}"/></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.directCosts.amount?100 * amounts.calculatedBenefits.amount / amounts.directCosts.amount:0}"/></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.sellPrice.amount?100 * amounts.calculatedBenefits.amount / amounts.sellPrice.amount:0}"/></td>
+			<td class="td-intableform center-aligned">Saldo IVA</td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.calculatedBenefits.iva}"/></td>
 		</tr>
 		
 		<tr class="form-inline">
 			<td class="td-intableform"><g:message code="balance.generalExpensesPlusBenefits.label" /></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.calculatedBenefits.amount + amounts.indirectGeneralExpenses }"/></td>
-			<td colspan="3" class="td-intableform"></td>
+			<td colspan="4" class="td-intableform"></td>
 		</tr>
 		
 		<tr class="form-inline important-bold">
@@ -116,26 +122,26 @@
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.sellPrice.amount}"/></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.directCosts.amount?100 * amounts.sellPrice.amount / amounts.directCosts.amount:0}"/></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.sellPrice.amount?100 * amounts.sellPrice.amount / amounts.sellPrice.amount:0}"/></td>
-			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.sellPrice.iva}"/></td>
+			<td colspan="2" class="td-intableform"></td>
 		</tr>
 		
 		<tr class="form-inline">
 			<td class="td-intableform"><g:message code="balance.ivaPercentage.label" /></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.sellPrice.amount? 100* amounts.sellPrice.iva / amounts.sellPrice.amount :0}"/></td>
-			<td colspan="3" class="td-intableform"></td>
+			<td colspan="4" class="td-intableform"></td>
 		</tr>
 		
 		<tr class="form-inline important-bold">
 			<td class="td-intableform"><g:message code="balance.finalSellPrice.label" /></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.sellPrice.iva + amounts.sellPrice.amount }"/></td>
-			<td colspan="3" class="td-intableform"></td>
+			<td colspan="4" class="td-intableform"></td>
 		</tr>
 		
 		<tr class="form-inline important-bold">
 			<td class="td-intableform"><g:message code="balance.coefficient.label" /></td>
 			<td class="td-intableform"></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.000" number="${amounts.directCosts.amount?amounts.sellPrice.amount / amounts.directCosts.amount:0 }"/></td>
-			<td colspan="2" class="td-intableform"></td>
+			<td colspan="3" class="td-intableform"></td>
 		</tr>
 		
 		<tr class="form-inline important-bold">
@@ -143,7 +149,7 @@
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.retiredBenefits.amount}"/></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.directCosts.amount?100 * amounts.calculatedBenefits.amount / amounts.directCosts.amount:0}"/></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.sellPrice.amount?100 * amounts.retiredBenefits.amount / amounts.sellPrice.amount:0}"/></td>
-			<td class="td-intableform"></td>
+			<td colspan="2" class="td-intableform"></td>
 		</tr>
 		
 		<tr class="form-inline important-bold">
@@ -151,7 +157,7 @@
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.calculatedBenefits.amount - amounts.retiredBenefits.amount}"/></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.directCosts.amount?100 * (amounts.calculatedBenefits.amount - amounts.retiredBenefits.amount) / amounts.directCosts.amount:0}"/></td>
 			<td class="td-intableform right-aligned"><g:formatNumber format="###,##0.00" number="${amounts.sellPrice.amount?100 * (amounts.calculatedBenefits.amount - amounts.retiredBenefits.amount) / amounts.sellPrice.amount:0}"/></td>
-			<td class="td-intableform"></td>
+			<td colspan="2" class="td-intableform"></td>
 		</tr>
 		
 	</tbody>

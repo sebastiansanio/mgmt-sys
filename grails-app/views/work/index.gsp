@@ -26,18 +26,20 @@
 	<table class="table table-bordered margin-top-medium">
 		<thead>
 			<tr>
-				<th>${message(code:'default.show.label')}</th>
-				<g:sortableColumn property="code" title="${message(code: 'work.code.label')}" />
-				<g:sortableColumn property="name" title="${message(code: 'work.name.label')}" />
-				<g:sortableColumn property="type" title="${message(code: 'work.type.label')}" />
-				<g:sortableColumn property="finished" title="${message(code: 'work.finished.label')}" />
-				<th><g:message code="work.client.label" default="Client" /></th>
+				<th class="center-aligned">${message(code:'default.show.label')}</th>
+				<th class="center-aligned">${message(code:'default.edit.label')}</th>
+				<g:sortableColumn class="center-aligned" params="${params}" property="code" title="${message(code: 'work.code.label')}" />
+				<g:sortableColumn class="center-aligned" params="${params}" property="name" title="${message(code: 'work.name.label')}" />
+				<g:sortableColumn class="center-aligned" params="${params}" property="type" title="${message(code: 'work.type.label')}" />
+				<g:sortableColumn class="center-aligned" params="${params}" property="finished" title="${message(code: 'work.finished.label')}" />
+				<th class="center-aligned"><g:message code="work.client.label" default="Client" /></th>
 			</tr>
 		</thead>
 		<tbody>
 		<g:each in="${workInstanceList}" status="i" var="workInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-				<td><g:link action="show" id="${workInstance.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
+				<td class="center-aligned"><g:link action="show" id="${workInstance.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
+				<td class="center-aligned"><g:link action="edit" id="${workInstance.id}"><span class="glyphicon glyphicon-pencil"></span></g:link></td>
 				<td>${workInstance.code}</td>
 				<td>${fieldValue(bean: workInstance, field: "name")}</td>
 				<td>${message(code:'work.type.'+workInstance.type)}</td>

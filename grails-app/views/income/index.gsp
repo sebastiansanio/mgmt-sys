@@ -11,7 +11,7 @@
 <section id="index-accountStatus" class="first">
 <h4><g:message code="menu.income.label" /></h4>
 <div class="col-md-6">
-<g:form target="_blank" class="noblock" controller="report" action="downloadReport" id="${mgmt.reports.Report.findByCode('income').id}" >
+<g:form onsubmit="checkFilters(event);" target="_blank" class="noblock" controller="report" action="downloadReport" id="${mgmt.reports.Report.findByCode('income').id}" >
 <table class="col-md-6 table table-bordered">
 	<tbody>
 		<tr>
@@ -89,6 +89,14 @@ function conceptsChanged(){
 		break;
 	}
 }
+
+function checkFilters(event){
+	if($('#Work_id').val() == -1 && $('#concepts').val() == 'all' && !$('#dateFromEnabled').prop('checked') && !$('#dateToEnabled').prop('checked') ){
+		alert("Debe seleccionar al menos un filtro.");
+		event.preventDefault();
+	}
+}
+
 </script>
 
 </body>

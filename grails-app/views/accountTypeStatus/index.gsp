@@ -14,9 +14,8 @@
 	<table class="table table-bordered margin-top-medium">
 		<thead>
 			<tr>
-				<g:sortableColumn property="name" title="${message(code: 'accountType.name.label', default: 'Name')}" />
-				<th><g:message code="accountType.currentBalance.label" /></th>
-				
+				<g:sortableColumn class="center-aligned" property="name" title="${message(code: 'accountType.name.label', default: 'Name')}" />
+				<th class="center-aligned"><g:message code="accountType.currentBalance.label" /></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -25,7 +24,7 @@
 			<g:if test="${currentBalance}" >
 				<tr>
 					<td><g:link action="show" id="${accountTypeInstance.id}">${fieldValue(bean: accountTypeInstance, field: "name")}</g:link></td>
-					<td><g:formatNumber format="###,##0.##" number="${currentBalance}"/></td>
+					<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${currentBalance}"/></td>
 				</tr>
 			</g:if>
 		</g:each>

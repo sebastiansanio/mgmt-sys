@@ -28,25 +28,23 @@
 	<table class="table table-bordered margin-top-medium">
 		<thead>
 			<tr>
-				<th>${message(code:'default.show.label')}</th>
-			
-				<g:sortableColumn property="code" title="${message(code: 'concept.code.label', default: 'Code')}" />
-				<g:sortableColumn property="description" title="${message(code: 'concept.description.label', default: 'Description')}" />
-				<th><g:message code="concept.conceptAccount.label" default="Concept Account" /></th>
-				<th><g:message code="concept.conceptGroup.label" default="Concept Group" /></th>
-			
+				<th class="center-aligned">${message(code:'default.show.label')}</th>
+				<th class="center-aligned">${message(code:'default.edit.label')}</th>
+				<g:sortableColumn class="center-aligned" params="${params}" property="code" title="${message(code: 'concept.code.label', default: 'Code')}" />
+				<g:sortableColumn class="center-aligned" params="${params}" property="description" title="${message(code: 'concept.description.label', default: 'Description')}" />
+				<th class="center-aligned"><g:message code="concept.conceptGroup.label" default="Concept Group" /></th>
+				<th class="center-aligned"><g:message code="concept.conceptAccount.label" default="Concept Account" /></th>
 			</tr>
 		</thead>
 		<tbody>
 		<g:each in="${conceptInstanceList}" status="i" var="conceptInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-				<td><g:link action="show" id="${conceptInstance.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
-			
+				<td class="center-aligned"><g:link action="show" id="${conceptInstance.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
+				<td class="center-aligned"><g:link action="edit" id="${conceptInstance.id}"><span class="glyphicon glyphicon-pencil"></span></g:link></td>
 				<td>${fieldValue(bean: conceptInstance, field: "code")}</td>
 				<td>${fieldValue(bean: conceptInstance, field: "description")}</td>
-				<td>${fieldValue(bean: conceptInstance, field: "conceptAccount")}</td>
 				<td>${fieldValue(bean: conceptInstance, field: "conceptGroup")}</td>
-			
+				<td>${fieldValue(bean: conceptInstance, field: "conceptAccount")}</td>
 			</tr>
 		</g:each>
 		</tbody>

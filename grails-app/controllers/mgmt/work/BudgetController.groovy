@@ -108,11 +108,6 @@ class BudgetController {
     }
 
     def edit(Budget budgetInstance) {
-		if(budgetInstance.hasWork){
-			flash.error = message(code: 'budget.closed.error')
-			redirect budgetInstance
-			return
-		}
         respond budgetInstance
     }
 
@@ -121,11 +116,6 @@ class BudgetController {
 		Budget budgetInstance = Budget.get(params.id.toLong())
 		if (budgetInstance == null) {
 			notFound()
-			return
-		}
-		if(budgetInstance.hasWork){
-			flash.error = message(code: 'budget.closed.error')
-			redirect budgetInstance
 			return
 		}
 		

@@ -31,10 +31,10 @@
 <table class="table table-bordered margin-top-medium">
 	<thead>
 		<tr>
-			<g:sortableColumn property="name" title="${message(code: 'account.name.label')}" />
-			<th><g:message code="account.currentBalance.label" /></th>
-			<th>Ver movimientos</th>
-			<th>Descargar movimientos</th>
+			<g:sortableColumn class="center-aligned" property="name" title="${message(code: 'account.name.label')}" />
+			<th class="center-aligned"><g:message code="account.currentBalance.label" /></th>
+			<th class="center-aligned">Ver movimientos</th>
+			<th class="center-aligned">Descargar movimientos</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -43,9 +43,9 @@
 		<g:if test="${currentBalance}" >
 			<tr>
 				<td>${fieldValue(bean: account, field: "name")}</td>
-				<td><g:formatNumber format="###,##0.##" number="${currentBalance}"/></td>
-				<td><g:link action="showPayments" id="${account.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
-				<td><g:link action="download" id="${account.id}"><span class="glyphicon glyphicon-download"></span></g:link></td>
+				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${currentBalance}"/></td>
+				<td class="center-aligned"><g:link action="showPayments" id="${account.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
+				<td class="center-aligned"><g:link action="download" id="${account.id}"><span class="glyphicon glyphicon-download"></span></g:link></td>
 			</tr>
 		</g:if>
 	</g:each>

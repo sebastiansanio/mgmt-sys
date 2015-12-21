@@ -23,13 +23,14 @@ class ConceptController {
     }
 	
 	def search(Integer max) {
-		params.max = Math.min(max ?: 100, 1000)
+		params.sort = params.sort ?: 'dateCreated'
+		params.order = params.order ?: 'desc'
 		String descriptionAdjusted = "%"+params.description+"%"
 		String codeAdjusted = "%"+params.code+"%"
 		def results = Concept.createCriteria().list () {
 			like("description", descriptionAdjusted)
 			like("code", codeAdjusted)
-			order("code", "asc")
+			order(params.sort, params.order)
 		}
 		respond results, model:[conceptInstanceCount: results.size() ],  view:'index'
 	}

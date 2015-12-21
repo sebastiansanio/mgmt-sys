@@ -5,8 +5,8 @@ package mgmt.persons
 import static org.springframework.http.HttpStatus.*
 
 import java.util.List;
-import pl.touk.excel.export.WebXlsxExporter
 
+import pl.touk.excel.export.WebXlsxExporter
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
@@ -34,6 +34,12 @@ class ClientController {
 			add(Client.list(), FIELDS)
 			save(response.outputStream)
 		}
+	}
+	
+	def search(Integer max) {
+		params.max = Math.min(max ?: 100, 1000)
+		String nameQuery = "%"+params.name+"%"
+		respond Client.findAllByNameLikeOrBusinessNameLike(nameQuery,nameQuery,params), model:[clientInstanceCount: Client.countByNameLike(nameQuery)],  view:'index'
 	}
 
     def show(Client clientInstance) {

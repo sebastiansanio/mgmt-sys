@@ -40,7 +40,7 @@ class SupplierController {
 	def search(Integer max) {
 		params.max = Math.min(max ?: 100, 1000)
 		String nameQuery = "%"+params.name+"%"
-		respond Supplier.findAllByNameLike(nameQuery,params), model:[supplierInstanceCount: Supplier.countByNameLike(nameQuery)],  view:'index'
+		respond Supplier.findAllByNameLikeOrBusinessNameLike(nameQuery,nameQuery,params), model:[supplierInstanceCount: Supplier.countByNameLike(nameQuery)],  view:'index'
 	}
 
     def show(Supplier supplierInstance) {

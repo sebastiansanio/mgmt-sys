@@ -14,14 +14,16 @@
 	<table class="table table-bordered margin-top-medium">
 		<thead>
 			<tr>
-				<th>${message(code:'default.show.label')}</th>
-				<g:sortableColumn property="name" title="${message(code: 'accountType.name.label', default: 'Name')}" />
+				<th class="center-aligned">${message(code:'default.show.label')}</th>
+				<th class="center-aligned">${message(code:'default.edit.label')}</th>
+				<g:sortableColumn  class="center-aligned" property="name" title="${message(code: 'accountType.name.label', default: 'Name')}" />
 			</tr>
 		</thead>
 		<tbody>
 		<g:each in="${accountTypeInstanceList}" status="i" var="accountTypeInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 				<td><g:link action="show" id="${accountTypeInstance.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
+				<td><g:link action="edit" id="${accountTypeInstance.id}"><span class="glyphicon glyphicon-pencil"></span></g:link></td>
 				<td>${fieldValue(bean: accountTypeInstance, field: "name")}</td>
 			</tr>
 		</g:each>

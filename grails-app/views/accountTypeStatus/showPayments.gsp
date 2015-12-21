@@ -17,12 +17,12 @@
 	<table class="table table-bordered margin-top-medium">
 		<thead>
 			<tr>
-				<th>${message(code: 'payment.account.label')}</th>
-				<th>${message(code: 'payment.movement.label')} </th>
-				<th>${message(code: 'payment.paymentDate.label')} </th>
-				<th>${message(code: 'payment.checkNumber.label')} </th>
-				<th>${message(code: 'payment.amount.label')} </th>
-				<th>${message(code: 'payment.note.label')} </th>
+				<th class="center-aligned">${message(code: 'payment.account.label')}</th>
+				<th class="center-aligned">${message(code: 'payment.movement.label')} </th>
+				<th class="center-aligned">${message(code: 'payment.paymentDate.label')} </th>
+				<th class="center-aligned">${message(code: 'payment.checkNumber.label')} </th>
+				<th class="center-aligned">${message(code: 'payment.amount.label')} </th>
+				<th class="center-aligned">${message(code: 'payment.note.label')} </th>
 			</tr>
 		</thead>
 		<tbody>
@@ -32,7 +32,7 @@
 				<td>${payment.movement}</td>
 				<td><g:formatDate date="${payment.paymentDate}" format="dd/MM/yyyy" /></td>
 				<td>${payment.checkNumber}</td>
-				<td><g:formatNumber format="###,##0.##" number="${payment.amount*payment.multiplier}"/></td>
+				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${payment.amount*payment.multiplier}"/></td>
 				<td>${payment.note}</td>
 			</tr>
 		</g:each>

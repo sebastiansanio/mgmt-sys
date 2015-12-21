@@ -21,28 +21,25 @@
 				<td valign="top" class="value">${fieldValue(bean: conceptInstance, field: "code")}</td>
 				
 			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="concept.conceptAccount.label" default="Concept Account" /></td>
-				
-				<td valign="top" class="value"><g:link controller="conceptAccount" action="show" id="${conceptInstance?.conceptAccount?.id}">${conceptInstance?.conceptAccount?.encodeAsHTML()}</g:link></td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="concept.conceptGroup.label" default="Concept Group" /></td>
-				
-				<td valign="top" class="value"><g:link controller="conceptGroup" action="show" id="${conceptInstance?.conceptGroup?.id}">${conceptInstance?.conceptGroup?.encodeAsHTML()}</g:link></td>
-				
-			</tr>
-		
+			
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="concept.description.label" default="Description" /></td>
 				
 				<td valign="top" class="value">${fieldValue(bean: conceptInstance, field: "description")}</td>
 				
 			</tr>
-		
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="concept.conceptGroup.label" default="Concept Group" /></td>
+				
+				<td valign="top" class="value"><g:link controller="conceptGroup" action="show" id="${conceptInstance?.conceptGroup?.id}">${conceptInstance?.conceptGroup?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="concept.conceptAccount.label" default="Concept Account" /></td>
+				
+				<td valign="top" class="value"><g:link controller="conceptAccount" action="show" id="${conceptInstance?.conceptAccount?.id}">${conceptInstance?.conceptAccount?.encodeAsHTML()}</g:link></td>
+				
+			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="concept.validInFiWork.label" default="Valid In Fi Work" /></td>

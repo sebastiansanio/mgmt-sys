@@ -8,14 +8,14 @@
 					<g:textField class="form-control" name="code" value="${conceptInstance?.code}"/>
 				</div>
 			</div>
-
-			<div class="${hasErrors(bean: conceptInstance, field: 'conceptAccount', 'has-error')} required">
-				<label for="conceptAccount" class="control-label"><g:message code="concept.conceptAccount.label" default="Concept Account" /><span class="required-indicator">*</span></label>
+			
+			<div class="${hasErrors(bean: conceptInstance, field: 'description', 'has-error')} ">
+				<label for="description" class="control-label"><g:message code="concept.description.label" default="Description" /></label>
 				<div>
-					<g:select class="form-control" id="conceptAccount" name="conceptAccount.id" from="${mgmt.concept.ConceptAccount.list()}" optionKey="id" required="" value="${conceptInstance?.conceptAccount?.id}"/>
+					<g:textField class="mayus form-control" name="description" value="${conceptInstance?.description}"/>
 				</div>
 			</div>
-
+			
 			<div class="${hasErrors(bean: conceptInstance, field: 'conceptGroup', 'has-error')} required">
 				<label for="conceptGroup" class="control-label"><g:message code="concept.conceptGroup.label" default="Concept Group" /><span class="required-indicator">*</span></label>
 				<div>
@@ -23,10 +23,10 @@
 				</div>
 			</div>
 
-			<div class="${hasErrors(bean: conceptInstance, field: 'description', 'has-error')} ">
-				<label for="description" class="control-label"><g:message code="concept.description.label" default="Description" /></label>
+			<div class="${hasErrors(bean: conceptInstance, field: 'conceptAccount', 'has-error')} required">
+				<label for="conceptAccount" class="control-label"><g:message code="concept.conceptAccount.label" default="Concept Account" /><span class="required-indicator">*</span></label>
 				<div>
-					<g:textField class="mayus form-control" name="description" value="${conceptInstance?.description}"/>
+					<g:select class="form-control" id="conceptAccount" name="conceptAccount.id" from="${mgmt.concept.ConceptAccount.list()}" optionKey="id" required="" value="${conceptInstance?.conceptAccount?.id}"/>
 				</div>
 			</div>
 

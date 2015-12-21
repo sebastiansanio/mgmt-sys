@@ -23,7 +23,7 @@ class MovementItemController {
     }
 	
 	def search(Integer max) {
-		params.max = Math.min(max ?: 50, 1000)
+		params.max = Math.min(max ?: 100, 1000)
 		String nameQuery = "%"+params.description+"%"
 		respond MovementItem.findAllByDescriptionLike(nameQuery,params), model:[movementItemInstanceCount: MovementItem.countByDescriptionLike(nameQuery)],  view:'index'
 	}

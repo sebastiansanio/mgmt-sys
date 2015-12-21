@@ -1,5 +1,6 @@
 package mgmt.persons
-
+import mgmt.work.Work
+import mgmt.work.Budget
 
 class Client {
 	
@@ -14,6 +15,8 @@ class Client {
 	String province
 	String zipCode
 	String note
+	
+	static hasMany = [works: Work, budgets: Budget]
 	
     static constraints = {
 		name unique: true

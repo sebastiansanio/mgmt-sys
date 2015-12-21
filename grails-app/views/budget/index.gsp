@@ -26,33 +26,30 @@
 	<table class="table table-bordered margin-top-medium">
 		<thead>
 			<tr>
-				<th>${message(code:'default.show.label')}</th>
-			
-				<g:sortableColumn property="name" title="${message(code: 'budget.name.label')}" />
-				<g:sortableColumn property="code" title="${message(code: 'budget.code.label')}" />
-				<th><g:message code="budget.client.label" default="Client" /></th>
-				<g:sortableColumn property="hasWork" title="${message(code: 'budget.hasWork.label')}" />
-				<g:sortableColumn property="directCosts" title="${message(code: 'budget.directCosts.label', default: 'Direct Costs')}" />
-				<th><g:message code="budget.items.label" /></th>
-				<g:sortableColumn property="totalAmount" title="${message(code: 'budget.pvai.label')}" />
-				<th><g:message code="budget.iva.label" /></th>
-				<th><g:message code="budget.pvii.label" /></th>
-				<g:sortableColumn property="dateCreated" title="${message(code: 'budget.dateCreated.label', default: 'Date Created')}" />
+				<th class="center-aligned">${message(code:'default.show.label')}</th>
+				<th class="center-aligned">${message(code:'default.edit.label')}</th>
+				<g:sortableColumn class="center-aligned" params="${params}" property="name" title="${message(code: 'budget.name.label')}" />
+				<g:sortableColumn class="center-aligned" params="${params}" property="code" title="${message(code: 'budget.code.label')}" />
+				<th class="center-aligned"><g:message code="budget.client.label" default="Client" /></th>
+				<g:sortableColumn class="center-aligned" params="${params}" property="work.code" title="${message(code: 'work.label')}" />
+				<g:sortableColumn class="center-aligned" params="${params}" property="directCosts" title="CDO (A-K)" />
+				<th class="center-aligned">GGO (L)</th>
+				<g:sortableColumn class="center-aligned" params="${params}" property="totalAmount" title="PV" />
+				<g:sortableColumn class="center-aligned" params="${params}" property="dateCreated" title="${message(code: 'budget.dateCreated.label', default: 'Date Created')}" />
 			</tr>
 		</thead>
 		<tbody>
 		<g:each in="${budgetInstanceList}" status="i" var="budgetInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-				<td><g:link action="show" id="${budgetInstance.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
+				<td class="center-aligned"><g:link action="show" id="${budgetInstance.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
+				<td class="center-aligned"><g:link action="edit" id="${budgetInstance.id}"><span class="glyphicon glyphicon-pencil"></span></g:link></td>
 				<td>${fieldValue(bean: budgetInstance, field: "name")}</td>
-				<td>${fieldValue(bean: budgetInstance, field: "code")}</td>
+				<td>${budgetInstance.code}</td>
 				<td>${fieldValue(bean: budgetInstance, field: "client")}</td>
-				<td><g:formatBoolean boolean="${budgetInstance.hasWork}" /></td>
-				<td class="right-aligned">${fieldValue(bean: budgetInstance, field: "directCosts")}</td>
-				<td class="right-aligned">${fieldValue(bean: budgetInstance, field: "generalExpendures")}</td>
-				<td class="right-aligned">${fieldValue(bean: budgetInstance, field: "totalAmount")}</td>
-				<td class="right-aligned">${fieldValue(bean: budgetInstance, field: "ivaAmount")}</td>
-				<td class="right-aligned">${fieldValue(bean: budgetInstance, field: "totalAmountWithIva")}</td>
+				<td>${mgmt.work.Work.findByBudget(budgetInstance)?.code}</td>
+				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${budgetInstance.directCosts}" /></td>
+				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${budgetInstance.generalExpendures}" /></td>
+				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${budgetInstance.totalAmount}" /></td>
 				<td><g:formatDate date="${budgetInstance.dateCreated}" /></td>
 			</tr>
 		</g:each>
