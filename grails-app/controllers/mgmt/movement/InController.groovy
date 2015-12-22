@@ -51,6 +51,8 @@ class InController {
 		movementInstance.payments = movementInstance.payments - [null]
 		for(item in movementInstance.items){
 			item.multiplier = 1
+			item.iibb = BigDecimal.valueOf(0)
+			item.otherPerceptions = BigDecimal.valueOf(0)
 		}
 		for(payment in movementInstance.payments){
 			payment.multiplier = 1
@@ -117,6 +119,8 @@ class InController {
 		movementInstance.payments = movementInstance.payments - [null]
 		for(item in movementInstance.items){
 			item.multiplier = 1
+			item.iibb = BigDecimal.valueOf(0)
+			item.otherPerceptions = BigDecimal.valueOf(0)
 		}
 		for(payment in movementInstance.payments){
 			payment.multiplier = 1
