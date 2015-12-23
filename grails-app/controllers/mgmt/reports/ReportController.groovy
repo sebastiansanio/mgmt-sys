@@ -23,7 +23,7 @@ class ReportController {
 	
 	def dataSource
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 100, 1000)

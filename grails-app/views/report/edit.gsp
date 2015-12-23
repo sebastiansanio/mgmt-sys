@@ -18,12 +18,16 @@
 		</div>
 		</g:hasErrors>
 
-		<g:form method="post" class="form-horizontal" role="form" >
+		<g:form method="post" action="update" class="form-horizontal" role="form" enctype="multipart/form-data">
 			<g:hiddenField name="id" value="${reportInstance?.id}" />
 			<g:hiddenField name="version" value="${reportInstance?.version}" />
 			<g:hiddenField name="_method" value="PUT" />
 			
+			<div class="row">
+			<div class="col-md-4">
 			<g:render template="form"/>
+			</div>
+			</div>
 			<div class="form-actions margin-top-medium">
 				<g:actionSubmit class="btn btn-primary" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
 	            <g:link action="index" class="btn" ><g:message code="default.button.cancel.label" default="Cancelar" /></g:link>
