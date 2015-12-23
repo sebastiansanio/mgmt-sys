@@ -8,6 +8,7 @@ import grails.transaction.Transactional
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 
+import mgmt.products.UnitOfMeasurement;
 import net.sf.jasperreports.engine.JasperCompileManager
 import net.sf.jasperreports.engine.JasperExportManager
 import net.sf.jasperreports.engine.JasperFillManager
@@ -59,6 +60,42 @@ class ReportController {
             '*' { respond reportInstance, [status: CREATED] }
         }
     }
+	
+	def edit(Report reportInstance) {
+		respond reportInstance
+	}
+
+	@Transactional
+	def update() {
+		Report reportInstance = Report.get(params.id.toLong())
+		if (reportInstance == null) {
+			notFound()
+			return
+		}
+		if (params.version) {
+			def version = params.version.toLong()
+			if (reportInstance.version > version) {
+				flash.error = message(code: "default.optimistic.locking.failure")
+				redirect action: "edit", id: reportInstance.id
+				return
+			}
+		}
+		reportInstance.properties = params
+		if (reportInstance.hasErrors()) {
+			respond reportInstance.errors, view:'edit'
+			return
+		}
+
+		reportInstance.save flush:true
+
+		request.withFormat {
+			form multipartForm {
+				flash.message = message(code: 'default.updated.message', args: [message(code: 'report.label'), reportInstance.id])
+				redirect reportInstance
+			}
+			'*'{ respond reportInstance, [status: OK] }
+		}
+	}
 
 	def downloadReport(){
 		Report reportInstance = Report.get(params.id.toLong())

@@ -17,7 +17,7 @@
 			<tr>
 			
 				<g:sortableColumn property="name" title="${message(code: 'report.name.label', default: 'Name')}" />
-			
+				<th>${message(code:'default.edit.label')}</th>
 				<th>${message(code:'default.download.label')}</th>
 			</tr>
 		</thead>
@@ -26,7 +26,7 @@
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 			
 				<td>${fieldValue(bean: reportInstance, field: "name")}</td>
-			
+				<td><g:link action="edit" id="${reportInstance.id}"><span class="glyphicon glyphicon-pencil"></span></g:link></td>
 				<td><g:link action="show" id="${reportInstance.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
 			</tr>
 		</g:each>
