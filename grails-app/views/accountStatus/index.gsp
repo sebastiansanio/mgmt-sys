@@ -11,7 +11,7 @@
 <section id="index-accountStatus" class="first">
 
 <div class="col-md-6">
-<g:form class="noblock" controller="report" action="downloadReport" id="${mgmt.reports.Report.findByCode('accountStatus').id}" >
+<g:form class="noblock" target="_blank" controller="report" action="downloadReport" id="${mgmt.reports.Report.findByCode('accountStatus').id}" >
 <table class="table table-bordered">
 	<thead>
 		<tr>
@@ -33,7 +33,7 @@
 </div>
 
 <div class="col-md-6">
-<g:form class="noblock" controller="report" action="downloadReport" id="${mgmt.reports.Report.findByCode('accountStatus').id}" >
+<g:form class="noblock" target="_blank" controller="report" action="downloadReport" id="${mgmt.reports.Report.findByCode('accountStatus').id}" >
 <table class="col-md-6 table table-bordered">
 	<thead>
 		<tr>

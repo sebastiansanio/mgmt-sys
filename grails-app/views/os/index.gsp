@@ -53,7 +53,7 @@
 				<td><g:formatDate date="${movementInstance.dateCreated}"/></td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${movementInstance.calculateItemsTotal()}" /></td>
 				<td><g:formatBoolean boolean="${movementInstance.checked}" /></td>
-				<td class="center-aligned"><g:link controller="report" action="downloadReport" id="${mgmt.reports.Report.findByCode("os").id}" params="${[movement_id:movementInstance.id]}"><span class="glyphicon glyphicon-download-alt"></span></g:link></td>
+				<td class="center-aligned"><g:link target="_blank" controller="report" action="downloadReport" id="${mgmt.reports.Report.findByCode("os").id}" params="${[movement_id:movementInstance.id]}"><span class="glyphicon glyphicon-download-alt"></span></g:link></td>
 				<td>${movementInstance.note}</td>
 			</tr>
 		</g:each>

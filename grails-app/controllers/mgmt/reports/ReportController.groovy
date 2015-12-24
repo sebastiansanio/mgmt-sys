@@ -118,7 +118,7 @@ class ReportController {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, variablesValues, dataSource.connection)
 		byte[] pdf = JasperExportManager.exportReportToPdf(jasperPrint)
 		response.setContentType("application/pdf");
-		response.setHeader("Content-Disposition", "attachment; filename='${reportInstance.name}.pdf'");
+		response.setHeader("Content-Disposition", "inline; filename='${reportInstance.name}.pdf'");
 		response.outputStream << pdf
 	}
 

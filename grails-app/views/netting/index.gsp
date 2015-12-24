@@ -44,7 +44,7 @@
 </div>
 
 <div class="col-md-1">
-<g:form class="noblock" controller="report" action="downloadReport" id="${mgmt.reports.Report.findByCode('netting')?.id}" >
+<g:form class="noblock" target="_blank" controller="report" action="downloadReport" id="${mgmt.reports.Report.findByCode('netting')?.id}" >
 <table class="col-md-6 table table-bordered">
 	<tbody>
 		<tr>
