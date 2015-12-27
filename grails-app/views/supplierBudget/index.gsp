@@ -26,8 +26,8 @@
 				<th class="center-aligned"><g:message code="supplierBudget.expendedIva.label" /></th>
 				<th class="center-aligned"><g:message code="supplierBudget.remainingAmount.label" /></th>
 				<th class="center-aligned"><g:message code="supplierBudget.remainingIva.label" /></th>
-				<th class="center-aligned"><g:message code="supplierBudget.note.label" /></th>
 				<g:sortableColumn class="center-aligned" property="dateCreated" title="${message(code: 'default.dateCreated.label')}" />
+				<th class="center-aligned"><g:message code="supplierBudget.note.label" /></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -45,8 +45,8 @@
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${realExpendures.expendedIva}" /></td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${realExpendures.remainingAmount}" /></td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${realExpendures.remainingIva}" /></td>
-				<td>${fieldValue(bean: supplierBudgetInstance, field: "note")}</td>
 				<td><g:formatDate date="${supplierBudgetInstance.dateCreated}" />
+				<td>${fieldValue(bean: supplierBudgetInstance, field: "note")}</td>
 				</td>
 			</tr>
 		</g:each>

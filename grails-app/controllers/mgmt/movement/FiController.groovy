@@ -80,8 +80,8 @@ class FiController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'movement.label', default: 'Movement'), movementInstance.id])
-                redirect action: 'show', id: movementInstance.id
+                flash.message = message(code: 'default.created.message', args: [movementInstance.toString().toUpperCase(), movementInstance.id])
+                redirect action:"index", method:"GET"
             }
             '*' { respond movementInstance, [status: CREATED] }
         }
@@ -92,7 +92,11 @@ class FiController {
 			notFound()
 			return
 		}
-		
+		if(movementInstance.checked){
+			flash.error = message(code: 'movement.isChecked.error')
+			redirect action:"index", method:"GET"
+			return
+		}
         respond movementInstance
     }
 
@@ -113,8 +117,9 @@ class FiController {
 			}
 		}
 		if(movementInstance.checked){
-			flash.message = message(code: 'movement.isChecked.error')
-			redirect movementInstance
+			flash.error = message(code: 'movement.isChecked.error')
+			redirect action:"index", method:"GET"
+			return
 		}
 				
 		for (movementItem in movementInstance.items) {
@@ -138,8 +143,8 @@ class FiController {
         movementInstance.save flush:true
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'movement.label', default: 'Movement'), movementInstance.id])
-                redirect action: 'show', id: movementInstance.id
+                flash.message = message(code: 'default.updated.message', args: [movementInstance.toString().toUpperCase(), movementInstance.id])
+                redirect action:"index", method:"GET"
             }
             '*'{ respond movementInstance, [status: OK] }
         }
@@ -156,7 +161,7 @@ class FiController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'movement.label', default: 'Movement'), movementInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [movementInstance.toString().toUpperCase(), movementInstance.id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
@@ -172,7 +177,7 @@ class FiController {
 		movementInstance.checked = true
 		movementInstance.save flush: true
 		flash.message = message(code: 'movement.checked.message')
-		redirect action: 'show', id: movementInstance.id
+		redirect action:"index", method:"GET"
 		
 	}
 	@Transactional
@@ -185,7 +190,7 @@ class FiController {
 		movementInstance.checked = false
 		movementInstance.save flush: true
 		flash.message = message(code: 'movement.unchecked.message')
-		redirect action: 'show', id: movementInstance.id
+		redirect action:"index", method:"GET"
 	}
 
     protected void notFound() {

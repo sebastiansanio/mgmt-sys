@@ -11,6 +11,15 @@
 	</div>
 </div>
 
+<g:if test="${movementInstance.number}">
+<div class="col-md-2" >
+	<label for="toString" class="control-label"><g:message code="movement.label" /></label>
+	<div>
+		<g:field type="text" disabled="true" class="form-control mayus" name="toString" value="${movementInstance.toString()}"/>
+	</div>
+</div>
+</g:if>
+
 </div>
 
 <div id="items" class="table-responsive">

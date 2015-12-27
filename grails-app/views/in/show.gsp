@@ -25,7 +25,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="movement.number.label" default="Number" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: movementInstance, field: "number")}</td>
+				<td valign="top" class="value">${movementInstance.number}</td>
 				
 			</tr>
 		
@@ -92,6 +92,13 @@
 			</g:form>
 		</sec:access>
 	</g:else>
+	<sec:access url="/op/delete">
+	<g:form action="delete">
+		<g:hiddenField name="_method" value="DELETE" />
+		<g:hiddenField name="id" value="${movementInstance.id}" />
+		<g:submitButton onclick="if(!confirm('${message(code:'default.delete.confirm.message')}')) event.preventDefault();" class="btn btn-danger margin-top-medium" name="delete" value="${message(code:'default.button.delete.label') }" /> 
+	</g:form>
+	</sec:access>	
 	
 	
 </section>

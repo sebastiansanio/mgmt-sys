@@ -73,6 +73,15 @@
 		
 		</tbody>
 	</table>
+	
+<sec:access url="/supplierBudget/delete">
+	<g:form action="delete">
+		<g:hiddenField name="_method" value="DELETE" />
+		<g:hiddenField name="id" value="${supplierBudgetInstance.id}" />
+		<g:submitButton onclick="if(!confirm('${message(code:'default.delete.confirm.message')}')) event.preventDefault();" class="btn btn-danger" name="delete" value="${message(code:'default.button.delete.label') }" /> 
+	</g:form>
+</sec:access>
+	
 </section>
 
 </body>
