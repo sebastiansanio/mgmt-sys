@@ -10,10 +10,16 @@
 
 <body>
 
-<div class="row">
+<div class="row margin-top-medium">
 <g:form action="search" method="get" >
 <div class="col-md-2">
 <g:select class="form-control" from="['all','checked','notChecked']" valueMessagePrefix="movement.checked" name="checked" value="${params.checked}" />
+</div>
+<div class="col-md-2">
+<g:field type="number" placeholder="${message(code:'movement.number.label')}" class="form-control" name="number" value="${params.number}" />
+</div>
+<div class="col-md-2">
+<g:field type="number" placeholder="${message(code:'movement.year.label')}" class="form-control" name="year" value="${params.year}" />
 </div>
 <div class="col-md-2">
 <g:actionSubmit class="btn btn-default" value="${message(code:'default.filter.label')}" action="search" />
@@ -50,7 +56,7 @@
 				<td>${movementInstance.number}</td>
 				<td>${movementInstance.year}</td>
 				<td class="center-aligned"><g:formatDate date="${movementInstance.dateCreated}"/></td>
-				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${movementInstance.calculateItemsTotal()}" /></td>
+				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${movementInstance.amount}" /></td>
 				<td class="center-aligned">
 				<g:if test="${!movementInstance.checked}">
 					<sec:access url="/os/check">
@@ -73,11 +79,13 @@
 				<td class="center-aligned"><g:link target="_blank" controller="report" action="downloadReport" id="${mgmt.reports.Report.findByCode("op").id}" params="${[movement_id:movementInstance.id]}"><span class="glyphicon glyphicon-download-alt"></span></g:link></td>
 				
 				<sec:access url="/os/delete"><td class="center-aligned">
+				<g:if test="${!movementInstance.checked}">
 				<g:form action="delete">
 					<g:hiddenField name="_method" value="DELETE" />
 					<g:hiddenField name="id" value="${movementInstance.id}" />
 					<button onclick="if(!confirm('${message(code:'default.delete.confirm.message')}')) event.preventDefault();" class="btn btn-danger btn-xs" name="delete"><span class="glyphicon glyphicon-trash"></span> </button>
 				</g:form>
+				</g:if>
 				</td></sec:access>
 				<td>${movementInstance.note}</td>
 			</tr>

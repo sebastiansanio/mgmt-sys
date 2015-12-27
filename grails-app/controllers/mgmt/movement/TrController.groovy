@@ -19,18 +19,27 @@ class TrController {
     }
 	 
 	def search(Integer max) {
-		 if(params.checked == "all"){
-			 redirect action: 'index'
-		 }
-		 params.max = Math.min(max ?: 100, 1000)
-		 params.sort = params.sort ?: 'id'
-		 params.order = params.order ?: 'desc'
-		 boolean checked = (params.checked == "checked")
-		 respond Movement.findAllByCheckedAndType(checked,'tr',params), model:[movementInstanceCount: Movement.countByCheckedAndType(checked,'tr')],  view:'index'
+		params.max = Math.min(max ?: 100, 1000)
+		params.sort = params.sort ?: 'id'
+		params.order = params.order ?: 'desc'
+		
+		def results = Movement.createCriteria().list (params) {
+			if(! (params.checked == "all")){
+				eq("checked",params.checked == "checked")
+			}
+			eq("type", "tr")
+			if(params.number){
+				eq("number", params.number.toLong())
+			}
+			if(params.year){
+				eq("year", params.year.toInteger())
+			}
+			order(params.sort, params.order)
+		}
+		
+		respond results, model:[movementInstanceCount: results.totalCount],  view:'index'
 	}
 	 
-	 
-
     def show(Movement movementInstance) {
 		if (movementInstance == null || movementInstance.type != 'tr') {
 			notFound()
@@ -81,11 +90,6 @@ class TrController {
 			notFound()
 			return
 		}
-		if(movementInstance.checked){
-			flash.error = message(code: 'movement.isChecked.error')
-			redirect action:"index", method:"GET"
-			return
-		}
         respond movementInstance
     }
 
@@ -133,7 +137,11 @@ class TrController {
             notFound()
             return
         }
-
+		if(movementInstance.checked){
+			flash.error = message(code: 'movement.isChecked.error')
+			redirect action:"index", method:"GET"
+			return
+		}
         movementInstance.delete flush:true
 
         request.withFormat {
