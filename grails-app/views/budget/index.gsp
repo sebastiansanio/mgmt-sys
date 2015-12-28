@@ -26,7 +26,6 @@
 	<table class="table table-bordered margin-top-medium">
 		<thead>
 			<tr>
-				<th class="center-aligned">${message(code:'default.show.label')}</th>
 				<th class="center-aligned">${message(code:'default.edit.label')}</th>
 				<g:sortableColumn class="center-aligned" params="${params}" property="name" title="${message(code: 'budget.name.label')}" />
 				<g:sortableColumn class="center-aligned" params="${params}" property="code" title="${message(code: 'budget.code.label')}" />
@@ -41,16 +40,24 @@
 		<tbody>
 		<g:each in="${budgetInstanceList}" status="i" var="budgetInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-				<td class="center-aligned"><g:link action="show" id="${budgetInstance.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
 				<td class="center-aligned"><g:link action="edit" id="${budgetInstance.id}"><span class="glyphicon glyphicon-pencil"></span></g:link></td>
 				<td>${fieldValue(bean: budgetInstance, field: "name")}</td>
 				<td>${budgetInstance.code}</td>
 				<td>${fieldValue(bean: budgetInstance, field: "client")}</td>
-				<td>${mgmt.work.Work.findByBudget(budgetInstance)?.code}</td>
+				<td>${mgmt.work.Work.findByBudget(budgetInstance)?.code}
+				<g:if test="${!budgetInstance.hasWork}">
+					<sec:access url="/budget/generateWork">
+						<g:form action="generateWork" id="${budgetInstance.id}">
+							<g:submitButton onclick="confirmGenerateWork(event);" class="btn btn-primary btn-xs" name="generateWork" value="${message(code:'work.generateWork.message')}" />
+						</g:form>
+					</sec:access>
+				</g:if>
+				
+				</td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${budgetInstance.directCosts}" /></td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${budgetInstance.generalExpendures}" /></td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${budgetInstance.totalAmount}" /></td>
-				<td><g:formatDate date="${budgetInstance.dateCreated}" /></td>
+				<td class="center-aligned"><g:formatDate date="${budgetInstance.dateCreated}" /></td>
 			</tr>
 		</g:each>
 		</tbody>
@@ -59,6 +66,16 @@
 		<bs:paginate total="${budgetInstanceCount}" />
 	</div>
 </section>
+
+
+<script>
+function confirmGenerateWork(event){
+	if(!confirm("${message(code:'work.generateWork.confirm.message')}")){
+		event.preventDefault();
+	}
+}
+</script>
+
 
 </body>
 

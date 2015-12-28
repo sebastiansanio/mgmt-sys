@@ -1,18 +1,16 @@
 <%@ page import="mgmt.persons.Client" %>
 
-
+			<div class="${hasErrors(bean: clientInstance, field: 'businessName', 'has-error')} ">
+				<label for="businessName" class="control-label"><g:message code="client.businessName.label" default="Business Name" /></label>
+				<div>
+					<g:textField onchange="fillName();" class="mayus form-control" name="businessName" value="${clientInstance?.businessName}"/>
+				</div>
+			</div>
 
 			<div class="${hasErrors(bean: clientInstance, field: 'name', 'has-error')} ">
 				<label for="name" class="control-label"><g:message code="client.name.label" default="Name" /></label>
 				<div>
 					<g:textField class="mayus form-control" name="name" value="${clientInstance?.name}"/>
-				</div>
-			</div>
-
-			<div class="${hasErrors(bean: clientInstance, field: 'businessName', 'has-error')} ">
-				<label for="businessName" class="control-label"><g:message code="client.businessName.label" default="Business Name" /></label>
-				<div>
-					<g:textField class="mayus form-control" name="businessName" value="${clientInstance?.businessName}"/>
 				</div>
 			</div>
 
@@ -65,4 +63,12 @@
 		});
 	
 	});
+
+	function fillName(){
+		if($("#name").val().length == 0){
+			$("#name").val($("#businessName").val());
+		}
+	}
+	
+	
 </script>

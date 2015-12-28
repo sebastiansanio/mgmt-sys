@@ -15,19 +15,15 @@
 	<table class="table table-bordered margin-top-medium">
 		<thead>
 			<tr>
-				<th>${message(code:'default.show.label')}</th>
-			
+				<th>${message(code:'default.edit.label')}</th>
 				<g:sortableColumn property="authority" title="${message(code: 'secAuthority.authority.label', default: 'Authority')}" />
-			
 			</tr>
 		</thead>
 		<tbody>
 		<g:each in="${secAuthorityInstanceList}" status="i" var="secAuthorityInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-				<td><g:link action="show" id="${secAuthorityInstance.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
-			
+				<td><g:link action="edit" id="${secAuthorityInstance.id}"><span class="glyphicon glyphicon-pencil"></span></g:link></td>
 				<td>${fieldValue(bean: secAuthorityInstance, field: "authority")}</td>
-			
 			</tr>
 		</g:each>
 		</tbody>

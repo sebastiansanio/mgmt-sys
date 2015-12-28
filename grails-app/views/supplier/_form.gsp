@@ -1,18 +1,16 @@
 <%@ page import="mgmt.persons.Supplier" %>
 
-
-
+			<div class="${hasErrors(bean: supplierInstance, field: 'businessName', 'has-error')} ">
+				<label for="businessName" class="control-label"><g:message code="supplier.businessName.label" default="Business Name" /><span class="required-indicator">*</span></label>
+				<div>
+					<g:textField onchange="fillName();" required="" class="mayus form-control" name="businessName" value="${supplierInstance?.businessName}"/>
+				</div>
+			</div>
+			
 			<div class="${hasErrors(bean: supplierInstance, field: 'name', 'has-error')} ">
 				<label for="name" class="control-label"><g:message code="supplier.name.label" default="Name" /><span class="required-indicator">*</span></label>
 				<div>
 					<g:textField required="" class="mayus form-control" name="name" value="${supplierInstance?.name}"/>
-				</div>
-			</div>
-
-			<div class="${hasErrors(bean: supplierInstance, field: 'businessName', 'has-error')} ">
-				<label for="businessName" class="control-label"><g:message code="supplier.businessName.label" default="Business Name" /><span class="required-indicator">*</span></label>
-				<div>
-					<g:textField required="" class="mayus form-control" name="businessName" value="${supplierInstance?.businessName}"/>
 				</div>
 			</div>
 
@@ -63,6 +61,11 @@
 		$(".mayus" ).each(function( index ) {
 			$(this).val($(this).val().toUpperCase());
 		});
-	
 	});
+
+	function fillName(){
+		if($("#name").val().length == 0){
+			$("#name").val($("#businessName").val());
+		}
+	}
 </script>

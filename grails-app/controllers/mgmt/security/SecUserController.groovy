@@ -94,7 +94,7 @@ class SecUserController {
             notFound()
             return
         }
-
+		SecUserSecAuthority.findAllBySecUser(secUserInstance)*.delete(flush: true)
         secUserInstance.delete flush:true
 
         request.withFormat {

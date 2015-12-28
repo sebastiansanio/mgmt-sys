@@ -15,7 +15,6 @@
 	<table class="table table-bordered margin-top-medium">
 		<thead>
 			<tr>
-				<th class="center-aligned">${message(code:'default.show.label')}</th>
 				<th class="center-aligned">${message(code:'default.edit.label')}</th>
 				<th class="center-aligned"><g:message code="supplierBudget.work.label" default="Work" /></th>
 				<th class="center-aligned"><g:message code="supplierBudget.supplier.label" default="Supplier" /></th>
@@ -26,14 +25,16 @@
 				<th class="center-aligned"><g:message code="supplierBudget.expendedIva.label" /></th>
 				<th class="center-aligned"><g:message code="supplierBudget.remainingAmount.label" /></th>
 				<th class="center-aligned"><g:message code="supplierBudget.remainingIva.label" /></th>
-				<g:sortableColumn class="center-aligned" property="dateCreated" title="${message(code: 'default.dateCreated.label')}" />
+				<g:sortableColumn class="center-aligned" property="dateCreated" title="${message(code: 'supplierBudget.dateCreated.label')}" />
+				<sec:access url="/supplierBudget/delete">
+					<th class="center-aligned">${message(code:'default.button.delete.label')}</th>
+				</sec:access>			
 				<th class="center-aligned"><g:message code="supplierBudget.note.label" /></th>
 			</tr>
 		</thead>
 		<tbody>
 		<g:each in="${supplierBudgetInstanceList}" status="i" var="supplierBudgetInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-				<td class="center-aligned"><g:link action="show" id="${supplierBudgetInstance.id}"><span class="glyphicon glyphicon-eye-open"></span></g:link></td>
 				<td class="center-aligned"><g:link action="edit" id="${supplierBudgetInstance.id}"><span class="glyphicon glyphicon-pencil"></span></g:link></td>
 				<td>${fieldValue(bean: supplierBudgetInstance, field: "work")}</td>
 				<td>${fieldValue(bean: supplierBudgetInstance, field: "supplier")}</td>
@@ -45,9 +46,17 @@
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${realExpendures.expendedIva}" /></td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${realExpendures.remainingAmount}" /></td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${realExpendures.remainingIva}" /></td>
-				<td><g:formatDate date="${supplierBudgetInstance.dateCreated}" />
+				<td class="center-aligned"><g:formatDate date="${supplierBudgetInstance.dateCreated}"/></td>
+				<sec:access url="/supplierBudget/delete">
+					<td class="center-aligned">
+						<g:form action="delete">
+							<g:hiddenField name="_method" value="DELETE" />
+							<g:hiddenField name="id" value="${supplierBudgetInstance.id}" />
+							<button onclick="if(!confirm('${message(code:'default.delete.confirm.message')}')) event.preventDefault();" class="btn btn-danger btn-xs" name="delete"><span class="glyphicon glyphicon-trash"></span> </button>
+						</g:form>
+					</td>
+				</sec:access>
 				<td>${fieldValue(bean: supplierBudgetInstance, field: "note")}</td>
-				</td>
 			</tr>
 		</g:each>
 		</tbody>
