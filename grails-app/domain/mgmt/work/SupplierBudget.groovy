@@ -26,12 +26,9 @@ class SupplierBudget {
 	
 	Date date
 	
-	Integer code
-	
     static constraints = {
 		note blank: true, nullable: true, maxSize: 4000
 		date nullable: true
-		code nullable: true
     }
 	
 	Map getRealExpendures(){

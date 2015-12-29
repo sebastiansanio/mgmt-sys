@@ -19,12 +19,14 @@ class ConceptController {
 	
     def index(Integer max) {
         params.max = Math.min(max ?: 100, 1000)
+		params.sort = params.sort ?: 'code'
+		params.order = params.order ?: 'asc'
         respond Concept.list(params), model:[conceptInstanceCount: Concept.count()]
     }
 	
 	def search(Integer max) {
-		params.sort = params.sort ?: 'dateCreated'
-		params.order = params.order ?: 'desc'
+		params.sort = params.sort ?: 'code'
+		params.order = params.order ?: 'asc'
 		String descriptionAdjusted = "%"+params.description+"%"
 		String codeAdjusted = "%"+params.code+"%"
 		def results = Concept.createCriteria().list () {

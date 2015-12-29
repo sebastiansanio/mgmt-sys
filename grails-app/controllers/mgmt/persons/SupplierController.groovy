@@ -20,6 +20,8 @@ class SupplierController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 100, 1000)
+		params.sort = params.sort ?: 'name'
+		params.order = params.order ?: 'asc'
         respond Supplier.list(params), model:[supplierInstanceCount: Supplier.count()]
     }
 	
@@ -39,6 +41,8 @@ class SupplierController {
 	
 	def search(Integer max) {
 		params.max = Math.min(max ?: 100, 1000)
+		params.sort = params.sort ?: 'name'
+		params.order = params.order ?: 'asc'
 		String nameQuery = "%"+params.name+"%"
 		respond Supplier.findAllByNameLikeOrBusinessNameLike(nameQuery,nameQuery,params), model:[supplierInstanceCount: Supplier.countByNameLike(nameQuery)],  view:'index'
 	}

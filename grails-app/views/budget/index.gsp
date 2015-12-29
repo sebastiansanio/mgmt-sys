@@ -27,22 +27,23 @@
 		<thead>
 			<tr>
 				<th class="center-aligned">${message(code:'default.edit.label')}</th>
-				<g:sortableColumn class="center-aligned" params="${params}" property="name" title="${message(code: 'budget.name.label')}" />
+				<g:sortableColumn class="center-aligned" params="${params}" property="dateCreated" title="${message(code: 'budget.dateCreated.label', default: 'Date Created')}" />
 				<g:sortableColumn class="center-aligned" params="${params}" property="code" title="${message(code: 'budget.code.label')}" />
+				<g:sortableColumn class="center-aligned" params="${params}" property="name" title="${message(code: 'budget.name.label')}" />
 				<th class="center-aligned"><g:message code="budget.client.label" default="Client" /></th>
 				<g:sortableColumn class="center-aligned" params="${params}" property="work.code" title="${message(code: 'work.label')}" />
 				<g:sortableColumn class="center-aligned" params="${params}" property="directCosts" title="CDO (A-K)" />
 				<th class="center-aligned">GGO (L)</th>
 				<g:sortableColumn class="center-aligned" params="${params}" property="totalAmount" title="PV" />
-				<g:sortableColumn class="center-aligned" params="${params}" property="dateCreated" title="${message(code: 'budget.dateCreated.label', default: 'Date Created')}" />
 			</tr>
 		</thead>
 		<tbody>
 		<g:each in="${budgetInstanceList}" status="i" var="budgetInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 				<td class="center-aligned"><g:link action="edit" id="${budgetInstance.id}"><span class="glyphicon glyphicon-pencil"></span></g:link></td>
-				<td>${fieldValue(bean: budgetInstance, field: "name")}</td>
+				<td class="center-aligned"><g:formatDate date="${budgetInstance.dateCreated}" /></td>
 				<td>${budgetInstance.code}</td>
+				<td>${fieldValue(bean: budgetInstance, field: "name")}</td>
 				<td>${fieldValue(bean: budgetInstance, field: "client")}</td>
 				<td>${mgmt.work.Work.findByBudget(budgetInstance)?.code}
 				<g:if test="${!budgetInstance.hasWork}">
@@ -57,7 +58,6 @@
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${budgetInstance.directCosts}" /></td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${budgetInstance.generalExpendures}" /></td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${budgetInstance.totalAmount}" /></td>
-				<td class="center-aligned"><g:formatDate date="${budgetInstance.dateCreated}" /></td>
 			</tr>
 		</g:each>
 		</tbody>

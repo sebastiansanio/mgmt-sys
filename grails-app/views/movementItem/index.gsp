@@ -32,9 +32,9 @@
 				<g:sortableColumn params="${params}" class="center-aligned" property="invoiceNumber" title="${message(code: 'movementItem.invoiceNumber.label', default: 'Invoice Number')}" />
 				<th class="center-aligned"><g:message code="movementItem.concept.label" default="Concept" /></th>
 				<g:sortableColumn params="${params}" class="center-aligned" property="date" title="${message(code: 'movementItem.date.label', default: 'Date')}" />
-				<th class="center-aligned"><g:message code="movement.type.label" /></th>
-				<th class="center-aligned"><g:message code="movement.number.label" /></th>
-				<th class="center-aligned"><g:message code="movement.year.label" /></th>
+				<g:sortableColumn params="${params}" class="center-aligned" property="movement.type" title="${message(code: 'movement.type.label')}" />
+				<g:sortableColumn params="${params}" class="center-aligned" property="movement.number" title="${message(code: 'movement.number.label')}" />
+				<g:sortableColumn params="${params}" class="center-aligned" property="movement.year" title="${message(code: 'movement.year.label')}" />
 				<g:sortableColumn params="${params}" class="center-aligned" property="amount" title="${message(code: 'movementItem.amount.label', default: 'Amount')}" />
 				<g:sortableColumn params="${params}" class="center-aligned" property="iva" title="${message(code: 'movementItem.iva.label')}" />
 				<g:sortableColumn params="${params}" class="center-aligned" property="iibb" title="${message(code: 'movementItem.iibb.label')}" />

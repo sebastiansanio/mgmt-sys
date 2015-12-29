@@ -16,6 +16,7 @@
 		<thead>
 			<tr>
 				<th class="center-aligned">${message(code:'default.edit.label')}</th>
+				<th class="center-aligned">${message(code:'supplierBudget.id.label')}</th>
 				<th class="center-aligned"><g:message code="supplierBudget.work.label" default="Work" /></th>
 				<th class="center-aligned"><g:message code="supplierBudget.supplier.label" default="Supplier" /></th>
 				<th class="center-aligned"><g:message code="supplierBudget.concept.label" default="Concept" /></th>
@@ -36,6 +37,7 @@
 		<g:each in="${supplierBudgetInstanceList}" status="i" var="supplierBudgetInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 				<td class="center-aligned"><g:link action="edit" id="${supplierBudgetInstance.id}"><span class="glyphicon glyphicon-pencil"></span></g:link></td>
+				<td>${supplierBudgetInstance.id}</td>
 				<td>${fieldValue(bean: supplierBudgetInstance, field: "work")}</td>
 				<td>${fieldValue(bean: supplierBudgetInstance, field: "supplier")}</td>
 				<td>${fieldValue(bean: supplierBudgetInstance, field: "concept")}</td>

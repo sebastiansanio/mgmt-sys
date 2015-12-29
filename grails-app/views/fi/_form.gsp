@@ -18,6 +18,13 @@
 		<g:field type="text" disabled="true" class="form-control mayus" name="toString" value="${movementInstance.toString()}"/>
 	</div>
 </div>
+
+<div class="col-md-1" >
+	<label for="dateCreated" class="control-label"><g:message code="movement.dateCreated.label" /></label>
+	<div>
+		<g:field type="text" disabled="true" class="form-control mayus" name="dateCreated" value="${movementInstance.dateCreated?.format("dd/MM/yyyy")}"/>
+	</div>
+</div>
 </g:if>
 
 </div>
@@ -26,15 +33,15 @@
 	<table class="table table-condensed table-bordered">
 		<thead>
 			<tr>
-				<th>${message(code: 'movementItem.workFrom.label')}</th>
-				<th>${message(code: 'movementItem.workTo.label')}</th>
-				<th>${message(code: 'movementItem.concept.label')}</th>
-				<th>${message(code: 'movementItem.description.label')}</th>
-				<th>${message(code: 'movementItem.unit.label')}</th>
-				<th>${message(code: 'movementItem.quantity.label')}</th>
-				<th>${message(code: 'movementItem.unitPrice.label')}</th>
-				<th>${message(code: 'movementItem.amount.label')}</th>
-				<th>${message(code: 'default.button.delete.label')}</th>
+				<th class="center-aligned vertical-center-aligned">${message(code: 'movementItem.workFrom.label')}</th>
+				<th class="center-aligned vertical-center-aligned">${message(code: 'movementItem.workTo.label')}</th>
+				<th class="center-aligned vertical-center-aligned">${message(code: 'movementItem.concept.label')}</th>
+				<th class="center-aligned vertical-center-aligned">${message(code: 'movementItem.description.label')}</th>
+				<th class="center-aligned vertical-center-aligned">${message(code: 'movementItem.unit.label')}</th>
+				<th class="center-aligned vertical-center-aligned">${message(code: 'movementItem.quantity.label')}</th>
+				<th class="center-aligned vertical-center-aligned">${message(code: 'movementItem.unitPrice.label')}</th>
+				<th class="center-aligned vertical-center-aligned">${message(code: 'movementItem.amount.label')}</th>
+				<th class="center-aligned vertical-center-aligned">${message(code: 'default.button.delete.label')}</th>
 			</tr>
 		</thead>
 		<tbody id="items-table">
@@ -43,13 +50,13 @@
 				<tr class="form-inline" id="items-${itemPosition*2}">
 					<td class="td-intableform"><g:select class="position-0 input-intableform form-control" id="items[${itemPosition*2}].work" name="items[${itemPosition*2}].work.id" from="${mgmt.work.Work.findAllByFinishedOrId(false,movementInstance.items[itemPosition*2]?.work?.id)}" optionKey="id" required="" value="${movementInstance.items[itemPosition*2]?.work?.id}"/></td>
 					<td class="td-intableform"><g:select class="position-1 input-intableform form-control" id="items[${itemPosition*2+1}].work" name="items[${itemPosition*2+1}].work.id" from="${mgmt.work.Work.findAllByFinishedOrId(false,movementInstance.items[itemPosition*2+1]?.work?.id)}" optionKey="id" required="" value="${movementInstance.items[itemPosition*2+1]?.work?.id}"/></td>
-					<td class="td-intableform"><g:select class="position-0 input-intableform form-control" id="items[${itemPosition*2}].concept" name="items[${itemPosition*2}].concept.id" from="${mgmt.concept.Concept.findAllByValidInFiWork(true)}" optionKey="id" required="" value="${movementInstance.items[itemPosition*2]?.concept?.id}"/></td>
+					<td class="td-intableform"><g:select class="position-0 input-intableform form-control" id="items[${itemPosition*2}].concept" name="items[${itemPosition*2}].concept.id" from="${mgmt.concept.Concept.findAllByValidInFiWork(true,[sort:'code',order:'asc'])}" optionKey="id" required="" value="${movementInstance.items[itemPosition*2]?.concept?.id}"/></td>
 					<td class="td-intableform"><g:textArea cols="60" class="position-0 mayus input-intableform form-control" name="items[${itemPosition*2}].description" value="${movementInstance.items[itemPosition*2]?.description}"/></td>
 					<td class="td-intableform"><g:select class="position-0 input-intableform form-control" id="items[${itemPosition*2}].unit.id" name="items[${itemPosition*2}].unit.id" from="${mgmt.products.UnitOfMeasurement.list()}" optionKey="id" required="" value="${movementInstance.items[itemPosition*2]?.unit?.id}"/></td>
 					<td class="td-intableform"><g:field onchange="refreshTotal('${itemPosition*2}');" type="text" class="position-0 input-intableform form-control numberinput right-aligned" id="quantity-${itemPosition*2}" name="items[${itemPosition*2}].quantity" value="${movementInstance.items[itemPosition*2]?.quantity}" required=""/></td>
 					<td class="td-intableform"><g:field onchange="refreshTotal('${itemPosition*2}');" type="text" class="position-0 input-intableform form-control numberinput right-aligned" id="unitPrice-${itemPosition*2}" name="items[${itemPosition*2}].unitPrice" value="${movementInstance.items[itemPosition*2]?.unitPrice}" required=""/></td>
 					<td class="td-intableform"><g:field type="text" class="position-0 input-intableform form-control field-amount right-aligned" id="amount-${itemPosition*2}" name="items[${itemPosition*2}].amount" value="${movementInstance.items[itemPosition*2]?.amount}" required=""/></td>
-					<td><button type="button" onclick="$('#items-${itemPosition*2}').remove();refreshTotals();"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
+					<td class="center-aligned"><button type="button" onclick="$('#items-${itemPosition*2}').remove();refreshTotals();"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
 				</tr>
 			</g:each>
 			</g:if>
@@ -72,13 +79,13 @@
 	<tr class="form-inline" id="item-model">
 		<td class="td-intableform"><g:select disabled="disabled" class="position-0 input-intableform form-control" name="items[xyz].work.id" from="${mgmt.work.Work.findAllByFinished(false)}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="position-1 input-intableform form-control" name="items[xyz].work.id" from="${mgmt.work.Work.findAllByFinished(false)}" optionKey="id" required="" value=""/></td>
-		<td class="td-intableform"><g:select disabled="disabled" class="position-0 input-intableform form-control" name="items[xyz].concept.id" from="${mgmt.concept.Concept.findAllByValidInFiWork(true)}" optionKey="id" required="" value=""/></td>
+		<td class="td-intableform"><g:select disabled="disabled" class="position-0 input-intableform form-control" name="items[xyz].concept.id" from="${mgmt.concept.Concept.findAllByValidInFiWork(true,[sort:'code',order:'asc'])}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:textArea cols="60" disabled="disabled" class="position-0 mayus input-intableform form-control" name="items[xyz].description" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="position-0 input-intableform form-control" name="items[xyz].unit.id" from="${mgmt.products.UnitOfMeasurement.list()}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:field type="text" disabled="disabled" class="position-0 input-intableform form-control numberinput right-aligned" id="quantity-xyz" name="items[xyz].quantity" value="" required=""/></td>
 		<td class="td-intableform"><g:field type="text" disabled="disabled" class="position-0 input-intableform form-control numberinput right-aligned" id="unitPrice-xyz" name="items[xyz].unitPrice" value="" required=""/></td>
 		<td class="td-intableform"><g:field type="text" disabled="disabled" class="position-0 input-intableform form-control field-amount right-aligned" id="amount-xyz" name="items[xyz].amount" value="" required=""/></td>
-		<td><button type="button" class="deleteButton" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
+		<td class="center-aligned"><button type="button" class="deleteButton" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
 	</tr>
 </table>
 

@@ -19,6 +19,8 @@ class ClientController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 100, 1000)
+		params.sort = params.sort ?: 'name'
+		params.order = params.order ?: 'asc'
         respond Client.list(params), model:[clientInstanceCount: Client.count()]
     }
 	
@@ -38,6 +40,8 @@ class ClientController {
 	
 	def search(Integer max) {
 		params.max = Math.min(max ?: 100, 1000)
+		params.sort = params.sort ?: 'name'
+		params.order = params.order ?: 'asc'
 		String nameQuery = "%"+params.name+"%"
 		respond Client.findAllByNameLikeOrBusinessNameLike(nameQuery,nameQuery,params), model:[clientInstanceCount: Client.countByNameLike(nameQuery)],  view:'index'
 	}

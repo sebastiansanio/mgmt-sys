@@ -24,7 +24,7 @@
 		<g:each in="${conceptAccountInstanceList}" status="i" var="conceptAccountInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 				<td class="center-aligned"><g:link action="edit" id="${conceptAccountInstance.id}"><span class="glyphicon glyphicon-pencil"></span></g:link></td>
-				<td class="center-aligned">${fieldValue(bean: conceptAccountInstance, field: "name")}</td>
+				<td>${fieldValue(bean: conceptAccountInstance, field: "name")}</td>
 				<td class="center-aligned"><g:formatDate date="${conceptAccountInstance.dateCreated}"/></td>
 			</tr>
 		</g:each>

@@ -1,7 +1,7 @@
 <sec:ifLoggedIn>
 	<g:set var="menu" value="${
 	[movement: ["op", "os", "in", "fi", "tr", "movementItem" ],
-	account: ["account","accountTypeStatus","accountStatus"],
+	account: ["account","accountTypeStatus"],
 	concept: ["concept","conceptGroup","conceptAccount"],
 	budget: ["budget","work","client"],
 	balance: ["income","expenses","netting","balance"],
@@ -38,7 +38,7 @@
 				<li class="${activeMark}"><a href="#menuGroup${menuItem}"
 					aria-controls="menuGroup${menuItem}" data-toggle="tab"><span
 						class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
-						${message(code:'menuGroup.'+menuItem+'.label') }</a></li>
+						<strong>${message(code:'menuGroup.'+menuItem+'.label') }</strong></a></li>
 						
 				</g:if>
 			</g:each>

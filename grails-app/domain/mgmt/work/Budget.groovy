@@ -49,16 +49,17 @@ class Budget {
 	})
 	BigDecimal totalAmount
 	boolean hasWork
-
 	
 	List items = new ArrayList()
 	Long code
 	
 	static hasMany = [items: BudgetItem]
-
+	static hasOne = [work: Work]
+	
     static constraints = {
 		client nullable: true
 		code nullable: false, unique: true
+		work nullable: true
     }
 	
 	String toString(){

@@ -52,9 +52,9 @@
 		<g:each in="${movementInstanceList}" status="i" var="movementInstance">
 			<tr class="${movementInstance.checked ? 'checked-movement' : ''}">
 				<td class="center-aligned"><g:link action="edit" id="${movementInstance.id}"><span class="glyphicon glyphicon glyphicon-pencil"></span></g:link></td>
-				<td><g:message code="movement.type.${movementInstance.type}" /></td>
-				<td>${movementInstance.number}</td>
-				<td>${movementInstance.year}</td>
+				<td class="center-aligned important-bold"><g:message code="movement.type.${movementInstance.type}" /></td>
+				<td class="center-aligned important-bold">${movementInstance.number}</td>
+				<td class="center-aligned important-bold">${movementInstance.year}</td>
 				<td class="center-aligned"><g:formatDate date="${movementInstance.dateCreated}"/></td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${movementInstance.amount}" /></td>
 				<sec:access url="/op/check">

@@ -102,3 +102,6 @@ footer {
 .margin-top-medium{
 	margin-top: 5px;
 }
+.vertical-center-aligned{
+	vertical-align: middle !important;
+}

@@ -11,7 +11,7 @@
 <body>
 
 <section id="index-concept" class="first">
-<div class="row">
+<div class="row margin-top-medium">
 <g:form action="search" method="get" >
 <div class="col-md-2">
 <g:textField placeholder="${message(code:'concept.description.label')}" class="form-control" name="description" value="${params.description}" />
