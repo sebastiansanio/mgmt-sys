@@ -1,5 +1,6 @@
 package mgmt.persons
 import mgmt.movement.MovementItem
+import mgmt.work.SupplierBudget
 
 class Supplier {
 	Date dateCreated
@@ -14,7 +15,7 @@ class Supplier {
 	String zipCode
 	String note
 	
-	static hasMany = [movements: MovementItem]
+	static hasMany = [movements: MovementItem, budgets: SupplierBudget]
 	
     static constraints = {
 		name unique: true

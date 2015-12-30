@@ -15,14 +15,14 @@
 <div class="col-md-2" >
 	<label for="toString" class="control-label"><g:message code="movement.label" /></label>
 	<div>
-		<g:field type="text" disabled="true" class="form-control mayus" name="toString" value="${movementInstance.toString()}"/>
+		<g:field type="text" disabled="true" class="form-control mayus importantBig" name="toString" value="${movementInstance.toString()}"/>
 	</div>
 </div>
 
 <div class="col-md-1" >
 	<label for="dateCreated" class="control-label"><g:message code="movement.dateCreated.label" /></label>
 	<div>
-		<g:field type="text" disabled="true" class="form-control mayus" name="dateCreated" value="${movementInstance.dateCreated?.format("dd/MM/yyyy")}"/>
+		<g:field type="text" disabled="true" class="form-control mayus importantBig" name="dateCreated" value="${movementInstance.dateCreated?.format("dd/MM/yyyy")}"/>
 	</div>
 </div>
 </g:if>
@@ -51,7 +51,7 @@
 				<tr class="form-inline" id="items-${i}">
 					<td class="td-intableform"><g:select onchange="refreshConcepts('${i}');" noSelection="${['null':'00 - Gastos generales']}" class="input-intableform form-control" id="work-${i}" name="items[${i}].work.id" from="${mgmt.work.Work.findAllByFinishedOrId(false,movementItemInstance?.work?.id,[sort:'code'])}" optionKey="id" required="" value="${movementItemInstance?.work?.id}"/></td>
 					<td class="td-intableform"><g:select class="input-intableform form-control ${movementItemInstance.work?'conceptsWork':'conceptsNoWork'}" id="concept-${i}" name="items[${i}].concept.id" from="${[movementItemInstance?.concept]}" optionKey="id" required="" value="${movementItemInstance?.concept?.id}"/></td>
-					<td class="td-intableform"><g:textArea cols="60" class="mayus input-intableform form-control" name="items[${i}].description" value="${movementItemInstance?.description}"/></td>
+					<td class="td-intableform"><g:textArea cols="60" class="mayus input-intableform form-control vertical-center-aligned" name="items[${i}].description" value="${movementItemInstance?.description}"/></td>
 					<td class="td-intableform"><g:select class="input-intableform form-control" id="items[${i}].invoiceType" name="items[${i}].invoiceType.id" from="${mgmt.invoice.InvoiceType.list()}" optionKey="id" required="" value="${movementItemInstance?.invoiceType?.id}"/></td>
 					<td class="td-intableform"><g:textField class="input-intableform form-control" name="items[${i}].invoiceNumber" value="${movementItemInstance?.invoiceNumber}"/></td>
 					<td class="td-intableform"><bs:datePicker class="input-intableform form-control center-aligned" name="items[${i}].date" precision="day"  value="${movementItemInstance?.date}"  /> </td>
@@ -118,7 +118,7 @@
 	<tr class="form-inline" id="item-model">
 		<td class="td-intableform"><g:select noSelection="${['null':'00 - Gastos generales']}" disabled="disabled" class="work-model input-intableform form-control" id="work-xyz" name="items[xyz].work.id" from="${mgmt.work.Work.findAllByFinished(false,[sort:'code'])}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" id="concept-xyz" name="items[xyz].concept.id" from="${mgmt.concept.Concept.findAllByValidInInNoWork(true,[sort:'code'])}" optionKey="id" required="" value=""/></td>
-		<td class="td-intableform"><g:textArea cols="60" disabled="disabled" class="mayus input-intableform form-control" name="items[xyz].description" value=""/></td>
+		<td class="td-intableform"><g:textArea cols="60" disabled="disabled" class="mayus input-intableform form-control vertical-center-aligned" name="items[xyz].description" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" name="items[xyz].invoiceType.id" from="${mgmt.invoice.InvoiceType.list()}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:textField disabled="disabled" class="input-intableform form-control" name="items[xyz].invoiceNumber" value=""/></td>
 		<td class="td-intableform"><bs:datePicker disabled="true" class="input-intableform form-control center-aligned" name="items[xyz].date" precision="day"  value=""  /> </td>

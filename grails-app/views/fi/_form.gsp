@@ -15,14 +15,14 @@
 <div class="col-md-2" >
 	<label for="toString" class="control-label"><g:message code="movement.label" /></label>
 	<div>
-		<g:field type="text" disabled="true" class="form-control mayus" name="toString" value="${movementInstance.toString()}"/>
+		<g:field type="text" disabled="true" class="form-control mayus importantBig" name="toString" value="${movementInstance.toString()}"/>
 	</div>
 </div>
 
 <div class="col-md-1" >
 	<label for="dateCreated" class="control-label"><g:message code="movement.dateCreated.label" /></label>
 	<div>
-		<g:field type="text" disabled="true" class="form-control mayus" name="dateCreated" value="${movementInstance.dateCreated?.format("dd/MM/yyyy")}"/>
+		<g:field type="text" disabled="true" class="form-control mayus importantBig" name="dateCreated" value="${movementInstance.dateCreated?.format("dd/MM/yyyy")}"/>
 	</div>
 </div>
 </g:if>
@@ -51,7 +51,7 @@
 					<td class="td-intableform"><g:select class="position-0 input-intableform form-control" id="items[${itemPosition*2}].work" name="items[${itemPosition*2}].work.id" from="${mgmt.work.Work.findAllByFinishedOrId(false,movementInstance.items[itemPosition*2]?.work?.id)}" optionKey="id" required="" value="${movementInstance.items[itemPosition*2]?.work?.id}"/></td>
 					<td class="td-intableform"><g:select class="position-1 input-intableform form-control" id="items[${itemPosition*2+1}].work" name="items[${itemPosition*2+1}].work.id" from="${mgmt.work.Work.findAllByFinishedOrId(false,movementInstance.items[itemPosition*2+1]?.work?.id)}" optionKey="id" required="" value="${movementInstance.items[itemPosition*2+1]?.work?.id}"/></td>
 					<td class="td-intableform"><g:select class="position-0 input-intableform form-control" id="items[${itemPosition*2}].concept" name="items[${itemPosition*2}].concept.id" from="${mgmt.concept.Concept.findAllByValidInFiWork(true,[sort:'code',order:'asc'])}" optionKey="id" required="" value="${movementInstance.items[itemPosition*2]?.concept?.id}"/></td>
-					<td class="td-intableform"><g:textArea cols="60" class="position-0 mayus input-intableform form-control" name="items[${itemPosition*2}].description" value="${movementInstance.items[itemPosition*2]?.description}"/></td>
+					<td class="td-intableform"><g:textArea cols="60" class="position-0 mayus input-intableform form-control vertical-center-aligned" name="items[${itemPosition*2}].description" value="${movementInstance.items[itemPosition*2]?.description}"/></td>
 					<td class="td-intableform"><g:select class="position-0 input-intableform form-control" id="items[${itemPosition*2}].unit.id" name="items[${itemPosition*2}].unit.id" from="${mgmt.products.UnitOfMeasurement.list()}" optionKey="id" required="" value="${movementInstance.items[itemPosition*2]?.unit?.id}"/></td>
 					<td class="td-intableform"><g:field onchange="refreshTotal('${itemPosition*2}');" type="text" class="position-0 input-intableform form-control numberinput right-aligned" id="quantity-${itemPosition*2}" name="items[${itemPosition*2}].quantity" value="${movementInstance.items[itemPosition*2]?.quantity}" required=""/></td>
 					<td class="td-intableform"><g:field onchange="refreshTotal('${itemPosition*2}');" type="text" class="position-0 input-intableform form-control numberinput right-aligned" id="unitPrice-${itemPosition*2}" name="items[${itemPosition*2}].unitPrice" value="${movementInstance.items[itemPosition*2]?.unitPrice}" required=""/></td>
@@ -80,7 +80,7 @@
 		<td class="td-intableform"><g:select disabled="disabled" class="position-0 input-intableform form-control" name="items[xyz].work.id" from="${mgmt.work.Work.findAllByFinished(false)}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="position-1 input-intableform form-control" name="items[xyz].work.id" from="${mgmt.work.Work.findAllByFinished(false)}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="position-0 input-intableform form-control" name="items[xyz].concept.id" from="${mgmt.concept.Concept.findAllByValidInFiWork(true,[sort:'code',order:'asc'])}" optionKey="id" required="" value=""/></td>
-		<td class="td-intableform"><g:textArea cols="60" disabled="disabled" class="position-0 mayus input-intableform form-control" name="items[xyz].description" value=""/></td>
+		<td class="td-intableform"><g:textArea cols="60" disabled="disabled" class="position-0 mayus input-intableform form-control vertical-center-aligned" name="items[xyz].description" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="position-0 input-intableform form-control" name="items[xyz].unit.id" from="${mgmt.products.UnitOfMeasurement.list()}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:field type="text" disabled="disabled" class="position-0 input-intableform form-control numberinput right-aligned" id="quantity-xyz" name="items[xyz].quantity" value="" required=""/></td>
 		<td class="td-intableform"><g:field type="text" disabled="disabled" class="position-0 input-intableform form-control numberinput right-aligned" id="unitPrice-xyz" name="items[xyz].unitPrice" value="" required=""/></td>

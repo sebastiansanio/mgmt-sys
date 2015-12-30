@@ -3,9 +3,9 @@
 	[movement: ["op", "os", "in", "fi", "tr", "movementItem" ],
 	account: ["account","accountTypeStatus"],
 	concept: ["concept","conceptGroup","conceptAccount"],
-	budget: ["budget","work","client"],
+	budget: ["budget","work","client","supplierBudgetTracing"],
 	balance: ["income","expenses","netting","balance"],
-	supplier: ["supplier","supplierBudget","expensesPerSupplier"],
+	supplier: ["supplier","supplierBudget","supplierExpenses"],
 	configuration: ["accountType","unitOfMeasurement","invoiceType","requestmap","secAuthority","secUser","report","import" ]
 	]}" />
 	
@@ -34,11 +34,12 @@
 					</g:if>
 				</g:each>
 				<g:if test="${itemsQuantity > 0}" >
-				
-				<li class="${activeMark}"><a href="#menuGroup${menuItem}"
-					aria-controls="menuGroup${menuItem}" data-toggle="tab"><span
-						class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
-						<strong>${message(code:'menuGroup.'+menuItem+'.label') }</strong></a></li>
+					<li class="${activeMark}">
+						<a class="importantBig" href="#menuGroup${menuItem}" aria-controls="menuGroup${menuItem}" data-toggle="tab">
+							<span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+							${message(code:'menuGroup.'+menuItem+'.label') }
+						</a>
+					</li>
 						
 				</g:if>
 			</g:each>

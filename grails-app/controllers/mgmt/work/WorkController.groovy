@@ -11,7 +11,7 @@ class WorkController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-		params.sort = params.sort?:[type:'desc', code:'desc']
+		params.sort = !params.sort || params.sort == "{type=desc, code=desc}"?[type:'desc', code:'desc']:params.sort
 		params.order = params.order?:'desc'
 		params.max = Math.min(max ?: 100, 1000)
         respond Work.list(params), model:[workInstanceCount: Work.count()]

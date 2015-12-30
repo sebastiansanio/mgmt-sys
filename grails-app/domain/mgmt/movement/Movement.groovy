@@ -95,6 +95,6 @@ class Movement {
 	}
 	
 	String toString(){
-		return type + " " + year + "/" + number
+		return type + " " + number + "/" + (year-2000)
 	}
 }

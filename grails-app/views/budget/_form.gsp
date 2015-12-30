@@ -3,7 +3,7 @@
 <div class="col-md-4 ${hasErrors(bean: budgetInstance, field: 'name', 'has-error')} ">
 	<label for="name" class="control-label"><g:message code="budget.name.label" default="Name" /> <span class="required-indicator">*</span> </label>
 	<div>
-		<g:textField required="" class="mayusc form-control" name="name" value="${budgetInstance?.name}"/>
+		<g:textField required="" class="mayus form-control" name="name" value="${budgetInstance?.name}"/>
 	</div>
 </div>
 
@@ -261,6 +261,9 @@ $(function() {
 });
 
 $( "form" ).submit(function( event ) {
+	$(".mayus" ).each(function( index ) {
+		$(this).val($(this).val().toUpperCase());
+	});
 	$(".readonly").prop( "disabled", true );
 	$("#pvai").prop("disabled", false);
 	

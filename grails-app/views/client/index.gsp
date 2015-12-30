@@ -13,7 +13,7 @@
 <div class="row margin-top-medium">
 <g:form action="search" method="get" >
 <div class="col-md-2">
-<g:textField placeholder="${message(code:'client.name.label')}" class="form-control" name="name" value="${params.name}" />
+<g:textField placeholder="${message(code:'client.name.label')}" class="form-control mayus" name="name" value="${params.name}" />
 </div>
 <div class="col-md-2">
 <g:actionSubmit class="btn btn-default" value="${message(code:'default.search.label')}" action="search" />

@@ -10,11 +10,10 @@
 
 <body>
 
-
 <div class="row margin-top-medium">
 <g:form action="search" method="get" >
 <div class="col-md-2">
-<g:textField placeholder="${message(code:'supplier.name.label')}" class="form-control" name="name" value="${params.name}" />
+<g:textField placeholder="${message(code:'supplier.name.label')}" class="form-control mayus" name="name" value="${params.name}" />
 </div>
 <div class="col-md-2">
 <g:actionSubmit class="btn btn-default" value="${message(code:'default.search.label')}" action="search" />
@@ -57,7 +56,7 @@
 				<td class="center-aligned"><g:formatDate date="${supplierInstance.dateCreated}"/></td>
 				<sec:access url="/supplier/delete">
 					<td class="center-aligned">
-						<g:if test="${!supplierInstance.movements}">
+						<g:if test="${!supplierInstance.movements && !supplierInstance.budgets}">
 							<g:form action="delete">
 								<g:hiddenField name="_method" value="DELETE" />
 								<g:hiddenField name="id" value="${supplierInstance.id}" />

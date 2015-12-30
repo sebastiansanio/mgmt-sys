@@ -10,7 +10,7 @@
 
 <body>
 
-<div class="row">
+<div class="row margin-top-medium">
 <g:form action="search" method="get" >
 <div class="col-md-2">
 <g:field type="number" placeholder="${message(code:'work.code.label')}" class="form-control" name="code" value="${params.long('code')}" />
