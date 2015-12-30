@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="op" language="groovy" pageWidth="595" pageHeight="842" columnWidth="589" leftMargin="3" rightMargin="3" topMargin="20" bottomMargin="20" uuid="8a7719ce-943e-4e58-bcc4-17a1c4039d85">
 	<property name="ireport.zoom" value="1.24184264611831"/>
-	<property name="ireport.x" value="135"/>
-	<property name="ireport.y" value="723"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -301,7 +301,7 @@ from movement m where m.id = $P{movement_id}]]>
 				<textFieldExpression><![CDATA[$F{date_created}]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="59" y="0" width="163" height="41" uuid="c9ae072f-3aac-4375-a353-98623093ba50"/>
+				<reportElement x="25" y="0" width="134" height="31" uuid="c9ae072f-3aac-4375-a353-98623093ba50"/>
 				<imageExpression><![CDATA["http://181.170.175.122:8080/urbatec/images/Logo%20Urbatec.jpg"]]></imageExpression>
 			</image>
 		</band>
@@ -449,7 +449,7 @@ from movement m where m.id = $P{movement_id}]]>
 								<staticText>
 									<reportElement x="0" y="0" width="40" height="20" uuid="ed572fd6-6e5b-4f06-ba7d-d6cad9fbaf0f"/>
 									<textElement verticalAlignment="Middle">
-										<font size="8" isBold="true"/>
+										<font size="9" isBold="true"/>
 										<paragraph leftIndent="1"/>
 									</textElement>
 									<text><![CDATA[Totales]]></text>
@@ -482,7 +482,7 @@ from movement m where m.id = $P{movement_id}]]>
 								<textField pattern="#,##0.00">
 									<reportElement x="0" y="0" width="53" height="20" uuid="f091c4f8-f8eb-4db6-b1df-f91a398497d6"/>
 									<textElement textAlignment="Right" verticalAlignment="Middle">
-										<font size="8" isBold="true"/>
+										<font size="9" isBold="true" isStrikeThrough="false"/>
 									</textElement>
 									<textFieldExpression><![CDATA[$V{amount_tot}]]></textFieldExpression>
 								</textField>
@@ -513,7 +513,7 @@ from movement m where m.id = $P{movement_id}]]>
 								<textField pattern="#,##0.00">
 									<reportElement x="0" y="0" width="56" height="20" uuid="82f1c9c6-595c-4f43-be0c-a30bd2f4b8d9"/>
 									<textElement textAlignment="Right" verticalAlignment="Middle">
-										<font size="8" isBold="true"/>
+										<font size="9" isBold="true"/>
 									</textElement>
 									<textFieldExpression><![CDATA[$V{iva_tot}]]></textFieldExpression>
 								</textField>
@@ -544,7 +544,7 @@ from movement m where m.id = $P{movement_id}]]>
 								<textField pattern="#,##0.00">
 									<reportElement x="0" y="0" width="63" height="20" uuid="556863a0-08b0-412d-ab2b-5b6fd06c7d81"/>
 									<textElement textAlignment="Right" verticalAlignment="Middle">
-										<font size="8" isBold="true"/>
+										<font size="9" isBold="true"/>
 									</textElement>
 									<textFieldExpression><![CDATA[$V{total_tot}]]></textFieldExpression>
 								</textField>

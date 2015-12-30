@@ -76,7 +76,7 @@
 					</g:else>
 					</td>
 				</sec:access>
-				<td class="center-aligned"><g:link target="_blank" controller="report" action="downloadReport" id="${mgmt.reports.Report.findByCode("op").id}" params="${[movement_id:movementInstance.id]}"><span class="glyphicon glyphicon-download-alt"></span></g:link></td>
+				<td class="center-aligned"><g:link target="_blank" controller="report" action="downloadReport" id="${mgmt.reports.Report.findByCode("fi").id}" params="${[movement_id:movementInstance.id]}"><span class="glyphicon glyphicon-download-alt"></span></g:link></td>
 				
 				<sec:access url="/fi/delete">
 					<td class="center-aligned">

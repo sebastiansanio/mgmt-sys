@@ -14,7 +14,7 @@
 
 	<div class="col-md-4">
 	<h3>${reportInstance.name} </h3>
-	<g:form class="noblock" action="downloadReport" method="GET">
+	<g:form target="_blank" class="noblock" action="downloadReport" method="GET">
 		<g:hiddenField name="id" value="${reportInstance.id }"/>
 		
 		<table class="table">

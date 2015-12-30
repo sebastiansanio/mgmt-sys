@@ -42,7 +42,7 @@ grails.project.dependency.resolution = {
 		runtime 'mysql:mysql-connector-java:5.1.34'
 		compile 'commons-beanutils:commons-beanutils:1.8.3'
 		compile "net.sf.jasperreports:jasperreports:6.0.4"
-		
+		compile "net.sf.jasperreports:jasperreports-fonts:6.0.0"
     }
 
     plugins {
