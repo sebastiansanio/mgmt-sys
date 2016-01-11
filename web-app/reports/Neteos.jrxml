@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Informe de Saldos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27b43501-3750-42ac-ad7d-c7726c3ab552">
 	<property name="ireport.zoom" value="1.610510000000002"/>
-	<property name="ireport.x" value="210"/>
-	<property name="ireport.y" value="251"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[SELECT
 
@@ -173,22 +173,22 @@ FROM
 			<line>
 				<reportElement x="8" y="44" width="538" height="1" forecolor="#CCCCCC" uuid="36b24f24-f63d-480f-9b2d-9009b90bf244"/>
 			</line>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="#,##0.00">
 				<reportElement x="19" y="21" width="120" height="20" uuid="b7faafa3-c721-4825-85f3-2fcd8a855ac5"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{Ingreso}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="#,##0.00">
 				<reportElement x="291" y="21" width="120" height="20" uuid="d6527fd1-5df0-40c9-8f2f-a3e403be4d4b"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{Pago}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="#,##0.00">
 				<reportElement x="420" y="21" width="100" height="20" uuid="6a0b04da-c0a1-4cdb-97ea-a051d725bc84"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{IvaPago}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="#,##0.00">
 				<reportElement x="152" y="21" width="100" height="20" uuid="adb7d2f7-8fe3-4154-9350-e5989517586d"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{IvaIngreso}]]></textFieldExpression>
@@ -200,14 +200,14 @@ FROM
 				</textElement>
 				<text><![CDATA[Total Ingresado]]></text>
 			</staticText>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="#,##0.00">
 				<reportElement x="152" y="58" width="100" height="20" uuid="58ef49f6-ba22-4f94-8989-ea0a02ce9e5e"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Ingreso}+$F{IvaIngreso}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="#,##0.00">
 				<reportElement x="420" y="58" width="100" height="20" uuid="23637b42-0f31-46dc-8e8f-27d522d44fb8"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -287,7 +287,7 @@ FROM
 				</textElement>
 				<text><![CDATA[Neto]]></text>
 			</staticText>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="232" y="26" width="138" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="a778ff90-431d-4304-bd46-6d8c366a3518"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
 					<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -295,14 +295,14 @@ FROM
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Pago}-$F{Ingreso}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="#,##0.00">
 				<reportElement x="232" y="57" width="138" height="20" uuid="58f37d4a-8a7f-499d-a0ff-fff1e5a6aad6"/>
 				<textElement textAlignment="Right">
 					<font size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{IvaPago}-$F{IvaIngreso}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="#,##0.00">
 				<reportElement x="232" y="90" width="138" height="20" uuid="57413494-e78c-4cc2-a6a6-91033f0a25a8"/>
 				<textElement textAlignment="Right">
 					<font size="11" isBold="true"/>

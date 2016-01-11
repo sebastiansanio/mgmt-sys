@@ -101,7 +101,7 @@ class BudgetController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'budget.label', default: 'Budget'), budgetInstance.id])
-                redirect budgetInstance
+                redirect action:"edit", id: budgetInstance.id, method:"GET"
             }
             '*' { respond budgetInstance, [status: CREATED] }
         }
@@ -145,7 +145,7 @@ class BudgetController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'budget.label', default: 'Budget'), budgetInstance.id])
-                redirect budgetInstance
+                redirect action:"edit", id: budgetInstance.id, method:"GET"
             }
             '*'{ respond budgetInstance, [status: OK] }
         }

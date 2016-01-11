@@ -3,6 +3,7 @@
 	<g:set var="menuName" value="${message(code: 'menu.'+params.controller+'.label')}" />
 	<g:set var="validUris" value="${grailsApplication.controllerClasses.find{it.logicalPropertyName == params.controller}.uris}" />
 	<ul id="Menu" class="nav nav-pills margin-top-small">
+		<li><a>${menuName}<i class="glyphicon glyphicon-chevron-right"></i></a></li>
 		<li class="${ params.action == "index" ? 'active' : '' }">
 			<g:if test="${ params.action != "index"}">
 				<g:link	action="index">

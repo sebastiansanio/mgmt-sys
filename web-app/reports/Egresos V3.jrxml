@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Informe de Saldos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27b43501-3750-42ac-ad7d-c7726c3ab552">
 	<property name="ireport.zoom" value="1.6105100000000017"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="240"/>
 	<parameter name="Date_from" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -241,7 +241,7 @@ ORDER BY
 					</textElement>
 					<textFieldExpression><![CDATA[$F{work_name}]]></textFieldExpression>
 				</textField>
-				<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
 					<reportElement mode="Transparent" x="394" y="0" width="111" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="2df52738-aefb-4921-b9b0-767a7d0b4391"/>
 					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
 						<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -274,21 +274,21 @@ ORDER BY
 		</groupHeader>
 		<groupFooter>
 			<band height="23">
-				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement x="495" y="0" width="60" height="20" uuid="706bbbf9-b027-4ab0-ba91-510bdd70c064"/>
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="9" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{variable1_1_2}]]></textFieldExpression>
 				</textField>
-				<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
 					<reportElement x="420" y="0" width="74" height="20" uuid="f485b902-8d4b-4672-a570-aaf4bfafc762"/>
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="9" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{variable1_1}]]></textFieldExpression>
 				</textField>
-				<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
 					<reportElement x="335" y="0" width="85" height="20" uuid="a20fc5fd-63b0-444c-a414-b41f12e673be"/>
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="9" isBold="true"/>
@@ -413,14 +413,14 @@ ORDER BY
 				</textElement>
 				<textFieldExpression><![CDATA[$F{movement_type}+" "+ $F{movement_number}+" / "+$F{movement_year}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
 				<reportElement x="495" y="2" width="60" height="20" uuid="8dd2725f-2ec8-46a0-948a-7b1ca993b675"/>
 				<textElement textAlignment="Right" verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{movement_item_iibb}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
 				<reportElement x="420" y="2" width="75" height="20" uuid="fe77675a-c49e-49c5-974d-dfdf465e614f"/>
 				<textElement textAlignment="Right" verticalAlignment="Top">
 					<font size="9"/>
@@ -441,7 +441,7 @@ ORDER BY
 				</textElement>
 				<textFieldExpression><![CDATA[$F{concept_code}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
 				<reportElement x="346" y="1" width="74" height="20" uuid="2fd6ee93-b7ce-47c6-a5c2-a24c5a4e25aa"/>
 				<textElement textAlignment="Right" verticalAlignment="Top">
 					<font size="9"/>
@@ -472,21 +472,21 @@ ORDER BY
 	</pageFooter>
 	<summary>
 		<band height="71" splitType="Stretch">
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="#,##0.00">
 				<reportElement x="360" y="24" width="88" height="20" uuid="23fcb419-4a3c-4305-819a-8d8b698ef993"/>
 				<textElement verticalAlignment="Top">
 					<font size="12" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{variable1_1_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="260" y="24" width="100" height="20" uuid="d53230a2-81d4-46a3-90af-e9076252e5a3"/>
 				<textElement verticalAlignment="Top">
 					<font size="12" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{variable1_1_2_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="#,##0.00">
 				<reportElement x="448" y="24" width="93" height="20" uuid="5332aba4-b624-4fce-8c12-6098275b195e"/>
 				<textElement verticalAlignment="Top">
 					<font size="12" isBold="true"/>
@@ -531,7 +531,7 @@ ORDER BY
 				</textElement>
 				<text><![CDATA[TOTAL]]></text>
 			</staticText>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="#,##0.00">
 				<reportElement x="324" y="50" width="148" height="20" uuid="8b13694f-784b-44fc-b66b-4d8c302d3fdf"/>
 				<textElement verticalAlignment="Top">
 					<font size="12" isBold="true"/>

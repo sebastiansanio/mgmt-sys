@@ -1,5 +1,7 @@
 <%@ page import="mgmt.work.Budget" %>
 
+<div class="col-md-12" >
+
 <div class="col-md-4 ${hasErrors(bean: budgetInstance, field: 'name', 'has-error')} ">
 	<label for="name" class="control-label"><g:message code="budget.name.label" default="Name" /> <span class="required-indicator">*</span> </label>
 	<div>
@@ -21,10 +23,10 @@
 	</div>
 </div>
 
-<div class="col-md-12" >
-<hr/>
 </div>
-<div class="col-md-12" >	
+
+
+<div class="col-md-12 margin-top-medium" >	
 
 <table class="table table-condensed table-bordered" >
 	<thead>
@@ -195,34 +197,34 @@ function calculateBudget(){
 	var totalCosts = directCosts + itemsTotal + parseFloat($("#iibbAmount").val()) + parseFloat($("#indirectOverheadAmount").val()) + parseFloat($("#profitAmount").val());
 
 	var pvai = totalCosts / (1 - parseFloat($("#iibbPercentage").val())/100 - parseFloat($("#indirectOverheadPercentage").val())/100 - parseFloat($("#profitPercentage").val())/100 );
-	$("#pvai").val(pvai.toFixed(2));
+	$("#pvai").val(thousandSep(pvai.toFixed(2)));
 
 	var iibb = parseFloat($("#iibbAmount").val()) != 0 ? parseFloat($("#iibbAmount").val()) : pvai * parseFloat($("#iibbPercentage").val())/100
-	$("#iibbCalculatedAmount").val(iibb.toFixed(2));
+	$("#iibbCalculatedAmount").val(thousandSep(iibb.toFixed(2)));
 
 	var ggo = itemsTotal + iibb;
-	$("#ggo").val(ggo.toFixed(2));
+	$("#ggo").val(thousandSep(ggo.toFixed(2)));
 
 	var indirectOverhead = parseFloat($("#indirectOverheadAmount").val()) != 0 ? parseFloat($("#indirectOverheadAmount").val()) : pvai * parseFloat($("#indirectOverheadPercentage").val())/100
-	$("#indirectOverheadCalculatedAmount").val(indirectOverhead.toFixed(2));
+	$("#indirectOverheadCalculatedAmount").val(thousandSep(indirectOverhead.toFixed(2)));
 
 	var gg = ggo + indirectOverhead;
-	$("#gg").val(gg.toFixed(2));
+	$("#gg").val(thousandSep(gg.toFixed(2)));
 
 	var profit = parseFloat($("#profitAmount").val()) != 0 ? parseFloat($("#profitAmount").val()) : pvai * parseFloat($("#profitPercentage").val())/100
-	$("#profitCalculatedAmount").val(profit.toFixed(2));
+	$("#profitCalculatedAmount").val(thousandSep(profit.toFixed(2)));
 
 	var ggb = gg + profit;
-	$("#ggb").val(ggb.toFixed(2));
+	$("#ggb").val(thousandSep(ggb.toFixed(2)));
 
 	var iva = pvai * parseFloat($("#ivaPercentage").val())/100;
-	$("#ivaCalculatedAmount").val(iva.toFixed(2));
+	$("#ivaCalculatedAmount").val(thousandSep(iva.toFixed(2)));
 
 	var pvii = pvai + iva;
-	$("#pvii").val(pvii.toFixed(2));
+	$("#pvii").val(thousandSep(pvii.toFixed(2)));
 
 	var cp = pvai/directCosts;
-	$("#cp").val(cp.toFixed(2));
+	$("#cp").val(thousandSep(cp.toFixed(2)));
 	
 	$("#directCostsPercentageOfDirectCosts").val((100 * directCosts / directCosts).toFixed(2));
 	$("#directCostsPercentageOfSellPrice").val((100 * directCosts / pvai).toFixed(2));
@@ -230,28 +232,28 @@ function calculateBudget(){
 	$("#iibbPercentageOfDirectCosts").val((100 * iibb / directCosts).toFixed(2));
 	$("#iibbPercentageOfSellPrice").val((100 * iibb / pvai).toFixed(2));
 
-	$("#ggoPercentageOfDirectCosts").val((100 * ggo / directCosts).toFixed(2));
-	$("#ggoPercentageOfSellPrice").val((100 * ggo / pvai).toFixed(2));
+	$("#ggoPercentageOfDirectCosts").val(thousandSep((100 * ggo / directCosts).toFixed(2)));
+	$("#ggoPercentageOfSellPrice").val(thousandSep((100 * ggo / pvai).toFixed(2)));
 
-	$("#indirectOverheadCalculatedAmountPercentageOfDirectCosts").val((100 * indirectOverhead / directCosts).toFixed(2));
-	$("#indirectOverheadCalculatedAmountPercentageOfSellPrice").val((100 * indirectOverhead / pvai).toFixed(2));
+	$("#indirectOverheadCalculatedAmountPercentageOfDirectCosts").val(thousandSep((100 * indirectOverhead / directCosts).toFixed(2)));
+	$("#indirectOverheadCalculatedAmountPercentageOfSellPrice").val(thousandSep((100 * indirectOverhead / pvai).toFixed(2)));
 
-	$("#ggPercentageOfDirectCosts").val((100 * gg / directCosts).toFixed(2));
-	$("#ggPercentageOfSellPrice").val((100 * gg / pvai).toFixed(2));
+	$("#ggPercentageOfDirectCosts").val(thousandSep((100 * gg / directCosts).toFixed(2)));
+	$("#ggPercentageOfSellPrice").val(thousandSep((100 * gg / pvai).toFixed(2)));
 
-	$("#profitPercentageOfDirectCosts").val((100 * profit / directCosts).toFixed(2));
-	$("#profitPercentageOfSellPrice").val((100 * profit / pvai).toFixed(2));
+	$("#profitPercentageOfDirectCosts").val(thousandSep((100 * profit / directCosts).toFixed(2)));
+	$("#profitPercentageOfSellPrice").val(thousandSep((100 * profit / pvai).toFixed(2)));
 
-	$("#ggbPercentageOfDirectCosts").val((100 * ggb / directCosts).toFixed(2));
-	$("#ggbPercentageOfSellPrice").val((100 * ggb / pvai).toFixed(2));
+	$("#ggbPercentageOfDirectCosts").val(thousandSep((100 * ggb / directCosts).toFixed(2)));
+	$("#ggbPercentageOfSellPrice").val(thousandSep((100 * ggb / pvai).toFixed(2)));
 
-	$("#pvaiPercentageOfDirectCosts").val((100 * pvai / directCosts).toFixed(2));
-	$("#pvaiPercentageOfSellPrice").val((100 * pvai / pvai).toFixed(2));
+	$("#pvaiPercentageOfDirectCosts").val(thousandSep((100 * pvai / directCosts).toFixed(2)));
+	$("#pvaiPercentageOfSellPrice").val(thousandSep((100 * pvai / pvai).toFixed(2)));
 
 	for (i = 0; i < itemsQuantity; i++) { 
 		var amount = $("#amount-"+i).val();
-		$("#percentageOfDirectCosts-"+i).val((100*amount / directCosts).toFixed(2));
-		$("#percentageOfSellPrice-"+i).val((100*amount / pvai).toFixed(2));
+		$("#percentageOfDirectCosts-"+i).val(thousandSep((100*amount / directCosts).toFixed(2)));
+		$("#percentageOfSellPrice-"+i).val(thousandSep((100*amount / pvai).toFixed(2)));
 	}
 }
 
@@ -269,6 +271,11 @@ $( "form" ).submit(function( event ) {
 	
 });
 
+function thousandSep(val) {
+    return String(val).split("").reverse().join("")
+                  .replace(/(\d{3}\B)/g, "$1,")
+                  .split("").reverse().join("");
+}
 
 
 </script>

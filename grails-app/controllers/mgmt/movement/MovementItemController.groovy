@@ -19,11 +19,15 @@ class MovementItemController {
 	
     def index(Integer max) {
         params.max = Math.min(max ?: 100, 1000)
+		params.sort = params.sort ?: 'dateCreated'
+		params.order = params.order ?: 'desc'
         respond MovementItem.list(params), model:[movementItemInstanceCount: MovementItem.count()]
     }
 	
 	def search(Integer max) {
 		params.max = Math.min(max ?: 100, 1000)
+		params.sort = params.sort ?: 'dateCreated'
+		params.order = params.order ?: 'desc'
 		String nameQuery = "%"+params.description+"%"
 		respond MovementItem.findAllByDescriptionLike(nameQuery,params), model:[movementItemInstanceCount: MovementItem.countByDescriptionLike(nameQuery)],  view:'index'
 	}
