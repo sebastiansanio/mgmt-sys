@@ -268,7 +268,7 @@ $( "form" ).submit(function( event ) {
 	});
 	$(".readonly").prop( "disabled", true );
 	$("#pvai").prop("disabled", false);
-	
+	$("#pvai").val($("#pvai").val().replace(/,/g,""))
 });
 
 function thousandSep(val) {

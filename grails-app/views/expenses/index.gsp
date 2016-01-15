@@ -35,6 +35,7 @@
 			<td>
 				<select id="concepts" onchange="conceptsChanged();" name="concepts" >
 					<option value="all">Todos</option>
+					<option value="AtoL">Rubros A - L</option>
 					<option value="allM">Todos los GGI (M)</option>
 					<option value="toM799">Todos los GGI hasta M799</option>
 					<option value="fromM800">Todos los GGI desde M800</option>
@@ -86,6 +87,10 @@ function conceptsChanged(){
 	case 'toM799':
 		$('#Concept_code_from').val('M000');
 		$('#Concept_code_to').val('M799');
+		break;
+	case 'AtoL':
+		$('#Concept_code_from').val('A000');
+		$('#Concept_code_to').val('L999');
 		break;
 	case 'fromM800':
 		$('#Concept_code_from').val('M800');

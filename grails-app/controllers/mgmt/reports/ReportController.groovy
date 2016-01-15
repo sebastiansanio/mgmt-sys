@@ -120,8 +120,6 @@ class ReportController {
 		response.setContentType("application/pdf");
 		response.setHeader("Content-Disposition", "inline; filename='${reportInstance.name}.pdf'");
 		response.outputStream << pdf
-		response.outputStream.flush()
-		response.outputStream.close()
 	}
 
     @Transactional
