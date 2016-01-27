@@ -44,8 +44,6 @@
 </div>
 
 
-<g:link class="btn btn-default" action="show" id="${account.type.id}" ><g:message code="default.return.label"/> </g:link>
-
 </section>
 
 </body>

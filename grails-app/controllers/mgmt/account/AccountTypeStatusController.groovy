@@ -32,10 +32,10 @@ class AccountTypeStatusController {
 	}
 	
     def show(AccountType accountTypeInstance) {
-		params.dateTo = params.dateTo? DATE_FORMAT.parse(params.dateTo): new Date()
+		params.balanceDate = params.balanceDate? DATE_FORMAT.parse(params.balanceDate): new Date()
 		Map balances = new HashMap()
 		Sql sql = new Sql(dataSource)
-		def rows = sql.rows("select p.account_id as accountId,sum(p.amount*p.multiplier) as amount from payment p where payment_date <= ? group by p.account_id",params.dateTo)
+		def rows = sql.rows("select p.account_id as accountId,sum(p.amount*p.multiplier) as amount from payment p where payment_date <= ? group by p.account_id",params.balanceDate)
 		rows.each { row ->
 			balances[row.accountId] = row.amount
 		}
@@ -48,20 +48,48 @@ class AccountTypeStatusController {
 		params.max = 100
 		params.sort = 'paymentDate'
 		params.order = 'desc'
-		def payments = Payment.findAllByAccount(account,params)
-		render model: [payments: payments,account:account,paymentsCount: Payment.countByAccount(account)], view: 'showPayments'
+		
+		def payments = Payment.createCriteria().list (params) {
+			eq("account", account)
+			if(params.dateFrom){
+				ge("paymentDate", DATE_FORMAT.parse(params.dateFrom))
+			}
+			if(params.dateTo){
+				le("paymentDate", DATE_FORMAT.parse(params.dateTo))
+			}
+			order(params.sort, params.order)
+		}
+		
+		render model: [payments: payments,account:account,paymentsCount: payments.totalCount], view: 'showPayments'
 	}
 	
 	def download(Account account){
 		response.setContentType("application/ms-excel");
 		response.setHeader("Content-Disposition", "attachment; filename='${message(code:'payments.label')}.xlsx'");
+		params.sort = 'paymentDate'
+		params.order = 'desc'
 		
 		def headers = FIELDS.collect{
 			message(code:'payment.'+it+'.label')
 		}
+		
+		def payments = Payment.createCriteria().list () {
+			eq("account", account)
+			if(params.dateFrom){
+				ge("paymentDate", DATE_FORMAT.parse(params.dateFrom))
+			}
+			if(params.dateTo){
+				le("paymentDate", DATE_FORMAT.parse(params.dateTo))
+			}
+			order(params.sort, params.order)
+		}
+		
 		new WebXlsxExporter().with {
 			fillHeader(headers)
-			add(Payment.findAllByAccount(account,[sort:'dateCreated',order:'desc']), FIELDS)
+			add(payments, FIELDS)
+			for(int i = 0;i < 8; i++){
+				sheet.autoSizeColumn(i)
+			}
 			save(response.outputStream)
 		}
 	}
