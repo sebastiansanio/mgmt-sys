@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Informe de Saldos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27b43501-3750-42ac-ad7d-c7726c3ab552">
 	<property name="ireport.zoom" value="1.4641000000000022"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="14"/>
+	<property name="ireport.y" value="118"/>
 	<parameter name="Date_from" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -87,17 +87,19 @@
      supplier.`name` AS supplier_name,
      supplier.`note` AS supplier_note,
      supplier.`province` AS supplier_province,
-     supplier.`zip_code` AS supplier_zip_code
+     supplier.`zip_code` AS supplier_zip_code,
+     cg.name as concept_group_name
 FROM
      `movement` movement INNER JOIN `movement_item` movement_item ON movement.`id` = movement_item.`movement_id`
      left JOIN `work` work ON movement_item.`work_id` = work.`id`
      INNER JOIN `concept` concept ON movement_item.`concept_id` = concept.`id`
      left JOIN `supplier` supplier ON movement_item.`supplier_id` = supplier.`id`
+LEFT OUTER JOIN concept_group cg ON concept.concept_group_id = cg.id
 where (movement.date_created >=  $P{Date_from} or $P{Date_from} is null ) and (movement.date_created < $P{Date_to} or $P{Date_to} is null) and (work.id = $P{Work_id} or $P{Work_id} = -1)
 and (concept.code between $P{Concept_code_from} and $P{Concept_code_to} or $P{Concept_code_from} = '' or $P{Concept_code_from} is null) and movement_item.multiplier = 1
 
 ORDER BY
-     work.id ASC,concept_group_id asc, concept.id asc, movement.date_created desc]]>
+     work.code ASC, cg.name asc, concept.code asc, movement.date_created desc]]>
 	</queryString>
 	<field name="movement_item_id" class="java.lang.Long"/>
 	<field name="movement_item_version" class="java.lang.Long"/>
@@ -167,6 +169,7 @@ ORDER BY
 	<field name="supplier_note" class="java.lang.String"/>
 	<field name="supplier_province" class="java.lang.String"/>
 	<field name="supplier_zip_code" class="java.lang.String"/>
+	<field name="concept_group_name" class="java.lang.String"/>
 	<variable name="variable1" class="java.math.BigDecimal" resetType="Group" resetGroup="CONCPET" calculation="Sum">
 		<variableExpression><![CDATA[$F{movement_item_amount}]]></variableExpression>
 	</variable>
@@ -313,7 +316,7 @@ ORDER BY
 					<textElement verticalAlignment="Top">
 						<font size="11" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{concept_concept_group_id}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{concept_group_name}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
@@ -331,7 +334,7 @@ ORDER BY
 					<textElement verticalAlignment="Top">
 						<font size="11" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{concept_concept_group_id}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{concept_group_name}]]></textFieldExpression>
 				</textField>
 				<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
 					<reportElement x="336" y="40" width="85" height="20" uuid="5197a7a2-4b59-41f1-bf32-26df587f7ca8"/>
@@ -476,7 +479,7 @@ ORDER BY
 	<pageHeader>
 		<band height="27" splitType="Stretch">
 			<staticText>
-				<reportElement x="1" y="4" width="54" height="20" uuid="86c31710-27eb-40e4-8788-fda6bce47470"/>
+				<reportElement x="0" y="4" width="55" height="20" uuid="86c31710-27eb-40e4-8788-fda6bce47470"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -539,11 +542,11 @@ ORDER BY
 	<detail>
 		<band height="24" splitType="Stretch">
 			<textField pattern="">
-				<reportElement x="4" y="0" width="63" height="20" uuid="e6b35ad5-55e8-4fc4-8053-ed0ac3daa999"/>
+				<reportElement x="1" y="0" width="54" height="20" uuid="e6b35ad5-55e8-4fc4-8053-ed0ac3daa999"/>
 				<textElement verticalAlignment="Top">
-					<font size="9"/>
+					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{movement_type}+" "+ $F{movement_number}+" / "+$F{movement_year}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{movement_type}+" "+ $F{movement_number}+"/"+$F{movement_year}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
 				<reportElement x="494" y="0" width="61" height="20" uuid="8dd2725f-2ec8-46a0-948a-7b1ca993b675"/>
@@ -567,7 +570,7 @@ ORDER BY
 				<textFieldExpression><![CDATA[$F{movement_date_created}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="55" y="0" width="47" height="20" uuid="baade5aa-035a-4782-be51-f15610d859d4"/>
+				<reportElement x="55" y="0" width="46" height="20" uuid="baade5aa-035a-4782-be51-f15610d859d4"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>

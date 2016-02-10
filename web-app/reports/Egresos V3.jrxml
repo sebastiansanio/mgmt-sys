@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Informe de Saldos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27b43501-3750-42ac-ad7d-c7726c3ab552">
 	<property name="ireport.zoom" value="1.6105100000000017"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="240"/>
+	<property name="ireport.y" value="96"/>
 	<parameter name="Date_from" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -409,9 +409,9 @@ ORDER BY
 			<textField pattern="">
 				<reportElement x="2" y="0" width="86" height="20" uuid="e6b35ad5-55e8-4fc4-8053-ed0ac3daa999"/>
 				<textElement verticalAlignment="Top">
-					<font size="9"/>
+					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{movement_type}+" "+ $F{movement_number}+" / "+$F{movement_year}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{movement_type}+" "+ $F{movement_number}+"/"+$F{movement_year}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
 				<reportElement x="495" y="2" width="60" height="20" uuid="8dd2725f-2ec8-46a0-948a-7b1ca993b675"/>
