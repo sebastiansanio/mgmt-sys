@@ -7,6 +7,8 @@ import static org.springframework.http.HttpStatus.*
 import java.util.Date;
 
 import grails.transaction.Transactional
+import org.apache.poi.ss.usermodel.CellStyle
+import org.apache.poi.ss.usermodel.CreationHelper
 import pl.touk.excel.export.WebXlsxExporter
 
 @Transactional(readOnly = true)
@@ -35,6 +37,18 @@ class SupplierController {
 		new WebXlsxExporter().with {
 			fillHeader(headers)
 			add(Supplier.list(), FIELDS)
+			
+			CellStyle cellStyle = sheet.workbook.createCellStyle();
+			CreationHelper createHelper = sheet.workbook.getCreationHelper();
+			cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-mm-yy"));
+			for(int i = 1;i <= Supplier.count(); i++){
+				getCellAt(i, 8).setCellStyle(cellStyle)
+				getCellAt(i, 9).setCellStyle(cellStyle)
+			}
+			for(int i = 0;i < FIELDS.size(); i++){
+				sheet.autoSizeColumn(i)
+			}
+			
 			save(response.outputStream)
 		}
 	}

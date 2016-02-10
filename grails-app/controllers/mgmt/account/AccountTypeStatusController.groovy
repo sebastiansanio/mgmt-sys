@@ -4,17 +4,22 @@ import groovy.sql.Sql
 import java.text.SimpleDateFormat
 import java.util.Date;
 
+import org.apache.poi.ss.usermodel.CellStyle
+import org.apache.poi.ss.usermodel.CreationHelper
 import pl.touk.excel.export.WebXlsxExporter
 import mgmt.movement.Payment
+import mgmt.utils.DateGetter
 
 
 class AccountTypeStatusController {
 	
 	def dataSource
 	private static final DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy")
+	private static final DATE_FORMAT_DOWNLOAD = new SimpleDateFormat("dd-MM-yy")
 	
-	private static final FIELDS = ["movement","account","signedAmount","paymentDate","checkNumber",
-		"note","dateCreated","lastUpdated"]
+	
+	private static final FIELDS = ["account","movement","movement.dateCreated","paymentDate",
+		"signedAmount","checkNumber","note","movement.lastUpdated"]
 	
     def index() { 
 		params.sort = params.sort ?: 'name'
@@ -70,7 +75,7 @@ class AccountTypeStatusController {
 		params.order = 'desc'
 		
 		def headers = FIELDS.collect{
-			message(code:'payment.'+it+'.label')
+			message(code:'payment.report.'+it+'.label')
 		}
 		
 		def payments = Payment.createCriteria().list () {
@@ -84,10 +89,35 @@ class AccountTypeStatusController {
 			order(params.sort, params.order)
 		}
 		
+		
 		new WebXlsxExporter().with {
+			CellStyle cellStyle = sheet.workbook.createCellStyle();
+			CreationHelper createHelper = sheet.workbook.getCreationHelper();
+			cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-mm-yy"));
+			
 			fillHeader(headers)
-			add(payments, FIELDS)
-			for(int i = 0;i < 8; i++){
+			
+			if(params.dateFrom){
+				Date balanceDate = DATE_FORMAT.parse(params.dateFrom).plus(-1)
+				def balance
+				Sql sql = new Sql(dataSource)
+				def rows = sql.rows("select sum(p.amount*p.multiplier) as amount from payment p where payment_date <= ? and p.account_id = ?",balanceDate,account.id)
+				rows.each { row ->
+					balance = row.amount
+				}
+				sql.close()
+				
+				fillRow(["", "SALDO AL "+DATE_FORMAT_DOWNLOAD.format(balanceDate) ,"","", balance], 1)
+			}
+			
+			add(payments, FIELDS,2)
+
+			for(int i = 2;i <= payments.size()+1; i++){
+				getCellAt(i, 2).setCellStyle(cellStyle)
+				getCellAt(i, 3).setCellStyle(cellStyle)
+				getCellAt(i, 7).setCellStyle(cellStyle)
+			}
+			for(int i = 0;i < FIELDS.size(); i++){
 				sheet.autoSizeColumn(i)
 			}
 			save(response.outputStream)

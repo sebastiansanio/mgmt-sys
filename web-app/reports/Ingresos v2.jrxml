@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Informe de Saldos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27b43501-3750-42ac-ad7d-c7726c3ab552">
+	<property name="ireport.zoom" value="1.4641000000000022"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="14"/>
+	<parameter name="Date_from" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Date_to" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Work_id" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Concept_code_from" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Concept_code_to" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     movement_item.`id` AS movement_item_id,
+     movement_item.`version` AS movement_item_version,
+     movement_item.`amount` AS movement_item_amount,
+     movement_item.`concept_id` AS movement_item_concept_id,
+     movement_item.`date` AS movement_item_date,
+     movement_item.`date_created` AS movement_item_date_created,
+     movement_item.`description` AS movement_item_description,
+     movement_item.`iibb` AS movement_item_iibb,
+     movement_item.`invoice_number` AS movement_item_invoice_number,
+     movement_item.`invoice_type_id` AS movement_item_invoice_type_id,
+     movement_item.`iva` AS movement_item_iva,
+     movement_item.`last_updated` AS movement_item_last_updated,
+     movement_item.`movement_id` AS movement_item_movement_id,
+     movement_item.`other_perceptions` AS movement_item_other_perceptions,
+     movement_item.`supplier_id` AS movement_item_supplier_id,
+     movement_item.`total` AS movement_item_total,
+     movement_item.`work_id` AS movement_item_work_id,
+     movement_item.`items_idx` AS movement_item_items_idx,
+     movement_item.`multiplier` AS movement_item_multiplier,
+     movement_item.`quantity` AS movement_item_quantity,
+     movement_item.`unit_id` AS movement_item_unit_id,
+     movement_item.`unit_price` AS movement_item_unit_price,
+     movement.`id` AS movement_id,
+     movement.`version` AS movement_version,
+     movement.`checked` AS movement_checked,
+     movement.`date_created` AS movement_date_created,
+     movement.`last_updated` AS movement_last_updated,
+     movement.`number` AS movement_number,
+     movement.`type` AS movement_type,
+     movement.`year` AS movement_year,
+     movement.`note` AS movement_note,
+     work.`id` AS work_id,
+     work.`version` AS work_version,
+     work.`budget_id` AS work_budget_id,
+     work.`client_id` AS work_client_id,
+     work.`code` AS work_code,
+     work.`finished` AS work_finished,
+     work.`last_updated` AS work_last_updated,
+     work.`name` AS work_name,
+     work.`type` AS work_type,
+     work.`date_created` AS work_date_created,
+     concept.`id` AS concept_id,
+     concept.`version` AS concept_version,
+     concept.`code` AS concept_code,
+     concept.`concept_account_id` AS concept_concept_account_id,
+     concept.`concept_group_id` AS concept_concept_group_id,
+     concept.`date_created` AS concept_date_created,
+     concept.`description` AS concept_description,
+     concept.`last_updated` AS concept_last_updated,
+     concept.`valid_in_fi_work` AS concept_valid_in_fi_work,
+     concept.`valid_in_in_no_work` AS concept_valid_in_in_no_work,
+     concept.`valid_in_in_work` AS concept_valid_in_in_work,
+     concept.`valid_in_op_no_work` AS concept_valid_in_op_no_work,
+     concept.`valid_in_op_work` AS concept_valid_in_op_work,
+     concept.`valid_in_os_no_work` AS concept_valid_in_os_no_work,
+     concept.`valid_in_os_work` AS concept_valid_in_os_work,
+     supplier.`id` AS supplier_id,
+     supplier.`version` AS supplier_version,
+     supplier.`address` AS supplier_address,
+     supplier.`business_name` AS supplier_business_name,
+     supplier.`cuit` AS supplier_cuit,
+     supplier.`date_created` AS supplier_date_created,
+     supplier.`last_updated` AS supplier_last_updated,
+     supplier.`location` AS supplier_location,
+     supplier.`name` AS supplier_name,
+     supplier.`note` AS supplier_note,
+     supplier.`province` AS supplier_province,
+     supplier.`zip_code` AS supplier_zip_code
+FROM
+     `movement` movement INNER JOIN `movement_item` movement_item ON movement.`id` = movement_item.`movement_id`
+     left JOIN `work` work ON movement_item.`work_id` = work.`id`
+     INNER JOIN `concept` concept ON movement_item.`concept_id` = concept.`id`
+     left JOIN `supplier` supplier ON movement_item.`supplier_id` = supplier.`id`
+where (movement.date_created >=  $P{Date_from} or $P{Date_from} is null ) and (movement.date_created < $P{Date_to} or $P{Date_to} is null) and (work.id = $P{Work_id} or $P{Work_id} = -1)
+and (concept.code between $P{Concept_code_from} and $P{Concept_code_to} or $P{Concept_code_from} = '' or $P{Concept_code_from} is null) and movement_item.multiplier = 1
+
+ORDER BY
+     work.id ASC,concept_group_id asc, concept.id asc, movement.date_created desc]]>
+	</queryString>
+	<field name="movement_item_id" class="java.lang.Long"/>
+	<field name="movement_item_version" class="java.lang.Long"/>
+	<field name="movement_item_amount" class="java.math.BigDecimal"/>
+	<field name="movement_item_concept_id" class="java.lang.Long"/>
+	<field name="movement_item_date" class="java.sql.Timestamp"/>
+	<field name="movement_item_date_created" class="java.sql.Timestamp"/>
+	<field name="movement_item_description" class="java.lang.String"/>
+	<field name="movement_item_iibb" class="java.math.BigDecimal"/>
+	<field name="movement_item_invoice_number" class="java.lang.String"/>
+	<field name="movement_item_invoice_type_id" class="java.lang.Long"/>
+	<field name="movement_item_iva" class="java.math.BigDecimal"/>
+	<field name="movement_item_last_updated" class="java.sql.Timestamp"/>
+	<field name="movement_item_movement_id" class="java.lang.Long"/>
+	<field name="movement_item_other_perceptions" class="java.math.BigDecimal"/>
+	<field name="movement_item_supplier_id" class="java.lang.Long"/>
+	<field name="movement_item_total" class="java.math.BigDecimal"/>
+	<field name="movement_item_work_id" class="java.lang.Long"/>
+	<field name="movement_item_items_idx" class="java.lang.Integer"/>
+	<field name="movement_item_multiplier" class="java.lang.Integer"/>
+	<field name="movement_item_quantity" class="java.math.BigDecimal"/>
+	<field name="movement_item_unit_id" class="java.lang.Long"/>
+	<field name="movement_item_unit_price" class="java.math.BigDecimal"/>
+	<field name="movement_id" class="java.lang.Long"/>
+	<field name="movement_version" class="java.lang.Long"/>
+	<field name="movement_checked" class="java.lang.Boolean"/>
+	<field name="movement_date_created" class="java.sql.Timestamp"/>
+	<field name="movement_last_updated" class="java.sql.Timestamp"/>
+	<field name="movement_number" class="java.lang.Long"/>
+	<field name="movement_type" class="java.lang.String"/>
+	<field name="movement_year" class="java.lang.Integer"/>
+	<field name="movement_note" class="java.lang.String"/>
+	<field name="work_id" class="java.lang.Long"/>
+	<field name="work_version" class="java.lang.Long"/>
+	<field name="work_budget_id" class="java.lang.Long"/>
+	<field name="work_client_id" class="java.lang.Long"/>
+	<field name="work_code" class="java.lang.Long"/>
+	<field name="work_finished" class="java.lang.Boolean"/>
+	<field name="work_last_updated" class="java.sql.Timestamp"/>
+	<field name="work_name" class="java.lang.String"/>
+	<field name="work_type" class="java.lang.String"/>
+	<field name="work_date_created" class="java.sql.Timestamp"/>
+	<field name="concept_id" class="java.lang.Long"/>
+	<field name="concept_version" class="java.lang.Long"/>
+	<field name="concept_code" class="java.lang.String"/>
+	<field name="concept_concept_account_id" class="java.lang.Long"/>
+	<field name="concept_concept_group_id" class="java.lang.Long"/>
+	<field name="concept_date_created" class="java.sql.Timestamp"/>
+	<field name="concept_description" class="java.lang.String"/>
+	<field name="concept_last_updated" class="java.sql.Timestamp"/>
+	<field name="concept_valid_in_fi_work" class="java.lang.Boolean"/>
+	<field name="concept_valid_in_in_no_work" class="java.lang.Boolean"/>
+	<field name="concept_valid_in_in_work" class="java.lang.Boolean"/>
+	<field name="concept_valid_in_op_no_work" class="java.lang.Boolean"/>
+	<field name="concept_valid_in_op_work" class="java.lang.Boolean"/>
+	<field name="concept_valid_in_os_no_work" class="java.lang.Boolean"/>
+	<field name="concept_valid_in_os_work" class="java.lang.Boolean"/>
+	<field name="supplier_id" class="java.lang.Long"/>
+	<field name="supplier_version" class="java.lang.Long"/>
+	<field name="supplier_address" class="java.lang.String"/>
+	<field name="supplier_business_name" class="java.lang.String"/>
+	<field name="supplier_cuit" class="java.lang.String"/>
+	<field name="supplier_date_created" class="java.sql.Timestamp"/>
+	<field name="supplier_last_updated" class="java.sql.Timestamp"/>
+	<field name="supplier_location" class="java.lang.String"/>
+	<field name="supplier_name" class="java.lang.String"/>
+	<field name="supplier_note" class="java.lang.String"/>
+	<field name="supplier_province" class="java.lang.String"/>
+	<field name="supplier_zip_code" class="java.lang.String"/>
+	<variable name="variable1" class="java.math.BigDecimal" resetType="Group" resetGroup="CONCPET" calculation="Sum">
+		<variableExpression><![CDATA[$F{movement_item_amount}]]></variableExpression>
+	</variable>
+	<variable name="variable1_1" class="java.math.BigDecimal" resetType="Group" resetGroup="CONCPET" calculation="Sum">
+		<variableExpression><![CDATA[$F{movement_item_iva}]]></variableExpression>
+	</variable>
+	<variable name="variable1_1_2" class="java.math.BigDecimal" resetType="Group" resetGroup="CONCPET" calculation="Sum">
+		<variableExpression><![CDATA[$F{movement_item_iibb}]]></variableExpression>
+	</variable>
+	<variable name="variable1_1_2_3" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{movement_item_iibb}]]></variableExpression>
+	</variable>
+	<variable name="variable1_1_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{movement_item_iva}]]></variableExpression>
+	</variable>
+	<variable name="variable1_1_2_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{movement_item_amount}]]></variableExpression>
+	</variable>
+	<variable name="variable1_1_2_3_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{movement_item_iibb}]]></variableExpression>
+	</variable>
+	<variable name="variable2" class="java.lang.Integer" resetType="Group" resetGroup="OBRA" calculation="Sum">
+		<variableExpression><![CDATA[$F{movement_item_amount}+$F{movement_item_iibb}]]></variableExpression>
+	</variable>
+	<variable name="variable3" class="java.math.BigDecimal" resetType="Group" resetGroup="GRUPO" calculation="Sum">
+		<variableExpression><![CDATA[$F{movement_item_amount}]]></variableExpression>
+	</variable>
+	<variable name="variable3_1" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA" calculation="Sum">
+		<variableExpression><![CDATA[$F{movement_item_amount}]]></variableExpression>
+	</variable>
+	<variable name="variable4" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA" calculation="Sum">
+		<variableExpression><![CDATA[$F{movement_item_iva}]]></variableExpression>
+	</variable>
+	<variable name="variable4_1" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA" calculation="Sum">
+		<variableExpression><![CDATA[$F{movement_item_iva}]]></variableExpression>
+	</variable>
+	<variable name="variable1_1_2_1_2" class="java.math.BigDecimal" resetType="Group" resetGroup="GRUPO" calculation="Sum">
+		<variableExpression><![CDATA[$F{movement_item_iibb}]]></variableExpression>
+	</variable>
+	<variable name="variable1_1_2_1_2_1" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA" calculation="Sum">
+		<variableExpression><![CDATA[$F{movement_item_iibb}]]></variableExpression>
+	</variable>
+	<variable name="variable5" class="java.lang.String" resetType="Group" resetGroup="OBRA" calculation="Sum">
+		<variableExpression><![CDATA[$F{movement_item_amount}+$F{movement_item_iibb}]]></variableExpression>
+	</variable>
+	<group name="OBRA">
+		<groupExpression><![CDATA[$F{work_id}]]></groupExpression>
+		<groupHeader>
+			<band height="23">
+				<textField isBlankWhenNull="true">
+					<reportElement x="101" y="3" width="175" height="20" uuid="b6335013-1486-4dbe-97ac-8385f723d65b"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{work_name}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="1" y="3" width="39" height="20" uuid="3ba4ce4c-ca2e-48fc-a317-ca329426d7c2"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Obra:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="51" y="3" width="50" height="20" uuid="fd1e34d5-d9e9-4345-871b-8d31faf63cbe"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{work_code}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="68">
+				<line>
+					<reportElement x="129" y="63" width="391" height="1" forecolor="#CCCCCC" uuid="0f70ebce-29b7-4769-ad1a-2caf0a4016e7"/>
+				</line>
+				<staticText>
+					<reportElement x="260" y="40" width="76" height="20" uuid="db29e616-c610-44ec-8b7e-5daf4b11934d"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Obra:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="129" y="20" width="119" height="20" uuid="c9e82f92-a93c-43a1-804f-c8f9657c1aaf"/>
+					<textElement verticalAlignment="Top">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{work_name}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="337" y="40" width="85" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="2df52738-aefb-4921-b9b0-767a7d0b4391"/>
+					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{variable5}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="336" y="0" width="85" height="20" uuid="f414ae46-bafc-4c4e-8c2a-f08a58875179"/>
+					<textElement textAlignment="Right">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{variable3_1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="422" y="0" width="72" height="20" uuid="f7616273-9f5b-4676-b507-99c650b74ff4"/>
+					<textElement textAlignment="Right">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{variable4_1}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="290" y="21" width="46" height="20" uuid="5213bb3e-26fb-4c1d-b5a3-47a5b20af34b"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[IIBB]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="290" y="0" width="46" height="20" uuid="b9d47d89-1670-4f61-9f28-4856180fb40e"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Monto]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="336" y="21" width="84" height="20" uuid="d0bb9074-8c54-4872-9d35-394aef84d1d0"/>
+					<textElement textAlignment="Right">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{variable1_1_2_1_2_1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="GRUPO">
+		<groupExpression><![CDATA[$F{concept_concept_group_id}]]></groupExpression>
+		<groupHeader>
+			<band height="22">
+				<textField>
+					<reportElement x="51" y="0" width="169" height="20" uuid="5efb8af2-b4a4-4e41-9945-1a634c9f303d"/>
+					<textElement verticalAlignment="Top">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{concept_concept_group_id}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="64">
+				<staticText>
+					<reportElement x="290" y="40" width="46" height="20" uuid="10533068-ebdd-4a36-a23f-f6cf90685399"/>
+					<textElement textAlignment="Right">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="127" y="21" width="151" height="20" uuid="ff009aa1-f0a5-43fd-b8b2-ac7d3940a4fa"/>
+					<textElement verticalAlignment="Top">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{concept_concept_group_id}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+					<reportElement x="336" y="40" width="85" height="20" uuid="5197a7a2-4b59-41f1-bf32-26df587f7ca8"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{variable3}+$V{variable1_1_2_1_2}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="290" y="21" width="46" height="20" uuid="0e7bfa64-d508-41c1-8ba7-c1948d7fef9d"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[IIBB]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="290" y="0" width="46" height="20" uuid="2e84f012-f85c-4a05-bf65-c08b6b6b6107"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Monto]]></text>
+				</staticText>
+				<line>
+					<reportElement x="127" y="60" width="391" height="1" forecolor="#CCCCCC" uuid="60c0bd43-2e3d-48c0-a35a-b6ff61747729"/>
+				</line>
+				<textField>
+					<reportElement x="336" y="0" width="85" height="20" uuid="c5a00855-19f2-43dd-bf5c-f43df09d3db7"/>
+					<textElement textAlignment="Right">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{variable3}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="422" y="1" width="72" height="20" uuid="8dd6339a-f9d3-43a1-a746-38210a062344"/>
+					<textElement textAlignment="Right">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{variable4}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="336" y="21" width="85" height="20" uuid="1ec17f10-740c-42d8-b216-a3239487636d"/>
+					<textElement textAlignment="Right">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{variable1_1_2_1_2}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="CONCPET">
+		<groupExpression><![CDATA[$F{concept_code}]]></groupExpression>
+		<groupHeader>
+			<band height="22">
+				<textField>
+					<reportElement x="51" y="0" width="50" height="20" uuid="b43647a5-ba56-4a95-88ba-60137d5cab89"/>
+					<textElement verticalAlignment="Top">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{concept_code}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="101" y="0" width="207" height="20" uuid="66754be0-19d6-4a86-9eb7-11b6d83248eb"/>
+					<textElement verticalAlignment="Top">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{concept_description}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="32">
+				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+					<reportElement x="494" y="3" width="60" height="20" uuid="706bbbf9-b027-4ab0-ba91-510bdd70c064"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{variable1_1_2}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+					<reportElement x="418" y="3" width="75" height="20" uuid="f485b902-8d4b-4672-a570-aaf4bfafc762"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{variable1_1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+					<reportElement x="334" y="3" width="83" height="20" uuid="a20fc5fd-63b0-444c-a414-b41f12e673be"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{variable1}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="138" y="3" width="46" height="20" uuid="236689f5-32cb-4dd3-b1cc-6b6ca26a4f62"/>
+					<textElement>
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="185" y="3" width="50" height="20" uuid="8e2151dc-dc7b-4ad1-b852-018295d952af"/>
+					<textElement verticalAlignment="Top">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{concept_code}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="125" y="25" width="400" height="1" forecolor="#CCCCCC" uuid="1101835c-2f0a-48d8-bd16-bcb3d2c45174"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="75" splitType="Stretch">
+			<staticText>
+				<reportElement x="212" y="46" width="109" height="20" uuid="99141cc7-0ef5-4ba4-8731-f92eae458552"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ingresos]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="167" height="46" uuid="a6a15b92-1a90-4477-84e1-e7763758a80f"/>
+				<imageExpression><![CDATA["http://localhost:8080/urbatec/images/Logo%20Urbatec.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="448" y="0" width="39" height="20" uuid="02482195-d74f-4b24-b0fd-021a5390ce41"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="487" y="0" width="59" height="20" uuid="3a30336f-6060-46d1-b242-5adbe161181b"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="4" width="54" height="20" uuid="86c31710-27eb-40e4-8788-fda6bce47470"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Operación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="55" y="4" width="46" height="20" uuid="f65c45cf-7d90-4b07-a9f1-2f0b69416acf"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cuenta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="162" y="3" width="172" height="20" uuid="ac227f42-924e-4b57-8ace-c82fd138d2bc"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="3" width="83" height="20" uuid="a87433e9-497d-4dcb-b4e6-56ddd42d7187"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="3" width="75" height="20" uuid="6ef21abf-1ace-40f0-8ab3-cf9ec3f1afbf"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IVA]]></text>
+			</staticText>
+			<line>
+				<reportElement x="5" y="3" width="538" height="1" forecolor="#666666" uuid="b5a6e0fa-acf3-4f6d-aaa9-60b25412c44e"/>
+			</line>
+			<staticText>
+				<reportElement x="102" y="4" width="57" height="19" uuid="c9382013-f8bb-49af-b9fd-e9f40fc51314"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="490" y="3" width="61" height="20" uuid="57345698-3487-4440-b33c-5b604d4fda8f"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IIBB]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="5" splitType="Stretch">
+			<line>
+				<reportElement x="6" y="-2" width="538" height="1" forecolor="#666666" uuid="9e823950-0611-4ef0-a312-fa04be6c7aa6"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField pattern="">
+				<reportElement x="4" y="0" width="63" height="20" uuid="e6b35ad5-55e8-4fc4-8053-ed0ac3daa999"/>
+				<textElement verticalAlignment="Top">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{movement_type}+" "+ $F{movement_number}+" / "+$F{movement_year}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+				<reportElement x="494" y="0" width="61" height="20" uuid="8dd2725f-2ec8-46a0-948a-7b1ca993b675"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{movement_item_iibb}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+				<reportElement x="418" y="0" width="75" height="20" uuid="fe77675a-c49e-49c5-974d-dfdf465e614f"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{movement_item_iva}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="102" y="0" width="57" height="20" uuid="3f907abf-a20f-47f1-940d-b75b796c847c"/>
+				<textElement verticalAlignment="Top">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{movement_date_created}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="55" y="0" width="47" height="20" uuid="baade5aa-035a-4782-be51-f15610d859d4"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{concept_code}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+				<reportElement x="335" y="0" width="82" height="20" uuid="2fd6ee93-b7ce-47c6-a5c2-a24c5a4e25aa"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{movement_item_amount}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+				<reportElement x="159" y="0" width="177" height="20" uuid="6aecc4d7-f8f8-4213-a6c1-06175f2f29f2"/>
+				<textElement verticalAlignment="Top">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{movement_item_description}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="5" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="84" splitType="Stretch">
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="458" y="11" width="88" height="20" uuid="23fcb419-4a3c-4305-819a-8d8b698ef993"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable1_1_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="355" y="11" width="100" height="20" uuid="d53230a2-81d4-46a3-90af-e9076252e5a3"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable1_1_2_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="355" y="35" width="93" height="20" uuid="5332aba4-b624-4fce-8c12-6098275b195e"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable1_1_2_3}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="13" y="1" width="533" height="1" uuid="2056caaa-f656-47ad-a720-8f597f4842ff"/>
+			</line>
+			<staticText>
+				<reportElement x="34" y="21" width="100" height="20" uuid="d7549de2-afef-4ee6-b064-97f06d68f1bb"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Urbatec]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="41" width="52" height="20" uuid="f5f3c11d-16cc-4a81-a0b3-3ed996b3dd34"/>
+				<textElement verticalAlignment="Top">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total IVA	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="11" width="76" height="20" uuid="3b5efb4a-caa1-40b5-9654-308d5a121620"/>
+				<textElement verticalAlignment="Top">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Monto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="35" width="69" height="20" uuid="cf66f360-0ac5-4c9f-80e2-455655de8ceb"/>
+				<textElement verticalAlignment="Top">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total IIBB]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="55" width="76" height="20" uuid="ac086172-2cba-4cf0-bdd5-0a9ace97eea7"/>
+				<textElement verticalAlignment="Top">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="355" y="55" width="148" height="20" uuid="8b13694f-784b-44fc-b66b-4d8c302d3fdf"/>
+				<textElement verticalAlignment="Top">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable1_1_2_3}+$V{variable1_1_2_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

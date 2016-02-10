@@ -95,6 +95,6 @@ class Movement {
 	}
 	
 	String toString(){
-		return type + " " + number + "/" + (year-2000)
+		return type.toUpperCase() + " " + number + "/" + (year-2000)
 	}
 }

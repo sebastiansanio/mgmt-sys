@@ -6,6 +6,8 @@ import static org.springframework.http.HttpStatus.*
 
 import java.util.List;
 
+import org.apache.poi.ss.usermodel.CellStyle
+import org.apache.poi.ss.usermodel.CreationHelper
 import pl.touk.excel.export.WebXlsxExporter
 import grails.transaction.Transactional
 
@@ -34,6 +36,18 @@ class ClientController {
 		new WebXlsxExporter().with {
 			fillHeader(headers)
 			add(Client.list(), FIELDS)
+			
+			CellStyle cellStyle = sheet.workbook.createCellStyle();
+			CreationHelper createHelper = sheet.workbook.getCreationHelper();
+			cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-mm-yy"));
+			for(int i = 1;i <= Client.count(); i++){
+				getCellAt(i, 8).setCellStyle(cellStyle)
+				getCellAt(i, 9).setCellStyle(cellStyle)
+			}
+			for(int i = 0;i < FIELDS.size(); i++){
+				sheet.autoSizeColumn(i)
+			}
+			
 			save(response.outputStream)
 		}
 	}

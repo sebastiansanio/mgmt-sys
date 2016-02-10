@@ -7,6 +7,8 @@ import static org.springframework.http.HttpStatus.*
 import java.util.List;
 
 import mgmt.persons.Client;
+import org.apache.poi.ss.usermodel.CellStyle
+import org.apache.poi.ss.usermodel.CreationHelper
 import pl.touk.excel.export.WebXlsxExporter
 import grails.transaction.Transactional
 
@@ -62,6 +64,18 @@ class BudgetController {
 		new WebXlsxExporter().with {
 			fillHeader(headers)
 			add(Budget.list(), FIELDS)
+			
+			CellStyle cellStyle = sheet.workbook.createCellStyle();
+			CreationHelper createHelper = sheet.workbook.getCreationHelper();
+			cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-mm-yy"));
+			for(int i = 1;i <= Budget.count(); i++){
+				getCellAt(i, 12).setCellStyle(cellStyle)
+				getCellAt(i, 13).setCellStyle(cellStyle)
+			}
+			for(int i = 0;i < FIELDS.size(); i++){
+				sheet.autoSizeColumn(i)
+			}
+			
 			save(response.outputStream)
 		}
 	}

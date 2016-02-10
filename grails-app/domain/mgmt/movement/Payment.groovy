@@ -29,4 +29,5 @@ class Payment {
 	BigDecimal getSignedAmount(){
 		return amount * multiplier
 	}
+	
 }

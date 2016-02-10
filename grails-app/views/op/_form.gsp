@@ -2,6 +2,10 @@
 
 <div class="container-fluid">
 
+<g:if test="${movementInstance.checked}">
+	<div class="alert alert-warning">${message(code:'movement.isChecked.error') }</div>
+</g:if>
+
 <g:hiddenField name="type" value="op" />
 
 <div class="col-md-3 ${hasErrors(bean: movementInstance, field: 'note', 'has-error')} ">
