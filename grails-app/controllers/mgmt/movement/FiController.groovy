@@ -4,6 +4,7 @@ package mgmt.movement
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import mgmt.concept.Concept
 
 @Transactional(readOnly = true)
 class FiController {
@@ -52,7 +53,7 @@ class FiController {
         respond new Movement(params)
     }
 
-	private void fillItems(Movement movement){
+	private void fillItems(Movement movement, Concept concept){
 		Date date = new Date().clearTime()
 		for(int i = 0; i < movement.items.size()/2; i++){
 			movement.items[2*i+1].description = movement.items[2*i].description
@@ -60,7 +61,7 @@ class FiController {
 			movement.items[2*i+1].quantity = movement.items[2*i].quantity
 			movement.items[2*i+1].unitPrice = movement.items[2*i].unitPrice
 			movement.items[2*i+1].amount = movement.items[2*i].amount
-			movement.items[2*i+1].concept = movement.items[2*i].concept
+			movement.items[2*i].concept = concept
 			movement.items[2*i].total = movement.items[2*i].amount
 			movement.items[2*i+1].total = movement.items[2*i+1].amount
 			movement.items[2*i].multiplier = 1
@@ -72,6 +73,7 @@ class FiController {
 	
     @Transactional
     def save() {
+		def concept = Concept.findByCode("P600")
 		Movement movementInstance = new Movement(params)
         if (movementInstance == null || movementInstance.type != 'fi') {
             notFound()
@@ -79,7 +81,7 @@ class FiController {
         }
 		movementInstance.items = movementInstance.items - [null]
 		movementInstance.payments = movementInstance.payments - [null]
-		fillItems(movementInstance)
+		fillItems(movementInstance,concept)
 		movementInstance.validate()
 		
         if (movementInstance.hasErrors()) {
@@ -108,7 +110,7 @@ class FiController {
 
     @Transactional
     def update() {
-		
+		def concept = Concept.findByCode("P600")
 		def movementInstance = Movement.get(params.id.toLong())
         if (movementInstance == null || movementInstance.type != 'fi') {
             notFound()
@@ -140,7 +142,7 @@ class FiController {
 		movementInstance.properties = params
 		movementInstance.items = movementInstance.items - [null]
 		movementInstance.payments = movementInstance.payments - [null]
-		fillItems(movementInstance)
+		fillItems(movementInstance,concept)
 		movementInstance.validate()
 		if (movementInstance.hasErrors()) {
             respond movementInstance.errors, view:'edit'

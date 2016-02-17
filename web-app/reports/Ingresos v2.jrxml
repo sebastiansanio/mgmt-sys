@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Informe de Saldos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27b43501-3750-42ac-ad7d-c7726c3ab552">
 	<property name="ireport.zoom" value="1.4641000000000022"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="118"/>
+	<property name="ireport.x" value="266"/>
+	<property name="ireport.y" value="22"/>
 	<parameter name="Date_from" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -269,14 +269,14 @@ ORDER BY
 					</textElement>
 					<textFieldExpression><![CDATA[$V{variable5}]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField pattern="#,##0.00">
 					<reportElement x="336" y="0" width="85" height="20" uuid="f414ae46-bafc-4c4e-8c2a-f08a58875179"/>
 					<textElement textAlignment="Right">
 						<font isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{variable3_1}]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField pattern="#,##0.00">
 					<reportElement x="422" y="0" width="72" height="20" uuid="f7616273-9f5b-4676-b507-99c650b74ff4"/>
 					<textElement textAlignment="Right">
 						<font isBold="false"/>
@@ -336,7 +336,7 @@ ORDER BY
 					</textElement>
 					<textFieldExpression><![CDATA[$F{concept_group_name}]]></textFieldExpression>
 				</textField>
-				<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
 					<reportElement x="336" y="40" width="85" height="20" uuid="5197a7a2-4b59-41f1-bf32-26df587f7ca8"/>
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="10" isBold="true"/>
@@ -360,21 +360,21 @@ ORDER BY
 				<line>
 					<reportElement x="127" y="60" width="391" height="1" forecolor="#CCCCCC" uuid="60c0bd43-2e3d-48c0-a35a-b6ff61747729"/>
 				</line>
-				<textField>
+				<textField pattern="#,##0.00">
 					<reportElement x="336" y="0" width="85" height="20" uuid="c5a00855-19f2-43dd-bf5c-f43df09d3db7"/>
 					<textElement textAlignment="Right">
 						<font isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{variable3}]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField pattern="#,##0.00">
 					<reportElement x="422" y="1" width="72" height="20" uuid="8dd6339a-f9d3-43a1-a746-38210a062344"/>
 					<textElement textAlignment="Right">
 						<font isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{variable4}]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField pattern="#,##0.00">
 					<reportElement x="336" y="21" width="85" height="20" uuid="1ec17f10-740c-42d8-b216-a3239487636d"/>
 					<textElement textAlignment="Right">
 						<font isBold="false"/>
@@ -406,21 +406,21 @@ ORDER BY
 		</groupHeader>
 		<groupFooter>
 			<band height="32">
-				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement x="494" y="3" width="60" height="20" uuid="706bbbf9-b027-4ab0-ba91-510bdd70c064"/>
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="10" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{variable1_1_2}]]></textFieldExpression>
 				</textField>
-				<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
 					<reportElement x="418" y="3" width="75" height="20" uuid="f485b902-8d4b-4672-a570-aaf4bfafc762"/>
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="10" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{variable1_1}]]></textFieldExpression>
 				</textField>
-				<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
 					<reportElement x="334" y="3" width="83" height="20" uuid="a20fc5fd-63b0-444c-a414-b41f12e673be"/>
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="10" isBold="true"/>
@@ -504,14 +504,14 @@ ORDER BY
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Monto]]></text>
+				<text><![CDATA[Monto $]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="415" y="3" width="75" height="20" uuid="6ef21abf-1ace-40f0-8ab3-cf9ec3f1afbf"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[IVA]]></text>
+				<text><![CDATA[IVA $]]></text>
 			</staticText>
 			<line>
 				<reportElement x="5" y="3" width="538" height="1" forecolor="#666666" uuid="b5a6e0fa-acf3-4f6d-aaa9-60b25412c44e"/>
@@ -548,14 +548,14 @@ ORDER BY
 				</textElement>
 				<textFieldExpression><![CDATA[$F{movement_type}+" "+ $F{movement_number}+"/"+$F{movement_year}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
 				<reportElement x="494" y="0" width="61" height="20" uuid="8dd2725f-2ec8-46a0-948a-7b1ca993b675"/>
 				<textElement textAlignment="Right" verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{movement_item_iibb}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
 				<reportElement x="418" y="0" width="75" height="20" uuid="fe77675a-c49e-49c5-974d-dfdf465e614f"/>
 				<textElement textAlignment="Right" verticalAlignment="Top">
 					<font size="9"/>
@@ -576,7 +576,7 @@ ORDER BY
 				</textElement>
 				<textFieldExpression><![CDATA[$F{concept_code}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
 				<reportElement x="335" y="0" width="82" height="20" uuid="2fd6ee93-b7ce-47c6-a5c2-a24c5a4e25aa"/>
 				<textElement textAlignment="Right" verticalAlignment="Top">
 					<font size="9"/>

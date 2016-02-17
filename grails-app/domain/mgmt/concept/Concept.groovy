@@ -1,7 +1,6 @@
 package mgmt.concept
 
 import mgmt.movement.MovementItem
-import pl.touk.excel.export.WebXlsxExporter
 
 class Concept {
 	
