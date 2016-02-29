@@ -97,9 +97,9 @@ class AccountTypeStatusController {
 			
 			fillHeader(headers)
 			
+			def balance = 0
 			if(params.dateFrom){
 				Date balanceDate = DATE_FORMAT.parse(params.dateFrom).plus(-1)
-				def balance
 				Sql sql = new Sql(dataSource)
 				def rows = sql.rows("select sum(p.amount*p.multiplier) as amount from payment p where payment_date <= ? and p.account_id = ?",balanceDate,account.id)
 				rows.each { row ->
@@ -109,10 +109,10 @@ class AccountTypeStatusController {
 				
 				fillRow(["", "SALDO AL "+DATE_FORMAT_DOWNLOAD.format(balanceDate) ,"","", balance], 1)
 			}
-			
-			add(payments, FIELDS,2)
+			fillRow(["", "SALDO DEL PERIODO","","", balance + payments.sum{it.signedAmount} ], 2)
+			add(payments, FIELDS,3)
 
-			for(int i = 2;i <= payments.size()+1; i++){
+			for(int i = 3;i <= payments.size()+2; i++){
 				getCellAt(i, 2).setCellStyle(cellStyle)
 				getCellAt(i, 3).setCellStyle(cellStyle)
 				getCellAt(i, 7).setCellStyle(cellStyle)

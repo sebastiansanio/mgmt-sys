@@ -19,7 +19,7 @@ class BalanceController {
 		amounts.generalExpenses = calculateAmount(work.id,'L000','L999')
 		amounts.retiredBenefits = calculateAmount(work.id,'N000','N999')
 		amounts.sellPrice = [amount: amounts.income.amount + amounts.otherIncome.amount, iva: amounts.income.iva + amounts.otherIncome.iva]
-		amounts.indirectGeneralExpenses =  work.budget.indirectOverheadPercentage? amounts.sellPrice.amount * work.budget.indirectOverheadPercentage/100 :  work.budget.indirectOverheadAmount
+		amounts.indirectGeneralExpenses =  work.budget.indirectOverheadPercentage? amounts.income.amount * work.budget.indirectOverheadPercentage/100 :  work.budget.indirectOverheadAmount
 		
 		amounts.totalGeneralExpenses = [amount: amounts.generalExpenses.amount + amounts.indirectGeneralExpenses, iva: amounts.generalExpenses.iva]
 		amounts.totalExpenses = [amount: amounts.generalExpenses.amount + amounts.indirectGeneralExpenses + amounts.directCosts.amount, iva: amounts.generalExpenses.iva + amounts.directCosts.iva]

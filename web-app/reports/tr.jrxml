@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="op" language="groovy" pageWidth="595" pageHeight="842" columnWidth="589" leftMargin="3" rightMargin="3" topMargin="20" bottomMargin="20" uuid="8a7719ce-943e-4e58-bcc4-17a1c4039d85">
-	<property name="ireport.zoom" value="0.7710865788590633"/>
+	<property name="ireport.zoom" value="0.9330147604194671"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table">
@@ -306,7 +306,7 @@ from movement m where m.id = $P{movement_id}]]>
 	<detail>
 		<band height="629" splitType="Stretch">
 			<componentElement>
-				<reportElement key="table 9" style="table 9" x="58" y="0" width="501" height="77" uuid="c700d514-13b4-4368-9eb0-bc1ee87b9388"/>
+				<reportElement key="table 9" style="table 9" x="40" y="0" width="537" height="77" uuid="c700d514-13b4-4368-9eb0-bc1ee87b9388"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="Movimientos" uuid="4772d315-c80d-4bd2-b489-8d91a99a6223">
 						<datasetParameter name="movement_id_m">
@@ -314,10 +314,10 @@ from movement m where m.id = $P{movement_id}]]>
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:column width="75" uuid="737be291-9cdf-4ed9-aa54-810e8582441c">
+					<jr:column width="82" uuid="737be291-9cdf-4ed9-aa54-810e8582441c">
 						<jr:columnHeader style="table 9_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="74" height="30" uuid="0e29668b-e8f5-4b07-8162-7f53968240b0"/>
+								<reportElement x="0" y="0" width="82" height="30" uuid="0e29668b-e8f5-4b07-8162-7f53968240b0"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
@@ -326,7 +326,7 @@ from movement m where m.id = $P{movement_id}]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table 9_TD" height="20" rowSpan="1">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="74" height="20" uuid="6de7e33e-67b7-481c-97e7-84ffef85a6f7"/>
+								<reportElement x="0" y="0" width="82" height="20" uuid="6de7e33e-67b7-481c-97e7-84ffef85a6f7"/>
 								<textElement verticalAlignment="Middle">
 									<font size="8"/>
 									<paragraph leftIndent="1"/>
@@ -335,10 +335,10 @@ from movement m where m.id = $P{movement_id}]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="74" uuid="90c9cd81-2f5c-4cd4-8115-6f4930bbd8c3">
+					<jr:column width="77" uuid="90c9cd81-2f5c-4cd4-8115-6f4930bbd8c3">
 						<jr:columnHeader style="table 9_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="74" height="30" uuid="c2b2811b-77ed-40dd-83c8-42777f2c3587"/>
+								<reportElement x="0" y="0" width="77" height="30" uuid="c2b2811b-77ed-40dd-83c8-42777f2c3587"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
@@ -347,7 +347,7 @@ from movement m where m.id = $P{movement_id}]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table 9_TD" height="20" rowSpan="1">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="74" height="20" uuid="3947ed84-648a-4090-a561-996ee5f3f000"/>
+								<reportElement x="0" y="0" width="77" height="20" uuid="3947ed84-648a-4090-a561-996ee5f3f000"/>
 								<textElement verticalAlignment="Middle">
 									<font size="8"/>
 									<paragraph leftIndent="1"/>
@@ -356,10 +356,10 @@ from movement m where m.id = $P{movement_id}]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="74" uuid="ceeb32d4-4ce7-4cea-a0f6-38b92718b8e3">
+					<jr:column width="77" uuid="ceeb32d4-4ce7-4cea-a0f6-38b92718b8e3">
 						<jr:columnHeader style="table 9_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="74" height="30" uuid="50401615-6285-4739-9d9b-da028d2a52c6"/>
+								<reportElement x="0" y="0" width="77" height="30" uuid="50401615-6285-4739-9d9b-da028d2a52c6"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
@@ -368,7 +368,7 @@ from movement m where m.id = $P{movement_id}]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table 9_TD" height="20" rowSpan="1">
 							<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="74" height="20" uuid="6165cb42-ac35-4ab3-bc74-83b9778909e5"/>
+								<reportElement x="0" y="0" width="77" height="20" uuid="6165cb42-ac35-4ab3-bc74-83b9778909e5"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 									<paragraph leftIndent="1"/>
@@ -377,10 +377,10 @@ from movement m where m.id = $P{movement_id}]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="58" uuid="97de271c-bf2c-4fa2-9fc2-478ba99e3cff">
+					<jr:column width="63" uuid="97de271c-bf2c-4fa2-9fc2-478ba99e3cff">
 						<jr:columnHeader style="table 9_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="58" height="30" uuid="9f311bc9-43fb-4fba-bf4c-500e5ac87017"/>
+								<reportElement x="0" y="0" width="63" height="30" uuid="9f311bc9-43fb-4fba-bf4c-500e5ac87017"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
@@ -389,7 +389,7 @@ from movement m where m.id = $P{movement_id}]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table 9_TD" height="20" rowSpan="1">
 							<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="57" height="20" uuid="55c72a24-bcaa-420d-a7ba-24345e70f618"/>
+								<reportElement x="0" y="0" width="63" height="20" uuid="55c72a24-bcaa-420d-a7ba-24345e70f618"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
@@ -397,10 +397,10 @@ from movement m where m.id = $P{movement_id}]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="219" uuid="21620ca2-33bb-4d14-b664-1659ad4e0b2c">
+					<jr:column width="236" uuid="21620ca2-33bb-4d14-b664-1659ad4e0b2c">
 						<jr:columnHeader style="table 9_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="219" height="30" uuid="7b285269-94fb-4c70-85c0-d42fb43296fa"/>
+								<reportElement x="0" y="0" width="236" height="30" uuid="7b285269-94fb-4c70-85c0-d42fb43296fa"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
@@ -409,7 +409,7 @@ from movement m where m.id = $P{movement_id}]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table 9_TD" height="20" rowSpan="1">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="219" height="20" uuid="2061bf48-b5fc-4576-8535-20cc7ad35d3a"/>
+								<reportElement x="0" y="0" width="236" height="20" uuid="2061bf48-b5fc-4576-8535-20cc7ad35d3a"/>
 								<textElement verticalAlignment="Middle">
 									<font size="8"/>
 									<paragraph leftIndent="1"/>

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Informe de Saldos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27b43501-3750-42ac-ad7d-c7726c3ab552">
 	<property name="ireport.zoom" value="1.610510000000002"/>
 	<property name="ireport.x" value="356"/>
-	<property name="ireport.y" value="487"/>
+	<property name="ireport.y" value="469"/>
 	<parameter name="Date_from" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -216,7 +216,7 @@ ORDER BY
 	<variable name="variable1_1_2_1_2_1" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA" calculation="Sum">
 		<variableExpression><![CDATA[$F{movement_item_iibb}]]></variableExpression>
 	</variable>
-	<variable name="variable5" class="java.lang.String" resetType="Group" resetGroup="OBRA" calculation="Sum">
+	<variable name="variable5" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA" calculation="Sum">
 		<variableExpression><![CDATA[$F{movement_item_amount}+$F{movement_item_iibb}]]></variableExpression>
 	</variable>
 	<group name="OBRA">
@@ -648,13 +648,6 @@ ORDER BY
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total Urbatec]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="160" y="41" width="52" height="20" uuid="f5f3c11d-16cc-4a81-a0b3-3ed996b3dd34"/>
-				<textElement verticalAlignment="Top">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Total IVA	]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="276" y="11" width="76" height="20" uuid="3b5efb4a-caa1-40b5-9654-308d5a121620"/>

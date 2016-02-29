@@ -136,7 +136,7 @@ function refreshTotals(){
 	$(".field-amount" ).each(function( index ) {
 		amount = amount + safeParseFloat($(this ).val());
 	});
-	$('#total-amount').text(amount.toFixed(2));
+	$('#total-amount').text(thousandSep(amount.toFixed(2)));
 }
 
 function safeParseFloat(inputString){
@@ -161,5 +161,11 @@ $(function() {
 		addItem();
 	}
 });
+
+function thousandSep(val) {
+    return String(val).split("").reverse().join("")
+                  .replace(/(\d{3}\B)/g, "$1,")
+                  .split("").reverse().join("");
+}
 
 </script>

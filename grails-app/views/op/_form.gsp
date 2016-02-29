@@ -230,34 +230,34 @@ function refreshTotals(){
 	$(".field-amount" ).each(function( index ) {
 		amount = amount + safeParseFloat($(this ).val());
 	});
-	$('#total-amount').text(amount.toFixed(2));
+	$('#total-amount').text(thousandSep(amount.toFixed(2)));
 	var iva = 0;
 	$(".field-iva" ).each(function( index ) {
 		iva = iva + safeParseFloat($(this ).val());
 	});
-	$('#total-iva').text(iva.toFixed(2));
+	$('#total-iva').text(thousandSep(iva.toFixed(2)));
 	var iibb = 0;
 	$(".field-iibb" ).each(function( index ) {
 		iibb = iibb + safeParseFloat($(this ).val());
 	});
-	$('#total-iibb').text(iibb.toFixed(2));
+	$('#total-iibb').text(thousandSep(iibb.toFixed(2)));
 	var otherPerceptions = 0;
 	$(".field-otherPerceptions" ).each(function( index ) {
 		otherPerceptions = otherPerceptions + safeParseFloat($(this ).val());
 	});
-	$('#total-otherPerceptions').text(otherPerceptions.toFixed(2));
+	$('#total-otherPerceptions').text(thousandSep(otherPerceptions.toFixed(2)));
 	var total = 0;
 	$(".field-total" ).each(function( index ) {
 		total = total + safeParseFloat($(this ).val());
 	});
-	$('#total-total').text(total.toFixed(2));
+	$('#total-total').text(thousandSep(total.toFixed(2)));
 }
 function refreshPaymentTotal(){
 	var total = 0;
 	$(".field-payment-amount" ).each(function( index ) {
 		total = total + safeParseFloat($(this ).val());
 	});
-	$('#total-payment-amount').text(total.toFixed(2));
+	$('#total-payment-amount').text(thousandSep(total.toFixed(2)));
 }
 
 function safeParseFloat(inputString){
@@ -299,5 +299,12 @@ $(function() {
 		addItem();
 	}
 });
+
+function thousandSep(val) {
+    return String(val).split("").reverse().join("")
+                  .replace(/(\d{3}\B)/g, "$1,")
+                  .split("").reverse().join("");
+}
+
 
 </script>

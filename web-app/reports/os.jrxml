@@ -188,7 +188,7 @@
 		<parameter name="movement_id_m" class="java.lang.Long" isForPrompting="false"/>
 		<queryString>
 			<![CDATA[select movement_id,w.code as work_code, c.code as concept_code, s.name as supplier_name, mi.description,
-it.code as invoice_type_code, mi.invoice_number,mi.amount,mi.iva,mi.iibb,mi.total
+it.code as invoice_type_code, mi.invoice_number,mi.amount,mi.iva,mi.iibb,mi.total, other_perceptions
 from movement_item mi
 left join work w on mi.work_id = w.id
 left join concept c on mi.concept_id = c.id
@@ -221,6 +221,9 @@ where movement_id = $P{movement_id_m}]]>
 		<field name="total" class="java.math.BigDecimal">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
+		<field name="other_perceptions" class="java.math.BigDecimal">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
 		<variable name="amount_tot" class="java.math.BigDecimal" resetType="Group" resetGroup="movement_id" incrementType="Group" incrementGroup="movement_id" calculation="Sum">
 			<variableExpression><![CDATA[$V{amount_tot} + $F{amount}]]></variableExpression>
 			<initialValueExpression><![CDATA[0]]></initialValueExpression>
@@ -237,6 +240,7 @@ where movement_id = $P{movement_id_m}]]>
 			<variableExpression><![CDATA[$V{total_tot} + $F{total}]]></variableExpression>
 			<initialValueExpression><![CDATA[0]]></initialValueExpression>
 		</variable>
+		<variable name="Tot_other" class="java.lang.String"/>
 		<group name="movement_id">
 			<groupExpression><![CDATA[$F{movement_id}]]></groupExpression>
 		</group>
@@ -315,7 +319,7 @@ from movement m where m.id = $P{movement_id}]]>
 	<detail>
 		<band height="325" splitType="Stretch">
 			<componentElement>
-				<reportElement key="table 5" style="table 5" stretchType="RelativeToBandHeight" x="59" y="0" width="499" height="325" uuid="3ad740e5-bd2b-4dd0-b911-68505bd9777e"/>
+				<reportElement key="table 5" style="table 5" stretchType="RelativeToBandHeight" x="40" y="0" width="537" height="325" uuid="3ad740e5-bd2b-4dd0-b911-68505bd9777e"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="Movimientos" uuid="4c6284b2-eaf9-4389-b41f-0569fa39ecd7">
 						<datasetParameter name="movement_id_m">
@@ -323,23 +327,23 @@ from movement m where m.id = $P{movement_id}]]>
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:column width="36" uuid="2c3e3ed0-c8ed-4468-a5bc-66a87bc32971">
+					<jr:column width="29" uuid="2c3e3ed0-c8ed-4468-a5bc-66a87bc32971">
 						<jr:groupFooter groupName="movement_id">
 							<jr:cell style="table 5_TH" height="20" rowSpan="1"/>
 						</jr:groupFooter>
-						<jr:columnHeader style="table 5_CH" height="20" rowSpan="1">
+						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="36" height="20" uuid="f3967ea0-dc49-442a-9621-06c1d74b5461"/>
+								<reportElement x="0" y="0" width="29" height="20" uuid="f3967ea0-dc49-442a-9621-06c1d74b5461"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
 								<text><![CDATA[Obra]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 5_TD" height="28" rowSpan="1">
 							<textField isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="36" height="20" uuid="9731812f-ddef-4bf9-80a6-cc8b225c8caf"/>
-								<textElement verticalAlignment="Middle">
+								<reportElement x="0" y="0" width="29" height="20" uuid="9731812f-ddef-4bf9-80a6-cc8b225c8caf"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 									<paragraph leftIndent="1"/>
 								</textElement>
@@ -351,7 +355,7 @@ from movement m where m.id = $P{movement_id}]]>
 						<jr:groupFooter groupName="movement_id">
 							<jr:cell style="table 5_TH" height="20" rowSpan="1"/>
 						</jr:groupFooter>
-						<jr:columnHeader style="table 5_CH" height="20" rowSpan="1">
+						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="39" height="20" uuid="cea73a2c-dc3c-491d-9411-9c51f406ae3c"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -360,7 +364,7 @@ from movement m where m.id = $P{movement_id}]]>
 								<text><![CDATA[Rubro]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 5_TD" height="28" rowSpan="1">
 							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="38" height="20" uuid="4f7bc167-30ef-4984-81f4-cbd643e84618"/>
 								<textElement verticalAlignment="Middle">
@@ -375,7 +379,7 @@ from movement m where m.id = $P{movement_id}]]>
 						<jr:groupFooter groupName="movement_id">
 							<jr:cell style="table 5_TH" height="20" rowSpan="1"/>
 						</jr:groupFooter>
-						<jr:columnHeader style="table 5_CH" height="20" rowSpan="1">
+						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="80" height="20" uuid="0aef6604-9ad3-4b0c-8d09-292952b38ea0"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -384,7 +388,7 @@ from movement m where m.id = $P{movement_id}]]>
 								<text><![CDATA[Proveedor]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 5_TD" height="28" rowSpan="1">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="80" height="20" uuid="c52cc356-4bca-451b-ba1e-8433eb387631"/>
 								<textElement verticalAlignment="Middle">
@@ -395,22 +399,22 @@ from movement m where m.id = $P{movement_id}]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="124" uuid="49d7356b-8f53-4930-9c36-40bf2ddd26b3">
+					<jr:column width="104" uuid="49d7356b-8f53-4930-9c36-40bf2ddd26b3">
 						<jr:groupFooter groupName="movement_id">
 							<jr:cell style="table 5_TH" height="20" rowSpan="1"/>
 						</jr:groupFooter>
-						<jr:columnHeader style="table 5_CH" height="20" rowSpan="1">
+						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="124" height="20" uuid="700b69b4-06aa-4607-b493-7a30a215b1b1"/>
+								<reportElement x="0" y="0" width="104" height="20" uuid="700b69b4-06aa-4607-b493-7a30a215b1b1"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
 								<text><![CDATA[Descripción]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 5_TD" height="28" rowSpan="1">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="124" height="20" uuid="e58a9c18-cdbe-40f4-9e4f-486e3b9bdc25"/>
+								<reportElement x="0" y="0" width="104" height="20" uuid="e58a9c18-cdbe-40f4-9e4f-486e3b9bdc25"/>
 								<textElement verticalAlignment="Middle">
 									<font size="8"/>
 									<paragraph leftIndent="1"/>
@@ -423,7 +427,7 @@ from movement m where m.id = $P{movement_id}]]>
 						<jr:groupFooter groupName="movement_id">
 							<jr:cell style="table 5_TH" height="20" rowSpan="1"/>
 						</jr:groupFooter>
-						<jr:columnHeader style="table 5_CH" height="20" rowSpan="1">
+						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="20" height="20" uuid="dd3c88a5-9839-4867-863a-3c32db16db23"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -432,7 +436,7 @@ from movement m where m.id = $P{movement_id}]]>
 								<text><![CDATA[Tipo]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 5_TD" height="28" rowSpan="1">
 							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="20" height="20" uuid="95935d4a-322e-427a-b932-92c7b16ac993"/>
 								<textElement verticalAlignment="Middle">
@@ -443,11 +447,11 @@ from movement m where m.id = $P{movement_id}]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="40" uuid="82dd5c22-a6a8-427f-a7ec-518bed9e9251">
+					<jr:column width="43" uuid="82dd5c22-a6a8-427f-a7ec-518bed9e9251">
 						<jr:groupFooter groupName="movement_id">
 							<jr:cell style="table 5_TH" height="20" rowSpan="1">
 								<staticText>
-									<reportElement x="0" y="0" width="40" height="20" uuid="ed572fd6-6e5b-4f06-ba7d-d6cad9fbaf0f"/>
+									<reportElement x="0" y="0" width="43" height="20" uuid="ed572fd6-6e5b-4f06-ba7d-d6cad9fbaf0f"/>
 									<textElement verticalAlignment="Middle">
 										<font size="9" isBold="true"/>
 										<paragraph leftIndent="1"/>
@@ -456,18 +460,18 @@ from movement m where m.id = $P{movement_id}]]>
 								</staticText>
 							</jr:cell>
 						</jr:groupFooter>
-						<jr:columnHeader style="table 5_CH" height="20" rowSpan="1">
+						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="40" height="20" uuid="57729ada-ca16-43c3-95e6-5dc16a4bf529"/>
+								<reportElement x="0" y="0" width="43" height="20" uuid="57729ada-ca16-43c3-95e6-5dc16a4bf529"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
 								<text><![CDATA[N° fac.]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 5_TD" height="28" rowSpan="1">
 							<textField isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="40" height="20" uuid="970d9c33-8bc7-4cad-9473-aab6bdaefd9d"/>
+								<reportElement x="0" y="0" width="43" height="20" uuid="970d9c33-8bc7-4cad-9473-aab6bdaefd9d"/>
 								<textElement verticalAlignment="Middle">
 									<font size="8"/>
 									<paragraph leftIndent="1"/>
@@ -476,11 +480,11 @@ from movement m where m.id = $P{movement_id}]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="54" uuid="048775e5-71b0-41b5-84d0-35a14b6ad0a9">
+					<jr:column width="62" uuid="048775e5-71b0-41b5-84d0-35a14b6ad0a9">
 						<jr:groupFooter groupName="movement_id">
 							<jr:cell style="table 5_TH" height="20" rowSpan="1">
 								<textField pattern="#,##0.00">
-									<reportElement x="0" y="0" width="53" height="20" uuid="f091c4f8-f8eb-4db6-b1df-f91a398497d6"/>
+									<reportElement x="0" y="0" width="62" height="20" uuid="f091c4f8-f8eb-4db6-b1df-f91a398497d6"/>
 									<textElement textAlignment="Right" verticalAlignment="Middle">
 										<font size="9" isBold="true" isStrikeThrough="false"/>
 									</textElement>
@@ -488,18 +492,18 @@ from movement m where m.id = $P{movement_id}]]>
 								</textField>
 							</jr:cell>
 						</jr:groupFooter>
-						<jr:columnHeader style="table 5_CH" height="20" rowSpan="1">
+						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="54" height="20" uuid="e824c27d-a71b-452a-911a-dcf0b1156cf7"/>
+								<reportElement x="0" y="0" width="62" height="20" uuid="e824c27d-a71b-452a-911a-dcf0b1156cf7"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
 								<text><![CDATA[Monto]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 5_TD" height="28" rowSpan="1">
 							<textField pattern="#,##0.00" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="53" height="20" uuid="669ebf30-ff62-4f0c-824e-d2e9a7424f2f"/>
+								<reportElement x="0" y="0" width="62" height="20" uuid="669ebf30-ff62-4f0c-824e-d2e9a7424f2f"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
@@ -507,11 +511,11 @@ from movement m where m.id = $P{movement_id}]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="57" uuid="30ca54a4-e269-4946-a2b6-5f5edabb38af">
+					<jr:column width="46" uuid="30ca54a4-e269-4946-a2b6-5f5edabb38af">
 						<jr:groupFooter groupName="movement_id">
 							<jr:cell style="table 5_TH" height="20" rowSpan="1">
 								<textField pattern="#,##0.00">
-									<reportElement x="0" y="0" width="56" height="20" uuid="82f1c9c6-595c-4f43-be0c-a30bd2f4b8d9"/>
+									<reportElement x="0" y="0" width="46" height="20" uuid="82f1c9c6-595c-4f43-be0c-a30bd2f4b8d9"/>
 									<textElement textAlignment="Right" verticalAlignment="Middle">
 										<font size="9" isBold="true"/>
 									</textElement>
@@ -519,18 +523,18 @@ from movement m where m.id = $P{movement_id}]]>
 								</textField>
 							</jr:cell>
 						</jr:groupFooter>
-						<jr:columnHeader style="table 5_CH" height="20" rowSpan="1">
+						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="57" height="20" uuid="c2c5cd2b-b897-4991-a94b-5a0124cf6dbf"/>
+								<reportElement x="0" y="0" width="46" height="20" uuid="c2c5cd2b-b897-4991-a94b-5a0124cf6dbf"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
 								<text><![CDATA[IVA]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 5_TD" height="28" rowSpan="1">
 							<textField pattern="#,##0.00" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="56" height="20" uuid="fefd92cc-dbd2-4047-a4f3-df806d2d81c9"/>
+								<reportElement x="0" y="0" width="46" height="20" uuid="fefd92cc-dbd2-4047-a4f3-df806d2d81c9"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
@@ -538,11 +542,38 @@ from movement m where m.id = $P{movement_id}]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="66" uuid="2ca38e14-2e9f-49f2-b3d2-1dba5de198e4">
+					<jr:column width="44" uuid="d1e7c72b-208e-4893-9ebe-83fb004ed4ac">
 						<jr:groupFooter groupName="movement_id">
 							<jr:cell style="table 5_TH" height="20" rowSpan="1">
 								<textField pattern="#,##0.00">
-									<reportElement x="0" y="0" width="63" height="20" uuid="556863a0-08b0-412d-ab2b-5b6fd06c7d81"/>
+									<reportElement x="0" y="0" width="44" height="20" uuid="e6e6143e-9e9b-4598-912b-e81024f139d9"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle">
+										<font fontName="SansSerif" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{iibb_tot}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="44" height="20" uuid="c9db0fab-4d80-4510-a219-2ccea2ac8c33"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Otros]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="28" rowSpan="1">
+							<textField pattern="#,##0.00" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="44" height="20" uuid="f0024d01-b19b-4c0d-adfc-8501c98de080"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{other_perceptions}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="69" uuid="2ca38e14-2e9f-49f2-b3d2-1dba5de198e4">
+						<jr:groupFooter groupName="movement_id">
+							<jr:cell style="table 5_TH" height="20" rowSpan="1">
+								<textField pattern="#,##0.00">
+									<reportElement x="0" y="0" width="69" height="20" uuid="556863a0-08b0-412d-ab2b-5b6fd06c7d81"/>
 									<textElement textAlignment="Right" verticalAlignment="Middle">
 										<font size="9" isBold="true"/>
 									</textElement>
@@ -550,18 +581,18 @@ from movement m where m.id = $P{movement_id}]]>
 								</textField>
 							</jr:cell>
 						</jr:groupFooter>
-						<jr:columnHeader style="table 5_CH" height="20" rowSpan="1">
+						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="64" height="20" uuid="460ab3a7-f02a-4c55-96ef-3809c258b1e7"/>
+								<reportElement x="0" y="0" width="69" height="20" uuid="460ab3a7-f02a-4c55-96ef-3809c258b1e7"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
 								<text><![CDATA[Total]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 5_TD" height="28" rowSpan="1">
 							<textField pattern="#,##0.00" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="63" height="20" uuid="88d36613-cd2c-416a-bd29-fcdaadc02fef"/>
+								<reportElement x="0" y="0" width="69" height="20" uuid="88d36613-cd2c-416a-bd29-fcdaadc02fef"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
@@ -574,7 +605,7 @@ from movement m where m.id = $P{movement_id}]]>
 		</band>
 		<band height="298">
 			<componentElement>
-				<reportElement key="table 7" style="table 7" stretchType="RelativeToBandHeight" x="59" y="23" width="499" height="275" uuid="93befff9-3476-4732-b349-c8c866e7092f"/>
+				<reportElement key="table 7" style="table 7" stretchType="RelativeToBandHeight" x="40" y="23" width="537" height="275" uuid="93befff9-3476-4732-b349-c8c866e7092f"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="Pagos" uuid="9d24ad5e-3dd5-44f8-b4d2-ffe1c2f04801">
 						<datasetParameter name="movement_id_p">
@@ -589,7 +620,7 @@ from movement m where m.id = $P{movement_id}]]>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
-								<text><![CDATA[Cuenta de pago]]></text>
+								<text><![CDATA[Cuenta]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="table 7_TD" height="20" rowSpan="1">
@@ -636,7 +667,7 @@ from movement m where m.id = $P{movement_id}]]>
 						<jr:detailCell style="table 7_TD" height="20" rowSpan="1">
 							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="76" height="20" uuid="ad0d58c8-a9b2-401b-a9e5-25477fa3d134"/>
-								<textElement verticalAlignment="Middle">
+								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 									<paragraph leftIndent="2"/>
 								</textElement>
@@ -665,10 +696,10 @@ from movement m where m.id = $P{movement_id}]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="193" uuid="9cfad1a4-68f4-4c10-89e5-122c549f5887">
+					<jr:column width="231" uuid="9cfad1a4-68f4-4c10-89e5-122c549f5887">
 						<jr:columnHeader style="table 7_CH" height="20" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="193" height="20" uuid="c210534d-9e66-420c-a289-d2ba5ce020fe"/>
+								<reportElement x="0" y="0" width="231" height="20" uuid="c210534d-9e66-420c-a289-d2ba5ce020fe"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
@@ -677,7 +708,7 @@ from movement m where m.id = $P{movement_id}]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table 7_TD" height="20" rowSpan="1">
 							<textField isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="193" height="20" uuid="749c3810-b243-4c6b-9453-e60e56462133"/>
+								<reportElement x="0" y="0" width="231" height="20" uuid="749c3810-b243-4c6b-9453-e60e56462133"/>
 								<textElement verticalAlignment="Middle">
 									<font size="8"/>
 									<paragraph leftIndent="1"/>
