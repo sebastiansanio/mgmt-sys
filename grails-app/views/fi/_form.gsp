@@ -58,7 +58,7 @@
 					<td class="td-intableform"><g:field onchange="refreshTotal('${itemPosition*2}');" type="text" class="position-0 input-intableform form-control numberinput right-aligned" id="quantity-${itemPosition*2}" name="items[${itemPosition*2}].quantity" value="${movementInstance.items[itemPosition*2]?.quantity}" required=""/></td>
 					<td class="td-intableform"><g:field onchange="refreshTotal('${itemPosition*2}');" type="text" class="position-0 input-intableform form-control numberinput right-aligned" id="unitPrice-${itemPosition*2}" name="items[${itemPosition*2}].unitPrice" value="${movementInstance.items[itemPosition*2]?.unitPrice}" required=""/></td>
 					<td class="td-intableform"><g:field type="text" class="position-0 input-intableform form-control field-amount right-aligned" id="amount-${itemPosition*2}" name="items[${itemPosition*2}].amount" value="${movementInstance.items[itemPosition*2]?.amount}" required=""/></td>
-					<td class="center-aligned"><button type="button" onclick="$('#items-${itemPosition*2}').remove();refreshTotals();"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
+					<td class="center-aligned"><button onfocus="addItem();" type="button" onclick="$('#items-${itemPosition*2}').remove();refreshTotals();"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
 				</tr>
 			</g:each>
 			</g:if>
@@ -87,7 +87,7 @@
 		<td class="td-intableform"><g:field type="text" disabled="disabled" class="position-0 input-intableform form-control numberinput right-aligned" id="quantity-xyz" name="items[xyz].quantity" value="" required=""/></td>
 		<td class="td-intableform"><g:field type="text" disabled="disabled" class="position-0 input-intableform form-control numberinput right-aligned" id="unitPrice-xyz" name="items[xyz].unitPrice" value="" required=""/></td>
 		<td class="td-intableform"><g:field type="text" disabled="disabled" class="position-0 input-intableform form-control field-amount right-aligned" id="amount-xyz" name="items[xyz].amount" value="" required=""/></td>
-		<td class="center-aligned"><button type="button" class="deleteButton" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
+		<td class="center-aligned"><button onfocus="addItem();" type="button" class="deleteButton" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
 	</tr>
 </table>
 
