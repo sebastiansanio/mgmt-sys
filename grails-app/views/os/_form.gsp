@@ -189,6 +189,7 @@ function addItem(){
 }
 
 var paymentsQuantity = ${movementInstance?.payments?.size()?:0};
+var globalTotal = 0;
 
 function addPayment(){
 	$tmc = $("#payment-model").clone();
@@ -207,7 +208,7 @@ function addPayment(){
 	$tmc.appendTo("#payments-table");
 
 	if(paymentsQuantity == 0){
-		$(".field-payment-amount",$tmc).val($("#total-total").text());
+		$(".field-payment-amount",$tmc).val($("#total-total").text().replace(/,/g,""));
 		refreshPaymentTotal();
 	}
 	
