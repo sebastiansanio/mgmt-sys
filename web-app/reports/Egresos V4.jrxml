@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Informe de Saldos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27b43501-3750-42ac-ad7d-c7726c3ab552">
 	<property name="ireport.zoom" value="1.610510000000002"/>
-	<property name="ireport.x" value="356"/>
-	<property name="ireport.y" value="469"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="Date_from" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -51,7 +51,7 @@
      movement.`date_created` AS movement_date_created,
      movement.`last_updated` AS movement_last_updated,
      movement.`number` AS movement_number,
-     movement.`type` AS movement_type,
+     upper(movement.`type`) AS movement_type,
      movement.`year` AS movement_year,
      movement.`note` AS movement_note,
      work.`id` AS work_id,
@@ -98,8 +98,10 @@ FROM
      INNER JOIN `concept` concept ON movement_item.`concept_id` = concept.`id`
      left JOIN `supplier` supplier ON movement_item.`supplier_id` = supplier.`id`
 LEFT OUTER JOIN concept_group cg ON concept.concept_group_id = cg.id
-where (movement.date_created >=  $P{Date_from} or $P{Date_from} is null ) and (movement.date_created < $P{Date_to} or $P{Date_to} is null) and (work.id = $P{Work_id} or $P{Work_id} = -1)
-and (concept.code between $P{Concept_code_from} and $P{Concept_code_to} or $P{Concept_code_from} = '' or $P{Concept_code_from} is null) and movement_item.multiplier = -1
+where (movement.date_created >=  $P{Date_from} or $P{Date_from} is null ) and (movement.date_created < $P{Date_to} or $P{Date_to} is null)
+and (($P{Work_id} <> -1 and work.id = $P{Work_id}) or ($P{Work_id} = -1 and work.id is null))
+and ($P{Work_id} <> -1 or (concept.code between $P{Concept_code_from} and $P{Concept_code_to} and concept.code between 'M000' and 'M999'))
+and movement_item.multiplier = -1
  and (movement_item.supplier_id = $P{Supplier_id} or $P{Supplier_id} = -1)
 
 ORDER BY
@@ -195,7 +197,7 @@ ORDER BY
 	<variable name="variable1_1_2_3_1" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{movement_item_iibb}]]></variableExpression>
 	</variable>
-	<variable name="variable2" class="java.lang.Integer" resetType="Group" resetGroup="OBRA" calculation="Sum">
+	<variable name="variable2" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA" calculation="Sum">
 		<variableExpression><![CDATA[$F{movement_item_amount}+$F{movement_item_iibb}]]></variableExpression>
 	</variable>
 	<variable name="variable3" class="java.math.BigDecimal" resetType="Group" resetGroup="GRUPO" calculation="Sum">
@@ -616,67 +618,4 @@ ORDER BY
 	<pageFooter>
 		<band splitType="Stretch"/>
 	</pageFooter>
-	<summary>
-		<band height="84" splitType="Stretch">
-			<textField pattern="#,##0.00">
-				<reportElement x="458" y="11" width="88" height="20" uuid="23fcb419-4a3c-4305-819a-8d8b698ef993"/>
-				<textElement verticalAlignment="Top">
-					<font size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{variable1_1_1}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="355" y="11" width="100" height="20" uuid="d53230a2-81d4-46a3-90af-e9076252e5a3"/>
-				<textElement verticalAlignment="Top">
-					<font size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{variable1_1_2_1}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00">
-				<reportElement x="355" y="35" width="93" height="20" uuid="5332aba4-b624-4fce-8c12-6098275b195e"/>
-				<textElement verticalAlignment="Top">
-					<font size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{variable1_1_2_3}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="13" y="1" width="533" height="1" uuid="2056caaa-f656-47ad-a720-8f597f4842ff"/>
-			</line>
-			<staticText>
-				<reportElement x="34" y="21" width="100" height="20" uuid="d7549de2-afef-4ee6-b064-97f06d68f1bb"/>
-				<textElement verticalAlignment="Top">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Total Urbatec]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="276" y="11" width="76" height="20" uuid="3b5efb4a-caa1-40b5-9654-308d5a121620"/>
-				<textElement verticalAlignment="Top">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Total Monto]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="276" y="35" width="69" height="20" uuid="cf66f360-0ac5-4c9f-80e2-455655de8ceb"/>
-				<textElement verticalAlignment="Top">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Total IIBB]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="276" y="55" width="76" height="20" uuid="ac086172-2cba-4cf0-bdd5-0a9ace97eea7"/>
-				<textElement verticalAlignment="Top">
-					<font size="13" isBold="true"/>
-				</textElement>
-				<text><![CDATA[TOTAL]]></text>
-			</staticText>
-			<textField pattern="#,##0.00">
-				<reportElement x="355" y="55" width="148" height="20" uuid="8b13694f-784b-44fc-b66b-4d8c302d3fdf"/>
-				<textElement verticalAlignment="Top">
-					<font size="13" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{variable1_1_2_3}+$V{variable1_1_2_1}]]></textFieldExpression>
-			</textField>
-		</band>
-	</summary>
 </jasperReport>
