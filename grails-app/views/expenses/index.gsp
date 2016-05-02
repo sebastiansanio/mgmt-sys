@@ -44,7 +44,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2"><g:submitButton class="btn btn-default" name="download" value="${message(code:'default.download.label')}" /></td>
+			<td colspan="2"><g:submitButton class="btn btn-default" name="download" value="${message(code:'default.download.pdf.label')}" /></td>
 		</tr>
 	</tbody>
 </table>

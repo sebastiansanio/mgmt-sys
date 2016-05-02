@@ -4,7 +4,7 @@
 	account: ["account","accountTypeStatus"],
 	concept: ["concept","conceptGroup","conceptAccount"],
 	budget: ["budget","work","client","supplierBudgetTracing"],
-	balance: ["income","expenses","netting","balance"],
+	balance: ["income","expenses","netting","balance","movementsExport"],
 	supplier: ["supplier","supplierBudget","supplierExpenses"],
 	configuration: ["accountType","unitOfMeasurement","invoiceType","requestmap","secAuthority","secUser","report","import" ]
 	]}" />
