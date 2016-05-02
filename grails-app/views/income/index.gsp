@@ -3,7 +3,6 @@
 
 <head>
 	<meta name="layout" content="main" />
-	<g:set var="entityName" value="${message(code: 'accountStatus.label')}" />
 </head>
 
 <body>
@@ -20,11 +19,11 @@
 		</tr>
 		<tr>
 			<td><label for="account_id"><g:message code="default.dateFrom.label"/> </label></td>
-			<td><bs:datePicker name="Date_from" precision="day" value="${new Date()}" /> <g:checkBox onchange="dateFromCheckboxChanged();" name="dateFromEnabled" value="true" /></td>
+			<td><bs:datePicker name="Date_from" precision="day" value="${new Date()}" /> <g:checkBox onchange="dateFromCheckboxChanged();" name="dateFromEnabled" checked="false" /></td>
 		</tr>
 		<tr>
 			<td><label for="account_id"><g:message code="default.dateTo.label"/> </label></td>
-			<td><bs:datePicker name="Date_to" precision="day" value="${new Date()}" /> <g:checkBox onchange="dateToCheckboxChanged();" name="dateToEnabled" value="true" /> </td>
+			<td><bs:datePicker name="Date_to" precision="day" value="${new Date()}" /> <g:checkBox onchange="dateToCheckboxChanged();" name="dateToEnabled" checked="false" /> </td>
 		</tr>
 		<tr>
 			<td colspan="2">
@@ -42,6 +41,8 @@
 <script>
 $(function() {
 	$(".select-chosen").chosen({search_contains: true, width:'100%'});
+	dateFromCheckboxChanged();
+	dateToCheckboxChanged();
 });
 function dateFromCheckboxChanged(){
 	if($('#dateFromEnabled').prop( 'checked')){

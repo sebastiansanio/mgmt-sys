@@ -3,9 +3,9 @@
 	[movement: ["op", "os", "in", "fi", "tr", "movementItem" ],
 	account: ["account","accountTypeStatus"],
 	concept: ["concept","conceptGroup","conceptAccount"],
-	budget: ["budget","work","client","supplierBudgetTracing"],
+	budget: ["budget","work","client"],
 	balance: ["income","expenses","netting","balance","movementsExport"],
-	supplier: ["supplier","supplierBudget","supplierExpenses"],
+	supplier: ["supplier","supplierBudget","supplierExpenses","supplierBudgetTracing"],
 	configuration: ["accountType","unitOfMeasurement","invoiceType","requestmap","secAuthority","secUser","report","import" ]
 	]}" />
 	
