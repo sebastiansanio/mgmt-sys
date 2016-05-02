@@ -56,6 +56,7 @@ class TrController {
 		movement.payments[1].amount = movement.payments[0].amount
 		movement.payments[1].paymentDate = movement.payments[0].paymentDate
 		movement.payments[1].note = movement.payments[0].note
+		movement.payments[1].checkNumber = movement.payments[0].checkNumber
 		movement.payments[0].multiplier = -1 
 		movement.payments[1].multiplier = 1
 	}
