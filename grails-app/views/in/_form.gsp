@@ -60,7 +60,7 @@
 					<td class="td-intableform"><g:field onchange="refreshTotal('${i}');" type="text" class="input-intableform form-control numberinput field-amount right-aligned" id="amount-${i}" name="items[${i}].amount" value="${movementItemInstance.amount}" required=""/></td>
 					<td class="td-intableform"><g:field onchange="refreshTotal('${i}');" type="text" class="input-intableform form-control numberinput field-iva right-aligned" id="iva-${i}" name="items[${i}].iva" value="${movementItemInstance.iva?:0}" required=""/></td>
 					<td class="td-intableform"><g:field type="text" class="input-intableform form-control field-total right-aligned" name="items[${i}].total" id="total-${i}" value="${movementItemInstance.total}" required=""/></td>
-					<td class="center-aligned"><button onfocus="addItem();" type="button" onclick="$('#items-${i}').remove();refreshTotals();"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
+					<td class="center-aligned"><button type="button" onclick="$('#items-${i}').remove();refreshTotals();"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button><input onfocus="addItem();" type="text" style="width:0.001px; opacity: 0;" name="add-${i}" id="add-${i}"></td>
 				</tr>
 			</g:each>
 		</tbody>
@@ -127,7 +127,7 @@
 		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-intableform form-control numberinput field-amount right-aligned" id="amount-xyz" name="items[xyz].amount" value="" required=""/></td>
 		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-intableform form-control numberinput field-iva right-aligned" id="iva-xyz" name="items[xyz].iva" value="0" required=""/></td>
 		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-intableform form-control field-total right-aligned" id="total-xyz" name="items[xyz].total" value="" required=""/></td>
-		<td class="center-aligned"><button onfocus="addItem();" type="button" class="deleteButton" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
+		<td class="center-aligned"><button type="button" class="deleteButton" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button><input onfocus="addItem();" type="text" style="width:0.001px; opacity: 0;" name="add-xyz" id="add-xyz"></td>
 	</tr>
 </table>
 
