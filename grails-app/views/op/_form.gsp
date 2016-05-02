@@ -2,9 +2,7 @@
 
 <div class="container-fluid">
 
-<g:if test="${movementInstance.checked}">
-	<div class="alert alert-warning">${message(code:'movement.isChecked.error') }</div>
-</g:if>
+
 
 <g:hiddenField name="type" value="op" />
 
@@ -306,5 +304,13 @@ function thousandSep(val) {
                   .split("").reverse().join("");
 }
 
-
 </script>
+
+<g:if test="${movementInstance.checked}">
+	<script>
+		$(function() {
+			$(".form-horizontal :input").prop('disabled', true);
+			$(".form-horizontal :submit").hide();
+		});
+	</script>
+</g:if>
