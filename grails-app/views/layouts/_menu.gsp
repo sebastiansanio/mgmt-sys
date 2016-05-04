@@ -11,7 +11,7 @@
 	
 	<g:set var="menuGroupPriorities" value="${
 	[movement: 1, account: 2, budget: 4, balance: 5, concept: 3, supplier: 6, configuration: 7	]}" />
-	<g:set var="menuPriorities" value="${[op: 1,os: 2,in: 3,fi: 4,tr: 5,movementItem: 6,
+	<g:set var="menuPriorities" value="${[op: 1,os: 2,in: 3,fi: 4,tr: 5,movementItem: 6,movementsExport:2,balance:3,
 	netting: 7 
 	]}" />
 	
