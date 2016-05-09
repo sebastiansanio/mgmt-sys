@@ -3,12 +3,49 @@ package mgmt.work
 
 
 import static org.springframework.http.HttpStatus.*
+
+import java.util.List;
+import org.apache.poi.ss.usermodel.CellStyle
+import org.apache.poi.ss.usermodel.CreationHelper
+import pl.touk.excel.export.WebXlsxExporter
+
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class WorkController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+	
+	private static List FIELDS = ["code","name","finished","client","dateCreated"]
+	
+	def download(){
+		response.setContentType("application/ms-excel");
+		response.setHeader("Content-Disposition", "attachment; filename='${message(code:'menu.work.label')}.xlsx'");
+		
+		def headers = FIELDS.collect{
+			message(code: 'work.'+it+'.label')
+		}
+		new WebXlsxExporter().with {
+			fillHeader(headers)
+			add(Work.list(), FIELDS)
+			
+			CellStyle cellStyle = sheet.workbook.createCellStyle();
+			CreationHelper createHelper = sheet.workbook.getCreationHelper();
+			cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-mm-yy"));
+			for(int i = 1;i <= Work.count(); i++){
+				getCellAt(i, 4).setCellStyle(cellStyle)
+			}
+			for(int i = 0;i < FIELDS.size(); i++){
+				sheet.autoSizeColumn(i)
+			}
+			
+			save(response.outputStream)
+		}
+	}
+	
+	def downloadPdf(){
+		redirect controller: 'report', action: 'downloadReport', id: mgmt.reports.Report.findByCode('worksList').id
+	}
 
     def index(Integer max) {
 		params.sort = !params.sort || params.sort == "{type=desc, code=desc}"?[type:'desc', code:'desc']:params.sort
@@ -124,9 +161,7 @@ class WorkController {
         }
     }
 	
-	def download(){
-		redirect controller: 'report', action: 'downloadReport', id: mgmt.reports.Report.findByCode('worksList').id
-	}
+
 	
 	@Transactional
 	def close(){
