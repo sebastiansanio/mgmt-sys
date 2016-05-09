@@ -6,7 +6,7 @@
 	budget: ["budget","work","client"],
 	balance: ["income","expenses","netting","balance","movementsExport"],
 	supplier: ["supplier","supplierBudget","supplierExpenses","supplierBudgetTracing"],
-	configuration: ["accountType","unitOfMeasurement","invoiceType","requestmap","secAuthority","secUser","report","import" ]
+	configuration: ["accountType","unitOfMeasurement","invoiceType","requestmap","secAuthority","secUser","report","import","parameter" ]
 	]}" />
 	
 	<g:set var="menuGroupPriorities" value="${

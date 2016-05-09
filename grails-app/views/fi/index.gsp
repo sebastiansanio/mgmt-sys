@@ -62,6 +62,10 @@
 						<sec:access url="/fi/check">
 							<g:form action="check">
 								<g:hiddenField name="id" value="${movementInstance.id}" />
+								<g:hiddenField name="max" value="${params.max}" />
+								<g:hiddenField name="sort" value="${params.sort}" />
+								<g:hiddenField name="order" value="${params.order}" />
+								<g:hiddenField name="offset" value="${params.offset}" />
 								<g:submitButton class="btn btn-primary btn-xs" name="check" value="${message(code:'movement.check.label') }" /> 
 							</g:form>
 						</sec:access>
@@ -70,6 +74,10 @@
 						<sec:access url="/fi/uncheck">
 							<g:form action="uncheck">
 								<g:hiddenField name="id" value="${movementInstance.id}" />
+								<g:hiddenField name="max" value="${params.max}" />
+								<g:hiddenField name="sort" value="${params.sort}" />
+								<g:hiddenField name="order" value="${params.order}" />
+								<g:hiddenField name="offset" value="${params.offset}" />
 								<g:submitButton class="btn btn-danger btn-xs" name="uncheck" value="${message(code:'movement.uncheck.label') }" /> 
 							</g:form>
 						</sec:access>

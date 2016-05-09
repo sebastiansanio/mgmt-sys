@@ -6,6 +6,7 @@ import mgmt.persons.Supplier
 import mgmt.products.UnitOfMeasurement
 import mgmt.work.Work
 
+
 import org.grails.databinding.BindUsing
 
 class MovementItem {

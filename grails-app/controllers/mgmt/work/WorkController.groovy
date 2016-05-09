@@ -138,7 +138,7 @@ class WorkController {
 		workInstance.finished = true
 		workInstance.save flush: true
 		flash.message = message(code: 'work.close.message')
-		redirect action:"index", method:"GET"
+		redirect action:"index", method:"GET", params:params
 		
 	}
 	@Transactional
@@ -151,6 +151,6 @@ class WorkController {
 		workInstance.finished = false
 		workInstance.save flush: true
 		flash.message = message(code: 'work.open.message')
-		redirect action:"index", method:"GET"
+		redirect action:"index", method:"GET", params:params
 	}
 }

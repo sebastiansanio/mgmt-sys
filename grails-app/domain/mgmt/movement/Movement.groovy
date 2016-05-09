@@ -1,4 +1,5 @@
 package mgmt.movement
+import mgmt.config.Parameter
 
 class Movement {
 

@@ -175,10 +175,24 @@ class OsController {
 			notFound()
 			return
 		}
+		for(item in movementInstance.items){
+			if (!(item.date >= mgmt.config.Parameter.findByCode("FECHA_DESDE").asDate() && item.date <= mgmt.config.Parameter.findByCode("FECHA_HASTA").asDate())){
+				flash.error = message(code: "movementItem.dateOutOfRange.message")
+				redirect action:"index", method:"GET"
+				return
+			}
+		}
+		for(payment in movementInstance.payments){
+			if (!(payment.paymentDate >= mgmt.config.Parameter.findByCode("FECHA_PAGO_DESDE").asDate() && payment.paymentDate <= mgmt.config.Parameter.findByCode("FECHA_PAGO_HASTA").asDate())){
+				flash.error = message(code: "payment.dateOutOfRange.message")
+				redirect action:"index", method:"GET"
+				return
+			}
+		}
 		movementInstance.checked = true
 		movementInstance.save flush: true
 		flash.message = message(code: 'movement.checked.message')
-		redirect action:"index", method:"GET"
+		redirect action:"index", method:"GET", params:params
 		
 	}
 	@Transactional
@@ -191,7 +205,7 @@ class OsController {
 		movementInstance.checked = false
 		movementInstance.save flush: true
 		flash.message = message(code: 'movement.unchecked.message')
-		redirect action:"index", method:"GET"
+		redirect action:"index", method:"GET", params:params
 	}
 
     protected void notFound() {

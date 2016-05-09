@@ -54,6 +54,10 @@
 						<sec:access url="/work/close">
 							<g:form action="close">
 								<g:hiddenField name="id" value="${workInstance.id}" />
+								<g:hiddenField name="max" value="${params.max}" />
+								<g:hiddenField name="sort" value="${params.sort}" />
+								<g:hiddenField name="order" value="${params.order}" />
+								<g:hiddenField name="offset" value="${params.offset}" />
 								<g:submitButton class="btn btn-danger btn-xs" name="close" value="${message(code:'work.close.label') }" /> 
 							</g:form>
 						</sec:access>
@@ -62,6 +66,10 @@
 						<sec:access url="/work/open">
 							<g:form action="open">
 								<g:hiddenField name="id" value="${workInstance.id}" />
+								<g:hiddenField name="max" value="${params.max}" />
+								<g:hiddenField name="sort" value="${params.sort}" />
+								<g:hiddenField name="order" value="${params.order}" />
+								<g:hiddenField name="offset" value="${params.offset}" />
 								<g:submitButton class="btn btn-primary btn-xs" name="open" value="${message(code:'work.open.label') }" /> 
 							</g:form>
 						</sec:access>
