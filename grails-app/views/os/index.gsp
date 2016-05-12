@@ -11,7 +11,7 @@
 <body>
 
 <div class="row margin-top-medium">
-<g:form action="search" method="get" >
+<g:form action="index" method="get" >
 <div class="col-md-2">
 <g:select class="form-control" from="['all','checked','notChecked']" valueMessagePrefix="movement.checked" name="checked" value="${params.checked}" />
 </div>
@@ -22,7 +22,7 @@
 <g:field type="number" placeholder="${message(code:'movement.year.label')}" class="form-control" name="year" value="${params.year}" />
 </div>
 <div class="col-md-2">
-<g:actionSubmit class="btn btn-default" value="${message(code:'default.filter.label')}" action="search" />
+<g:actionSubmit class="btn btn-default" value="${message(code:'default.filter.label')}" action="index" />
 </div>
 </g:form>
 </div>
@@ -67,6 +67,9 @@
 							<g:hiddenField name="sort" value="${params.sort}" />
 							<g:hiddenField name="order" value="${params.order}" />
 							<g:hiddenField name="offset" value="${params.offset}" />
+							<g:hiddenField name="checked" value="${params.checked}" />
+							<g:hiddenField name="number" value="${params.number}" />
+							<g:hiddenField name="year" value="${params.year}" />
 							<g:submitButton class="btn btn-primary btn-xs" name="check" value="${message(code:'movement.check.label') }" /> 
 						</g:form>
 					</sec:access>
@@ -79,6 +82,9 @@
 							<g:hiddenField name="sort" value="${params.sort}" />
 							<g:hiddenField name="order" value="${params.order}" />
 							<g:hiddenField name="offset" value="${params.offset}" />
+							<g:hiddenField name="checked" value="${params.checked}" />
+							<g:hiddenField name="number" value="${params.number}" />
+							<g:hiddenField name="year" value="${params.year}" />
 							<g:submitButton class="btn btn-danger btn-xs" name="uncheck" value="${message(code:'movement.uncheck.label') }" /> 
 						</g:form>
 					</sec:access>

@@ -11,12 +11,28 @@ class OsController {
 
     static allowedMethods = [save: "POST", check: "POST", uncheck: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 100, 1000)
+	def index(Integer max) {
+		params.max = Math.min(max ?: 100, 1000)
 		params.sort = params.sort ?: 'dateCreated'
 		params.order = params.order ?: 'desc'
-        respond Movement.findAllByType('os',params), model:[movementInstanceCount: Movement.countByType('os')]
-    }
+		params.checked = params.checked ?: 'all'
+		
+		def results = Movement.createCriteria().list (params) {
+			if(! (params.checked == "all")){
+				eq("checked",params.checked == "checked")
+			}
+			eq("type", "os")
+			if(params.number){
+				eq("number", params.number.toLong())
+			}
+			if(params.year){
+				eq("year", params.year.toInteger())
+			}
+			order(params.sort, params.order)
+		}
+		
+		respond results, model:[movementInstanceCount: results.totalCount]
+	}
 	
 	def search(Integer max) {
 		params.max = Math.min(max ?: 100, 1000)
@@ -178,14 +194,14 @@ class OsController {
 		for(item in movementInstance.items){
 			if (!(item.date >= mgmt.config.Parameter.findByCode("FECHA_DESDE").asDate() && item.date <= mgmt.config.Parameter.findByCode("FECHA_HASTA").asDate())){
 				flash.error = message(code: "movementItem.dateOutOfRange.message")
-				redirect action:"index", method:"GET"
+				redirect action:"index", method:"GET", params:params
 				return
 			}
 		}
 		for(payment in movementInstance.payments){
 			if (!(payment.paymentDate >= mgmt.config.Parameter.findByCode("FECHA_PAGO_DESDE").asDate() && payment.paymentDate <= mgmt.config.Parameter.findByCode("FECHA_PAGO_HASTA").asDate())){
 				flash.error = message(code: "payment.dateOutOfRange.message")
-				redirect action:"index", method:"GET"
+				redirect action:"index", method:"GET", params:params
 				return
 			}
 		}
@@ -201,6 +217,20 @@ class OsController {
 		if (movementInstance == null || movementInstance.type != 'os') {
 			notFound()
 			return
+		}
+		for(item in movementInstance.items){
+			if (!(item.date >= mgmt.config.Parameter.findByCode("FECHA_DESDE").asDate() && item.date <= mgmt.config.Parameter.findByCode("FECHA_HASTA").asDate())){
+				flash.error = message(code: "movementItem.dateOutOfRange.message")
+				redirect action:"index", method:"GET", params:params
+				return
+			}
+		}
+		for(payment in movementInstance.payments){
+			if (!(payment.paymentDate >= mgmt.config.Parameter.findByCode("FECHA_PAGO_DESDE").asDate() && payment.paymentDate <= mgmt.config.Parameter.findByCode("FECHA_PAGO_HASTA").asDate())){
+				flash.error = message(code: "payment.dateOutOfRange.message")
+				redirect action:"index", method:"GET", params:params
+				return
+			}
 		}
 		movementInstance.checked = false
 		movementInstance.save flush: true
