@@ -8,7 +8,7 @@
 <body>
 
 <section id="index-accountStatus" class="first">
-<h4><g:message code="menu.income.label" /></h4>
+<h4><g:message code="menu.movementsExport.label" /></h4>
 <div class="col-md-6">
 <g:form class="noblock" controller="movementsExport" action="download" id="${mgmt.reports.Report.findByCode('income').id}" >
 <table class="col-md-6 table table-bordered">

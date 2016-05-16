@@ -11,7 +11,7 @@
 <section id="index-supplierExpenses" class="first">
 <h4><g:message code="menu.supplierExpenses.label" /></h4>
 <div class="col-md-6">
-<g:form onsubmit="checkFilters(event);" target="_blank" class="noblock" controller="report" action="downloadReport" id="${mgmt.reports.Report.findByCode('supplierExpenses').id}" >
+<g:form onsubmit="checkFilters(event);" target="_blank" class="noblock" controller="supplierExpenses" action="download" id="${mgmt.reports.Report.findByCode('supplierExpenses').id}" >
 <table class="col-md-6 table table-bordered">
 	<tbody>
 		<tr>
@@ -20,14 +20,15 @@
 		</tr>
 		<tr>
 			<td><label for="account_id"><g:message code="default.dateFrom.label"/> </label></td>
-			<td><bs:datePicker name="Date_from" precision="day" value="${new Date()}" /> <g:checkBox onchange="dateFromCheckboxChanged();" name="dateFromEnabled" value="true" /></td>
+			<td><bs:datePicker name="Date_from" precision="day" value="${new Date()}" /> <g:checkBox onchange="dateFromCheckboxChanged();" name="dateFromEnabled" checked="false" /></td>
 		</tr>
 		<tr>
 			<td><label for="account_id"><g:message code="default.dateTo.label"/> </label></td>
-			<td><bs:datePicker name="Date_to" precision="day" value="${new Date()}" /> <g:checkBox onchange="dateToCheckboxChanged();" name="dateToEnabled" value="true" /> </td>
+			<td><bs:datePicker name="Date_to" precision="day" value="${new Date()}" /> <g:checkBox onchange="dateToCheckboxChanged();" name="dateToEnabled" checked="false" /> </td>
 		</tr>
 		<tr>
-			<td colspan="2"><g:submitButton class="btn btn-default" name="download" value="${message(code:'default.download.label')}" /></td>
+			<td><g:submitButton class="btn btn-default" name="download" value="${message(code:'default.download.pdf.label')}" /></td>
+			<td><g:actionSubmit class="btn btn-default" name="downloadExcel" action="downloadExcel" value="${message(code:'default.download.label')}" /></td>		
 		</tr>
 	</tbody>
 </table>
@@ -39,6 +40,8 @@
 <script>
 $(function() {
 	$(".select-chosen").chosen({search_contains: true, width:'100%'});
+	dateFromCheckboxChanged();
+	dateToCheckboxChanged();
 });
 function dateFromCheckboxChanged(){
 	if($('#dateFromEnabled').prop( 'checked')){

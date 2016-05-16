@@ -1,5 +1,5 @@
 <sec:ifLoggedIn>
-<g:if test="${params.controller	&& !(params.controller in ['home','login','accountStatus','accountTypeStatus','income','expenses','balance','netting'])}" >
+<g:if test="${params.controller	&& !(params.controller in ['home','login','accountStatus','accountTypeStatus','income','expenses','balance','netting','movementsExport','supplierExpenses'])}" >
 	<g:set var="menuName" value="${message(code: 'menu.'+params.controller+'.label')}" />
 	<g:set var="validUris" value="${grailsApplication.controllerClasses.find{it.logicalPropertyName == params.controller}.uris}" />
 	<ul id="Menu" class="nav nav-pills margin-top-small">
