@@ -15,18 +15,18 @@ class OpController {
 		params.max = Math.min(max ?: 100, 1000)
 		params.sort = params.sort ?: 'dateCreated'
 		params.order = params.order ?: 'desc'
-		params.checked = params.checked ?: 'all'
+		params.checkedFilter = params.checkedFilter ?: 'all'
 		
 		def results = Movement.createCriteria().list (params) {
-			if(! (params.checked == "all")){
-				eq("checked",params.checked == "checked")
+			if(! (params.checkedFilter == "all")){
+				eq("checked",params.checkedFilter == "checked")
 			}
 			eq("type", "op")
-			if(params.number){
-				eq("number", params.number.toLong())
+			if(params.numberFilter){
+				eq("number", params.numberFilter.toLong())
 			}
-			if(params.year){
-				eq("year", params.year.toInteger())
+			if(params.yearFilter){
+				eq("year", params.yearFilter.toInteger())
 			}
 			order(params.sort, params.order)
 		}
@@ -72,7 +72,7 @@ class OpController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [movementInstance.toString().toUpperCase(), movementInstance.id])
-                redirect action:"index", method:"GET"
+                redirect action:"index", method:"GET", fragment: 'movement-'+movementInstance.id, params:params.subMap(['max','sort','order','offset','checkedFilter','numberFilter','yearFilter'])
             }
             '*' { respond movementInstance, [status: CREATED] }
         }
@@ -136,7 +136,7 @@ class OpController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [movementInstance.toString().toUpperCase(), movementInstance.id])
-                redirect action:"index", method:"GET"
+                redirect action:"index", method:"GET", fragment: 'movement-'+movementInstance.id , params:params.subMap(['max','sort','order','offset','checkedFilter','numberFilter','yearFilter'])
             }
             '*'{ respond movementInstance, [status: OK] }
         }
@@ -173,14 +173,14 @@ class OpController {
 		for(item in movementInstance.items){
 			if (!(item.date >= mgmt.config.Parameter.findByCode("FECHA_DESDE").asDate() && item.date <= mgmt.config.Parameter.findByCode("FECHA_HASTA").asDate())){
 				flash.error = message(code: "movementItem.dateOutOfRange.message")
-				redirect action:"index", method:"GET", params:params
+				redirect action:"index", method:"GET",fragment: 'movement-'+movementInstance.id, params:params
 				return
 			}
 		}
 		for(payment in movementInstance.payments){
 			if (!(payment.paymentDate >= mgmt.config.Parameter.findByCode("FECHA_PAGO_DESDE").asDate() && payment.paymentDate <= mgmt.config.Parameter.findByCode("FECHA_PAGO_HASTA").asDate())){
 				flash.error = message(code: "payment.dateOutOfRange.message")
-				redirect action:"index", method:"GET", params:params
+				redirect action:"index", method:"GET",fragment: 'movement-'+movementInstance.id, params:params
 				return
 			}
 		}
@@ -188,7 +188,7 @@ class OpController {
 		movementInstance.checked = true
 		movementInstance.save flush: true
 		flash.message = message(code: 'movement.checked.message')
-		redirect action:"index", method:"GET", params:params
+		redirect action:"index", method:"GET",fragment: 'movement-'+movementInstance.id, params:params
 		
 	}
 	@Transactional
@@ -201,21 +201,21 @@ class OpController {
 		for(item in movementInstance.items){
 			if (!(item.date >= mgmt.config.Parameter.findByCode("FECHA_DESDE").asDate() && item.date <= mgmt.config.Parameter.findByCode("FECHA_HASTA").asDate())){
 				flash.error = message(code: "movementItem.dateOutOfRange.message")
-				redirect action:"index", method:"GET", params:params
+				redirect action:"index", method:"GET",fragment: 'movement-'+movementInstance.id, params:params
 				return
 			}
 		}
 		for(payment in movementInstance.payments){
 			if (!(payment.paymentDate >= mgmt.config.Parameter.findByCode("FECHA_PAGO_DESDE").asDate() && payment.paymentDate <= mgmt.config.Parameter.findByCode("FECHA_PAGO_HASTA").asDate())){
 				flash.error = message(code: "payment.dateOutOfRange.message")
-				redirect action:"index", method:"GET", params:params
+				redirect action:"index", method:"GET",fragment: 'movement-'+movementInstance.id, params:params
 				return
 			}
 		}
 		movementInstance.checked = false
 		movementInstance.save flush: true
 		flash.message = message(code: 'movement.unchecked.message')
-		redirect action:"index", method:"GET", params:params
+		redirect action:"index", method:"GET",fragment: 'movement-'+movementInstance.id, params:params
 	}
 
     protected void notFound() {

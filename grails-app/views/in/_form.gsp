@@ -145,6 +145,14 @@
 
 </div>
 
+<g:hiddenField name="max" value="${params.max}" />
+<g:hiddenField name="sort" value="${params.sort}" />
+<g:hiddenField name="order" value="${params.order}" />
+<g:hiddenField name="offset" value="${params.offset}" />
+<g:hiddenField name="checkedFilter" value="${params.checkedFilter}" />
+<g:hiddenField name="numberFilter" value="${params.numberFilter}" />
+<g:hiddenField name="yearFilter" value="${params.yearFilter}" />
+
 <script>
 
 var itemsQuantity = ${movementInstance?.items?.size()?:0};

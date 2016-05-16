@@ -2,8 +2,6 @@
 
 <div class="container-fluid">
 
-
-
 <g:hiddenField name="type" value="op" />
 
 <div class="col-md-3 ${hasErrors(bean: movementInstance, field: 'note', 'has-error')} ">
@@ -160,6 +158,14 @@
 <g:select disabled="disabled" class="input-intableform form-control" id="conceptsNoWork" name="conceptsNoWork" from="${mgmt.concept.Concept.findAllByValidInOpNoWork(true,[sort:'code',order:'asc'])}" optionKey="id" required="" value=""/>
 
 </div>
+
+<g:hiddenField name="max" value="${params.max}" />
+<g:hiddenField name="sort" value="${params.sort}" />
+<g:hiddenField name="order" value="${params.order}" />
+<g:hiddenField name="offset" value="${params.offset}" />
+<g:hiddenField name="checkedFilter" value="${params.checkedFilter}" />
+<g:hiddenField name="numberFilter" value="${params.numberFilter}" />
+<g:hiddenField name="yearFilter" value="${params.yearFilter}" />
 
 <script>
 

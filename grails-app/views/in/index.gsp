@@ -13,13 +13,13 @@
 <div class="row margin-top-medium">
 <g:form action="index" method="get" >
 <div class="col-md-2">
-<g:select class="form-control" from="['all','checked','notChecked']" valueMessagePrefix="movement.checked" name="checked" value="${params.checked}" />
+<g:select class="form-control" from="['all','checked','notChecked']" valueMessagePrefix="movement.checked" name="checkedFilter" value="${params.checkedFilter}" />
 </div>
 <div class="col-md-2">
-<g:field type="number" placeholder="${message(code:'movement.number.label')}" class="form-control" name="number" value="${params.number}" />
+<g:field type="number" placeholder="${message(code:'movement.number.label')}" class="form-control" name="numberFilter" value="${params.numberFilter}" />
 </div>
 <div class="col-md-2">
-<g:field type="number" placeholder="${message(code:'movement.year.label')}" class="form-control" name="year" value="${params.year}" />
+<g:field type="number" placeholder="${message(code:'movement.year.label')}" class="form-control" name="yearFilter" value="${params.yearFilter}" />
 </div>
 <div class="col-md-2">
 <g:actionSubmit class="btn btn-default" value="${message(code:'default.filter.label')}" action="index" />
@@ -50,8 +50,8 @@
 		</thead>
 		<tbody>
 		<g:each in="${movementInstanceList}" status="i" var="movementInstance">
-			<tr class="${movementInstance.checked ? 'checked-movement' : ''}">
-				<td class="center-aligned"><g:link action="edit" id="${movementInstance.id}"><span class="glyphicon glyphicon glyphicon-pencil"></span></g:link></td>
+			<tr id="movement-${movementInstance.id}" class="${movementInstance.checked ? 'checked-movement' : ''}">
+				<td class="center-aligned"><g:link action="edit" id="${movementInstance.id}" params="${params.subMap(['max','sort','order','offset','checkedFilter','numberFilter','yearFilter'])}"><span class="glyphicon glyphicon glyphicon-pencil"></span></g:link></td>
 				<td class="center-aligned importantBig"><g:message code="movement.type.${movementInstance.type}" /></td>
 				<td class="center-aligned importantBig">${movementInstance.number}</td>
 				<td class="center-aligned importantBig">${movementInstance.year}</td>
@@ -67,9 +67,9 @@
 							<g:hiddenField name="sort" value="${params.sort}" />
 							<g:hiddenField name="order" value="${params.order}" />
 							<g:hiddenField name="offset" value="${params.offset}" />
-							<g:hiddenField name="checked" value="${params.checked}" />
-							<g:hiddenField name="number" value="${params.number}" />
-							<g:hiddenField name="year" value="${params.year}" />
+							<g:hiddenField name="checkedFilter" value="${params.checkedFilter}" />
+							<g:hiddenField name="numberFilter" value="${params.numberFilter}" />
+							<g:hiddenField name="yearFilter" value="${params.yearFilter}" />
 							<g:submitButton class="btn btn-primary btn-xs" name="check" value="${message(code:'movement.check.label') }" /> 
 						</g:form>
 					</sec:access>
@@ -82,9 +82,9 @@
 							<g:hiddenField name="sort" value="${params.sort}" />
 							<g:hiddenField name="order" value="${params.order}" />
 							<g:hiddenField name="offset" value="${params.offset}" />
-							<g:hiddenField name="checked" value="${params.checked}" />
-							<g:hiddenField name="number" value="${params.number}" />
-							<g:hiddenField name="year" value="${params.year}" />
+							<g:hiddenField name="checkedFilter" value="${params.checkedFilter}" />
+							<g:hiddenField name="numberFilter" value="${params.numberFilter}" />
+							<g:hiddenField name="yearFilter" value="${params.yearFilter}" />
 							<g:submitButton class="btn btn-danger btn-xs" name="uncheck" value="${message(code:'movement.uncheck.label') }" /> 
 						</g:form>
 					</sec:access>
