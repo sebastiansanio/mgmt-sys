@@ -29,7 +29,11 @@ class MovementsExportController {
 		     left JOIN supplier supplier ON movement_item.supplier_id = supplier.id
 		LEFT OUTER JOIN concept_group cg ON concept.concept_group_id = cg.id
 		where (movement.date_created >=  :dateFrom or :dateFrom is null ) and (movement.date_created < :dateTo or :dateTo is null)
-		and ((:workId <> -1 and work.id = :workId) or (:workId = -1 and work.id is null))
+		and ((:workId <> -1 and work.id = :workId) or (:workId = -1 and work.id is null)
+		and (:concepts = 'all' or 
+		(:concepts = 'toM799' and (concept.code between 'M000' and 'M799' or concept.code between 'P000' and 'P799')) 
+	or (:concepts = 'fromM800'and (concept.code between 'M800' and 'M999' or concept.code between 'P800' and 'P999'))
+		))
 		ORDER BY work.code ASC, cg.name asc, concept.code asc, movement.date_created desc
 	"""
 	
@@ -37,7 +41,7 @@ class MovementsExportController {
 	
 	def downloadExcel(){
 		response.setContentType("application/ms-excel");
-		response.setHeader("Content-Disposition", "attachment; filename='Ingresos.xlsx'");
+		response.setHeader("Content-Disposition", "attachment; filename='Ingresos y egresos.xlsx'");
 		
 		new WebXlsxExporter().with {
 			fillHeader(["Obra","Operación","Proveedor","Cuenta","Fecha","Descripción","Monto \$","IVA \$", "IIBB"])
@@ -47,8 +51,7 @@ class MovementsExportController {
 			cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-mm-yy"));
 			
 			Sql sql = new Sql(dataSource)
-			
-			def rows = sql.rows(QUERY,[workId:params.long('Work_id'),dateFrom:params.Date_from?DATE_FORMAT.parse(params.Date_from):null,dateTo:params.Date_to?DATE_FORMAT.parse(params.Date_to):null])
+			def rows = sql.rows(QUERY,[concepts:params.concepts,workId:params.long('Work_id'),dateFrom:params.Date_from?DATE_FORMAT.parse(params.Date_from):null,dateTo:params.Date_to?DATE_FORMAT.parse(params.Date_to):null])
 			long queryCount = rows.size()
 			add(rows, ["work_code","operation","supplier_name","concept_code","movement_date_created","movement_item_description","movement_item_amount","movement_item_iva","movement_item_iibb"])
 			sql.close()
