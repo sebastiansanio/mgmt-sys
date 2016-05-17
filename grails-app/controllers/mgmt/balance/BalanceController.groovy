@@ -11,7 +11,8 @@ class BalanceController {
 		
 	}
 	
-	def show(Work work){
+	def show(){
+		Work work = Work.get(params.long('workId'))
 		Map amounts = new HashMap()
 		amounts.income = calculateAmount(work.id,'P100','P100')
 		amounts.otherIncome = calculateAmount(work.id,'P200','P600')
@@ -38,5 +39,9 @@ class BalanceController {
 		results.iva = row.iva
 		sql.close()
 		return results
+	}
+	
+	def download(){
+		redirect(controller: 'report', action: 'downloadReport', params: [workId:params.workId, id: params.id])
 	}
 }
