@@ -28,7 +28,7 @@
 		</tr>
 		<tr>
 			<td><g:submitButton class="btn btn-default" name="download" value="${message(code:'default.download.pdf.label')}" /></td>
-			<td><g:actionSubmit class="btn btn-default" name="downloadExcel" action="downloadExcel" value="${message(code:'default.download.label')}" /></td>		
+			<td><g:actionSubmit class="btn btn-default" name="downloadExcel" action="downloadExcel" value="${message(code:'default.download.excel.label')}" /></td>		
 		</tr>
 	</tbody>
 </table>

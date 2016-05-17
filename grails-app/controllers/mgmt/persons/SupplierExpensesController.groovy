@@ -11,7 +11,7 @@ import pl.touk.excel.export.WebXlsxExporter
 
 class SupplierExpensesController {
 	private static final String QUERY = """	SELECT  CONCAT(upper(movement.type)," ",movement.number,"/",movement.year) AS operation,
-		concept.`code` AS concept_code, work.`name` AS work_name, movement.`date_created` AS movement_date_created,
+		concept.`code` AS concept_code, work.`code` AS work_code, movement.`date_created` AS movement_date_created,
 		supplier.`name` AS supplier_name, movement_item.`description` AS movement_item_description,
 		movement_item.`amount` AS movement_item_amount, movement_item.`iibb` AS movement_item_iibb,
 		movement_item.`iva` AS movement_item_iva, movement_item.`other_perceptions` AS movement_item_other_perceptions,
@@ -55,7 +55,7 @@ class SupplierExpensesController {
 			Sql sql = new Sql(dataSource)
 			def rows = sql.rows(QUERY,[supplierId:params.long('Supplier_id'),dateFrom:params.Date_from?DATE_FORMAT.parse(params.Date_from):null,dateTo:params.Date_to?DATE_FORMAT.parse(params.Date_to):null])
 			long queryCount = rows.size()
-			add(rows, ["work_name","operation","supplier_name","concept_code","movement_date_created","movement_item_description","movement_item_amount","movement_item_iva","movement_item_iibb","movement_item_other_perceptions"])
+			add(rows, ["work_code","operation","supplier_name","concept_code","movement_date_created","movement_item_description","movement_item_amount","movement_item_iva","movement_item_iibb","movement_item_other_perceptions"])
 			sql.close()
 			
 			
