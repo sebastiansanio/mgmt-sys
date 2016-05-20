@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="op" language="groovy" pageWidth="595" pageHeight="842" columnWidth="589" leftMargin="3" rightMargin="3" topMargin="20" bottomMargin="20" uuid="8a7719ce-943e-4e58-bcc4-17a1c4039d85">
 	<property name="ireport.zoom" value="1.1289478601075555"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="166"/>
+	<property name="ireport.y" value="96"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -271,457 +271,457 @@ inner join budget b on w.budget_id = b.id
 	<detail>
 		<band height="341" splitType="Stretch">
 			<staticText>
-				<reportElement x="20" y="45" width="152" height="17" uuid="8728f730-c7ec-4c90-9962-50039c596a26"/>
+				<reportElement x="44" y="45" width="160" height="17" uuid="8728f730-c7ec-4c90-9962-50039c596a26"/>
 				<textElement>
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Cobranza clientes (P100)]]></text>
 			</staticText>
 			<textField pattern="#,##0.00">
-				<reportElement x="172" y="45" width="66" height="17" uuid="ee370749-5e1b-4a31-8d72-8b53873d9e57"/>
+				<reportElement x="204" y="45" width="66" height="17" uuid="ee370749-5e1b-4a31-8d72-8b53873d9e57"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount_p100}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="20" y="62" width="152" height="17" uuid="34c6bc65-947a-4299-9c3c-ce5b13916384"/>
+				<reportElement x="44" y="62" width="160" height="17" uuid="34c6bc65-947a-4299-9c3c-ce5b13916384"/>
 				<textElement>
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Otros ingresos (P200 a P600)]]></text>
 			</staticText>
 			<textField pattern="#,##0.00">
-				<reportElement x="172" y="62" width="66" height="17" uuid="8d6f8383-2e22-4c67-a596-0755ef83f91d"/>
+				<reportElement x="204" y="62" width="66" height="17" uuid="8d6f8383-2e22-4c67-a596-0755ef83f91d"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount_p200ap600}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="20" y="200" width="152" height="17" uuid="3bd27311-144e-4d24-bc26-0d751200029d"/>
+				<reportElement x="44" y="200" width="160" height="17" uuid="3bd27311-144e-4d24-bc26-0d751200029d"/>
 				<textElement>
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Beneficios (N)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="79" width="152" height="17" uuid="93dbe287-eaca-422b-b41e-99eca5277421"/>
+				<reportElement x="44" y="79" width="160" height="17" uuid="93dbe287-eaca-422b-b41e-99eca5277421"/>
 				<textElement>
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total ingresos]]></text>
 			</staticText>
 			<textField pattern="#,##0.00">
-				<reportElement x="172" y="79" width="66" height="17" uuid="b34bc48b-b2a5-4a53-b879-66292cfe811c"/>
+				<reportElement x="204" y="79" width="66" height="17" uuid="b34bc48b-b2a5-4a53-b879-66292cfe811c"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sell_price}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="20" y="28" width="152" height="17" uuid="d637d044-a30f-4c05-80e8-bea21fa2089b"/>
+				<reportElement x="44" y="28" width="160" height="17" uuid="d637d044-a30f-4c05-80e8-bea21fa2089b"/>
 				<textElement>
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Ingresos]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="172" y="28" width="66" height="17" uuid="76d5d97d-6acf-4747-8649-7aa7b665aa3f"/>
+				<reportElement x="204" y="28" width="66" height="17" uuid="76d5d97d-6acf-4747-8649-7aa7b665aa3f"/>
 				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Monto s/iva]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="434" y="28" width="66" height="17" uuid="202b3c25-abc1-4136-93eb-62867f6e2e71"/>
+				<reportElement x="466" y="28" width="66" height="17" uuid="202b3c25-abc1-4136-93eb-62867f6e2e71"/>
 				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[IVA]]></text>
 			</staticText>
 			<textField pattern="#,##0.00">
-				<reportElement x="434" y="79" width="66" height="17" uuid="aa7d8803-be1b-4b75-b7dd-a8f41cc88abb"/>
+				<reportElement x="466" y="79" width="66" height="17" uuid="aa7d8803-be1b-4b75-b7dd-a8f41cc88abb"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true" isItalic="false"/>
+					<font size="9" isBold="true" isItalic="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{iva_p100}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="20" y="96" width="152" height="17" uuid="0a3cb18f-cb72-4987-966d-047e21cc8d3a"/>
+				<reportElement x="44" y="96" width="160" height="17" uuid="0a3cb18f-cb72-4987-966d-047e21cc8d3a"/>
 				<textElement>
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Egresos]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="113" width="152" height="17" uuid="c3c17495-9477-4092-855d-377462d80713"/>
+				<reportElement x="44" y="113" width="160" height="17" uuid="c3c17495-9477-4092-855d-377462d80713"/>
 				<textElement>
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Total costo directo de obra (A a K)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="217" width="152" height="17" uuid="d4a4b957-977f-40cf-a2f7-b31671063f21"/>
+				<reportElement x="44" y="217" width="160" height="17" uuid="d4a4b957-977f-40cf-a2f7-b31671063f21"/>
 				<textElement>
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Gastos generales + beneficios]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="164" width="152" height="17" uuid="f6ff1ef9-422b-46f8-8d29-5f310ef06af7"/>
+				<reportElement x="44" y="164" width="160" height="17" uuid="f6ff1ef9-422b-46f8-8d29-5f310ef06af7"/>
 				<textElement>
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Total gastos generales (L + M)	]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="234" width="152" height="17" uuid="343939f0-be07-41df-9d45-3a237633c398"/>
+				<reportElement x="44" y="234" width="160" height="17" uuid="343939f0-be07-41df-9d45-3a237633c398"/>
 				<textElement>
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Precio de venta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="181" width="152" height="17" uuid="de717e76-5286-41b8-94c4-5d22d9d19f06"/>
+				<reportElement x="44" y="181" width="160" height="17" uuid="de717e76-5286-41b8-94c4-5d22d9d19f06"/>
 				<textElement>
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total egresos (A - K + L + M)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="147" width="152" height="17" uuid="4a223157-5151-4a5f-87f7-0dd3d0bdcea9"/>
+				<reportElement x="44" y="147" width="160" height="17" uuid="4a223157-5151-4a5f-87f7-0dd3d0bdcea9"/>
 				<textElement>
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Gastos generales indirectos (M)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="130" width="152" height="17" uuid="acf72ea9-54a3-49e3-80bc-ac2cb6525df5"/>
+				<reportElement x="44" y="130" width="160" height="17" uuid="acf72ea9-54a3-49e3-80bc-ac2cb6525df5"/>
 				<textElement>
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Gastos generales de obra (L)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="285" width="152" height="17" uuid="5d8b8d48-792a-46eb-bfdb-0ef26abebffd"/>
+				<reportElement x="44" y="285" width="160" height="17" uuid="5d8b8d48-792a-46eb-bfdb-0ef26abebffd"/>
 				<textElement>
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Coeficiente de pase (CP)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="268" width="152" height="17" uuid="2f981e30-850c-4fe5-a4b0-d5e197e9d32c"/>
+				<reportElement x="44" y="268" width="160" height="17" uuid="2f981e30-850c-4fe5-a4b0-d5e197e9d32c"/>
 				<textElement>
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Precio de venta final]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="251" width="152" height="17" uuid="ab08af83-8962-4d52-831e-f23a638a5058"/>
+				<reportElement x="44" y="251" width="160" height="17" uuid="ab08af83-8962-4d52-831e-f23a638a5058"/>
 				<textElement>
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<text><![CDATA[IVA cobrado]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="302" width="152" height="17" uuid="703925e5-4ac9-40af-bd05-81049723040d"/>
+				<reportElement x="44" y="302" width="160" height="17" uuid="703925e5-4ac9-40af-bd05-81049723040d"/>
 				<textElement>
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Beneficios retirados (N)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="319" width="152" height="17" uuid="e27af945-3cb3-4cd5-b321-241864200e3a"/>
+				<reportElement x="44" y="319" width="160" height="17" uuid="e27af945-3cb3-4cd5-b321-241864200e3a"/>
 				<textElement>
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Saldo disponible]]></text>
 			</staticText>
 			<textField pattern="#,##0.00">
-				<reportElement x="434" y="45" width="66" height="17" uuid="ccbd3e39-0ffe-48e2-b01f-f8869d7c1cd9"/>
+				<reportElement x="466" y="45" width="66" height="17" uuid="ccbd3e39-0ffe-48e2-b01f-f8869d7c1cd9"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{iva_p100}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="238" y="96" width="66" height="17" uuid="d61d21d5-3951-4a42-99dd-21936090c699"/>
+				<reportElement x="270" y="96" width="66" height="17" uuid="d61d21d5-3951-4a42-99dd-21936090c699"/>
 				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[% S/CDO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="304" y="96" width="66" height="17" uuid="7f924fb1-6e0d-4709-91c6-ea07fc6a2db3"/>
+				<reportElement x="336" y="96" width="66" height="17" uuid="7f924fb1-6e0d-4709-91c6-ea07fc6a2db3"/>
 				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[% S/PV	]]></text>
 			</staticText>
 			<textField pattern="#,##0.00">
-				<reportElement x="172" y="113" width="66" height="17" uuid="1201f4d6-a54f-4ab0-8d9b-daa224227f89"/>
+				<reportElement x="204" y="113" width="66" height="17" uuid="1201f4d6-a54f-4ab0-8d9b-daa224227f89"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount_a000ak999}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="434" y="96" width="66" height="17" uuid="8652aac6-280b-409d-a13c-35ee5508f3d3"/>
+				<reportElement x="466" y="96" width="66" height="17" uuid="8652aac6-280b-409d-a13c-35ee5508f3d3"/>
 				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[IVA]]></text>
 			</staticText>
 			<textField pattern="#,##0.00">
-				<reportElement x="172" y="130" width="66" height="17" uuid="f651a4e9-9d92-4d38-88ff-e84d71e7cb3a"/>
+				<reportElement x="204" y="130" width="66" height="17" uuid="f651a4e9-9d92-4d38-88ff-e84d71e7cb3a"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount_l000al899}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="172" y="147" width="66" height="17" uuid="3e013bf3-28f0-4c2e-8716-c3afab3000f9"/>
+				<reportElement x="204" y="147" width="66" height="17" uuid="3e013bf3-28f0-4c2e-8716-c3afab3000f9"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{indirect_general_expenses}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="172" y="164" width="66" height="17" uuid="d56aa903-4ed7-4d11-a1eb-27cd264875cc"/>
+				<reportElement x="204" y="164" width="66" height="17" uuid="d56aa903-4ed7-4d11-a1eb-27cd264875cc"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount_l000al899}+$F{indirect_general_expenses}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="172" y="181" width="66" height="17" uuid="35c62f06-e89c-4ff3-aafd-baf7277b1d21"/>
+				<reportElement x="204" y="181" width="66" height="17" uuid="35c62f06-e89c-4ff3-aafd-baf7277b1d21"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount_a000ak999}+$F{amount_l000al899}+$F{indirect_general_expenses}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="434" y="130" width="66" height="17" uuid="1e1bf449-9977-44fc-9767-d7aa37920a31"/>
+				<reportElement x="466" y="130" width="66" height="17" uuid="1e1bf449-9977-44fc-9767-d7aa37920a31"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{iva_l000al899}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="434" y="113" width="66" height="17" uuid="70f27a93-c1b9-4b60-b80f-4db4f37ecec0"/>
+				<reportElement x="466" y="113" width="66" height="17" uuid="70f27a93-c1b9-4b60-b80f-4db4f37ecec0"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{iva_a000ak999}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="434" y="164" width="66" height="17" uuid="abfa0633-8947-4ddf-9c67-170ecfd935aa"/>
+				<reportElement x="466" y="164" width="66" height="17" uuid="abfa0633-8947-4ddf-9c67-170ecfd935aa"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{iva_l000al899}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="434" y="181" width="66" height="17" uuid="8140f97d-3af8-425a-ba4e-55b70b152724"/>
+				<reportElement x="466" y="181" width="66" height="17" uuid="8140f97d-3af8-425a-ba4e-55b70b152724"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{iva_a000ak999}+$F{iva_l000al899}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="172" y="200" width="66" height="17" uuid="f0a43aae-9d30-459e-af81-3d6a63c397db"/>
+				<reportElement x="204" y="200" width="66" height="17" uuid="f0a43aae-9d30-459e-af81-3d6a63c397db"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sell_price}-($F{amount_a000ak999}+$F{amount_l000al899}+$F{indirect_general_expenses})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="172" y="217" width="66" height="17" uuid="3184058a-bc8a-4162-a178-52feabb7b622"/>
+				<reportElement x="204" y="217" width="66" height="17" uuid="3184058a-bc8a-4162-a178-52feabb7b622"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sell_price}-($F{amount_a000ak999}+$F{amount_l000al899})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="172" y="234" width="66" height="17" uuid="97992922-13ee-4fec-8955-fd057ffae1c0"/>
+				<reportElement x="204" y="234" width="66" height="17" uuid="97992922-13ee-4fec-8955-fd057ffae1c0"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sell_price}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="368" y="200" width="66" height="17" uuid="83dd74b8-52e2-4fe7-8eab-4a136762d9d5"/>
+				<reportElement x="400" y="200" width="66" height="17" uuid="83dd74b8-52e2-4fe7-8eab-4a136762d9d5"/>
 				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Saldo IVA]]></text>
 			</staticText>
 			<textField pattern="#,##0.00">
-				<reportElement x="172" y="251" width="66" height="17" uuid="a8565264-a218-40aa-a20b-41c28aa3d9ae"/>
+				<reportElement x="204" y="251" width="66" height="17" uuid="a8565264-a218-40aa-a20b-41c28aa3d9ae"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sell_price}.compareTo(BigDecimal.ZERO) != 0 ? 100* $F{iva_p100} / $F{sell_price} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="172" y="268" width="66" height="17" uuid="22f07d11-1eb6-46da-bcc2-dc1b821fdbe3"/>
+				<reportElement x="204" y="268" width="66" height="17" uuid="22f07d11-1eb6-46da-bcc2-dc1b821fdbe3"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sell_price}+$F{iva_p100}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="172" y="302" width="66" height="17" uuid="8c4e2cd5-ac74-4f3e-a425-fa5d4646047b"/>
+				<reportElement x="204" y="302" width="66" height="17" uuid="8c4e2cd5-ac74-4f3e-a425-fa5d4646047b"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount_n000an999}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="172" y="319" width="66" height="17" uuid="6960ddc3-0cf2-4c9b-b63e-1103391cc67b"/>
+				<reportElement x="204" y="319" width="66" height="17" uuid="6960ddc3-0cf2-4c9b-b63e-1103391cc67b"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sell_price}-($F{amount_a000ak999}+$F{amount_l000al899}+$F{indirect_general_expenses})-$F{amount_n000an999}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="238" y="113" width="66" height="17" uuid="c02c129b-a6d0-42f8-bd97-acbad5b29450"/>
+				<reportElement x="270" y="113" width="66" height="17" uuid="c02c129b-a6d0-42f8-bd97-acbad5b29450"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount_a000ak999}.compareTo(BigDecimal.ZERO) != 0?$F{amount_a000ak999} *100/$F{amount_a000ak999} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="304" y="113" width="66" height="17" uuid="8b293beb-076b-41fa-964a-e2411e8db088"/>
+				<reportElement x="336" y="113" width="66" height="17" uuid="8b293beb-076b-41fa-964a-e2411e8db088"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sell_price}.compareTo(BigDecimal.ZERO) != 0? $F{amount_a000ak999}  *100/$F{sell_price} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="238" y="130" width="66" height="17" uuid="c7c48cd0-f957-4e89-a2c9-f75a75be67f7"/>
+				<reportElement x="270" y="130" width="66" height="17" uuid="c7c48cd0-f957-4e89-a2c9-f75a75be67f7"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount_a000ak999}.compareTo(BigDecimal.ZERO) != 0?$F{amount_l000al899} *100/$F{amount_a000ak999} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="304" y="130" width="66" height="17" uuid="a4169ac3-76fc-40e8-b1a4-3f3aefea11a0"/>
+				<reportElement x="336" y="130" width="66" height="17" uuid="a4169ac3-76fc-40e8-b1a4-3f3aefea11a0"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sell_price}.compareTo(BigDecimal.ZERO) != 0? $F{amount_l000al899}  *100/$F{sell_price} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="238" y="147" width="66" height="17" uuid="43ffb75f-9b99-4b8b-8161-0b11aa1086a2"/>
+				<reportElement x="270" y="147" width="66" height="17" uuid="43ffb75f-9b99-4b8b-8161-0b11aa1086a2"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount_a000ak999}.compareTo(BigDecimal.ZERO) != 0?($F{indirect_general_expenses}) *100/$F{amount_a000ak999} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="304" y="147" width="66" height="17" uuid="ee8b7a9d-2187-4a8b-a03f-ed629808bb1f"/>
+				<reportElement x="336" y="147" width="66" height="17" uuid="ee8b7a9d-2187-4a8b-a03f-ed629808bb1f"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sell_price}.compareTo(BigDecimal.ZERO) != 0? $F{indirect_general_expenses}  *100/$F{sell_price} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="238" y="164" width="66" height="17" uuid="da944a95-5d7a-466d-bf4f-5ce2da08dd41"/>
+				<reportElement x="270" y="164" width="66" height="17" uuid="da944a95-5d7a-466d-bf4f-5ce2da08dd41"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount_a000ak999}.compareTo(BigDecimal.ZERO) != 0?($F{amount_l000al899}+$F{indirect_general_expenses}) *100/$F{amount_a000ak999} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="304" y="164" width="66" height="17" uuid="f74a9bf3-7bb5-4c8f-8b6f-450bbdfbc8ea"/>
+				<reportElement x="336" y="164" width="66" height="17" uuid="f74a9bf3-7bb5-4c8f-8b6f-450bbdfbc8ea"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sell_price}.compareTo(BigDecimal.ZERO) != 0? ($F{amount_l000al899}+$F{indirect_general_expenses})  *100/$F{sell_price} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="238" y="181" width="66" height="17" uuid="ea3f4107-70ca-457e-86d8-581f026f53e7"/>
+				<reportElement x="270" y="181" width="66" height="17" uuid="ea3f4107-70ca-457e-86d8-581f026f53e7"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount_a000ak999}.compareTo(BigDecimal.ZERO) != 0?($F{amount_a000ak999}+$F{amount_l000al899}+$F{indirect_general_expenses}) *100/$F{amount_a000ak999} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="304" y="181" width="66" height="17" uuid="a9d1ef27-a2db-49b8-900e-e9c0c9e99ade"/>
+				<reportElement x="336" y="181" width="66" height="17" uuid="a9d1ef27-a2db-49b8-900e-e9c0c9e99ade"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sell_price}.compareTo(BigDecimal.ZERO) != 0?($F{amount_a000ak999}+$F{amount_l000al899}+$F{indirect_general_expenses}) *100/$F{sell_price} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="238" y="200" width="66" height="17" uuid="1443e4a5-d912-4cdb-83e9-0175e3172f59"/>
+				<reportElement x="270" y="200" width="66" height="17" uuid="1443e4a5-d912-4cdb-83e9-0175e3172f59"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount_a000ak999}.compareTo(BigDecimal.ZERO) != 0?($F{sell_price}-($F{amount_a000ak999}+$F{amount_l000al899}+$F{indirect_general_expenses})) *100/$F{amount_a000ak999} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="304" y="200" width="66" height="17" uuid="f1ccbb73-5c8d-4d27-ab5c-7348a6d1eb47"/>
+				<reportElement x="336" y="200" width="66" height="17" uuid="f1ccbb73-5c8d-4d27-ab5c-7348a6d1eb47"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sell_price}.compareTo(BigDecimal.ZERO) != 0?($F{sell_price}-($F{amount_a000ak999}+$F{amount_l000al899}+$F{indirect_general_expenses})) *100/$F{sell_price} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="434" y="200" width="66" height="17" uuid="25f7694a-2cf4-4b05-a353-4f336aece82a"/>
+				<reportElement x="466" y="200" width="66" height="17" uuid="25f7694a-2cf4-4b05-a353-4f336aece82a"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{iva_p100} - ($F{iva_a000ak999}+$F{iva_l000al899})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="238" y="234" width="66" height="17" uuid="a9028d9d-ba43-4114-959b-f2fe6b26a807"/>
+				<reportElement x="270" y="234" width="66" height="17" uuid="a9028d9d-ba43-4114-959b-f2fe6b26a807"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount_a000ak999}.compareTo(BigDecimal.ZERO) != 0?($F{sell_price}) *100/$F{amount_a000ak999} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="304" y="234" width="66" height="17" uuid="f6d8e1e3-a5ec-4d75-a631-d342745652ab"/>
+				<reportElement x="336" y="234" width="66" height="17" uuid="f6d8e1e3-a5ec-4d75-a631-d342745652ab"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sell_price}.compareTo(BigDecimal.ZERO) != 0?($F{sell_price}) *100/$F{sell_price} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.000">
-				<reportElement x="238" y="285" width="66" height="17" uuid="c99dab97-f905-4437-b015-b54038717a29"/>
+				<reportElement x="270" y="285" width="66" height="17" uuid="c99dab97-f905-4437-b015-b54038717a29"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount_a000ak999}.compareTo(BigDecimal.ZERO) != 0?$F{sell_price}/$F{amount_a000ak999}:0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="238" y="302" width="66" height="17" uuid="49ae257d-08cd-49e4-83f9-8b8183b9039e"/>
+				<reportElement x="270" y="302" width="66" height="17" uuid="49ae257d-08cd-49e4-83f9-8b8183b9039e"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount_a000ak999}.compareTo(BigDecimal.ZERO) != 0?($F{amount_n000an999}) *100/$F{amount_a000ak999} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="304" y="302" width="66" height="17" uuid="3f98c5a6-758a-41fb-a877-90c472716249"/>
+				<reportElement x="336" y="302" width="66" height="17" uuid="3f98c5a6-758a-41fb-a877-90c472716249"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sell_price}.compareTo(BigDecimal.ZERO) != 0?($F{amount_n000an999}) *100/$F{sell_price} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="238" y="319" width="66" height="17" uuid="265284e3-b8d6-4489-976e-a99b680446a1"/>
+				<reportElement x="270" y="319" width="66" height="17" uuid="265284e3-b8d6-4489-976e-a99b680446a1"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount_a000ak999}.compareTo(BigDecimal.ZERO) != 0?($F{sell_price}-($F{amount_a000ak999}+$F{amount_l000al899}+$F{indirect_general_expenses})-$F{amount_n000an999}) *100/$F{amount_a000ak999} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="304" y="319" width="66" height="17" uuid="02a4e784-3b71-46f5-8d1e-14ab65c2d123"/>
+				<reportElement x="336" y="319" width="66" height="17" uuid="02a4e784-3b71-46f5-8d1e-14ab65c2d123"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sell_price}.compareTo(BigDecimal.ZERO) != 0?($F{sell_price}-($F{amount_a000ak999}+$F{amount_l000al899}+$F{indirect_general_expenses})-$F{amount_n000an999}) *100/$F{sell_price} :0]]></textFieldExpression>
 			</textField>
