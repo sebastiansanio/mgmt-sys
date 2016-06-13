@@ -16,7 +16,7 @@
 	<tbody>
 		<tr>
 			<td><label for="id"><g:message code="work.label"/> </label></td>
-			<td><g:select class="select-chosen" name="workId" from="${mgmt.work.Work.list([sort:'code'])}" optionKey="id" value="" />
+			<td><g:select class="select-chosen" name="workId" from="${mgmt.work.Work.list([sort:['type':'desc','code':'desc']])}" optionKey="id" value="" />
 		</tr>
 		<tr>
 			<td><g:submitButton class="btn btn-default" name="show" value="${message(code:'default.show.label')}" /></td>

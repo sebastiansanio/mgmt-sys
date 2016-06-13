@@ -68,7 +68,7 @@
 		</tbody>
 	</table>
 	<div>
-		<bs:paginate total="${movementItemInstanceCount}" />
+		<bs:paginate total="${movementItemInstanceCount}" params="${params}" />
 	</div>
 </section>
 

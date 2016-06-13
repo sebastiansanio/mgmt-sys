@@ -31,6 +31,10 @@ class Work {
 		return code + " - " + name
 	}
 	
+	String getCodeAndName(){
+		return code + " - " + name
+	}
+	
 	def beforeValidate() {
 		if(!code){
 			Long calculatedCode = Work.createCriteria().get {

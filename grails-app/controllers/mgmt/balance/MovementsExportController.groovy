@@ -29,7 +29,7 @@ class MovementsExportController {
 		     left JOIN supplier supplier ON movement_item.supplier_id = supplier.id
 		LEFT OUTER JOIN concept_group cg ON concept.concept_group_id = cg.id
 		where (movement.date_created >=  :dateFrom or :dateFrom is null ) and (movement.date_created < :dateTo or :dateTo is null)
-		and ((:workId <> -1 and work.id = :workId) or (:workId = -1 and work.id is null)
+		and ((:workId = -2 and work.id is not null) or  (:workId > -1 and work.id = :workId) or (:workId = -1 and work.id is null)
 		and (:concepts = 'all' or 
 		(:concepts = 'toM799' and (concept.code between 'M000' and 'M799' or concept.code between 'P000' and 'P799')) 
 	or (:concepts = 'fromM800'and (concept.code between 'M800' and 'M999' or concept.code between 'P800' and 'P999'))

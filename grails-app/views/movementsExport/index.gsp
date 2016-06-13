@@ -10,12 +10,12 @@
 <section id="index-accountStatus" class="first">
 <h4><g:message code="menu.movementsExport.label" /></h4>
 <div class="col-md-6">
-<g:form class="noblock" controller="movementsExport" action="download" id="${mgmt.reports.Report.findByCode('income').id}" >
+<g:form class="noblock" controller="movementsExport" action="download"  >
 <table class="col-md-6 table table-bordered">
 	<tbody>
 		<tr>
 			<td><label for="Work_id"><g:message code="work.label"/> </label></td>
-			<td><g:select onchange="refreshConcepts();" class="select-chosen" noSelection="${['-1':'GG']}" name="Work_id" from="${mgmt.work.Work.list([sort:'code'])}" optionKey="id" value="" />
+			<td><g:select onchange="refreshConcepts();" class="select-chosen" noSelection="${['-1':'GG']}" name="Work_id" from="${new ArrayList([[id:-2,codeAndName:'Todas las obras']]).plus(mgmt.work.Work.list([sort:['type':'desc','code':'desc']]))}" optionKey="id" optionValue="codeAndName" value="" />
 		</tr>
 		<tr>
 			<td><label for="account_id"><g:message code="default.dateFrom.label"/> </label></td>

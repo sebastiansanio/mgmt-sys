@@ -38,16 +38,16 @@
 		</tr>
 	</thead>
 	<tbody>
-	<g:each in="${accountTypeInstance.accounts.sort{it.name}}" status="i" var="account">
+	<g:each in="${accountTypeInstance.accounts.sort{((balances[it.id]?:0) !=0 ? ' ':'') +    it.name}}" status="i" var="account">
 		<g:set var="currentBalance" value="${balances[account.id]}" />
-		<g:if test="${currentBalance}" >
-			<tr>
-				<td>${fieldValue(bean: account, field: "name")}</td>
-				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${currentBalance}"/></td>
-				<td class="center-aligned"><g:form class="noblock" action="showPayments" target="_blank" method="get" id="${account.id}" > <button onclick="setFilterDates('showPayments-${account.id}');" type="submit" >  <g:hiddenField name="dateFrom" id="dateFrom-showPayments-${account.id}" /> <g:hiddenField name="dateTo" id="dateTo-showPayments-${account.id}" />   <span class="glyphicon glyphicon-eye-open"></span></button> </g:form></td>
-				<td class="center-aligned"><g:form class="noblock" action="download" method="get" id="${account.id}"> <button onclick="setFilterDates('download-${account.id}');" type="submit" > <g:hiddenField name="dateFrom" id="dateFrom-download-${account.id}" /> <g:hiddenField name="dateTo" id="dateTo-download-${account.id}" /> <span class="glyphicon glyphicon-download"></span></button> </g:form></td>
-			</tr>
-		</g:if>
+
+		<tr>
+			<td>${fieldValue(bean: account, field: "name")}</td>
+			<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${currentBalance?:0}"/></td>
+			<td class="center-aligned"><g:form class="noblock" action="showPayments" target="_blank" method="get" id="${account.id}" > <button onclick="setFilterDates('showPayments-${account.id}');" type="submit" >  <g:hiddenField name="dateFrom" id="dateFrom-showPayments-${account.id}" /> <g:hiddenField name="dateTo" id="dateTo-showPayments-${account.id}" />   <span class="glyphicon glyphicon-eye-open"></span></button> </g:form></td>
+			<td class="center-aligned"><g:form class="noblock" action="download" method="get" id="${account.id}"> <button onclick="setFilterDates('download-${account.id}');" type="submit" > <g:hiddenField name="dateFrom" id="dateFrom-download-${account.id}" /> <g:hiddenField name="dateTo" id="dateTo-download-${account.id}" /> <span class="glyphicon glyphicon-download"></span></button> </g:form></td>
+		</tr>
+
 	</g:each>
 	</tbody>
 </table>
