@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="op" language="groovy" pageWidth="595" pageHeight="842" columnWidth="589" leftMargin="3" rightMargin="3" topMargin="20" bottomMargin="20" uuid="8a7719ce-943e-4e58-bcc4-17a1c4039d85">
-	<property name="ireport.zoom" value="1.24184264611831"/>
+	<property name="ireport.zoom" value="0.9330147604194666"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="101"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -240,7 +240,10 @@ where movement_id = $P{movement_id_m}]]>
 			<variableExpression><![CDATA[$V{total_tot} + $F{total}]]></variableExpression>
 			<initialValueExpression><![CDATA[0]]></initialValueExpression>
 		</variable>
-		<variable name="Tot_other" class="java.lang.String"/>
+		<variable name="Tot_other" class="java.math.BigDecimal" resetType="Group" resetGroup="movement_id" incrementType="Group" incrementGroup="movement_id" calculation="Sum">
+			<variableExpression><![CDATA[$V{Tot_other}+$F{other_perceptions}]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
 		<group name="movement_id">
 			<groupExpression><![CDATA[$F{movement_id}]]></groupExpression>
 		</group>
@@ -305,7 +308,7 @@ from movement m where m.id = $P{movement_id}]]>
 				<textFieldExpression><![CDATA[$F{date_created}]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="25" y="0" width="134" height="31" uuid="c9ae072f-3aac-4375-a353-98623093ba50"/>
+				<reportElement x="24" y="0" width="134" height="31" uuid="c9ae072f-3aac-4375-a353-98623093ba50"/>
 				<imageExpression><![CDATA["http://localhost:8080/urbatec/images/Logo%20Urbatec.jpg"]]></imageExpression>
 			</image>
 		</band>
@@ -351,13 +354,13 @@ from movement m where m.id = $P{movement_id}]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="39" uuid="c2e4df22-bd9e-4f46-922a-832fd5da2af0">
+					<jr:column width="27" uuid="c2e4df22-bd9e-4f46-922a-832fd5da2af0">
 						<jr:groupFooter groupName="movement_id">
 							<jr:cell style="table 5_TH" height="20" rowSpan="1"/>
 						</jr:groupFooter>
 						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="39" height="20" uuid="cea73a2c-dc3c-491d-9411-9c51f406ae3c"/>
+								<reportElement x="0" y="0" width="27" height="20" uuid="cea73a2c-dc3c-491d-9411-9c51f406ae3c"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
@@ -366,7 +369,7 @@ from movement m where m.id = $P{movement_id}]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table 5_TD" height="28" rowSpan="1">
 							<textField isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="38" height="20" uuid="4f7bc167-30ef-4984-81f4-cbd643e84618"/>
+								<reportElement x="0" y="0" width="27" height="20" uuid="4f7bc167-30ef-4984-81f4-cbd643e84618"/>
 								<textElement verticalAlignment="Middle">
 									<font size="8"/>
 									<paragraph leftIndent="1"/>
@@ -375,13 +378,13 @@ from movement m where m.id = $P{movement_id}]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="80" uuid="92437717-30a6-4915-8084-69b0fe19429b">
+					<jr:column width="94" uuid="92437717-30a6-4915-8084-69b0fe19429b">
 						<jr:groupFooter groupName="movement_id">
 							<jr:cell style="table 5_TH" height="20" rowSpan="1"/>
 						</jr:groupFooter>
 						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="80" height="20" uuid="0aef6604-9ad3-4b0c-8d09-292952b38ea0"/>
+								<reportElement x="0" y="0" width="94" height="20" uuid="0aef6604-9ad3-4b0c-8d09-292952b38ea0"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
@@ -390,7 +393,7 @@ from movement m where m.id = $P{movement_id}]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table 5_TD" height="28" rowSpan="1">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="80" height="20" uuid="c52cc356-4bca-451b-ba1e-8433eb387631"/>
+								<reportElement x="0" y="0" width="94" height="20" uuid="c52cc356-4bca-451b-ba1e-8433eb387631"/>
 								<textElement verticalAlignment="Middle">
 									<font size="8"/>
 									<paragraph leftIndent="1"/>
@@ -439,7 +442,7 @@ from movement m where m.id = $P{movement_id}]]>
 						<jr:detailCell style="table 5_TD" height="28" rowSpan="1">
 							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="20" height="20" uuid="95935d4a-322e-427a-b932-92c7b16ac993"/>
-								<textElement verticalAlignment="Middle">
+								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 									<paragraph leftIndent="1"/>
 								</textElement>
@@ -452,7 +455,7 @@ from movement m where m.id = $P{movement_id}]]>
 							<jr:cell style="table 5_TH" height="20" rowSpan="1">
 								<staticText>
 									<reportElement x="0" y="0" width="43" height="20" uuid="ed572fd6-6e5b-4f06-ba7d-d6cad9fbaf0f"/>
-									<textElement verticalAlignment="Middle">
+									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="9" isBold="true"/>
 										<paragraph leftIndent="1"/>
 									</textElement>
@@ -548,7 +551,7 @@ from movement m where m.id = $P{movement_id}]]>
 								<textField pattern="#,##0.00">
 									<reportElement x="0" y="0" width="44" height="20" uuid="e6e6143e-9e9b-4598-912b-e81024f139d9"/>
 									<textElement textAlignment="Right" verticalAlignment="Middle">
-										<font fontName="SansSerif" isBold="true"/>
+										<font fontName="SansSerif" size="9" isBold="true"/>
 									</textElement>
 									<textFieldExpression><![CDATA[$V{Tot_other}]]></textFieldExpression>
 								</textField>

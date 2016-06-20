@@ -262,7 +262,7 @@ from movement m where m.id = $P{movement_id}]]>
 	<title>
 		<band height="79" splitType="Stretch">
 			<image>
-				<reportElement x="40" y="0" width="134" height="31" uuid="87be08e7-7872-431f-8171-bb83efafc0de"/>
+				<reportElement x="24" y="0" width="134" height="31" uuid="87be08e7-7872-431f-8171-bb83efafc0de"/>
 				<imageExpression><![CDATA["http://localhost:8080/urbatec/images/Logo%20Urbatec.jpg"]]></imageExpression>
 			</image>
 			<staticText>
@@ -309,9 +309,9 @@ from movement m where m.id = $P{movement_id}]]>
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="325" splitType="Stretch">
+		<band height="56" splitType="Stretch">
 			<componentElement>
-				<reportElement key="table 5" style="table 5" stretchType="RelativeToBandHeight" x="40" y="0" width="537" height="325" uuid="3ad740e5-bd2b-4dd0-b911-68505bd9777e"/>
+				<reportElement key="table 5" style="table 5" stretchType="RelativeToBandHeight" x="40" y="0" width="537" height="36" uuid="3ad740e5-bd2b-4dd0-b911-68505bd9777e"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="Movimientos" uuid="4c6284b2-eaf9-4389-b41f-0569fa39ecd7">
 						<datasetParameter name="movement_id_m">
@@ -359,7 +359,7 @@ from movement m where m.id = $P{movement_id}]]>
 						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
 							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="31" height="20" uuid="4f7bc167-30ef-4984-81f4-cbd643e84618"/>
-								<textElement verticalAlignment="Middle">
+								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 									<paragraph leftIndent="1"/>
 								</textElement>
@@ -568,9 +568,9 @@ from movement m where m.id = $P{movement_id}]]>
 				</jr:table>
 			</componentElement>
 		</band>
-		<band height="298">
+		<band height="78">
 			<componentElement>
-				<reportElement key="table 7" style="table 7" stretchType="RelativeToBandHeight" x="40" y="23" width="537" height="275" uuid="93befff9-3476-4732-b349-c8c866e7092f"/>
+				<reportElement key="table 7" style="table 7" stretchType="RelativeToBandHeight" x="40" y="23" width="537" height="36" uuid="93befff9-3476-4732-b349-c8c866e7092f"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="Pagos" uuid="9d24ad5e-3dd5-44f8-b4d2-ffe1c2f04801">
 						<datasetParameter name="movement_id_p">
@@ -658,24 +658,25 @@ from movement m where m.id = $P{movement_id}]]>
 		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="64" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="434" y="54" width="55" height="10" uuid="c0d9fc3b-a07c-4deb-af56-c2ac962e5ba1"/>
+				<reportElement x="445" y="10" width="55" height="10" uuid="c0d9fc3b-a07c-4deb-af56-c2ac962e5ba1"/>
 				<textElement>
 					<font size="8" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{date_created}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement isPrintRepeatedValues="false" x="499" y="54" width="58" height="10" uuid="695d4b95-5b2f-405c-95f2-8c9e88a1a93d"/>
+				<reportElement isPrintRepeatedValues="false" x="519" y="10" width="58" height="10" uuid="695d4b95-5b2f-405c-95f2-8c9e88a1a93d"/>
 				<textElement>
 					<font size="8" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["IN-"+$F{number}+"/"+$F{year}]]></textFieldExpression>
 			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="64" splitType="Stretch">
 			<staticText>
 				<reportElement x="350" y="18" width="186" height="20" uuid="ccca1d8e-0e79-4b36-b204-a4be8fd6af48"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
