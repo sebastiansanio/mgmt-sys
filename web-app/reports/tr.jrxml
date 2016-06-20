@@ -293,7 +293,7 @@ from movement m where m.id = $P{movement_id}]]>
 			</textField>
 			<image>
 				<reportElement x="22" y="0" width="134" height="31" uuid="165e59c2-477d-43ef-b40f-d10040e219f2"/>
-				<imageExpression><![CDATA["http://181.170.175.122:8080/urbatec/images/Logo%20Urbatec.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["http://localhost:8080/urbatec/images/Logo%20Urbatec.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>

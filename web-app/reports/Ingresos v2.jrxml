@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Informe de Saldos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27b43501-3750-42ac-ad7d-c7726c3ab552">
 	<property name="ireport.zoom" value="1.4641000000000022"/>
-	<property name="ireport.x" value="266"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="Date_from" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -90,9 +90,8 @@ FROM
      left JOIN `supplier` supplier ON movement_item.`supplier_id` = supplier.`id`
 LEFT OUTER JOIN concept_group cg ON concept.concept_group_id = cg.id
 where (movement.date_created >=  $P{Date_from} or $P{Date_from} is null ) and (movement.date_created < $P{Date_to} or $P{Date_to} is null)
-and (($P{Work_id} <> -1 and work.id = $P{Work_id}) or ($P{Work_id} = -1 and work.id is null))
+and (($P{Work_id} = -2 and work.id is not null) or ($P{Work_id} > -1 and work.id = $P{Work_id}) or ($P{Work_id} = -1 and work.id is null))
 and movement_item.multiplier = 1
-
 ORDER BY
      work.code ASC, cg.name asc, concept.code asc, movement.date_created desc]]>
 	</queryString>

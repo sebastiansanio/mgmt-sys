@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Informe de Saldos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27b43501-3750-42ac-ad7d-c7726c3ab552">
 	<property name="ireport.zoom" value="1.3310000000000044"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="43"/>
+	<property name="ireport.y" value="91"/>
 	<parameter name="Supplier_id" class="java.lang.Long">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -91,7 +91,7 @@ where (movement_item.supplier_id = $P{Supplier_id} or $P{Supplier_id} = -1)
 and
 (movement.date_created >=  $P{Date_from} or $P{Date_from} is null ) and (movement.date_created < $P{Date_to} or $P{Date_to} is null)
 ORDER BY
-     supplier.id ASC, work.id ASC]]>
+     supplier.id ASC, work.type desc, work.code desc]]>
 	</queryString>
 	<field name="movement_item_id" class="java.lang.Long"/>
 	<field name="movement_item_version" class="java.lang.Long"/>
@@ -228,7 +228,7 @@ ORDER BY
 					<textElement verticalAlignment="Top">
 						<font size="11" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Total PROVEDOR]]></text>
+					<text><![CDATA[Total PROVEEDOR]]></text>
 				</staticText>
 				<textField pattern="#,##0.00">
 					<reportElement x="324" y="22" width="108" height="20" uuid="ba420ad8-c326-4b93-bc56-bc4414f83769"/>

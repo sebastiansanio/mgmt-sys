@@ -15,7 +15,7 @@
 	<tbody>
 		<tr>
 			<td><label for="Work_id"><g:message code="work.label"/> </label></td>
-			<td><g:select class="select-chosen" noSelection="${['-1':'GG']}" name="Work_id" from="${mgmt.work.Work.list([sort:'code'])}" optionKey="id" value="" />
+			<td><g:select class="select-chosen" noSelection="${['-1':'GG']}" name="Work_id" from="${new ArrayList([[id:-2,codeAndName:'Todas las obras']]).plus(mgmt.work.Work.list([sort:['type':'desc','code':'desc']]))}" optionKey="id" value="" optionValue="codeAndName" />
 		</tr>
 		<tr>
 			<td><label for="account_id"><g:message code="default.dateFrom.label"/> </label></td>

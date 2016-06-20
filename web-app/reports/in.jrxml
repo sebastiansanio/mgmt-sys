@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="op" language="groovy" pageWidth="595" pageHeight="842" columnWidth="589" leftMargin="3" rightMargin="3" topMargin="20" bottomMargin="20" uuid="8a7719ce-943e-4e58-bcc4-17a1c4039d85">
 	<property name="ireport.zoom" value="0.7710865788590635"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="144"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -262,8 +262,8 @@ from movement m where m.id = $P{movement_id}]]>
 	<title>
 		<band height="79" splitType="Stretch">
 			<image>
-				<reportElement x="40" y="-1" width="134" height="31" uuid="87be08e7-7872-431f-8171-bb83efafc0de"/>
-				<imageExpression><![CDATA["http://181.170.175.122:8080/urbatec/images/Logo%20Urbatec.jpg"]]></imageExpression>
+				<reportElement x="40" y="0" width="134" height="31" uuid="87be08e7-7872-431f-8171-bb83efafc0de"/>
+				<imageExpression><![CDATA["http://localhost:8080/urbatec/images/Logo%20Urbatec.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="225" y="41" width="142" height="20" uuid="21804eb7-8644-45d3-97fa-3e3e04dea779"/>
