@@ -49,32 +49,36 @@
 				<td>${fieldValue(bean: workInstance, field: "client")}</td>
 				<td class="center-aligned"><g:formatDate date="${workInstance.dateCreated}" /></td>
 			
-				<td class="center-aligned">
+				
 					<g:if test="${!workInstance.finished}">
 						<sec:access url="/work/close">
-							<g:form action="close">
-								<g:hiddenField name="id" value="${workInstance.id}" />
-								<g:hiddenField name="max" value="${params.max}" />
-								<g:hiddenField name="sort" value="${params.sort}" />
-								<g:hiddenField name="order" value="${params.order}" />
-								<g:hiddenField name="offset" value="${params.offset}" />
-								<g:submitButton class="btn btn-danger btn-xs" name="close" value="${message(code:'work.close.label') }" /> 
-							</g:form>
+							<td class="center-aligned">
+								<g:form action="close">
+									<g:hiddenField name="id" value="${workInstance.id}" />
+									<g:hiddenField name="max" value="${params.max}" />
+									<g:hiddenField name="sort" value="${params.sort}" />
+									<g:hiddenField name="order" value="${params.order}" />
+									<g:hiddenField name="offset" value="${params.offset}" />
+									<g:submitButton class="btn btn-danger btn-xs" name="close" value="${message(code:'work.close.label') }" /> 
+								</g:form>
+							</td>
 						</sec:access>
 					</g:if>
 					<g:else>
 						<sec:access url="/work/open">
-							<g:form action="open">
-								<g:hiddenField name="id" value="${workInstance.id}" />
-								<g:hiddenField name="max" value="${params.max}" />
-								<g:hiddenField name="sort" value="${params.sort}" />
-								<g:hiddenField name="order" value="${params.order}" />
-								<g:hiddenField name="offset" value="${params.offset}" />
-								<g:submitButton class="btn btn-primary btn-xs" name="open" value="${message(code:'work.open.label') }" /> 
-							</g:form>
+							<td class="center-aligned">
+								<g:form action="open">
+									<g:hiddenField name="id" value="${workInstance.id}" />
+									<g:hiddenField name="max" value="${params.max}" />
+									<g:hiddenField name="sort" value="${params.sort}" />
+									<g:hiddenField name="order" value="${params.order}" />
+									<g:hiddenField name="offset" value="${params.offset}" />
+									<g:submitButton class="btn btn-primary btn-xs" name="open" value="${message(code:'work.open.label') }" /> 
+								</g:form>
+							</td>
 						</sec:access>
 					</g:else>
-				</td>
+				
 			
 			</tr>
 		</g:each>

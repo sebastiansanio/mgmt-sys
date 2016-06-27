@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="op" language="groovy" pageWidth="595" pageHeight="842" columnWidth="589" leftMargin="3" rightMargin="3" topMargin="20" bottomMargin="20" uuid="8a7719ce-943e-4e58-bcc4-17a1c4039d85">
 	<property name="ireport.zoom" value="0.9330147604194666"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="69"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -270,59 +270,56 @@ from movement m where m.id = $P{movement_id}]]>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<title>
+	<pageHeader>
 		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="58" y="0" width="134" height="31" uuid="c9ae072f-3aac-4375-a353-98623093ba50"/>
+				<imageExpression><![CDATA["http://localhost:8080/urbatec/images/Logo%20Urbatec.jpg"]]></imageExpression>
+			</image>
 			<staticText>
-				<reportElement x="219" y="41" width="129" height="20" uuid="21804eb7-8644-45d3-97fa-3e3e04dea779"/>
+				<reportElement x="219" y="31" width="129" height="20" uuid="21804eb7-8644-45d3-97fa-3e3e04dea779"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ORDEN DE PAGO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="434" y="10" width="50" height="20" uuid="b1693f85-820b-4970-96ff-4318ed7834b7"/>
+				<reportElement x="429" y="0" width="50" height="20" uuid="b1693f85-820b-4970-96ff-4318ed7834b7"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[OS N°:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="434" y="30" width="50" height="20" uuid="40dc0a0f-85e0-4c83-b4c7-ed0c9e973ee2"/>
+				<reportElement x="429" y="20" width="50" height="20" uuid="40dc0a0f-85e0-4c83-b4c7-ed0c9e973ee2"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="489" y="10" width="93" height="20" uuid="285fbadf-9481-4740-82e1-083f5e27d9ed"/>
+				<reportElement x="484" y="0" width="93" height="20" uuid="285fbadf-9481-4740-82e1-083f5e27d9ed"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{number}+" / "+$F{year}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="489" y="30" width="93" height="20" uuid="8de7cf2e-ef5f-4d2c-a83a-0e7941ce7231"/>
+				<reportElement x="484" y="20" width="93" height="20" uuid="8de7cf2e-ef5f-4d2c-a83a-0e7941ce7231"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{date_created}]]></textFieldExpression>
 			</textField>
-			<image>
-				<reportElement x="24" y="0" width="134" height="31" uuid="c9ae072f-3aac-4375-a353-98623093ba50"/>
-				<imageExpression><![CDATA["http://localhost:8080/urbatec/images/Logo%20Urbatec.jpg"]]></imageExpression>
-			</image>
 		</band>
-	</title>
-	<pageHeader>
-		<band height="1" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="56" splitType="Stretch">
+		<band height="116" splitType="Stretch">
 			<componentElement>
-				<reportElement key="table 5" style="table 5" stretchType="RelativeToBandHeight" x="40" y="0" width="537" height="36" uuid="3ad740e5-bd2b-4dd0-b911-68505bd9777e"/>
+				<reportElement key="table 5" style="table 5" stretchType="RelativeToBandHeight" x="58" y="0" width="518" height="36" uuid="3ad740e5-bd2b-4dd0-b911-68505bd9777e"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="Movimientos" uuid="4c6284b2-eaf9-4389-b41f-0569fa39ecd7">
 						<datasetParameter name="movement_id_m">
@@ -378,13 +375,13 @@ from movement m where m.id = $P{movement_id}]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="94" uuid="92437717-30a6-4915-8084-69b0fe19429b">
+					<jr:column width="77" uuid="92437717-30a6-4915-8084-69b0fe19429b">
 						<jr:groupFooter groupName="movement_id">
 							<jr:cell style="table 5_TH" height="20" rowSpan="1"/>
 						</jr:groupFooter>
 						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="94" height="20" uuid="0aef6604-9ad3-4b0c-8d09-292952b38ea0"/>
+								<reportElement x="0" y="0" width="77" height="20" uuid="0aef6604-9ad3-4b0c-8d09-292952b38ea0"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
@@ -393,7 +390,7 @@ from movement m where m.id = $P{movement_id}]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table 5_TD" height="28" rowSpan="1">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="94" height="20" uuid="c52cc356-4bca-451b-ba1e-8433eb387631"/>
+								<reportElement x="0" y="0" width="77" height="20" uuid="c52cc356-4bca-451b-ba1e-8433eb387631"/>
 								<textElement verticalAlignment="Middle">
 									<font size="8"/>
 									<paragraph leftIndent="1"/>
@@ -456,7 +453,7 @@ from movement m where m.id = $P{movement_id}]]>
 								<staticText>
 									<reportElement x="0" y="0" width="43" height="20" uuid="ed572fd6-6e5b-4f06-ba7d-d6cad9fbaf0f"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font size="9" isBold="true"/>
+										<font size="8" isBold="true"/>
 										<paragraph leftIndent="1"/>
 									</textElement>
 									<text><![CDATA[Totales]]></text>
@@ -483,13 +480,13 @@ from movement m where m.id = $P{movement_id}]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="62" uuid="048775e5-71b0-41b5-84d0-35a14b6ad0a9">
+					<jr:column width="58" uuid="048775e5-71b0-41b5-84d0-35a14b6ad0a9">
 						<jr:groupFooter groupName="movement_id">
 							<jr:cell style="table 5_TH" height="20" rowSpan="1">
 								<textField pattern="#,##0.00">
-									<reportElement x="0" y="0" width="62" height="20" uuid="f091c4f8-f8eb-4db6-b1df-f91a398497d6"/>
+									<reportElement x="0" y="0" width="58" height="20" uuid="f091c4f8-f8eb-4db6-b1df-f91a398497d6"/>
 									<textElement textAlignment="Right" verticalAlignment="Middle">
-										<font size="9" isBold="true" isStrikeThrough="false"/>
+										<font size="8" isBold="true" isStrikeThrough="false"/>
 									</textElement>
 									<textFieldExpression><![CDATA[$V{amount_tot}]]></textFieldExpression>
 								</textField>
@@ -497,7 +494,7 @@ from movement m where m.id = $P{movement_id}]]>
 						</jr:groupFooter>
 						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="62" height="20" uuid="e824c27d-a71b-452a-911a-dcf0b1156cf7"/>
+								<reportElement x="0" y="0" width="58" height="20" uuid="e824c27d-a71b-452a-911a-dcf0b1156cf7"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
@@ -506,7 +503,7 @@ from movement m where m.id = $P{movement_id}]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table 5_TD" height="28" rowSpan="1">
 							<textField pattern="#,##0.00" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="62" height="20" uuid="669ebf30-ff62-4f0c-824e-d2e9a7424f2f"/>
+								<reportElement x="0" y="0" width="50" height="20" uuid="669ebf30-ff62-4f0c-824e-d2e9a7424f2f"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
@@ -520,7 +517,7 @@ from movement m where m.id = $P{movement_id}]]>
 								<textField pattern="#,##0.00">
 									<reportElement x="0" y="0" width="46" height="20" uuid="82f1c9c6-595c-4f43-be0c-a30bd2f4b8d9"/>
 									<textElement textAlignment="Right" verticalAlignment="Middle">
-										<font size="9" isBold="true"/>
+										<font size="8" isBold="true"/>
 									</textElement>
 									<textFieldExpression><![CDATA[$V{iva_tot}]]></textFieldExpression>
 								</textField>
@@ -551,7 +548,7 @@ from movement m where m.id = $P{movement_id}]]>
 								<textField pattern="#,##0.00">
 									<reportElement x="0" y="0" width="44" height="20" uuid="e6e6143e-9e9b-4598-912b-e81024f139d9"/>
 									<textElement textAlignment="Right" verticalAlignment="Middle">
-										<font fontName="SansSerif" size="9" isBold="true"/>
+										<font fontName="SansSerif" size="8" isBold="true"/>
 									</textElement>
 									<textFieldExpression><![CDATA[$V{Tot_other}]]></textFieldExpression>
 								</textField>
@@ -578,7 +575,7 @@ from movement m where m.id = $P{movement_id}]]>
 								<textField pattern="#,##0.00">
 									<reportElement x="0" y="0" width="69" height="20" uuid="556863a0-08b0-412d-ab2b-5b6fd06c7d81"/>
 									<textElement textAlignment="Right" verticalAlignment="Middle">
-										<font size="9" isBold="true"/>
+										<font size="8" isBold="true"/>
 									</textElement>
 									<textFieldExpression><![CDATA[$V{total_tot}]]></textFieldExpression>
 								</textField>
@@ -608,7 +605,7 @@ from movement m where m.id = $P{movement_id}]]>
 		</band>
 		<band height="78">
 			<componentElement>
-				<reportElement key="table 7" style="table 7" stretchType="RelativeToBandHeight" x="40" y="23" width="537" height="36" uuid="93befff9-3476-4732-b349-c8c866e7092f"/>
+				<reportElement key="table 7" style="table 7" stretchType="RelativeToBandHeight" x="58" y="23" width="518" height="36" uuid="93befff9-3476-4732-b349-c8c866e7092f"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="Pagos" uuid="9d24ad5e-3dd5-44f8-b4d2-ffe1c2f04801">
 						<datasetParameter name="movement_id_p">
@@ -699,10 +696,10 @@ from movement m where m.id = $P{movement_id}]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="231" uuid="9cfad1a4-68f4-4c10-89e5-122c549f5887">
+					<jr:column width="209" uuid="9cfad1a4-68f4-4c10-89e5-122c549f5887">
 						<jr:columnHeader style="table 7_CH" height="20" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="231" height="20" uuid="c210534d-9e66-420c-a289-d2ba5ce020fe"/>
+								<reportElement x="0" y="0" width="209" height="20" uuid="c210534d-9e66-420c-a289-d2ba5ce020fe"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
@@ -711,7 +708,7 @@ from movement m where m.id = $P{movement_id}]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table 7_TD" height="20" rowSpan="1">
 							<textField isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="231" height="20" uuid="749c3810-b243-4c6b-9453-e60e56462133"/>
+								<reportElement x="0" y="0" width="209" height="20" uuid="749c3810-b243-4c6b-9453-e60e56462133"/>
 								<textElement verticalAlignment="Middle">
 									<font size="8"/>
 									<paragraph leftIndent="1"/>
@@ -723,53 +720,32 @@ from movement m where m.id = $P{movement_id}]]>
 				</jr:table>
 			</componentElement>
 			<staticText>
-				<reportElement x="59" y="10" width="100" height="13" uuid="0dffc3f5-2ebd-4b08-8593-ca1b65335788"/>
+				<reportElement x="58" y="10" width="100" height="13" uuid="0dffc3f5-2ebd-4b08-8593-ca1b65335788"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Formas de pago]]></text>
 			</staticText>
-			<line>
-				<reportElement x="0" y="2" width="589" height="3" uuid="8de15834-c64a-4879-930b-1c577ff30bb1"/>
-			</line>
 		</band>
 	</detail>
 	<columnFooter>
 		<band splitType="Stretch"/>
 	</columnFooter>
-	<pageFooter>
-		<band height="20" splitType="Stretch">
-			<textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
-				<reportElement x="445" y="10" width="55" height="10" uuid="c0d9fc3b-a07c-4deb-af56-c2ac962e5ba1"/>
-				<textElement>
-					<font size="8" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{date_created}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement isPrintRepeatedValues="false" x="519" y="10" width="58" height="10" uuid="695d4b95-5b2f-405c-95f2-8c9e88a1a93d"/>
-				<textElement>
-					<font size="8" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA["OS-"+$F{number}+"/"+$F{year}]]></textFieldExpression>
-			</textField>
-		</band>
-	</pageFooter>
 	<summary>
-		<band height="64" splitType="Stretch">
+		<band height="123" splitType="Stretch">
 			<staticText>
-				<reportElement x="59" y="18" width="186" height="20" uuid="ab63c434-c32d-45b4-b900-543adce3602a"/>
+				<reportElement x="58" y="85" width="186" height="20" uuid="ab63c434-c32d-45b4-b900-543adce3602a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[OK]]></text>
 			</staticText>
 			<line>
-				<reportElement x="348" y="18" width="186" height="1" uuid="763f72ce-d36a-4db3-8a08-d6d5bc31c55a"/>
+				<reportElement x="348" y="85" width="186" height="1" uuid="763f72ce-d36a-4db3-8a08-d6d5bc31c55a"/>
 			</line>
 			<line>
-				<reportElement x="59" y="18" width="186" height="1" uuid="553c496b-1330-4399-bc19-647835287c66"/>
+				<reportElement x="58" y="85" width="186" height="1" uuid="553c496b-1330-4399-bc19-647835287c66"/>
 			</line>
 			<staticText>
-				<reportElement x="348" y="18" width="186" height="20" uuid="8ce743fd-f16c-4cff-a8c0-c765b8234766"/>
+				<reportElement x="348" y="85" width="186" height="20" uuid="8ce743fd-f16c-4cff-a8c0-c765b8234766"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[AUTORIZÓ]]></text>
 			</staticText>

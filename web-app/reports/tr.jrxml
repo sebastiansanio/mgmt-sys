@@ -257,59 +257,56 @@ from movement m where m.id = $P{movement_id}]]>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<title>
+	<pageHeader>
 		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="58" y="0" width="134" height="31" uuid="165e59c2-477d-43ef-b40f-d10040e219f2"/>
+				<imageExpression><![CDATA["http://localhost:8080/urbatec/images/Logo%20Urbatec.jpg"]]></imageExpression>
+			</image>
 			<staticText>
-				<reportElement x="221" y="41" width="195" height="20" uuid="21804eb7-8644-45d3-97fa-3e3e04dea779"/>
+				<reportElement x="219" y="31" width="195" height="20" uuid="21804eb7-8644-45d3-97fa-3e3e04dea779"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ORDEN DE TRANSFERENCIA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="434" y="10" width="50" height="20" uuid="b1693f85-820b-4970-96ff-4318ed7834b7"/>
+				<reportElement x="429" y="0" width="50" height="20" uuid="b1693f85-820b-4970-96ff-4318ed7834b7"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[TR N°:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="434" y="30" width="50" height="20" uuid="40dc0a0f-85e0-4c83-b4c7-ed0c9e973ee2"/>
+				<reportElement x="429" y="20" width="50" height="20" uuid="40dc0a0f-85e0-4c83-b4c7-ed0c9e973ee2"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="489" y="10" width="93" height="20" uuid="285fbadf-9481-4740-82e1-083f5e27d9ed"/>
+				<reportElement x="484" y="0" width="93" height="20" uuid="285fbadf-9481-4740-82e1-083f5e27d9ed"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{number}+" / "+$F{year}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="489" y="30" width="93" height="20" uuid="8de7cf2e-ef5f-4d2c-a83a-0e7941ce7231"/>
+				<reportElement x="484" y="20" width="93" height="20" uuid="8de7cf2e-ef5f-4d2c-a83a-0e7941ce7231"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{date_created}]]></textFieldExpression>
 			</textField>
-			<image>
-				<reportElement x="24" y="0" width="134" height="31" uuid="165e59c2-477d-43ef-b40f-d10040e219f2"/>
-				<imageExpression><![CDATA["http://localhost:8080/urbatec/images/Logo%20Urbatec.jpg"]]></imageExpression>
-			</image>
 		</band>
-	</title>
-	<pageHeader>
-		<band height="1" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="56" splitType="Stretch">
+		<band height="47" splitType="Stretch">
 			<componentElement>
-				<reportElement key="table 9" style="table 9" x="40" y="0" width="537" height="36" uuid="c700d514-13b4-4368-9eb0-bc1ee87b9388"/>
+				<reportElement key="table 9" style="table 9" x="58" y="0" width="518" height="36" uuid="c700d514-13b4-4368-9eb0-bc1ee87b9388"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="Movimientos" uuid="4772d315-c80d-4bd2-b489-8d91a99a6223">
 						<datasetParameter name="movement_id_m">
@@ -421,10 +418,10 @@ from movement m where m.id = $P{movement_id}]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="196" uuid="21620ca2-33bb-4d14-b664-1659ad4e0b2c">
+					<jr:column width="170" uuid="21620ca2-33bb-4d14-b664-1659ad4e0b2c">
 						<jr:columnHeader style="table 9_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="195" height="30" uuid="7b285269-94fb-4c70-85c0-d42fb43296fa"/>
+								<reportElement x="0" y="0" width="170" height="30" uuid="7b285269-94fb-4c70-85c0-d42fb43296fa"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
@@ -433,7 +430,7 @@ from movement m where m.id = $P{movement_id}]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table 9_TD" height="22" rowSpan="1">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="195" height="20" uuid="2061bf48-b5fc-4576-8535-20cc7ad35d3a"/>
+								<reportElement x="0" y="0" width="170" height="20" uuid="2061bf48-b5fc-4576-8535-20cc7ad35d3a"/>
 								<textElement verticalAlignment="Middle">
 									<font size="8"/>
 									<paragraph leftIndent="2"/>
@@ -449,41 +446,23 @@ from movement m where m.id = $P{movement_id}]]>
 	<columnFooter>
 		<band splitType="Stretch"/>
 	</columnFooter>
-	<pageFooter>
-		<band height="20" splitType="Stretch">
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="445" y="10" width="55" height="10" uuid="c0d9fc3b-a07c-4deb-af56-c2ac962e5ba1"/>
-				<textElement>
-					<font size="8" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{date_created}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement isPrintRepeatedValues="false" x="519" y="10" width="58" height="10" uuid="695d4b95-5b2f-405c-95f2-8c9e88a1a93d"/>
-				<textElement>
-					<font size="8" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA["TR-"+$F{number}+"/"+$F{year}]]></textFieldExpression>
-			</textField>
-		</band>
-	</pageFooter>
 	<summary>
-		<band height="64" splitType="Stretch">
+		<band height="123" splitType="Stretch">
 			<line>
-				<reportElement x="347" y="17" width="186" height="1" uuid="976be208-10bd-439e-b7ef-cacf97be66aa"/>
+				<reportElement x="348" y="85" width="186" height="1" uuid="976be208-10bd-439e-b7ef-cacf97be66aa"/>
 			</line>
 			<staticText>
-				<reportElement x="347" y="17" width="186" height="20" uuid="4fad9192-b079-4821-965d-fd351f1e4e61"/>
+				<reportElement x="348" y="85" width="186" height="20" uuid="4fad9192-b079-4821-965d-fd351f1e4e61"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[AUTORIZÓ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="58" y="17" width="186" height="20" uuid="49bfc2ae-622e-45e8-b725-3f9f5f46d6af"/>
+				<reportElement x="58" y="85" width="186" height="20" uuid="49bfc2ae-622e-45e8-b725-3f9f5f46d6af"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[OK]]></text>
 			</staticText>
 			<line>
-				<reportElement x="58" y="17" width="186" height="1" uuid="8f7820e1-48b7-45cd-b9dd-4bd21775673b"/>
+				<reportElement x="58" y="85" width="186" height="1" uuid="8f7820e1-48b7-45cd-b9dd-4bd21775673b"/>
 			</line>
 		</band>
 	</summary>
