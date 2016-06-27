@@ -516,8 +516,8 @@ from movement m where m.id = $P{movement_id}]]>
 	<columnFooter>
 		<band splitType="Stretch"/>
 	</columnFooter>
-	<summary>
-		<band height="123" splitType="Stretch">
+	<lastPageFooter>
+		<band height="123">
 			<line>
 				<reportElement x="348" y="85" width="186" height="1" uuid="c9d680ee-45e1-4d3d-a752-edf8521ab817"/>
 			</line>
@@ -535,5 +535,5 @@ from movement m where m.id = $P{movement_id}]]>
 				<reportElement x="58" y="85" width="186" height="1" uuid="48db7c44-25e4-4973-b69a-3948eea7c2ec"/>
 			</line>
 		</band>
-	</summary>
+	</lastPageFooter>
 </jasperReport>

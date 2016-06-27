@@ -731,8 +731,8 @@ from movement m where m.id = $P{movement_id}]]>
 	<columnFooter>
 		<band splitType="Stretch"/>
 	</columnFooter>
-	<summary>
-		<band height="123" splitType="Stretch">
+	<lastPageFooter>
+		<band height="123">
 			<staticText>
 				<reportElement x="58" y="85" width="186" height="20" uuid="ab63c434-c32d-45b4-b900-543adce3602a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
@@ -750,5 +750,5 @@ from movement m where m.id = $P{movement_id}]]>
 				<text><![CDATA[AUTORIZÓ]]></text>
 			</staticText>
 		</band>
-	</summary>
+	</lastPageFooter>
 </jasperReport>
