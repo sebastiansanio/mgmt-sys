@@ -254,36 +254,36 @@ from movement m where m.id = $P{movement_id}]]>
 				<imageExpression><![CDATA["http://localhost:8080/urbatec/images/Logo%20Urbatec.jpg"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="219" y="31" width="142" height="20" uuid="21804eb7-8644-45d3-97fa-3e3e04dea779"/>
-				<textElement>
+				<reportElement x="58" y="40" width="531" height="20" uuid="21804eb7-8644-45d3-97fa-3e3e04dea779"/>
+				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[FACTURA INTERNA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="419" y="0" width="50" height="20" uuid="b1693f85-820b-4970-96ff-4318ed7834b7"/>
-				<textElement>
+				<reportElement x="470" y="0" width="50" height="20" uuid="b1693f85-820b-4970-96ff-4318ed7834b7"/>
+				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[FI N°:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="419" y="20" width="50" height="20" uuid="40dc0a0f-85e0-4c83-b4c7-ed0c9e973ee2"/>
-				<textElement>
+				<reportElement x="470" y="20" width="50" height="20" uuid="40dc0a0f-85e0-4c83-b4c7-ed0c9e973ee2"/>
+				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="474" y="0" width="93" height="20" uuid="285fbadf-9481-4740-82e1-083f5e27d9ed"/>
-				<textElement>
+				<reportElement x="520" y="0" width="69" height="20" uuid="285fbadf-9481-4740-82e1-083f5e27d9ed"/>
+				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{number}+" / "+$F{year}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="474" y="20" width="93" height="20" uuid="8de7cf2e-ef5f-4d2c-a83a-0e7941ce7231"/>
-				<textElement>
+				<reportElement x="520" y="20" width="69" height="20" uuid="8de7cf2e-ef5f-4d2c-a83a-0e7941ce7231"/>
+				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{date_created}]]></textFieldExpression>
@@ -517,7 +517,7 @@ from movement m where m.id = $P{movement_id}]]>
 		<band splitType="Stretch"/>
 	</columnFooter>
 	<lastPageFooter>
-		<band height="123">
+		<band height="107">
 			<line>
 				<reportElement x="348" y="85" width="186" height="1" uuid="c9d680ee-45e1-4d3d-a752-edf8521ab817"/>
 			</line>

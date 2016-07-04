@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="op" language="groovy" pageWidth="595" pageHeight="842" columnWidth="589" leftMargin="3" rightMargin="3" topMargin="20" bottomMargin="20" uuid="8a7719ce-943e-4e58-bcc4-17a1c4039d85">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="100"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -277,36 +277,36 @@ from movement m where m.id = $P{movement_id}]]>
 				<imageExpression><![CDATA["http://localhost:8080/urbatec/images/Logo%20Urbatec.jpg"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="219" y="31" width="129" height="20" uuid="21804eb7-8644-45d3-97fa-3e3e04dea779"/>
-				<textElement>
+				<reportElement x="58" y="40" width="531" height="20" uuid="21804eb7-8644-45d3-97fa-3e3e04dea779"/>
+				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ORDEN DE PAGO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="429" y="0" width="50" height="20" uuid="b1693f85-820b-4970-96ff-4318ed7834b7"/>
-				<textElement>
+				<reportElement x="470" y="0" width="50" height="20" uuid="b1693f85-820b-4970-96ff-4318ed7834b7"/>
+				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[OP N°:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="429" y="20" width="50" height="20" uuid="40dc0a0f-85e0-4c83-b4c7-ed0c9e973ee2"/>
-				<textElement>
+				<reportElement x="470" y="20" width="50" height="20" uuid="40dc0a0f-85e0-4c83-b4c7-ed0c9e973ee2"/>
+				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="484" y="0" width="93" height="20" uuid="285fbadf-9481-4740-82e1-083f5e27d9ed"/>
-				<textElement>
+				<reportElement x="520" y="0" width="69" height="20" uuid="285fbadf-9481-4740-82e1-083f5e27d9ed"/>
+				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{number}+" / "+$F{year}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="484" y="20" width="93" height="20" uuid="8de7cf2e-ef5f-4d2c-a83a-0e7941ce7231"/>
-				<textElement>
+				<reportElement x="520" y="20" width="69" height="20" uuid="8de7cf2e-ef5f-4d2c-a83a-0e7941ce7231"/>
+				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{date_created}]]></textFieldExpression>
@@ -317,7 +317,7 @@ from movement m where m.id = $P{movement_id}]]>
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="116" splitType="Stretch">
+		<band height="77" splitType="Stretch">
 			<componentElement>
 				<reportElement key="table 5" style="table 5" stretchType="RelativeToBandHeight" x="58" y="0" width="518" height="36" uuid="3ad740e5-bd2b-4dd0-b911-68505bd9777e"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
@@ -767,7 +767,7 @@ from movement m where m.id = $P{movement_id}]]>
 		<band splitType="Stretch"/>
 	</columnFooter>
 	<lastPageFooter>
-		<band height="123">
+		<band height="107">
 			<staticText>
 				<reportElement x="348" y="85" width="186" height="20" uuid="c2b141b3-915f-4465-a818-bdd0b00cb706"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
