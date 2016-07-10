@@ -10,14 +10,14 @@
 <section id="index-accountStatus" class="first">
 <h4><g:message code="menu.expenses.label" /></h4>
 <div class="col-md-6">
-<g:form target="_blank" class="noblock" controller="report" action="downloadReport" id="${mgmt.reports.Report.findByCode('expenses')?.id}" >
+<g:form onsubmit="validateForm(event);" target="_blank" class="noblock" controller="report" action="downloadReport" id="${mgmt.reports.Report.findByCode('expenses')?.id}" >
 <table class="col-md-6 table table-bordered">
 	<tbody>
 		<tr>
 			<td><label for="Work_id"><g:message code="work.label"/> </label></td>
 			<td><g:select onchange="refreshConcepts();" class="select-chosen" noSelection="${['-1':'GG']}" name="Work_id" from="${new ArrayList([[id:-2,codeAndName:'Todas las obras']]).plus(mgmt.work.Work.list([sort:['type':'desc','code':'desc']]))}" optionKey="id" value="" optionValue="codeAndName" />
 		</tr>
-				<tr>
+		<tr>
 			<td><label for="Supplier_id"><g:message code="supplier.label"/> </label></td>
 			<td><g:select class="select-chosen" noSelection="${['-1':'Todos los proveedores']}" name="Supplier_id" from="${mgmt.persons.Supplier.list([sort:'name'])}" optionKey="id" value="" />
 		</tr>
@@ -95,6 +95,14 @@ function conceptsChanged(){
 		$('#Concept_code_from').val('M800');
 		$('#Concept_code_to').val('M999');
 		break;
+	}
+}
+
+function validateForm(event){
+	if($('#Work_id').val() == -2 && $('#Supplier_id').val()==-1 && !$('#dateFromEnabled').is(':checked')
+			&& !$('#dateToEnabled').is(':checked')){
+		alert("Debe seleccionar al menos un filtro");
+		event.preventDefault();
 	}
 }
 

@@ -10,7 +10,7 @@
 <section id="index-accountStatus" class="first">
 <h4><g:message code="menu.income.label" /></h4>
 <div class="col-md-6">
-<g:form target="_blank" class="noblock" controller="income" action="download" id="${mgmt.reports.Report.findByCode('income').id}" >
+<g:form onsubmit="validateForm(event);" target="_blank" class="noblock" controller="income" action="download" id="${mgmt.reports.Report.findByCode('income').id}" >
 <table class="col-md-6 table table-bordered">
 	<tbody>
 		<tr>
@@ -57,6 +57,14 @@ function dateToCheckboxChanged(){
 	}else{
 		$("#Date_to").prop( "disabled", true );
 	} 
+}
+
+function validateForm(event){
+	if($('#Work_id').val() == -2 && !$('#dateFromEnabled').is(':checked')
+			&& !$('#dateToEnabled').is(':checked')){
+		alert("Debe seleccionar al menos un filtro");
+		event.preventDefault();
+	}
 }
 
 </script>
