@@ -273,28 +273,28 @@ from movement m where m.id = $P{movement_id}]]>
 				<text><![CDATA[ORDEN DE INGRESO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="470" y="0" width="50" height="20" uuid="b1693f85-820b-4970-96ff-4318ed7834b7"/>
+				<reportElement x="460" y="0" width="50" height="20" uuid="b1693f85-820b-4970-96ff-4318ed7834b7"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[IN N°:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="470" y="20" width="50" height="20" uuid="40dc0a0f-85e0-4c83-b4c7-ed0c9e973ee2"/>
+				<reportElement x="460" y="20" width="50" height="20" uuid="40dc0a0f-85e0-4c83-b4c7-ed0c9e973ee2"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="520" y="0" width="69" height="20" uuid="285fbadf-9481-4740-82e1-083f5e27d9ed"/>
+				<reportElement x="510" y="0" width="69" height="20" uuid="285fbadf-9481-4740-82e1-083f5e27d9ed"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{number}+" / "+$F{year}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="520" y="20" width="69" height="20" uuid="8de7cf2e-ef5f-4d2c-a83a-0e7941ce7231"/>
+				<reportElement x="510" y="20" width="69" height="20" uuid="8de7cf2e-ef5f-4d2c-a83a-0e7941ce7231"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
@@ -459,7 +459,7 @@ from movement m where m.id = $P{movement_id}]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
-							<textField isBlankWhenNull="true">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="51" height="20" uuid="970d9c33-8bc7-4cad-9473-aab6bdaefd9d"/>
 								<textElement verticalAlignment="Middle">
 									<font size="8"/>
