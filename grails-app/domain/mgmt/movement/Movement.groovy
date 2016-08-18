@@ -29,6 +29,17 @@ class Movement {
 			if (object.type in ['op','os','in'] && !(object.calculateItemsTotal() == object.calculatePaymentsTotal())){
 				return ["movement.amountsNotEqual.error"]
 			}
+			if (object.type in ['op','os']){
+				for(MovementItem movementItem: object.items){
+					if(movementItem.budget && movementItem.budget.realExpendures.remainingAmount < (movementItem.budget.movementItems.contains(movementItem)?0 :movementItem.amount) ){
+						return ['supplierBudget.amountNotValid.error']
+					}
+					if(movementItem.budget && movementItem.budget.realExpendures.remainingIva < (movementItem.budget.movementItems.contains(movementItem)?0 :movementItem.iva) ){
+						return ['supplierBudget.ivaNotValid.error']
+					}
+				}
+				
+			}
         }
 		checkedDate nullable: true
 		payments validator: {value, object ->

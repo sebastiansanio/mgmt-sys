@@ -4,6 +4,10 @@ package mgmt.movement
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import mgmt.concept.Concept
+import mgmt.persons.Supplier
+import mgmt.work.SupplierBudget
+import mgmt.work.Work
 
 @Transactional(readOnly = true)
 class OsController {
@@ -131,6 +135,9 @@ class OsController {
 		}
 		
 		for (movementItem in movementInstance.items) {
+			if(movementItem.budget){
+				movementItem.budget.movementItems.remove(movementItem)
+			}
 			movementItem.delete()
 		}
 		movementInstance.items.clear()
@@ -236,6 +243,20 @@ class OsController {
 		movementInstance.save flush: true
 		flash.message = message(code: 'movement.unchecked.message')
 		redirect action:"index", method:"GET", fragment: 'movement-'+movementInstance.id, params:params.subMap(['max','sort','order','offset','checkedFilter','numberFilter','yearFilter'])
+	}
+	
+	def retrieveBudgets() {
+		Work work = Work.get(params.long('workId'))  
+		Concept concept = Concept.get(params.long('conceptId'))
+		Supplier supplier = Supplier.get(params.long('supplierId'))
+		
+		def results = SupplierBudget.createCriteria().list (params) {
+			eq("work",work)
+			eq("concept",concept)
+			eq("supplier",supplier)
+		}
+		
+		respond results,model: [budgets:results]
 	}
 
     protected void notFound() {

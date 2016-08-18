@@ -12,7 +12,6 @@
 
 
 	<section id="edit-movement" class="first">
-
 		<g:hasErrors bean="${movementInstance}">
 		<div class="alert alert-danger">
 			<g:renderErrors bean="${movementInstance}" as="list" />

@@ -31,7 +31,7 @@ class SupplierBudgetController {
             notFound()
             return
         }
-
+		supplierBudgetInstance.validate()
         if (supplierBudgetInstance.hasErrors()) {
             respond supplierBudgetInstance.errors, view:'create'
             return
@@ -42,7 +42,7 @@ class SupplierBudgetController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'supplierBudget.label', default: 'SupplierBudget'), supplierBudgetInstance.id])
-                redirect supplierBudgetInstance
+				redirect action:"edit", id: supplierBudgetInstance.id, method:"GET"
             }
             '*' { respond supplierBudgetInstance, [status: CREATED] }
         }
@@ -68,7 +68,7 @@ class SupplierBudgetController {
 			}
 		}
 		supplierBudgetInstance.properties = params
-
+		supplierBudgetInstance.validate()
         if (supplierBudgetInstance.hasErrors()) {
             respond supplierBudgetInstance.errors, view:'edit'
             return
@@ -78,8 +78,8 @@ class SupplierBudgetController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'upplierBudget.label', default: 'SupplierBudget'), supplierBudgetInstance.id])
-                redirect supplierBudgetInstance
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'supplierBudget.label', default: 'SupplierBudget'), supplierBudgetInstance.id])
+                redirect action:"edit", id: supplierBudgetInstance.id, method:"GET"
             }
             '*'{ respond supplierBudgetInstance, [status: OK] }
         }

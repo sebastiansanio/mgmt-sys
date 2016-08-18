@@ -4,6 +4,7 @@ import mgmt.concept.Concept
 import mgmt.invoice.InvoiceType
 import mgmt.persons.Supplier
 import mgmt.products.UnitOfMeasurement
+import mgmt.work.SupplierBudget
 import mgmt.work.Work
 
 
@@ -23,6 +24,7 @@ class MovementItem {
 	Date date
 	int multiplier
 	UnitOfMeasurement unit
+	SupplierBudget budget
 	@BindUsing({
 		obj, source -> new BigDecimal(source['quantity'])
 	})
@@ -81,6 +83,7 @@ class MovementItem {
 				return ["default.null.message"]
 			}
         }
+		budget nullable: true
 		unit nullable: true
 		quantity nullable: true
 		unitPrice nullable: true

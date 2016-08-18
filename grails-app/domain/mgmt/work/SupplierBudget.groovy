@@ -1,6 +1,7 @@
 package mgmt.work
 
 import mgmt.concept.Concept
+import mgmt.invoice.InvoiceType;
 import mgmt.movement.MovementItem
 import mgmt.persons.Supplier
 
@@ -20,36 +21,49 @@ class SupplierBudget {
 	})
 	BigDecimal iva
 	String note
+	InvoiceType invoiceType
 	
 	Date dateCreated
 	Date lastUpdated
 	
 	Date date
 	
+	static hasMany = [movementItems: MovementItem]
+	
     static constraints = {
 		note blank: true, nullable: true, maxSize: 4000
 		date nullable: true
+		invoiceType nullable: true
+		amount validator: {value, object ->
+			if (object.amount < object.realExpendures.expendedAmount){
+				return ["supplierBudget.amountNotValid.error"]
+			}
+        }
+		iva validator: {value, object ->
+			if (object.iva < object.realExpendures.expendedIva){
+				return ["supplierBudget.ivaNotValid.error"]
+			}
+        }
     }
 	
 	Map getRealExpendures(){
 		Map calculatedRealExpendures = new HashMap()
-		def results = MovementItem.createCriteria().get {
-			eq("work", work)
-			eq("supplier", supplier)
-			eq("concept", concept)
-			
-			projections {
-				sum 'amount'
-				sum 'iva'
-			}
+		
+		calculatedRealExpendures.expendedAmount = BigDecimal.valueOf(0)
+		calculatedRealExpendures.expendedIva = BigDecimal.valueOf(0)
+		
+		for(MovementItem item: movementItems){
+			calculatedRealExpendures.expendedAmount = calculatedRealExpendures.expendedAmount.plus(item.amount) 
+			calculatedRealExpendures.expendedIva = calculatedRealExpendures.expendedIva.plus(item.iva)
 		}
-		calculatedRealExpendures.expendedAmount = results[0]?:0
-		calculatedRealExpendures.expendedIva = results[1]?:0
-		calculatedRealExpendures.remainingAmount = amount - calculatedRealExpendures.expendedAmount
-		calculatedRealExpendures.remainingIva = iva - calculatedRealExpendures.expendedIva
-		
+		calculatedRealExpendures.remainingAmount = amount.minus(calculatedRealExpendures.expendedAmount)
+		calculatedRealExpendures.remainingIva = iva.minus(calculatedRealExpendures.expendedIva)
+				
 		return calculatedRealExpendures
-		
+	}
+	
+	String getIdAndRemainingAmount(){
+		return id.toString() + " (" + getRealExpendures().remainingAmount + ")"
 	}
 	
 }

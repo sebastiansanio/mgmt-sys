@@ -26,6 +26,7 @@
 				<th class="center-aligned"><g:message code="supplierBudget.expendedIva.label" /></th>
 				<th class="center-aligned"><g:message code="supplierBudget.remainingAmount.label" /></th>
 				<th class="center-aligned"><g:message code="supplierBudget.remainingIva.label" /></th>
+				<th class="center-aligned"><g:message code="supplierBudget.invoiceType.label" /></th>
 				<g:sortableColumn class="center-aligned" property="dateCreated" title="${message(code: 'supplierBudget.dateCreated.label')}" />
 				<sec:access url="/supplierBudget/delete">
 					<th class="center-aligned">${message(code:'default.button.delete.label')}</th>
@@ -48,6 +49,7 @@
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${realExpendures.expendedIva}" /></td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${realExpendures.remainingAmount}" /></td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${realExpendures.remainingIva}" /></td>
+				<td>${fieldValue(bean: supplierBudgetInstance, field: "invoiceType")}</td>
 				<td class="center-aligned"><g:formatDate date="${supplierBudgetInstance.dateCreated}"/></td>
 				<sec:access url="/supplierBudget/delete">
 					<td class="center-aligned">
