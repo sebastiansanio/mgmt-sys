@@ -1,4 +1,11 @@
 <%@ page import="mgmt.work.SupplierBudget" %>
+<g:if test="${supplierBudgetInstance.id}">
+
+<label for="id" class="control-label">
+<g:message code="supplierBudget.id.label"  />
+</label>
+<div>${supplierBudgetInstance?.id}</div>
+</g:if>			
 
 			<div class="${hasErrors(bean: supplierBudgetInstance, field: 'supplier', 'has-error')} required">
 				<label for="supplier" class="control-label"><g:message code="supplierBudget.supplier.label" default="Supplier" /><span class="required-indicator">*</span></label>
