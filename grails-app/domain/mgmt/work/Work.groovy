@@ -23,7 +23,12 @@ class Work {
     static constraints = {
 		client nullable: true
 		type inList: ["building","asset"]
-		budget nullable: true
+		budget nullable: true, unique: true, validator: {value, object ->
+			if (object.type == "building" && !value){
+				return ["work.budget.null.message",1]
+			}
+
+		}
 		code nullable:false, unique: 'type'
     }
 	

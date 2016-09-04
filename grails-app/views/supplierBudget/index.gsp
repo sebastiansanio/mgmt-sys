@@ -31,6 +31,9 @@
 				<sec:access url="/supplierBudget/delete">
 					<th class="center-aligned">${message(code:'default.button.delete.label')}</th>
 				</sec:access>			
+				<sec:access url="/supplierBudget/close">
+					<th class="center-aligned"><g:message code="supplierBudget.close.label" /></th>
+				</sec:access>
 				<th class="center-aligned"><g:message code="supplierBudget.note.label" /></th>
 			</tr>
 		</thead>
@@ -60,6 +63,36 @@
 						</g:form>
 					</td>
 				</sec:access>
+				
+					<g:if test="${!supplierBudgetInstance.closed}">
+						<sec:access url="/supplierBudget/close">
+							<td class="center-aligned">
+								<g:form action="close">
+									<g:hiddenField name="id" value="${supplierBudgetInstance.id}" />
+									<g:hiddenField name="max" value="${params.max}" />
+									<g:hiddenField name="sort" value="${params.sort}" />
+									<g:hiddenField name="order" value="${params.order}" />
+									<g:hiddenField name="offset" value="${params.offset}" />
+									<g:submitButton class="btn btn-danger btn-xs" name="close" value="${message(code:'supplierBudget.close.label') }" /> 
+								</g:form>
+							</td>
+						</sec:access>
+					</g:if>
+					<g:else>
+						<sec:access url="/supplierBudget/open">
+							<td class="center-aligned">
+								<g:form action="open">
+									<g:hiddenField name="id" value="${supplierBudgetInstance.id}" />
+									<g:hiddenField name="max" value="${params.max}" />
+									<g:hiddenField name="sort" value="${params.sort}" />
+									<g:hiddenField name="order" value="${params.order}" />
+									<g:hiddenField name="offset" value="${params.offset}" />
+									<g:submitButton class="btn btn-primary btn-xs" name="open" value="${message(code:'supplierBudget.open.label') }" /> 
+								</g:form>
+							</td>
+						</sec:access>
+					</g:else>
+				
 				<td>${fieldValue(bean: supplierBudgetInstance, field: "note")}</td>
 			</tr>
 		</g:each>

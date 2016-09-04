@@ -113,4 +113,30 @@ class SupplierBudgetController {
             '*'{ render status: NOT_FOUND }
         }
     }
+	
+	@Transactional
+	def close(){
+		def supplierBudgetInstance = SupplierBudget.get(params.id.toLong())
+		if (supplierBudgetInstance == null) {
+			notFound()
+			return
+		}
+		supplierBudgetInstance.closed = true
+		supplierBudgetInstance.save flush: true
+		flash.message = message(code: 'supplierBudget.close.message')
+		redirect action:"index", method:"GET", params:params
+		
+	}
+	@Transactional
+	def open(){
+		def supplierBudgetInstance = SupplierBudget.get(params.id.toLong())
+		if (supplierBudgetInstance == null) {
+			notFound()
+			return
+		}
+		supplierBudgetInstance.closed = false
+		supplierBudgetInstance.save flush: true
+		flash.message = message(code: 'supplierBudget.open.message')
+		redirect action:"index", method:"GET", params:params
+	}
 }

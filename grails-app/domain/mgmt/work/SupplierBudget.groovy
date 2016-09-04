@@ -25,7 +25,7 @@ class SupplierBudget {
 	
 	Date dateCreated
 	Date lastUpdated
-	
+	boolean closed
 	Date date
 	
 	static hasMany = [movementItems: MovementItem]

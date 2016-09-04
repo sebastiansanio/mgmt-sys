@@ -115,7 +115,7 @@ class WorkController {
 			}
 		}
 		workInstance.properties = params
-
+		workInstance.validate()
         if (workInstance.hasErrors()) {
             respond workInstance.errors, view:'edit'
             return
