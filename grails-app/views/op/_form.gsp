@@ -297,10 +297,8 @@ function refreshBudgets(idx){
 	var supplierId = $('#supplier-'+idx).val()
 	var conceptId = $('#concept-'+idx).val()
 
-	if(workId!='null' && supplierId != 'null' && conceptId != 'null'){
-		
+	if(supplierId != 'null' && conceptId != 'null'){
 		var url = '${g.createLink(action:'retrieveBudgets')}?workId='+workId + '&conceptId='+conceptId + '&supplierId=' + supplierId
-		
 		$.get( url, function( data ) {
   			$( "#budget-"+idx ).html( data );
 		});

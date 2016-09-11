@@ -251,7 +251,11 @@ class OsController {
 		Supplier supplier = Supplier.get(params.long('supplierId'))
 		
 		def results = SupplierBudget.createCriteria().list (params) {
-			eq("work",work)
+			if(work){
+				eq("work",work)
+			}else{
+				isNull("work")
+			}
 			eq("concept",concept)
 			eq("supplier",supplier)
 			eq("closed",false)

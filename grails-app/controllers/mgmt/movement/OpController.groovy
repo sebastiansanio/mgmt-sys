@@ -229,9 +229,13 @@ class OpController {
 		Work work = Work.get(params.long('workId'))  
 		Concept concept = Concept.get(params.long('conceptId'))
 		Supplier supplier = Supplier.get(params.long('supplierId'))
-		
+		log.error("a:" + work)
 		def results = SupplierBudget.createCriteria().list (params) {
-			eq("work",work)
+			if(work){
+				eq("work",work)
+			}else{
+				isNull("work")
+			}
 			eq("concept",concept)
 			eq("supplier",supplier)
 			eq("closed",false)
