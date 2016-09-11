@@ -234,6 +234,7 @@ class OpController {
 			eq("work",work)
 			eq("concept",concept)
 			eq("supplier",supplier)
+			eq("closed",false)
 		}
 		
 		respond results,model: [budgets:results]

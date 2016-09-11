@@ -31,6 +31,7 @@ class SupplierBudget {
 	static hasMany = [movementItems: MovementItem]
 	
     static constraints = {
+		work nullable: true
 		note blank: true, nullable: true, maxSize: 4000
 		date nullable: true
 		invoiceType nullable: true

@@ -19,6 +19,17 @@
 				</div>
 			</div>
 			
+			<div class="${hasErrors(bean: supplierBudgetInstance, field: 'work', 'has-error')} required">
+				<label for="work" class="control-label"><g:message code="supplierBudget.work.label" default="Work" /><span class="required-indicator">*</span></label>
+				<div>
+					<g:if test="${supplierBudgetInstance.movementItems}">
+						${supplierBudgetInstance?.work}
+					</g:if>
+					<g:else>
+						<g:select onchange="refreshConcepts();" noSelection="${['null':'00 - Gastos generales']}" class="form-control" id="work" name="work.id" from="${mgmt.work.Work.findAllByFinished(false,[sort: 'code'])}" optionKey="id" required="" value="${supplierBudgetInstance?.work?.id}"/>
+					</g:else>
+				</div>
+			</div>
 			<div class="${hasErrors(bean: supplierBudgetInstance, field: 'concept', 'has-error')} required">
 				<label for="concept" class="control-label"><g:message code="supplierBudget.concept.label" default="Concept" /><span class="required-indicator">*</span></label>
 				<div>
@@ -27,17 +38,6 @@
 					</g:if>
 					<g:else>
 						<g:select class="form-control" id="concept" name="concept.id" from="${mgmt.concept.Concept.list()}" optionKey="id" required="" value="${supplierBudgetInstance?.concept?.id}"/>
-					</g:else>
-				</div>
-			</div>
-			<div class="${hasErrors(bean: supplierBudgetInstance, field: 'work', 'has-error')} required">
-				<label for="work" class="control-label"><g:message code="supplierBudget.work.label" default="Work" /><span class="required-indicator">*</span></label>
-				<div>
-					<g:if test="${supplierBudgetInstance.movementItems}">
-						${supplierBudgetInstance?.work}
-					</g:if>
-					<g:else>
-						<g:select noSelection="${['null':'00 - Gastos generales']}" class="form-control" id="work" name="work.id" from="${mgmt.work.Work.findAllByFinished(false)}" optionKey="id" required="" value="${supplierBudgetInstance?.work?.id}"/>
 					</g:else>
 				</div>
 			</div>
@@ -73,11 +73,26 @@
 			</div>
 			
 			
+<div class="hide" >	
+	<g:select disabled="disabled" class="input-intableform form-control" id="conceptsWork" name="conceptsWork" from="${mgmt.concept.Concept.findAllByValidInOpWork(true,[sort:'code',order:'asc'])}" optionKey="id" required="" value=""/>
+	<g:select disabled="disabled" class="input-intableform form-control" id="conceptsNoWork" name="conceptsNoWork" from="${mgmt.concept.Concept.findAllByValidInOpNoWork(true,[sort:'code',order:'asc'])}" optionKey="id" required="" value=""/>
+</div>			
+			
+			
 <script>
 
 $(function() {
+	refreshConcepts();
 	$(".select-chosen").chosen();
 });
+
+function refreshConcepts(){
+	if($('#work').val()=='null'){
+		$('#concept').empty().append($("#conceptsNoWork > option").clone());
+	}else{
+		$('#concept').empty().append($("#conceptsWork > option").clone());
+	}
+}
 
 $("form").submit(function( event ) {
 	$(".mayus" ).each(function( index ) {

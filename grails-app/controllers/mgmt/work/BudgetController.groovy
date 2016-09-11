@@ -15,7 +15,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class BudgetController {
 	
-	private static List FIELDS = ["client","name","directCosts","iibbPercentage","iibbAmount",
+	private static List FIELDS = ["code","client","name","directCosts","iibbPercentage","iibbAmount",
 	"indirectOverheadPercentage","indirectOverheadAmount","profitPercentage","profitAmount",
 	"ivaPercentage","totalAmount","hasWork","dateCreated","lastUpdated"]
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
