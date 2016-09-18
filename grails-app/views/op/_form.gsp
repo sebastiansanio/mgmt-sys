@@ -123,8 +123,6 @@
 </div>
 <button type="button" class="btn btn-default" onclick="addPayment();" >Agregar pago</button>
 
-
-
 <div class="hide" >
 
 <table>
@@ -133,7 +131,6 @@
 		<td class="td-intableform"><g:select disabled="disabled" class="supplier-select-model form-control" id="supplier-xyz" name="items[xyz].supplier.id" from="${mgmt.persons.Supplier.list(sort:'name')}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="concept-model input-intableform form-control" id="concept-xyz" name="items[xyz].concept.id" from="${mgmt.concept.Concept.findAllByValidInOpNoWork(true,[sort:'code'])}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control budgets-class" id="budget-xyz" name="items[xyz].budget.id" from="${new ArrayList()}" noSelection="['null':'Sin presupuesto']" optionKey="id" optionValue="id" required="" value=""/></td>
-		
 		<td class="td-intableform"><g:textArea cols="60" disabled="disabled" class="mayus input-intableform form-control vertical-center-aligned" name="items[xyz].description" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" name="items[xyz].invoiceType.id" from="${mgmt.invoice.InvoiceType.list()}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:textField disabled="disabled" class="input-intableform form-control" name="items[xyz].invoiceNumber" value=""/></td>
@@ -305,6 +302,7 @@ function refreshBudgets(idx){
 		
 	}
 }
+
 
 $(function() {
 	$('.supplier-select').append($(".supplier-select-model > option").clone());

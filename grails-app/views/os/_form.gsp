@@ -5,7 +5,7 @@
 <g:hiddenField name="type" value="os" />
 
 <div class="col-md-3 ${hasErrors(bean: movementInstance, field: 'note', 'has-error')} ">
-	<label for="type" class="control-label"><g:message code="movement.note.label" default="Note" /></label>
+	<label for="type" class="control-label"><g:message code="movement.note.label" /></label>
 	<div>
 		<g:textArea class="form-control mayus" name="note" value="${movementInstance.note}"/>
 	</div>
@@ -129,7 +129,7 @@
 	<tr class="form-inline" id="item-model">
 		<td class="td-intableform"><g:select noSelection="${['null':'00 - Gastos generales']}" disabled="disabled" class="work-model input-intableform form-control" id="work-xyz" name="items[xyz].work.id" from="${mgmt.work.Work.findAllByFinished(false,[sort:'code'])}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="supplier-select-model form-control" id="supplier-xyz" name="items[xyz].supplier.id" from="${mgmt.persons.Supplier.list(sort:'name')}" optionKey="id" required="" value=""/></td>
-		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" id="concept-xyz" name="items[xyz].concept.id" from="${mgmt.concept.Concept.findAllByValidInOsNoWork(true,[sort:'code'])}" optionKey="id" required="" value=""/></td>
+		<td class="td-intableform"><g:select disabled="disabled" class="concept-model input-intableform form-control" id="concept-xyz" name="items[xyz].concept.id" from="${mgmt.concept.Concept.findAllByValidInOsNoWork(true,[sort:'code'])}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control budgets-class" id="budget-xyz" name="items[xyz].budget.id" from="${new ArrayList()}" noSelection="['null':'Sin presupuesto']" optionKey="id" optionValue="id" required="" value=""/></td>
 		<td class="td-intableform"><g:textArea cols="60" disabled="disabled" class="mayus input-intableform form-control vertical-center-aligned" name="items[xyz].description" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" name="items[xyz].invoiceType.id" from="${mgmt.invoice.InvoiceType.list()}" optionKey="id" required="" value="${mgmt.invoice.InvoiceType.findByCode('SD')?.id}"/></td>
