@@ -56,7 +56,16 @@
 					<td class="td-intableform"><g:select onchange="refreshConcepts('${i}');refreshBudgets('${i}');" noSelection="${['null':'00 - Gastos generales']}" class="input-intableform form-control" id="work-${i}" name="items[${i}].work.id" from="${mgmt.work.Work.findAllByFinishedOrId(false,movementItemInstance?.work?.id,[sort:'code'])}" optionKey="id" required="" value="${movementItemInstance?.work?.id}"/></td>
 					<td class="td-intableform"><g:select onchange="refreshBudgets('${i}');" class="select-chosen supplier-select form-control" id="supplier-${i}" name="items[${i}].supplier.id" from="${[movementItemInstance?.supplier]}" optionKey="id" required="" value="${movementItemInstance?.supplier?.id}"/></td>
 					<td class="td-intableform"><g:select onchange="refreshBudgets('${i}');" class="input-intableform form-control ${movementItemInstance.work?'conceptsWork':'conceptsNoWork'}" id="concept-${i}" name="items[${i}].concept.id" from="${[movementItemInstance?.concept]}" optionKey="id" required="" value="${movementItemInstance?.concept?.id}"/></td>
-					<td class="td-intableform"><g:select class="input-intableform form-control budgets-class" id="budget-${i}" name="items[${i}].budget.id" from="${movementItemInstance?.budget?[movementItemInstance?.budget]:new ArrayList()}" noSelection="['null':'Sin presupuesto']" optionKey="id" optionValue="idAndRemainingAmount" required="" value="${movementItemInstance?.budget?.id}"/></td>					
+					<td class="td-intableform"><g:select class="input-intableform form-control budgets-class" id="budget-${i}" name="items[${i}].budget.id" from="${mgmt.work.SupplierBudget.createCriteria().list () {
+			if(movementItemInstance.work){
+				eq("work",movementItemInstance.work)
+			}else{
+				isNull("work")
+			}
+			eq("concept",movementItemInstance.concept)
+			eq("supplier",movementItemInstance.supplier)
+			eq("closed",false)
+		}?:[[id:'null',idAndRemainingAmount:'Sin presupuesto']]}" optionKey="id" optionValue="idAndRemainingAmount" required="" value="${movementItemInstance?.budget?.id}"/></td>					
 					
 					<td class="td-intableform"><g:textArea cols="60" class="mayus input-intableform form-control vertical-center-aligned" name="items[${i}].description" value="${movementItemInstance?.description}"/></td>
 					<td class="td-intableform"><g:select class="input-intableform form-control" id="items[${i}].invoiceType" name="items[${i}].invoiceType.id" from="${mgmt.invoice.InvoiceType.list()}" optionKey="id" required="" value="${movementItemInstance?.invoiceType?.id}"/></td>

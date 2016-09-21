@@ -250,7 +250,7 @@ class OsController {
 		Concept concept = Concept.get(params.long('conceptId'))
 		Supplier supplier = Supplier.get(params.long('supplierId'))
 		
-		def results = SupplierBudget.createCriteria().list (params) {
+		def results = SupplierBudget.createCriteria().list () {
 			if(work){
 				eq("work",work)
 			}else{
