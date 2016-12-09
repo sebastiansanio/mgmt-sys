@@ -31,4 +31,8 @@ class Supplier {
 	String toString(){
 		return name
 	}
+	
+	String getNameAndBusinessName(){
+		return name + '(' + businessName + ')'
+	}
 }

@@ -91,7 +91,7 @@ where (movement_item.supplier_id = $P{Supplier_id} or $P{Supplier_id} = -1)
 and
 (movement.date_created >=  $P{Date_from} or $P{Date_from} is null ) and (movement.date_created < $P{Date_to} or $P{Date_to} is null)
 ORDER BY
-     supplier.id ASC, work.type desc, work.code desc]]>
+     supplier.id ASC, work.type desc, work.code desc,movement.date_created desc]]>
 	</queryString>
 	<field name="movement_item_id" class="java.lang.Long"/>
 	<field name="movement_item_version" class="java.lang.Long"/>
