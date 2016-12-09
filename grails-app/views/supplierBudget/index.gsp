@@ -15,26 +15,26 @@
 	<table class="table table-bordered margin-top-medium">
 		<thead>
 			<tr>
-				<th class="center-aligned">${message(code:'default.edit.label')}</th>
-				<th class="center-aligned">${message(code:'supplierBudget.id.label')}</th>
-				<th class="center-aligned"><g:message code="supplierBudget.work.label" default="Work" /></th>
-				<th class="center-aligned"><g:message code="supplierBudget.supplier.label" default="Supplier" /></th>
-				<th class="center-aligned"><g:message code="supplierBudget.concept.label" default="Concept" /></th>
-				<g:sortableColumn class="center-aligned" property="amount" title="${message(code: 'supplierBudget.amount.label', default: 'Amount')}" />
-				<g:sortableColumn class="center-aligned" property="iva" title="${message(code: 'supplierBudget.iva.label', default: 'Iva')}" />
-				<th class="center-aligned"><g:message code="supplierBudget.expendedAmount.label" /></th>
-				<th class="center-aligned"><g:message code="supplierBudget.expendedIva.label" /></th>
-				<th class="center-aligned"><g:message code="supplierBudget.remainingAmount.label" /></th>
-				<th class="center-aligned"><g:message code="supplierBudget.remainingIva.label" /></th>
-				<th class="center-aligned"><g:message code="supplierBudget.invoiceType.label" /></th>
-				<g:sortableColumn class="center-aligned" property="dateCreated" title="${message(code: 'supplierBudget.dateCreated.label')}" />
+				<th class="center-aligned mayus">${message(code:'default.edit.label')}</th>
+				<th class="center-aligned mayus">${message(code:'supplierBudget.id.label')}</th>
+				<th class="center-aligned mayus"><g:message code="supplierBudget.work.label" default="Work" /></th>
+				<th class="center-aligned mayus"><g:message code="supplierBudget.supplier.label" default="Supplier" /></th>
+				<th class="center-aligned mayus"><g:message code="supplierBudget.concept.label" default="Concept" /></th>
+				<g:sortableColumn class="center-aligned mayus" property="amount" title="${message(code: 'supplierBudget.amount.label', default: 'Amount')}" />
+				<g:sortableColumn class="center-aligned mayus" property="iva" title="${message(code: 'supplierBudget.iva.label', default: 'Iva')}" />
+				<th class="center-aligned mayus"><g:message code="supplierBudget.expendedAmount.label" /></th>
+				<th class="center-aligned mayus"><g:message code="supplierBudget.expendedIva.label" /></th>
+				<th class="center-aligned mayus"><g:message code="supplierBudget.remainingAmount.label" /></th>
+				<th class="center-aligned mayus"><g:message code="supplierBudget.remainingIva.label" /></th>
+				<th class="center-aligned mayus"><g:message code="supplierBudget.invoiceType.label" /></th>
+				<g:sortableColumn class="center-aligned mayus" property="dateCreated" title="${message(code: 'supplierBudget.dateCreated.label')}" />
 				<sec:access url="/supplierBudget/delete">
-					<th class="center-aligned">${message(code:'default.button.delete.label')}</th>
+					<th class="center-aligned mayus">${message(code:'default.button.delete.label')}</th>
 				</sec:access>			
 				<sec:access url="/supplierBudget/close">
-					<th class="center-aligned"><g:message code="supplierBudget.close.label" /></th>
+					<th class="center-aligned mayus"><g:message code="supplierBudget.close.label" /></th>
 				</sec:access>
-				<th class="center-aligned"><g:message code="supplierBudget.note.label" /></th>
+				<th class="center-aligned mayus"><g:message code="supplierBudget.note.label" /></th>
 			</tr>
 		</thead>
 		<tbody>
