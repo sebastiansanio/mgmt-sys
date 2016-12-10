@@ -14,7 +14,7 @@ class BalanceController {
 	def show(){
 		Work work = Work.get(params.long('workId'))
 		Map amounts = new HashMap()
-		amounts.income = calculateAmount(work.id,'P100','P100')
+		amounts.income = calculateAmount(work.id,'P100','P101')
 		amounts.otherIncome = calculateAmount(work.id,'P200','P600')
 		amounts.directCosts = calculateAmount(work.id,'A000','K999')
 		amounts.generalExpenses = calculateAmount(work.id,'L000','L899')

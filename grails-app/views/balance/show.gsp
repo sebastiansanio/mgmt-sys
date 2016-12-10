@@ -13,6 +13,7 @@
 	<div>
 		<g:field type="number" required="" class="form-control" name="code" value="${work.code}"/>
 		<g:textField required="" class="form-control" name="name" value="${work.name}"/>
+		<g:textField required="" class="form-control" name="name" value="${new Date().format("dd/MM/yyyy")}"/>
 	</div>
 </div>
 

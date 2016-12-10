@@ -186,7 +186,7 @@
 	<subDataset name="Movimientos" uuid="481ed7f6-caa6-4ba4-b893-77fbc12418c9">
 		<parameter name="movement_id_m" class="java.lang.Long" isForPrompting="false"/>
 		<queryString>
-			<![CDATA[select mi.movement_id,w.code as work_from,w2.code as work_to,c.code as concept_code,mi.description,uom.name,mi.quantity,mi.unit_price,mi.total
+			<![CDATA[select mi.movement_id,coalesce(w.code,'000') as work_from,coalesce(w2.code,'000') as work_to,c.code as concept_code,mi.description,uom.name,mi.quantity,mi.unit_price,mi.total
 from movement_item mi
 left join movement_item mi2 on mi.items_idx + 1 = mi2.items_idx
 left join work w on mi.work_id = w.id
@@ -199,8 +199,8 @@ and mi.items_idx % 2 = 0]]>
 		<field name="movement_id" class="java.lang.Long">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
-		<field name="work_from" class="java.lang.Long"/>
-		<field name="work_to" class="java.lang.Long"/>
+		<field name="work_from" class="java.lang.String"/>
+		<field name="work_to" class="java.lang.String"/>
 		<field name="concept_code" class="java.lang.String"/>
 		<field name="description" class="java.lang.String">
 			<fieldDescription><![CDATA[]]></fieldDescription>

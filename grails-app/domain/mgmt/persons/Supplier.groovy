@@ -33,6 +33,10 @@ class Supplier {
 	}
 	
 	String getNameAndBusinessName(){
-		return name + '(' + businessName + ')'
+		if(name.equals(businessName)){
+			return name
+		}else{
+			return name + '(' + businessName + ')'
+		}
 	}
 }

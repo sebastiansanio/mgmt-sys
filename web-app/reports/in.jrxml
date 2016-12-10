@@ -187,7 +187,7 @@
 	<subDataset name="Movimientos" uuid="481ed7f6-caa6-4ba4-b893-77fbc12418c9">
 		<parameter name="movement_id_m" class="java.lang.Long" isForPrompting="false"/>
 		<queryString>
-			<![CDATA[select movement_id,w.code as work_code, c.code as concept_code, cl.name as client_name, mi.description,
+			<![CDATA[select movement_id,coalesce(w.code,'000') as work_code, c.code as concept_code, cl.name as client_name, mi.description,
 it.code as invoice_type_code, mi.invoice_number,mi.amount,mi.iva,mi.iibb,mi.total
 from movement_item mi
 left join work w on mi.work_id = w.id
@@ -199,7 +199,7 @@ where movement_id = $P{movement_id_m}]]>
 		<field name="movement_id" class="java.lang.Long">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
-		<field name="work_code" class="java.lang.Long"/>
+		<field name="work_code" class="java.lang.String"/>
 		<field name="concept_code" class="java.lang.String"/>
 		<field name="client_name" class="java.lang.String"/>
 		<field name="description" class="java.lang.String">
