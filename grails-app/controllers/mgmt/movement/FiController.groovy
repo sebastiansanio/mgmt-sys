@@ -62,6 +62,13 @@ class FiController {
 			movement.items[2*i+1].multiplier = -1
 			movement.items[2*i].date = date
 			movement.items[2*i+1].date = date
+			
+			movement.items[2*i].iibb = BigDecimal.valueOf(0)
+			movement.items[2*i+1].iibb = BigDecimal.valueOf(0)
+			movement.items[2*i].otherPerceptions = BigDecimal.valueOf(0)
+			movement.items[2*i+1].otherPerceptions = BigDecimal.valueOf(0)
+			movement.items[2*i].iva = BigDecimal.valueOf(0)
+			movement.items[2*i+1].iva = BigDecimal.valueOf(0)
 		}
 	}
 	
