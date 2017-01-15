@@ -333,6 +333,9 @@ $(function() {
     			sinPresupuesto = true;
     		}
 		}
+		
+		
+		
 		if(sinPresupuesto && prompt('Existen ítems sin presupuesto. Ingrese clave para continuar:') != '${mgmt.config.Parameter.findByCode("CLAVE_PRESUPUESTO").value}'){
 			alert("Clave inválida");
 			event.preventDefault();

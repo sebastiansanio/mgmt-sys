@@ -84,7 +84,16 @@ class FiController {
 		movementInstance.payments = movementInstance.payments - [null]
 		fillItems(movementInstance,concept)
 		movementInstance.validate()
-		
+		for(item in movementInstance.items){
+			if (!(item.date >= mgmt.config.Parameter.findByCode("FECHA_DESDE").asDate() && item.date <= mgmt.config.Parameter.findByCode("FECHA_HASTA").asDate())){
+				movementInstance.errors.rejectValue('items', 'movementItem.dateOutOfRange.save.message')
+			}
+		}
+		for(payment in movementInstance.payments){
+			if (!(payment.paymentDate >= mgmt.config.Parameter.findByCode("FECHA_PAGO_DESDE").asDate() && payment.paymentDate <= mgmt.config.Parameter.findByCode("FECHA_PAGO_HASTA").asDate())){
+				movementInstance.errors.rejectValue('payments', 'payment.dateOutOfRange.save.message')
+			}
+		}
         if (movementInstance.hasErrors()) {
             respond movementInstance.errors, view:'create'
             return
@@ -145,6 +154,16 @@ class FiController {
 		movementInstance.payments = movementInstance.payments - [null]
 		fillItems(movementInstance,concept)
 		movementInstance.validate()
+		for(item in movementInstance.items){
+			if (!(item.date >= mgmt.config.Parameter.findByCode("FECHA_DESDE").asDate() && item.date <= mgmt.config.Parameter.findByCode("FECHA_HASTA").asDate())){
+				movementInstance.errors.rejectValue('items', 'movementItem.dateOutOfRange.save.message')
+			}
+		}
+		for(payment in movementInstance.payments){
+			if (!(payment.paymentDate >= mgmt.config.Parameter.findByCode("FECHA_PAGO_DESDE").asDate() && payment.paymentDate <= mgmt.config.Parameter.findByCode("FECHA_PAGO_HASTA").asDate())){
+				movementInstance.errors.rejectValue('payments', 'payment.dateOutOfRange.save.message')
+			}
+		}
 		if (movementInstance.hasErrors()) {
             respond movementInstance.errors, view:'edit'
             return

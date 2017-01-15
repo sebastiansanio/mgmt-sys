@@ -40,6 +40,7 @@ class Movement {
 				}
 				
 			}
+			
         }
 		checkedDate nullable: true
 		payments validator: {value, object ->
