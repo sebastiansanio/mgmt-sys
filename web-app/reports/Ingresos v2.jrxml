@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Informe de Saldos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27b43501-3750-42ac-ad7d-c7726c3ab552">
 	<property name="ireport.zoom" value="1.4641000000000022"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.x" value="238"/>
+	<property name="ireport.y" value="399"/>
 	<parameter name="Date_from" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -208,6 +208,18 @@ ORDER BY
 	</variable>
 	<variable name="variable5" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA" calculation="Sum">
 		<variableExpression><![CDATA[$F{movement_item_amount}+$F{movement_item_iibb}]]></variableExpression>
+	</variable>
+	<variable name="amountTotal" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{movement_item_amount}]]></variableExpression>
+	</variable>
+	<variable name="iibbTotal" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{movement_item_iibb}]]></variableExpression>
+	</variable>
+	<variable name="totalTotal" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{movement_item_amount}+$F{movement_item_iibb}]]></variableExpression>
+	</variable>
+	<variable name="ivaTotal" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{movement_item_iva}]]></variableExpression>
 	</variable>
 	<group name="OBRA">
 		<groupExpression><![CDATA[$F{work_id}]]></groupExpression>
@@ -587,9 +599,70 @@ ORDER BY
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="5" splitType="Stretch"/>
+		<band height="26" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band splitType="Stretch"/>
 	</pageFooter>
+	<summary>
+		<band height="136">
+			<staticText>
+				<reportElement x="129" y="0" width="135" height="20" uuid="bc3c11cb-20e8-44fb-842d-0c865e1e5dd5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Totales generales:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="337" y="40" width="85" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="303cb970-fc84-4928-947a-47bc5ab0339d"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalTotal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="336" y="0" width="85" height="20" uuid="d60ba6b9-0f4e-45f6-bc3b-91fd791beb2a"/>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{amountTotal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="260" y="40" width="76" height="20" uuid="c67403bf-8384-41e0-a896-5add34e7b860"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Obra:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="422" y="0" width="72" height="20" uuid="a39d909f-3d77-463a-9e19-6a05fa7d756d"/>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{ivaTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="336" y="21" width="84" height="20" uuid="9a528d8b-cc00-42d3-85d6-b65b60be296b"/>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{iibbTotal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="0" width="46" height="20" uuid="77cc0df4-a2e1-4a26-b3f3-41a779ee7128"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="21" width="46" height="20" uuid="8bcb0d47-6bb7-4c1d-b796-49b9bf24c2db"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IIBB]]></text>
+			</staticText>
+		</band>
+	</summary>
 </jasperReport>
