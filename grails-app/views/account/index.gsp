@@ -10,6 +10,18 @@
 
 <body>
 
+<div class="row margin-top-medium">
+<g:form action="index" method="get" >
+<div class="col-md-2">
+<g:select class="form-control" from="['all','active']" valueMessagePrefix="account.status" name="statusFilter" value="${params.statusFilter}" />
+</div>
+<div class="col-md-2">
+<g:actionSubmit class="btn btn-default" value="${message(code:'default.filter.label')}" action="index" />
+</div>
+</g:form>
+</div>
+
+
 <section id="index-account" class="first">
 
 	<table class="table table-bordered margin-top-medium">
@@ -48,7 +60,7 @@
 		</tbody>
 	</table>
 	<div>
-		<bs:paginate total="${accountInstanceCount}" />
+		<bs:paginate total="${accountInstanceCount}" params="${params}" />
 	</div>
 </section>
 

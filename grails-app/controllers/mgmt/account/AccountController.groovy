@@ -7,6 +7,7 @@ import static org.springframework.http.HttpStatus.*
 import java.util.List;
 
 import grails.transaction.Transactional
+import groovy.sql.Sql
 import org.apache.poi.ss.usermodel.CellStyle
 import org.apache.poi.ss.usermodel.CreationHelper
 import pl.touk.excel.export.WebXlsxExporter
@@ -15,6 +16,7 @@ import pl.touk.excel.export.WebXlsxExporter
 class AccountController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+	def dataSource
 
 	private static List FIELDS = ["name","code","type","currentBalance","dateCreated","lastUpdated"]
 	
@@ -22,7 +24,16 @@ class AccountController {
         params.max = Math.min(max ?: 100, 1000)
 		params.sort = params.sort ?: 'name'
 		params.order = params.order ?: 'asc'
-        respond Account.list(params), model:[accountInstanceCount: Account.count()]
+		
+		def results = Account.createCriteria().list (params) {
+			if(params.statusFilter == "active"){
+				def sql = new Sql(dataSource)
+				'in'("id",sql.rows("select account_id account from payment group by account_id having sum(amount*multiplier)<>0")*.account)
+			}
+			order(params.sort, params.order)
+		}
+		
+		respond results, model:[accountInstanceCount: results.totalCount]
     }
 
 	def download(){
