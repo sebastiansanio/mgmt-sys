@@ -14,7 +14,18 @@ class SupplierBudgetController {
 		params.sort = params.sort?:'id'
 		params.order = params.order?:'desc'
         params.max = Math.min(max ?: 100, 1000)
-        respond SupplierBudget.list(params), model:[supplierBudgetInstanceCount: SupplierBudget.count()]
+		
+		def results = SupplierBudget.createCriteria().list (params) {
+			if(params.supplierFilter){
+				eq("supplier", mgmt.persons.Supplier.get(params.supplierFilter.toLong()))
+			}
+			if(params.conceptFilter){
+				eq("concept", mgmt.concept.Concept.get(params.conceptFilter.toLong()))
+			}
+			order(params.sort, params.order)
+		}
+		
+        respond results, model:[supplierBudgetInstanceCount: results.totalCount]
     }
 
     def show(SupplierBudget supplierBudgetInstance) {

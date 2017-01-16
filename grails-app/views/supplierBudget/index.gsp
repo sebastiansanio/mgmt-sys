@@ -10,6 +10,22 @@
 
 <body>
 
+
+<div class="row margin-top-medium">
+<g:form action="index" method="get" >
+<div class="col-md-2">Proveedor
+<g:select noSelection="${['':'Todos']}" from="${mgmt.persons.Supplier.list([sort:'businessName'])}" optionKey="id" optionValue="nameAndBusinessName"  placeholder="${message(code:'supplierBudget.supplier.label')}" class="form-control select-chosen" name="supplierFilter" value="${params.supplierFilter}" />
+</div>
+<div class="col-md-2">Rubro
+<g:select noSelection="${['':'Todos']}" from="${mgmt.concept.Concept.list([sort:'code'])}" optionKey="id" placeholder="${message(code:'supplierBudget.concept.label')}" class="form-control select-chosen" name="conceptFilter" value="${params.conceptFilter}" />
+</div>
+<div class="col-md-2">
+<g:actionSubmit class="btn btn-default" value="${message(code:'default.filter.label')}" action="index" />
+</div>
+</g:form>
+</div>
+
+
 <section id="index-supplierBudget" class="first">
 
 	<table class="table table-bordered margin-top-medium">
@@ -99,9 +115,16 @@
 		</tbody>
 	</table>
 	<div>
-		<bs:paginate total="${supplierBudgetInstanceCount}" />
+		<bs:paginate total="${supplierBudgetInstanceCount}" params="${params}" />
 	</div>
 </section>
+
+<script>
+
+$(function() {
+	$(".select-chosen").chosen({search_contains: true, width: "200px"});
+});
+</script>
 
 </body>
 
