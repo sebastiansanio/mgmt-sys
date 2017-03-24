@@ -22,6 +22,9 @@ class SupplierBudgetController {
 			if(params.conceptFilter){
 				eq("concept", mgmt.concept.Concept.get(params.conceptFilter.toLong()))
 			}
+			if(params.workFilter){
+				eq("work", mgmt.work.Work.get(params.workFilter.toLong()))
+			}
 			order(params.sort, params.order)
 		}
 		

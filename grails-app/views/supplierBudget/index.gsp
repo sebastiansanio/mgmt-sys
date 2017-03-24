@@ -19,6 +19,9 @@
 <div class="col-md-2">Rubro
 <g:select noSelection="${['':'Todos']}" from="${mgmt.concept.Concept.list([sort:'code'])}" optionKey="id" placeholder="${message(code:'supplierBudget.concept.label')}" class="form-control select-chosen" name="conceptFilter" value="${params.conceptFilter}" />
 </div>
+<div class="col-md-2">Obra
+<g:select noSelection="${['':'Todos']}" from="${mgmt.work.Work.list([sort:'code'])}" optionKey="id" placeholder="${message(code:'supplierBudget.work.label')}" class="form-control select-chosen" name="workFilter" value="${params.workFilter}" />
+</div>
 <div class="col-md-2">
 <g:actionSubmit class="btn btn-default" value="${message(code:'default.filter.label')}" action="index" />
 </div>
