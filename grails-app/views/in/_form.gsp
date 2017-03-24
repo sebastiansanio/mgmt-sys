@@ -54,7 +54,7 @@
 					<td class="td-intableform"><g:textArea cols="60" class="mayus input-intableform form-control vertical-center-aligned" name="items[${i}].description" value="${movementItemInstance?.description}"/></td>
 					<td class="td-intableform"><g:select class="input-intableform form-control" id="items[${i}].invoiceType" name="items[${i}].invoiceType.id" from="${mgmt.invoice.InvoiceType.list()}" optionKey="id" required="" value="${movementItemInstance?.invoiceType?.id}"/></td>
 					<td class="td-intableform"><g:textField class="input-intableform form-control" name="items[${i}].invoiceNumber" value="${movementItemInstance?.invoiceNumber}"/></td>
-					<td class="td-intableform"><bs:datePicker class="input-intableform form-control center-aligned" name="items[${i}].date" precision="day"  value="${movementItemInstance?.date}"  /> </td>
+					<td class="td-intableform"><bs:datePicker class="input-intableform form-control center-aligned" id="date-${i}" name="items[${i}].date" precision="day"  value="${movementItemInstance?.date}"  /> </td>
 					<td class="td-intableform"><g:field onchange="refreshTotal('${i}');" type="text" class="input-intableform form-control numberinput field-amount right-aligned" id="amount-${i}" name="items[${i}].amount" value="${movementItemInstance.amount}" required=""/></td>
 					<td class="td-intableform"><g:field onchange="refreshTotal('${i}');" type="text" class="input-intableform form-control numberinput field-iva right-aligned" id="iva-${i}" name="items[${i}].iva" value="${movementItemInstance.iva?:0}" required=""/></td>
 					<td class="td-intableform"><g:field type="text" class="input-intableform form-control field-total right-aligned" name="items[${i}].total" id="total-${i}" value="${movementItemInstance.total}" required=""/></td>
@@ -92,7 +92,7 @@
 				<tr class="form-inline" id="payments-${i}">
 					<td class="td-intableform"><g:select class="input-intableform form-control" id="payments[${i}].account" name="payments[${i}].account" from="${mgmt.account.Account.list(sort:'code')}" optionKey="id" required="" value="${paymentInstance?.account?.id}"/></td>
 					<td class="td-intableform"><g:field type="text" onchange="refreshPaymentTotal();" class="input-intableform form-control field-payment-amount right-aligned" name="payments[${i}].amount" value="${paymentInstance.amount}" required=""/></td>
-					<td class="td-intableform"><bs:datePicker class="input-intableform form-control center-aligned" name="payments[${i}].paymentDate" precision="day"  value="${paymentInstance?.paymentDate}"  /> </td>
+					<td class="td-intableform"><bs:datePicker class="input-intableform form-control center-aligned" id="paymentDate-${i}" name="payments[${i}].paymentDate" precision="day"  value="${paymentInstance?.paymentDate}"  /> </td>
 					<td class="td-intableform"><g:textField class="mayus input-intableform form-control" name="payments[${i}].note" value="${paymentInstance?.note}"/></td>
 					<td class="center-aligned"><button type="button" onclick="$('#payments-${i}').remove();refreshPaymentTotal();"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
 				</tr>
@@ -121,7 +121,7 @@
 		<td class="td-intableform"><g:textArea cols="60" disabled="disabled" class="mayus input-intableform form-control vertical-center-aligned" name="items[xyz].description" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" name="items[xyz].invoiceType.id" from="${mgmt.invoice.InvoiceType.list()}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:textField disabled="disabled" class="input-intableform form-control" name="items[xyz].invoiceNumber" value=""/></td>
-		<td class="td-intableform"><bs:datePicker disabled="true" class="input-intableform form-control center-aligned" name="items[xyz].date" precision="day"  value=""  /> </td>
+		<td class="td-intableform"><bs:datePicker disabled="true" class="input-intableform form-control center-aligned" id="date-xyz" name="items[xyz].date" precision="day"  value=""  /> </td>
 		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-intableform form-control numberinput field-amount right-aligned" id="amount-xyz" name="items[xyz].amount" value="" required=""/></td>
 		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-intableform form-control numberinput field-iva right-aligned" id="iva-xyz" name="items[xyz].iva" value="0" required=""/></td>
 		<td class="td-intableform"><g:field type="text" disabled="disabled" class="input-intableform form-control field-total right-aligned" id="total-xyz" name="items[xyz].total" value="" required=""/></td>
@@ -133,7 +133,7 @@
 	<tr class="form-inline" id="payment-model">
 		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" name="payments[xyz].account.id" from="${mgmt.account.Account.list(sort:'code')}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:field type="text" onchange="refreshPaymentTotal();" disabled="disabled" class="input-intableform form-control field-payment-amount right-aligned" name="payments[xyz].amount" value="" required=""/></td>
-		<td class="td-intableform"><bs:datePicker disabled="true" class="input-intableform form-control center-aligned" name="payments[xyz].paymentDate" precision="day"  value=""  /> </td>
+		<td class="td-intableform"><bs:datePicker disabled="true" class="input-intableform form-control center-aligned" id="paymentDate-xyz" name="payments[xyz].paymentDate" precision="day"  value=""  /> </td>
 		<td class="td-intableform"><g:textField disabled="disabled" class="mayus input-intableform form-control" name="payments[xyz].note" value=""/></td>
 		<td class="center-aligned"><button type="button" class="deleteButton" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
 	</tr>
@@ -267,6 +267,30 @@ $(function() {
 			alert('${message(code:'movement.amountsNotEqual.error')}');
 			event.preventDefault();
 		}
+
+		var dateFromMillis = ${mgmt.config.Parameter.findByCode("FECHA_DESDE").asDate().getTime()};
+		var dateToMillis = ${mgmt.config.Parameter.findByCode("FECHA_HASTA").asDate().getTime()};
+		var paymentDateFromMillis = ${mgmt.config.Parameter.findByCode("FECHA_PAGO_DESDE").asDate().getTime()};
+		var paymentDateToMillis = ${mgmt.config.Parameter.findByCode("FECHA_PAGO_HASTA").asDate().getTime()};
+
+		for (i = 0; i < itemsQuantity; i++) {
+    		var dateMillis = $('#date-'+i).datepicker('getDate').getTime();  
+    		if(dateMillis > dateToMillis || dateMillis < dateFromMillis){
+    			alert('${message(code:'movementItem.dateOutOfRange.save.message')}');
+				event.preventDefault();
+				return;
+    		}
+		}
+		
+		for (i = 0; i < paymentsQuantity; i++) {
+    		var paymentDateMillis = $('#paymentDate-'+i).datepicker('getDate').getTime();  
+    		if(paymentDateMillis > paymentDateToMillis || paymentDateMillis < paymentDateFromMillis){
+    			alert('${message(code:'payment.dateOutOfRange.save.message')}');
+				event.preventDefault();
+				return;
+    		}
+		}
+		
 		$(".mayus" ).each(function( index ) {
 			$(this).val($(this).val().toUpperCase());
 		});

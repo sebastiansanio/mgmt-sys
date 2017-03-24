@@ -12,7 +12,6 @@ import mgmt.work.Work
 @Transactional(readOnly = true)
 class OsController {
 	
-
     static allowedMethods = [save: "POST", check: "POST", uncheck: "POST", update: "PUT", delete: "DELETE"]
 
 	def index(Integer max) {
@@ -33,6 +32,7 @@ class OsController {
 				eq("year", params.yearFilter.toInteger())
 			}
 			order(params.sort, params.order)
+			order('dateCreated','desc')
 		}
 		
 		respond results, model:[movementInstanceCount: results.totalCount]
@@ -87,17 +87,6 @@ class OsController {
 			payment.multiplier = -1
 		}
 		movementInstance.validate()
-		for(item in movementInstance.items){
-			if (!(item.date >= mgmt.config.Parameter.findByCode("FECHA_DESDE").asDate() && item.date <= mgmt.config.Parameter.findByCode("FECHA_HASTA").asDate())){
-				movementInstance.errors.rejectValue('items', 'movementItem.dateOutOfRange.save.message')
-			}
-		}
-		for(payment in movementInstance.payments){
-			if (!(payment.paymentDate >= mgmt.config.Parameter.findByCode("FECHA_PAGO_DESDE").asDate() && payment.paymentDate <= mgmt.config.Parameter.findByCode("FECHA_PAGO_HASTA").asDate())){
-				movementInstance.errors.rejectValue('payments', 'payment.dateOutOfRange.save.message')
-			}
-		}
-		
         if (movementInstance.hasErrors()) {
             respond movementInstance.errors, view:'create'
             return
@@ -166,16 +155,6 @@ class OsController {
 			payment.multiplier = -1
 		}
 		movementInstance.validate()
-		for(item in movementInstance.items){
-			if (!(item.date >= mgmt.config.Parameter.findByCode("FECHA_DESDE").asDate() && item.date <= mgmt.config.Parameter.findByCode("FECHA_HASTA").asDate())){
-				movementInstance.errors.rejectValue('items', 'movementItem.dateOutOfRange.save.message')
-			}
-		}
-		for(payment in movementInstance.payments){
-			if (!(payment.paymentDate >= mgmt.config.Parameter.findByCode("FECHA_PAGO_DESDE").asDate() && payment.paymentDate <= mgmt.config.Parameter.findByCode("FECHA_PAGO_HASTA").asDate())){
-				movementInstance.errors.rejectValue('payments', 'payment.dateOutOfRange.save.message')
-			}
-		}
 		if (movementInstance.hasErrors()) {
             respond movementInstance.errors, view:'edit'
             return

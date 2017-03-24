@@ -47,7 +47,7 @@
 				<td class="td-intableform"><g:select class="select-chosen" name="payments[0].account" from="${mgmt.account.Account.list(sort:'code')}" optionKey="id" required="" value="${movementInstance.payments[0]?.account?.id}"/></td>
 				<td class="td-intableform"><g:select class="select-chosen" name="payments[1].account" from="${mgmt.account.Account.list(sort:'code')}" optionKey="id" required="" value="${movementInstance.payments[1]?.account?.id}"/></td>
 				<td class="td-intableform"><g:field type="text" class="input-intableform form-control right-aligned" name="payments[0].amount" value="${movementInstance.payments[0]?.amount}" required=""/></td>
-				<td class="td-intableform"><bs:datePicker class="center-aligned input-intableform form-control" name="payments[0].paymentDate" precision="day"  value="${movementInstance.payments[0]?.paymentDate}"  /> </td>
+				<td class="td-intableform"><bs:datePicker class="center-aligned input-intableform form-control" id="paymentDate-0" name="payments[0].paymentDate" precision="day"  value="${movementInstance.payments[0]?.paymentDate}"  /> </td>
 				<td class="td-intableform"><g:textField class="mayus input-intableform form-control" name="payments[0].checkNumber" value="${movementInstance.payments[0]?.checkNumber}"/></td>
 				<td class="td-intableform"><g:textField class="mayus input-intableform form-control" name="payments[0].note" value="${movementInstance.payments[0]?.note}"/></td>
 			</tr>
@@ -65,13 +65,25 @@
 	
 	
 <script>
-	$("form").submit(function( event ) {
-		$(".mayus" ).each(function( index ) {
-			$(this).val($(this).val().toUpperCase());
-		});
-	});
 	$(function() {
 		$('.select-chosen').chosen({search_contains: true});
+
+		$('input[type="submit"]').click(function( event ) {
+			$(".mayus" ).each(function( index ) {
+				$(this).val($(this).val().toUpperCase());
+			});
+
+			var paymentDateFromMillis = ${mgmt.config.Parameter.findByCode("FECHA_PAGO_DESDE").asDate().getTime()};
+			var paymentDateToMillis = ${mgmt.config.Parameter.findByCode("FECHA_PAGO_HASTA").asDate().getTime()};
+				
+			var paymentDateMillis = $('#paymentDate-0').datepicker('getDate').getTime();  
+			if(paymentDateMillis > paymentDateToMillis || paymentDateMillis < paymentDateFromMillis){
+				alert('${message(code:'payment.dateOutOfRange.save.message')}');
+				event.preventDefault();
+				return;
+			}
+			
+		});
 	});
 </script>
 

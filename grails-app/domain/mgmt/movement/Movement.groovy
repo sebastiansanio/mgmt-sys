@@ -17,7 +17,7 @@ class Movement {
 	Date checkedDate
 
 	static hasMany = [items: MovementItem, payments: Payment]
-
+	
 	static constraints = {
 		type inList: ['op', 'os', 'in', 'tr', 'fi']
 		number unique: ['type','year'], nullable: false
@@ -38,22 +38,24 @@ class Movement {
 						return ['supplierBudget.ivaNotValid.error']
 					}
 				}
-				
 			}
-			
+			return true
         }
 		checkedDate nullable: true
 		payments validator: {value, object ->
 			if (object.type in ['op','os','in','tr'] && !value){
 				return ["default.invalid.min.size.message",1]
 			}
+			return true
+			
         }
 		note nullable: true, blank: true, maxSize: 4000
 	}
 
 	static mapping = {
 	}
-
+	
+	
 	def beforeValidate() {
 		if(!year){
 			year = new Date()[Calendar.YEAR]
@@ -106,6 +108,7 @@ class Movement {
 			return calculatedAmount
 		}
 	}
+	
 	
 	String toString(){
 		return type.toUpperCase() + " " + number + "/" + (year-2000)
