@@ -28,6 +28,10 @@
 				</tr>
 			</g:if>
 		</g:each>
+		<tr>
+			<td><g:link action="show" id="${null}">HISTÓRICO</g:link></td>
+			<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${0}"/></td>
+		</tr>
 		</tbody>
 	</table>
 </div>

@@ -20,7 +20,7 @@
 <g:form action="show" method="get" >
 <label for="balanceDate"><g:message code="account.balanceDate.label" /> </label>
 <bs:datePicker class="form-control" name="balanceDate" value="${params.balanceDate}" />
-<g:hiddenField name="id" value="${accountTypeInstance.id}" />
+<g:hiddenField name="id" value="${params.id}" />
 <g:actionSubmit class="btn btn-default margin-top-medium" value="${message(code:'default.refresh.label')}" action="show" />
 </g:form>
 </div>
@@ -38,7 +38,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<g:each in="${accountTypeInstance.accounts.sort{((balances[it.id]?:0) !=0 ? ' ':'') +    it.name}}" status="i" var="account">
+	<g:each in="${accounts}" status="i" var="account">
 		<g:set var="currentBalance" value="${balances[account.id]}" />
 
 		<tr>

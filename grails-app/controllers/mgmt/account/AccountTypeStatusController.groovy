@@ -36,7 +36,8 @@ class AccountTypeStatusController {
         respond AccountType.list(params), model: [balances:balances]
 	}
 	
-    def show(AccountType accountTypeInstance) {
+    def show() {
+		AccountType accountTypeInstance = AccountType.get(params.long('id'))
 		params.balanceDate = params.balanceDate? DATE_FORMAT.parse(params.balanceDate): new Date()
 		Map balances = new HashMap()
 		Sql sql = new Sql(dataSource)
@@ -46,7 +47,15 @@ class AccountTypeStatusController {
 		}
 		sql.close()
 		
-        respond accountTypeInstance, model: [balances:balances]
+		def accounts
+		
+		if (accountTypeInstance){
+			accounts = accountTypeInstance.accounts.findAll{balances[it.id]!=0}.sort{((balances[it.id]?:0) !=0 ? ' ':'') +    it.name}
+		}else{
+			accounts = Account.list().findAll{balances[it.id]==0}.sort{it.name}
+		}
+			
+        respond accounts,model: [accounts:accounts,balances:balances]
     }
 	
 	def showPayments(Account account){
