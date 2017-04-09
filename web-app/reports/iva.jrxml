@@ -22,6 +22,8 @@
      movement_item.`invoice_number` AS movement_item_invoice_number,
      movement_item.`invoice_type_id` AS movement_item_invoice_type_id,
      coalesce(movement_item.`iva`*movement_item.`multiplier`,0) AS movement_item_iva,
+     coalesce(case when movement_item.`iva`*movement_item.`multiplier` > 0 then movement_item.`iva`*movement_item.`multiplier` else 0 end,0) AS iva_cobrado,
+     coalesce(case when movement_item.`iva`*movement_item.`multiplier` < 0 then movement_item.`iva`*movement_item.`multiplier` else 0 end,0) AS iva_pagado,
      movement_item.`last_updated` AS movement_item_last_updated,
      movement_item.`movement_id` AS movement_item_movement_id,
      coalesce(movement_item.`other_perceptions`,0) AS movement_item_other_perceptions,
@@ -102,6 +104,8 @@ ORDER BY
 	<field name="movement_item_invoice_number" class="java.lang.String"/>
 	<field name="movement_item_invoice_type_id" class="java.lang.Long"/>
 	<field name="movement_item_iva" class="java.math.BigDecimal"/>
+	<field name="iva_cobrado" class="java.math.BigDecimal"/>
+	<field name="iva_pagado" class="java.math.BigDecimal"/>
 	<field name="movement_item_last_updated" class="java.sql.Timestamp"/>
 	<field name="movement_item_movement_id" class="java.lang.Long"/>
 	<field name="movement_item_other_perceptions" class="java.math.BigDecimal"/>
@@ -162,6 +166,14 @@ ORDER BY
 	<field name="supplier_zip_code" class="java.lang.String"/>
 	<variable name="sumaIva" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{movement_item_iva}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="sumaIvaPagado" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{iva_pagado}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="sumaIvaCobrado" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{iva_cobrado}]]></variableExpression>
 		<initialValueExpression><![CDATA[0]]></initialValueExpression>
 	</variable>
 	<background>
@@ -304,18 +316,46 @@ ORDER BY
 	<summary>
 		<band height="50">
 			<staticText>
-				<reportElement x="437" y="0" width="31" height="20" uuid="d375bb0e-dd08-4430-85cf-46df4d9a279f"/>
+				<reportElement x="437" y="18" width="31" height="20" uuid="d375bb0e-dd08-4430-85cf-46df4d9a279f"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total:]]></text>
 			</staticText>
 			<textField pattern="#,##0.00">
-				<reportElement x="468" y="0" width="75" height="20" uuid="81a00bbd-ceaa-4f0d-a50b-b3a29f621926"/>
+				<reportElement x="468" y="18" width="75" height="20" uuid="81a00bbd-ceaa-4f0d-a50b-b3a29f621926"/>
 				<textElement textAlignment="Right">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{sumaIva}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="82" y="18" width="74" height="20" uuid="25b4a197-3fbf-404f-b85a-dfd60c61221a"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total cobrado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="18" width="73" height="20" uuid="8449fd53-afdd-4c6d-a7e5-46ed37cb0b0e"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total pagado:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="333" y="18" width="75" height="20" uuid="f95183cc-cfc5-467e-89e2-1752e0e76c60"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[-$V{sumaIvaPagado}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="156" y="18" width="75" height="20" uuid="4099b4ac-1f1a-41ff-a0c9-dedb6446f59f"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumaIvaCobrado}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
