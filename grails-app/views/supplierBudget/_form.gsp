@@ -44,7 +44,7 @@
 			<div class="${hasErrors(bean: supplierBudgetInstance, field: 'amount', 'has-error')} required">
 				<label for="amount" class="control-label"><g:message code="supplierBudget.amount.label" default="Amount" /><span class="required-indicator">*</span></label>
 				<div>
-					<g:field type="text" class="form-control" name="amount" value="${supplierBudgetInstance.amount}" required=""/>
+					<g:field type="text" class="autonumeric form-control" name="amount" value="${supplierBudgetInstance.amount}" required=""/>
 					<g:if test="${supplierBudgetInstance.id}"> (Min: ${supplierBudgetInstance.realExpendures.expendedAmount}) </g:if>
 				</div>
 			</div>
@@ -52,7 +52,7 @@
 			<div class="${hasErrors(bean: supplierBudgetInstance, field: 'iva', 'has-error')} required">
 				<label for="iva" class="control-label"><g:message code="supplierBudget.iva.label" default="Iva" /><span class="required-indicator">*</span></label>
 				<div>
-					<g:field type="text" class="form-control" name="iva" value="${supplierBudgetInstance.iva}" required=""/>
+					<g:field type="text" class="autonumeric form-control" name="iva" value="${supplierBudgetInstance.iva}" required=""/>
 					<g:if test="${supplierBudgetInstance.id}">(Min: ${supplierBudgetInstance.realExpendures.expendedIva}) </g:if>
 				</div>
 			</div>
@@ -84,6 +84,8 @@
 $(function() {
 	refreshConcepts();
 	$(".select-chosen").chosen();
+
+	$('.autonumeric').autoNumeric('init');
 });
 
 function refreshConcepts(){
@@ -97,6 +99,10 @@ function refreshConcepts(){
 $("form").submit(function( event ) {
 	$(".mayus" ).each(function( index ) {
 		$(this).val($(this).val().toUpperCase());
+	});
+
+	$(".autonumeric" ).each(function( index ) {
+		$(this).val($(this).val().replace(/,/g, ''));
 	});
 
 });

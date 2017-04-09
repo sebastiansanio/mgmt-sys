@@ -43,9 +43,9 @@
 	<tbody>
 		<tr class="form-inline ${hasErrors(bean: budgetInstance, field: 'directCosts', 'has-error')} required">
 			<td class="td-intableform"><g:message code="budget.directCosts.label" /></td>
-			<td class="td-intableform"><g:field onchange="calculateBudget();" type="text" class="input-intableform form-control right-aligned" name="directCosts" value="${budgetInstance.directCosts}" required=""/></td>
-			<td class="td-intableform"><g:field type="text" readonly="true" tabindex="-1" class="input-intableform form-control right-aligned readonly" name="directCostsPercentageOfDirectCosts" value="" required=""/></td>
-			<td class="td-intableform"><g:field type="text" readonly="true" tabindex="-1" class="input-intableform form-control right-aligned readonly" name="directCostsPercentageOfSellPrice" value="" required=""/></td>
+			<td class="td-intableform"><g:field onchange="calculateBudget();" type="text" class="autonumeric input-intableform form-control right-aligned" name="directCosts" value="${budgetInstance.directCosts}" required=""/></td>
+			<td class="td-intableform"><g:field type="text" readonly="true" tabindex="-1" class="autonumeric input-intableform form-control right-aligned readonly" name="directCostsPercentageOfDirectCosts" value="" required=""/></td>
+			<td class="td-intableform"><g:field type="text" readonly="true" tabindex="-1" class="autonumeric input-intableform form-control right-aligned readonly" name="directCostsPercentageOfSellPrice" value="" required=""/></td>
 			<td colspan="2" class="td-intableform"></td>
 		</tr>
 	</tbody>
@@ -56,7 +56,7 @@
 		<g:each var="budgetItemInstance" in="${budgetInstance.items}" status="i">
 			<tr class="form-inline" id="items-${i}">
 				<td class="td-intableform"><g:select class="input-intableform" id="concept-${i}" name="items[${i}].concept.id" from="${mgmt.concept.Concept.findAllByCodeLike('L%')}" optionKey="id" required="" value="${budgetItemInstance.concept.id}"/></td>
-				<td class="td-intableform"><g:field onchange="calculateBudget();" type="text" class="input-intableform form-control right-aligned field-item-amount" name="items[${i}].amount" id="amount-${i}" value="${budgetItemInstance.amount}" required=""/></td>
+				<td class="td-intableform"><g:field onchange="calculateBudget();" type="text" class="autonumeric input-intableform form-control right-aligned field-item-amount" name="items[${i}].amount" id="amount-${i}" value="${budgetItemInstance.amount}" required=""/></td>
 				<td class="td-intableform"><g:field readonly="true" tabindex="-1" type="text" class="input-intableform form-control right-aligned readonly" name="items[${i}].percentageOfDirectCosts" id="percentageOfDirectCosts-${i}" value=""/></td>
 				<td class="td-intableform"><g:field readonly="true" tabindex="-1" type="text" class="input-intableform form-control right-aligned readonly" name="items[${i}].percentageOfSellPrice" id="percentageOfSellPrice-${i}" value=""/></td>
 				<td colspan="2" class="td-intableform center-aligned"><button type="button" onclick="$('#items-${i}').remove();refreshTotals();"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
@@ -72,8 +72,8 @@
 			<td class="td-intableform"><g:field readonly="true" tabindex="-1" type="text" class="right-aligned form-control input-intableform readonly" name="iibbCalculatedAmount" value=""/></td>
 			<td class="td-intableform"><g:field readonly="true" tabindex="-1" type="text" class="right-aligned form-control input-intableform readonly" name="iibbPercentageOfDirectCosts" value=""/></td>
 			<td class="td-intableform"><g:field readonly="true" tabindex="-1" type="text" class="right-aligned form-control input-intableform readonly" name="iibbPercentageOfSellPrice" value="" /></td>
-			<td class="td-intableform"><g:field onchange="\$('#iibbPercentage').val(0); calculateBudget();" type="text" class="right-aligned form-control input-intableform" name="iibbAmount" value="${budgetInstance.iibbAmount}" required=""/></td>
-			<td class="td-intableform"><g:field onchange="\$('#iibbAmount').val(0); calculateBudget();" type="text" class="right-aligned form-control input-intableform" name="iibbPercentage" value="${budgetInstance.iibbPercentage}" required=""/></td>
+			<td class="td-intableform"><g:field onchange="changeIfNotZero('iibbAmount','iibbPercentage'); calculateBudget();" type="text" class="autonumeric right-aligned form-control input-intableform" name="iibbAmount" value="${budgetInstance.iibbAmount}" required=""/></td>
+			<td class="td-intableform"><g:field onchange="changeIfNotZero('iibbPercentage','iibbAmount'); calculateBudget();" type="text" class="autonumeric right-aligned form-control input-intableform" name="iibbPercentage" value="${budgetInstance.iibbPercentage}" required=""/></td>
 
 		</tr>
 		<tr class="form-inline">
@@ -88,8 +88,8 @@
 			<td class="td-intableform"><g:field readonly="true" tabindex="-1" type="text" class="right-aligned input-intableform form-control readonly" name="indirectOverheadCalculatedAmount" value=""/></td>
 			<td class="td-intableform"><g:field readonly="true" tabindex="-1" type="text" class="right-aligned input-intableform form-control readonly" name="indirectOverheadCalculatedAmountPercentageOfDirectCosts" value=""/></td>
 			<td class="td-intableform"><g:field readonly="true" tabindex="-1" type="text" class="right-aligned input-intableform form-control readonly" name="indirectOverheadCalculatedAmountPercentageOfSellPrice" value=""/></td>
-			<td class="td-intableform"><g:field onchange="\$('#indirectOverheadPercentage').val(0); calculateBudget();" type="text" class="right-aligned input-intableform form-control" name="indirectOverheadAmount" value="${budgetInstance.indirectOverheadAmount}" required=""/></td>
-			<td class="td-intableform"><g:field onchange="\$('#indirectOverheadAmount').val(0); calculateBudget();" type="text" class="right-aligned input-intableform form-control" name="indirectOverheadPercentage" value="${budgetInstance.indirectOverheadPercentage}" required=""/></td>
+			<td class="td-intableform"><g:field onchange="changeIfNotZero('indirectOverheadAmount','indirectOverheadPercentage');calculateBudget();" type="text" class="autonumeric right-aligned input-intableform form-control" name="indirectOverheadAmount" value="${budgetInstance.indirectOverheadAmount}" required=""/></td>
+			<td class="td-intableform"><g:field onchange="changeIfNotZero('indirectOverheadPercentage','indirectOverheadAmount'); calculateBudget();" type="text" class="autonumeric right-aligned input-intableform form-control" name="indirectOverheadPercentage" value="${budgetInstance.indirectOverheadPercentage}" required=""/></td>
 
 		</tr>
 		<tr class="form-inline">
@@ -105,8 +105,8 @@
 			<td class="td-intableform"><g:field readonly="true" tabindex="-1" type="text" class="right-aligned input-intableform form-control readonly" name="profitCalculatedAmount" value=""/></td>
 			<td class="td-intableform"><g:field readonly="true" tabindex="-1" type="text" class="right-aligned input-intableform form-control readonly" name="profitPercentageOfDirectCosts" value=""/></td>
 			<td class="td-intableform"><g:field readonly="true" tabindex="-1" type="text" class="right-aligned input-intableform form-control readonly" name="profitPercentageOfSellPrice" value=""/></td>
-			<td class="td-intableform"><g:field onchange="\$('#profitPercentage').val(0); calculateBudget();" type="text" class="right-aligned input-intableform form-control" name="profitAmount" value="${budgetInstance.profitAmount}" required=""/></td>
-			<td class="td-intableform"><g:field onchange="\$('#profitAmount').val(0); calculateBudget();" type="text" class="right-aligned input-intableform form-control" name="profitPercentage" value="${budgetInstance.profitPercentage}" required=""/></td>
+			<td class="td-intableform"><g:field onchange="changeIfNotZero('profitAmount','profitPercentage'); calculateBudget();" type="text" class="autonumeric right-aligned input-intableform form-control" name="profitAmount" value="${budgetInstance.profitAmount}" required=""/></td>
+			<td class="td-intableform"><g:field onchange="changeIfNotZero('profitPercentage','profitAmount'); calculateBudget();" type="text" class="autonumeric right-aligned input-intableform form-control" name="profitPercentage" value="${budgetInstance.profitPercentage}" required=""/></td>
 
 		</tr>
 		<tr class="form-inline">
@@ -129,7 +129,7 @@
 			<td class="td-intableform"></td>
 			<td class="td-intableform"></td>
 			<td class="td-intableform"></td>
-			<td class="td-intableform"><g:field onchange="calculateBudget();" type="text" class="right-aligned input-intableform form-control" name="ivaPercentage" value="${budgetInstance.ivaPercentage?:21}" required=""/></td>
+			<td class="td-intableform"><g:field onchange="calculateBudget();" type="text" class="autonumeric right-aligned input-intableform form-control" name="ivaPercentage" value="${budgetInstance.ivaPercentage?:21}" required=""/></td>
 		</tr>
 		<tr class="form-inline">
 			<td class="td-intableform"><g:message code="budget.pvii.label" /></td>
@@ -164,6 +164,14 @@
 
 <script>
 
+function safeParseFloat(inputString){
+	var result = parseFloat(inputString.replace(/,/g, ''));
+	if(isNaN(result)){
+		result = 0;
+	}
+	return result;
+}
+
 var itemsQuantity = ${budgetInstance.items?.size()?:0};
 	
 function addItem(){
@@ -181,43 +189,44 @@ function addItem(){
 	
 	$tmc.appendTo("#items-table");
 	itemsQuantity = itemsQuantity + 1;
+	$('.autonumeric').autoNumeric('init');
 }
 
 function calculateBudget(){
-	if(!$.isNumeric($("#directCosts").val()) || $("#directCosts").val() <= 0){
+	if(!$.isNumeric($("#directCosts").val().replace(/,/g, '')) || $("#directCosts").val() <= 0){
 		return;
 	}
-	var directCosts = parseFloat($("#directCosts").val());
+	var directCosts = safeParseFloat($("#directCosts").val());
 
 	var itemsTotal = 0;
 	$(".field-item-amount").each(function() {
-		itemsTotal += Number($(this).val());
+		itemsTotal += Number($(this).val().replace(/,/g, ''));
 	});
 	
-	var totalCosts = directCosts + itemsTotal + parseFloat($("#iibbAmount").val()) + parseFloat($("#indirectOverheadAmount").val()) + parseFloat($("#profitAmount").val());
+	var totalCosts = directCosts + itemsTotal + safeParseFloat($("#iibbAmount").val()) + safeParseFloat($("#indirectOverheadAmount").val()) + safeParseFloat($("#profitAmount").val());
 
-	var pvai = totalCosts / (1 - parseFloat($("#iibbPercentage").val())/100 - parseFloat($("#indirectOverheadPercentage").val())/100 - parseFloat($("#profitPercentage").val())/100 );
+	var pvai = totalCosts / (1 - safeParseFloat($("#iibbPercentage").val())/100 - safeParseFloat($("#indirectOverheadPercentage").val())/100 - safeParseFloat($("#profitPercentage").val())/100 );
 	$("#pvai").val(thousandSep(pvai.toFixed(2)));
 
-	var iibb = parseFloat($("#iibbAmount").val()) != 0 ? parseFloat($("#iibbAmount").val()) : pvai * parseFloat($("#iibbPercentage").val())/100
+	var iibb = safeParseFloat($("#iibbAmount").val()) != 0 ? safeParseFloat($("#iibbAmount").val()) : pvai * safeParseFloat($("#iibbPercentage").val())/100
 	$("#iibbCalculatedAmount").val(thousandSep(iibb.toFixed(2)));
 
 	var ggo = itemsTotal + iibb;
 	$("#ggo").val(thousandSep(ggo.toFixed(2)));
 
-	var indirectOverhead = parseFloat($("#indirectOverheadAmount").val()) != 0 ? parseFloat($("#indirectOverheadAmount").val()) : pvai * parseFloat($("#indirectOverheadPercentage").val())/100
+	var indirectOverhead = safeParseFloat($("#indirectOverheadAmount").val()) != 0 ? safeParseFloat($("#indirectOverheadAmount").val()) : pvai * safeParseFloat($("#indirectOverheadPercentage").val())/100
 	$("#indirectOverheadCalculatedAmount").val(thousandSep(indirectOverhead.toFixed(2)));
 
 	var gg = ggo + indirectOverhead;
 	$("#gg").val(thousandSep(gg.toFixed(2)));
 
-	var profit = parseFloat($("#profitAmount").val()) != 0 ? parseFloat($("#profitAmount").val()) : pvai * parseFloat($("#profitPercentage").val())/100
+	var profit = safeParseFloat($("#profitAmount").val()) != 0 ? safeParseFloat($("#profitAmount").val()) : pvai * safeParseFloat($("#profitPercentage").val())/100
 	$("#profitCalculatedAmount").val(thousandSep(profit.toFixed(2)));
 
 	var ggb = gg + profit;
 	$("#ggb").val(thousandSep(ggb.toFixed(2)));
 
-	var iva = pvai * parseFloat($("#ivaPercentage").val())/100;
+	var iva = pvai * safeParseFloat($("#ivaPercentage").val())/100;
 	$("#ivaCalculatedAmount").val(thousandSep(iva.toFixed(2)));
 
 	var pvii = pvai + iva;
@@ -251,7 +260,7 @@ function calculateBudget(){
 	$("#pvaiPercentageOfSellPrice").val(thousandSep((100 * pvai / pvai).toFixed(2)));
 
 	for (i = 0; i < itemsQuantity; i++) { 
-		var amount = $("#amount-"+i).val();
+		var amount = $("#amount-"+i).val().replace(/,/g, '');
 		$("#percentageOfDirectCosts-"+i).val(thousandSep((100*amount / directCosts).toFixed(2)));
 		$("#percentageOfSellPrice-"+i).val(thousandSep((100*amount / pvai).toFixed(2)));
 	}
@@ -260,6 +269,7 @@ function calculateBudget(){
 $(function() {
 	calculateBudget();
 	$(".select-chosen").chosen({search_contains: true});
+	$('.autonumeric').autoNumeric('init');
 });
 
 $( "form" ).submit(function( event ) {
@@ -269,6 +279,11 @@ $( "form" ).submit(function( event ) {
 	$(".readonly").prop( "disabled", true );
 	$("#pvai").prop("disabled", false);
 	$("#pvai").val($("#pvai").val().replace(/,/g,""))
+	
+	$(".autonumeric" ).each(function( index ) {
+		$(this).val($(this).val().replace(/,/g, ''));
+	});
+	
 });
 
 function thousandSep(val) {
@@ -277,5 +292,11 @@ function thousandSep(val) {
                   .split("").reverse().join("");
 }
 
+function changeIfNotZero(fieldToCheck,fieldToChange){
+	if(safeParseFloat($("#"+fieldToCheck).val())!=0){
+		$("#"+fieldToChange).val(0);
+	}
+
+}
 
 </script>
