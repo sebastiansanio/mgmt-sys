@@ -53,9 +53,9 @@
 					<td class="td-intableform"><g:select class="position-1 input-intableform form-control" id="items[${itemPosition*2+1}].concept" name="items[${itemPosition*2+1}].concept.id" from="${mgmt.concept.Concept.findAllByValidInFiWork(true,[sort:'code',order:'asc'])}" optionKey="id" required="" value="${movementInstance.items[itemPosition*2+1]?.concept?.id}"/></td>
 					<td class="td-intableform"><g:textArea cols="60" class="position-0 mayus input-intableform form-control vertical-center-aligned" name="items[${itemPosition*2}].description" value="${movementInstance.items[itemPosition*2]?.description}"/></td>
 					<td class="td-intableform"><g:select class="position-0 input-intableform form-control" id="items[${itemPosition*2}].unit.id" name="items[${itemPosition*2}].unit.id" from="${mgmt.products.UnitOfMeasurement.list()}" optionKey="id" required="" value="${movementInstance.items[itemPosition*2]?.unit?.id}"/></td>
-					<td class="td-intableform"><g:field onchange="refreshTotal('${itemPosition*2}');" type="text" class="position-0 input-intableform form-control numberinput right-aligned" id="quantity-${itemPosition*2}" name="items[${itemPosition*2}].quantity" value="${movementInstance.items[itemPosition*2]?.quantity}" required=""/></td>
-					<td class="td-intableform"><g:field onchange="refreshTotal('${itemPosition*2}');" type="text" class="position-0 input-intableform form-control numberinput right-aligned" id="unitPrice-${itemPosition*2}" name="items[${itemPosition*2}].unitPrice" value="${movementInstance.items[itemPosition*2]?.unitPrice}" required=""/></td>
-					<td class="td-intableform"><g:field type="text" class="position-0 input-intableform form-control field-amount right-aligned" id="amount-${itemPosition*2}" name="items[${itemPosition*2}].amount" value="${movementInstance.items[itemPosition*2]?.amount}" required=""/></td>
+					<td class="td-intableform"><g:field onchange="refreshTotal('${itemPosition*2}');" type="text" class="autonumeric position-0 input-intableform form-control numberinput right-aligned" id="quantity-${itemPosition*2}" name="items[${itemPosition*2}].quantity" value="${movementInstance.items[itemPosition*2]?.quantity}" required=""/></td>
+					<td class="td-intableform"><g:field onchange="refreshTotal('${itemPosition*2}');" type="text" class="autonumeric position-0 input-intableform form-control numberinput right-aligned" id="unitPrice-${itemPosition*2}" name="items[${itemPosition*2}].unitPrice" value="${movementInstance.items[itemPosition*2]?.unitPrice}" required=""/></td>
+					<td class="td-intableform"><g:field type="text" class="autonumeric position-0 input-intableform form-control field-amount right-aligned" id="amount-${itemPosition*2}" name="items[${itemPosition*2}].amount" value="${movementInstance.items[itemPosition*2]?.amount}" required=""/></td>
 					<td class="center-aligned"><button type="button" onclick="$('#items-${itemPosition*2}').remove();refreshTotals();"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button><input onfocus="addItem();" type="text" style="width:0.001px; opacity: 0;" name="add-${itemPosition}" id="add-${itemPosition}"></td>
 				</tr>
 			</g:each>
@@ -82,9 +82,9 @@
 		<td class="td-intableform"><g:select disabled="disabled" class="position-1 input-intableform form-control" name="items[xyz].concept.id" from="${mgmt.concept.Concept.findAllByValidInFiWork(true,[sort:'code',order:'asc'])}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:textArea cols="60" disabled="disabled" class="position-0 mayus input-intableform form-control vertical-center-aligned" name="items[xyz].description" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="position-0 input-intableform form-control" name="items[xyz].unit.id" from="${mgmt.products.UnitOfMeasurement.list()}" optionKey="id" required="" value=""/></td>
-		<td class="td-intableform"><g:field type="text" disabled="disabled" class="position-0 input-intableform form-control numberinput right-aligned" id="quantity-xyz" name="items[xyz].quantity" value="" required=""/></td>
-		<td class="td-intableform"><g:field type="text" disabled="disabled" class="position-0 input-intableform form-control numberinput right-aligned" id="unitPrice-xyz" name="items[xyz].unitPrice" value="" required=""/></td>
-		<td class="td-intableform"><g:field type="text" disabled="disabled" class="position-0 input-intableform form-control field-amount right-aligned" id="amount-xyz" name="items[xyz].amount" value="" required=""/></td>
+		<td class="td-intableform"><g:field type="text" disabled="disabled" class="autonumeric position-0 input-intableform form-control numberinput right-aligned" id="quantity-xyz" name="items[xyz].quantity" value="" required=""/></td>
+		<td class="td-intableform"><g:field type="text" disabled="disabled" class="autonumeric position-0 input-intableform form-control numberinput right-aligned" id="unitPrice-xyz" name="items[xyz].unitPrice" value="" required=""/></td>
+		<td class="td-intableform"><g:field type="text" disabled="disabled" class="autonumeric position-0 input-intableform form-control field-amount right-aligned" id="amount-xyz" name="items[xyz].amount" value="" required=""/></td>
 		<td class="center-aligned"><button type="button" class="deleteButton" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button><input onfocus="addItem();" type="text" style="width:0.001px; opacity: 0;" name="add-xyz" id="add-xyz"></td>
 	</tr>
 </table>
@@ -128,12 +128,13 @@ function addItem(){
 	
 	$tmc.appendTo("#items-table");
 	itemsQuantity = itemsQuantity + 2;
+	$('.autonumeric').autoNumeric('init');
 	$('#supplier-'+currentItemQuantity).chosen({width: "200px"});
 }
 
 function refreshTotal(idx){
 	var total = safeParseFloat($('#quantity-'+idx).val()) * safeParseFloat($('#unitPrice-'+idx).val());
-	$('#amount-'+idx).val(total);
+	$('#amount-'+idx).autoNumeric('set',total);
 	refreshTotals();
 }
 
@@ -146,7 +147,7 @@ function refreshTotals(){
 }
 
 function safeParseFloat(inputString){
-	var result = parseFloat(inputString);
+	var result = parseFloat(inputString.replace(/,/g, ''));
 	if(isNaN(result)){
 		result = 0;
 	}
@@ -161,11 +162,17 @@ $(function() {
 			$(this).val($(this).val().toUpperCase());
 		});
 
+		$(".autonumeric" ).each(function( index ) {
+			$(this).val($(this).val().replace(/,/g, ''));
+		});
+
 	});
 
 	if(itemsQuantity == 0){
 		addItem();
 	}
+
+	$('.autonumeric').autoNumeric('init');
 });
 
 function thousandSep(val) {

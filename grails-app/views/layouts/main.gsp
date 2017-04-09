@@ -19,6 +19,8 @@
 <asset:javascript src="scripts.js" />
 <asset:javascript src="chosen.jquery.min.js" />
 <asset:javascript src="jquery.blockUI.js" />
+<asset:javascript src="autoNumeric.min.js" />
+
 
 <g:layoutHead />
 </head>
