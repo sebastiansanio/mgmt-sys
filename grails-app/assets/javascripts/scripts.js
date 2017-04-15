@@ -30,3 +30,23 @@ $(document).unbind('keydown').bind('keydown', function (event) {
         event.preventDefault();
     }
 });
+
+const autoNumericOptions = {
+	    digitGroupSeparator        : '.',
+	    decimalCharacter           : ','
+};
+
+function thousandSep(val) {
+    return String(val).replace('.',',').split("").reverse().join("")
+                  .replace(/(\d{3}\B)/g, "$1.")
+                  .split("").reverse().join("");
+}
+
+function safeParseFloat(inputString){
+	var result = parseFloat(inputString.replace(/\./g, '').replace(/,/g,'.'));
+	if(isNaN(result)){
+		result = 0;
+	}
+	return result;
+}
+

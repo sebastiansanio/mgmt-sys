@@ -211,7 +211,7 @@ function addItem(){
 	
 	$tmc.appendTo("#items-table");
 	itemsQuantity = itemsQuantity + 1;
-	$('.autonumeric').autoNumeric('init');
+	$('.autonumeric',$tmc).autoNumeric('init',autoNumericOptions);
 	$('#supplier-'+currentItemQuantity).chosen({search_contains: true, width: "200px"});
 }
 
@@ -235,12 +235,12 @@ function addPayment(){
 	$tmc.appendTo("#payments-table");
 
 	if(paymentsQuantity == 0){
-		$(".field-payment-amount",$tmc).val($("#total-total").text().replace(/,/g,""));
-		refreshPaymentTotal();
+		$(".field-payment-amount",$tmc).val(safeParseFloat($("#total-total").text()));
 	}
 	
 	paymentsQuantity = paymentsQuantity + 1;
-	$('.autonumeric').autoNumeric('init');
+	$('.autonumeric',$tmc).autoNumeric('init',autoNumericOptions);
+	refreshPaymentTotal();
 }
 
 function refreshTotal(idx){
@@ -284,14 +284,6 @@ function refreshPaymentTotal(){
 	$('#total-payment-amount').text(thousandSep(total.toFixed(2)));
 }
 
-function safeParseFloat(inputString){
-	var result = parseFloat(inputString.replace(/,/g, ''));
-	if(isNaN(result)){
-		result = 0;
-	}
-	return result;
-}
-
 function refreshConcepts(idx){
 	if($('#work-'+idx).val()=='null'){
 		$('#concept-'+idx).empty().append($("#conceptsNoWork > option").clone());
@@ -321,6 +313,10 @@ $(function() {
 	$('.conceptsWork').append($("#conceptsWork > option").clone());
 	$('.conceptsNoWork').append($("#conceptsNoWork > option").clone());
 	$(".select-chosen").chosen({search_contains: true, width: "200px"});
+	if(itemsQuantity == 0){
+		addItem();
+	}
+	$('#items .autonumeric').autoNumeric('init',autoNumericOptions);
 	refreshTotals();
 	refreshPaymentTotal();
 
@@ -373,23 +369,12 @@ $(function() {
 		
 				
 		$(".autonumeric" ).each(function( index ) {
-			$(this).val($(this).val().replace(/,/g, ''));
+			$(this).val($(this).val().replace(/\./g, '').replace(/,/g,'.'));
 		});
 
 	});
 
-	if(itemsQuantity == 0){
-		addItem();
-	}
-	
-	$('.autonumeric').autoNumeric('init');
 });
-
-function thousandSep(val) {
-    return String(val).split("").reverse().join("")
-                  .replace(/(\d{3}\B)/g, "$1,")
-                  .split("").reverse().join("");
-}
 
 </script>
 

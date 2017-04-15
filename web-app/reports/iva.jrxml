@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Informe de Saldos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27b43501-3750-42ac-ad7d-c7726c3ab552">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="140"/>
+	<property name="ireport.y" value="132"/>
 	<parameter name="Date_from" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -48,7 +48,7 @@
      work.`version` AS work_version,
      work.`budget_id` AS work_budget_id,
      work.`client_id` AS work_client_id,
-     work.`code` AS work_code,
+     coalesce(work.`code`,'000') AS work_code,
      work.`finished` AS work_finished,
      work.`last_updated` AS work_last_updated,
      work.`name` AS work_name,
@@ -130,7 +130,7 @@ ORDER BY
 	<field name="work_version" class="java.lang.Long"/>
 	<field name="work_budget_id" class="java.lang.Long"/>
 	<field name="work_client_id" class="java.lang.Long"/>
-	<field name="work_code" class="java.lang.Long"/>
+	<field name="work_code" class="java.lang.String"/>
 	<field name="work_finished" class="java.lang.Boolean"/>
 	<field name="work_last_updated" class="java.sql.Timestamp"/>
 	<field name="work_name" class="java.lang.String"/>
@@ -208,28 +208,28 @@ ORDER BY
 	<pageHeader>
 		<band height="27" splitType="Stretch">
 			<staticText>
-				<reportElement x="1" y="4" width="65" height="20" uuid="86c31710-27eb-40e4-8788-fda6bce47470"/>
+				<reportElement x="1" y="4" width="61" height="20" uuid="86c31710-27eb-40e4-8788-fda6bce47470"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Operación]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="167" y="4" width="154" height="20" uuid="a6e76761-f4f8-4521-b767-15ec4f347ae3"/>
+				<reportElement x="202" y="4" width="131" height="20" uuid="a6e76761-f4f8-4521-b767-15ec4f347ae3"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Proveedor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="66" y="4" width="46" height="20" uuid="f65c45cf-7d90-4b07-a9f1-2f0b69416acf"/>
+				<reportElement x="62" y="4" width="38" height="20" uuid="f65c45cf-7d90-4b07-a9f1-2f0b69416acf"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cuenta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="333" y="5" width="135" height="20" uuid="ac227f42-924e-4b57-8ace-c82fd138d2bc"/>
+				<reportElement x="333" y="4" width="135" height="20" uuid="ac227f42-924e-4b57-8ace-c82fd138d2bc"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -246,11 +246,18 @@ ORDER BY
 				<reportElement x="5" y="3" width="538" height="1" forecolor="#666666" uuid="b5a6e0fa-acf3-4f6d-aaa9-60b25412c44e"/>
 			</line>
 			<staticText>
-				<reportElement x="112" y="4" width="55" height="19" uuid="c9382013-f8bb-49af-b9fd-e9f40fc51314"/>
+				<reportElement x="146" y="4" width="56" height="20" uuid="c9382013-f8bb-49af-b9fd-e9f40fc51314"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="4" width="46" height="20" uuid="1d531c66-2a9c-4648-8700-d05279b90cf5"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Obra]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -264,7 +271,7 @@ ORDER BY
 	<detail>
 		<band height="24" splitType="Stretch">
 			<textField pattern="">
-				<reportElement x="1" y="0" width="65" height="20" uuid="e6b35ad5-55e8-4fc4-8053-ed0ac3daa999"/>
+				<reportElement x="1" y="0" width="61" height="20" uuid="e6b35ad5-55e8-4fc4-8053-ed0ac3daa999"/>
 				<textElement verticalAlignment="Top">
 					<font size="8"/>
 				</textElement>
@@ -278,21 +285,21 @@ ORDER BY
 				<textFieldExpression><![CDATA[$F{movement_item_iva}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="112" y="0" width="55" height="20" uuid="3f907abf-a20f-47f1-940d-b75b796c847c"/>
+				<reportElement x="146" y="0" width="56" height="20" uuid="3f907abf-a20f-47f1-940d-b75b796c847c"/>
 				<textElement verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{movement_date_created}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="66" y="0" width="46" height="20" uuid="baade5aa-035a-4782-be51-f15610d859d4"/>
+				<reportElement x="62" y="0" width="38" height="20" uuid="baade5aa-035a-4782-be51-f15610d859d4"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{concept_code}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="167" y="0" width="154" height="20" uuid="682c06fa-4063-493a-b952-6bf5467fbfcb"/>
+				<reportElement x="202" y="0" width="131" height="20" uuid="682c06fa-4063-493a-b952-6bf5467fbfcb"/>
 				<textElement verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
@@ -304,6 +311,13 @@ ORDER BY
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{movement_item_description}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="46" height="20" uuid="05b96145-05a9-40a8-a769-feb8b8ce599f"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{work_code}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
