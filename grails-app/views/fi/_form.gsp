@@ -128,7 +128,7 @@ function addItem(){
 	
 	$tmc.appendTo("#items-table");
 	itemsQuantity = itemsQuantity + 2;
-	$('.autonumeric').autoNumeric('init');
+	$('.autonumeric',$tmc).autoNumeric('init',autoNumericOptions);
 	$('#supplier-'+currentItemQuantity).chosen({width: "200px"});
 }
 
@@ -146,15 +146,11 @@ function refreshTotals(){
 	$('#total-amount').text(thousandSep(amount.toFixed(2)));
 }
 
-function safeParseFloat(inputString){
-	var result = parseFloat(inputString.replace(/,/g, ''));
-	if(isNaN(result)){
-		result = 0;
-	}
-	return result;
-}
-
 $(function() {
+	if(itemsQuantity == 0){
+		addItem();
+	}
+	$('#items .autonumeric').autoNumeric('init',autoNumericOptions);
 	refreshTotals();
 
 	$("form").submit(function( event ) {
@@ -163,23 +159,14 @@ $(function() {
 		});
 
 		$(".autonumeric" ).each(function( index ) {
-			$(this).val($(this).val().replace(/,/g, ''));
+			$(this).val($(this).val().replace(/\./g, '').replace(/,/g,'.'));
 		});
 
 	});
 
-	if(itemsQuantity == 0){
-		addItem();
-	}
 
-	$('.autonumeric').autoNumeric('init');
 });
 
-function thousandSep(val) {
-    return String(val).split("").reverse().join("")
-                  .replace(/(\d{3}\B)/g, "$1,")
-                  .split("").reverse().join("");
-}
 
 </script>
 

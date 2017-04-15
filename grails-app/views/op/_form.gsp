@@ -236,7 +236,6 @@ function addPayment(){
 	if(paymentsQuantity == 0){
 		$(".field-payment-amount",$tmc).val(safeParseFloat($("#total-total").text()));
 	}
-	
 	paymentsQuantity = paymentsQuantity + 1;
 	$('.autonumeric',$tmc).autoNumeric('init',autoNumericOptions);
 	refreshPaymentTotal();

@@ -44,8 +44,8 @@
 		<tr class="form-inline ${hasErrors(bean: budgetInstance, field: 'directCosts', 'has-error')} required">
 			<td class="td-intableform"><g:message code="budget.directCosts.label" /></td>
 			<td class="td-intableform"><g:field onchange="calculateBudget();" type="text" class="autonumeric input-intableform form-control right-aligned" name="directCosts" value="${budgetInstance.directCosts}" required=""/></td>
-			<td class="td-intableform"><g:field type="text" readonly="true" tabindex="-1" class="autonumeric input-intableform form-control right-aligned readonly" name="directCostsPercentageOfDirectCosts" value="" required=""/></td>
-			<td class="td-intableform"><g:field type="text" readonly="true" tabindex="-1" class="autonumeric input-intableform form-control right-aligned readonly" name="directCostsPercentageOfSellPrice" value="" required=""/></td>
+			<td class="td-intableform"><g:field type="text" readonly="true" tabindex="-1" class="input-intableform form-control right-aligned readonly" name="directCostsPercentageOfDirectCosts" value="" required=""/></td>
+			<td class="td-intableform"><g:field type="text" readonly="true" tabindex="-1" class="input-intableform form-control right-aligned readonly" name="directCostsPercentageOfSellPrice" value="" required=""/></td>
 			<td colspan="2" class="td-intableform"></td>
 		</tr>
 	</tbody>
@@ -164,14 +164,6 @@
 
 <script>
 
-function safeParseFloat(inputString){
-	var result = parseFloat(inputString.replace(/,/g, ''));
-	if(isNaN(result)){
-		result = 0;
-	}
-	return result;
-}
-
 var itemsQuantity = ${budgetInstance.items?.size()?:0};
 	
 function addItem(){
@@ -189,18 +181,18 @@ function addItem(){
 	
 	$tmc.appendTo("#items-table");
 	itemsQuantity = itemsQuantity + 1;
-	$('.autonumeric').autoNumeric('init');
+	$('.autonumeric',$tmc).autoNumeric('init',autoNumericOptions);
 }
 
 function calculateBudget(){
-	if(!$.isNumeric($("#directCosts").val().replace(/,/g, '')) || $("#directCosts").val() <= 0){
+	if(safeParseFloat($("#directCosts").val()) <= 0){
 		return;
 	}
 	var directCosts = safeParseFloat($("#directCosts").val());
 
 	var itemsTotal = 0;
 	$(".field-item-amount").each(function() {
-		itemsTotal += Number($(this).val().replace(/,/g, ''));
+		itemsTotal += safeParseFloat($(this).val());
 	});
 	
 	var totalCosts = directCosts + itemsTotal + safeParseFloat($("#iibbAmount").val()) + safeParseFloat($("#indirectOverheadAmount").val()) + safeParseFloat($("#profitAmount").val());
@@ -235,11 +227,11 @@ function calculateBudget(){
 	var cp = pvai/directCosts;
 	$("#cp").val(thousandSep(cp.toFixed(2)));
 	
-	$("#directCostsPercentageOfDirectCosts").val((100 * directCosts / directCosts).toFixed(2));
-	$("#directCostsPercentageOfSellPrice").val((100 * directCosts / pvai).toFixed(2));
+	$("#directCostsPercentageOfDirectCosts").val(thousandSep((100 * directCosts / directCosts).toFixed(2)));
+	$("#directCostsPercentageOfSellPrice").val(thousandSep((100 * directCosts / pvai).toFixed(2)));
 
-	$("#iibbPercentageOfDirectCosts").val((100 * iibb / directCosts).toFixed(2));
-	$("#iibbPercentageOfSellPrice").val((100 * iibb / pvai).toFixed(2));
+	$("#iibbPercentageOfDirectCosts").val(thousandSep((100 * iibb / directCosts).toFixed(2)));
+	$("#iibbPercentageOfSellPrice").val(thousandSep((100 * iibb / pvai).toFixed(2)));
 
 	$("#ggoPercentageOfDirectCosts").val(thousandSep((100 * ggo / directCosts).toFixed(2)));
 	$("#ggoPercentageOfSellPrice").val(thousandSep((100 * ggo / pvai).toFixed(2)));
@@ -260,16 +252,16 @@ function calculateBudget(){
 	$("#pvaiPercentageOfSellPrice").val(thousandSep((100 * pvai / pvai).toFixed(2)));
 
 	for (i = 0; i < itemsQuantity; i++) { 
-		var amount = $("#amount-"+i).val().replace(/,/g, '');
+		var amount = safeParseFloat($("#amount-"+i).val());
 		$("#percentageOfDirectCosts-"+i).val(thousandSep((100*amount / directCosts).toFixed(2)));
 		$("#percentageOfSellPrice-"+i).val(thousandSep((100*amount / pvai).toFixed(2)));
 	}
 }
 
 $(function() {
+	$('.autonumeric').autoNumeric('init',autoNumericOptions);
 	calculateBudget();
 	$(".select-chosen").chosen({search_contains: true});
-	$('.autonumeric').autoNumeric('init');
 });
 
 $( "form" ).submit(function( event ) {
@@ -278,19 +270,14 @@ $( "form" ).submit(function( event ) {
 	});
 	$(".readonly").prop( "disabled", true );
 	$("#pvai").prop("disabled", false);
-	$("#pvai").val($("#pvai").val().replace(/,/g,""))
+	$("#pvai").val($("#pvai").val().replace(/\./g, '').replace(/,/g,'.'))
 	
 	$(".autonumeric" ).each(function( index ) {
-		$(this).val($(this).val().replace(/,/g, ''));
+		$(this).val($(this).val().replace(/\./g, '').replace(/,/g,'.'));
 	});
 	
 });
 
-function thousandSep(val) {
-    return String(val).split("").reverse().join("")
-                  .replace(/(\d{3}\B)/g, "$1,")
-                  .split("").reverse().join("");
-}
 
 function changeIfNotZero(fieldToCheck,fieldToChange){
 	if(safeParseFloat($("#"+fieldToCheck).val())!=0){

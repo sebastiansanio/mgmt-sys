@@ -67,7 +67,8 @@
 <script>
 	$(function() {
 		$('.select-chosen').chosen({search_contains: true});
-
+		$('#items .autonumeric').autoNumeric('init',autoNumericOptions);
+		
 		$('input[type="submit"]').click(function( event ) {
 			$(".mayus" ).each(function( index ) {
 				$(this).val($(this).val().toUpperCase());
@@ -84,13 +85,12 @@
 			}
 
 			$(".autonumeric" ).each(function( index ) {
-				$(this).val($(this).val().replace(/,/g, ''));
+				$(this).val($(this).val().replace(/\./g, '').replace(/,/g,'.'));
 			});
 
 			
 		});
 
-		$('.autonumeric').autoNumeric('init');
 	});
 </script>
 
