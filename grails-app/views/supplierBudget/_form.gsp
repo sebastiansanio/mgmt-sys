@@ -42,18 +42,16 @@
 	</div>
 </div>
 <div class="${hasErrors(bean: supplierBudgetInstance, field: 'amount', 'has-error')} required">
-	<label for="amount" class="control-label"><g:message code="supplierBudget.amount.label" default="Amount" /><span class="required-indicator">*</span></label>
+	<label for="amount" class="control-label"><g:message code="supplierBudget.amount.label" default="Amount" /><span class="required-indicator">*</span><g:if test="${supplierBudgetInstance.id}"> (Min: ${supplierBudgetInstance.realExpendures.expendedAmount}) </g:if></label>
 	<div>
 		<g:field type="text" class="autonumeric form-control" name="amount" value="${supplierBudgetInstance.amount}" required=""/>
-		<g:if test="${supplierBudgetInstance.id}"> (Min: ${supplierBudgetInstance.realExpendures.expendedAmount}) </g:if>
 	</div>
 </div>
 
 <div class="${hasErrors(bean: supplierBudgetInstance, field: 'iva', 'has-error')} required">
-	<label for="iva" class="control-label"><g:message code="supplierBudget.iva.label" default="Iva" /><span class="required-indicator">*</span></label>
+	<label for="iva" class="control-label"><g:message code="supplierBudget.iva.label" default="Iva" /><span class="required-indicator">* </span><g:if test="${supplierBudgetInstance.id}">(Min: ${supplierBudgetInstance.realExpendures.expendedIva}) </g:if></label>
 	<div>
 		<g:field type="text" class="autonumeric form-control" name="iva" value="${supplierBudgetInstance.iva}" required=""/>
-		<g:if test="${supplierBudgetInstance.id}">(Min: ${supplierBudgetInstance.realExpendures.expendedIva}) </g:if>
 	</div>
 </div>
 
