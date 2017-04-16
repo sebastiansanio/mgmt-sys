@@ -28,7 +28,7 @@ class SupplierBudget {
 	boolean closed
 	Date date
 	
-	static hasMany = [movementItems: MovementItem]
+	static hasMany = [movementItems: MovementItem,items:SupplierBudgetItem]
 	
     static constraints = {
 		work nullable: true

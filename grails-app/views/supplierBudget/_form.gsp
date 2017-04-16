@@ -1,4 +1,8 @@
 <%@ page import="mgmt.work.SupplierBudget" %>
+
+<div class="container-fluid">
+
+<div class="col-md-6">
 <g:if test="${supplierBudgetInstance.id}">
 
 <label for="id" class="control-label">
@@ -75,7 +79,9 @@
 	<g:select disabled="disabled" class="input-intableform form-control" id="conceptsWork" name="conceptsWork" from="${mgmt.concept.Concept.findAllByValidInOpWork(true,[sort:'code',order:'asc'])}" optionKey="id" required="" value=""/>
 	<g:select disabled="disabled" class="input-intableform form-control" id="conceptsNoWork" name="conceptsNoWork" from="${mgmt.concept.Concept.findAllByValidInOpNoWork(true,[sort:'code',order:'asc'])}" optionKey="id" required="" value=""/>
 </div>			
-			
+		
+</div>			
+</div>
 			
 <script>
 
