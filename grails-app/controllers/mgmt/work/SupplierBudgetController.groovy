@@ -11,8 +11,8 @@ class SupplierBudgetController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-		params.sort = params.sort?:'id'
-		params.order = params.order?:'desc'
+		params.sort = params.sort?:'closed'
+		params.order = params.order?:'asc'
         params.max = Math.min(max ?: 100, 1000)
 		
 		def results = SupplierBudget.createCriteria().list (params) {
@@ -45,6 +45,7 @@ class SupplierBudgetController {
             notFound()
             return
         }
+		supplierBudgetInstance.items = supplierBudgetInstance.items - [null]
 		supplierBudgetInstance.validate()
         if (supplierBudgetInstance.hasErrors()) {
             respond supplierBudgetInstance.errors, view:'create'
@@ -81,7 +82,13 @@ class SupplierBudgetController {
 				return
 			}
 		}
+		for (supplierBudgetItem in supplierBudgetInstance.items) {
+			supplierBudgetItem.delete()
+		}
+		supplierBudgetInstance.items.clear()
+		
 		supplierBudgetInstance.properties = params
+		supplierBudgetInstance.items = supplierBudgetInstance.items - [null]
 		supplierBudgetInstance.validate()
         if (supplierBudgetInstance.hasErrors()) {
             respond supplierBudgetInstance.errors, view:'edit'

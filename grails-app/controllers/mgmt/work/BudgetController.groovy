@@ -28,14 +28,14 @@ class BudgetController {
 			return
 		}
 		
+		budgetInstance.hasWork = true
 		Work work = new Work()
 		work.client = budgetInstance.client
 		work.name = budgetInstance.name
 		work.type = 'building'
 		work.budget = budgetInstance
-		budgetInstance.hasWork = true
-		work.save flush:true
 		budgetInstance.save flush: true
+		work.save flush:true
 		
 		request.withFormat {
 			form multipartForm {

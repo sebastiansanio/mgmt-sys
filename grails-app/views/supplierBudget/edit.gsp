@@ -10,7 +10,6 @@
 <body>
 
 	<section id="edit-supplierBudget" class="first">
-
 		<g:hasErrors bean="${supplierBudgetInstance}">
 		<div class="alert alert-danger">
 			<g:renderErrors bean="${supplierBudgetInstance}" as="list" />
@@ -21,15 +20,10 @@
 			<g:hiddenField name="id" value="${supplierBudgetInstance?.id}" />
 			<g:hiddenField name="version" value="${supplierBudgetInstance?.version}" />
 			<g:hiddenField name="_method" value="PUT" />
-			<div class="row">
-			<div class="col-md-4">
 			<g:render template="form"/>
-			</div>
-			</div>
-			<hr/>
 			<div class="form-actions margin-top-medium">
 				<g:actionSubmit class="btn btn-primary" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-	            <button class="btn" type="reset"><g:message code="default.button.reset.label" default="Reset" /></button>
+				<g:link action="index" class="btn" ><g:message code="default.button.cancel.label" default="Cancelar" /></g:link>
 			</div>
 		</g:form>
 

@@ -33,7 +33,8 @@
 				<th class="center-aligned"><g:message code="budget.client.label" default="Client" /></th>
 				<g:sortableColumn class="center-aligned" params="${params}" property="work.code" title="${message(code: 'work.label')}" />
 				<g:sortableColumn class="center-aligned" params="${params}" property="directCosts" title="CDO (A-K)" />
-				<th class="center-aligned">GGO (L)</th>
+				<th class="center-aligned">GG (L)</th>
+				<th class="center-aligned">GG (M)</th>
 				<g:sortableColumn class="center-aligned" params="${params}" property="totalAmount" title="PV" />
 			</tr>
 		</thead>
@@ -57,6 +58,7 @@
 				</td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${budgetInstance.directCosts}" /></td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${budgetInstance.generalExpendures}" /></td>
+				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${budgetInstance.indirectOverheadAmount?:budgetInstance.totalAmount*budgetInstance.indirectOverheadPercentage/100}" /></td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${budgetInstance.totalAmount}" /></td>
 			</tr>
 		</g:each>

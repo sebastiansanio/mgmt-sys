@@ -10,7 +10,6 @@
 
 <body>
 
-
 	<section id="edit-movement" class="first">
 		<g:hasErrors bean="${movementInstance}">
 		<div class="alert alert-danger">
@@ -22,7 +21,6 @@
 			<g:hiddenField name="id" value="${movementInstance?.id}" />
 			<g:hiddenField name="version" value="${movementInstance?.version}" />
 			<g:hiddenField name="_method" value="PUT" />
-			
 			<g:render template="form"/>
 			<div class="form-actions margin-top-medium">
 				<g:actionSubmit class="btn btn-primary" action="update" value="${message(code: 'default.button.update.label')}" />

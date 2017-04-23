@@ -12,12 +12,13 @@ class SupplierBudgetItem {
 	})
 	BigDecimal amount
 	@BindUsing({
-		obj, source -> new BigDecimal(source['amount'])
+		obj, source -> new BigDecimal(source['iva'])
 	})
 	BigDecimal iva
 	String description
 	
     static constraints = {
-		
+		amount nullable: false
+		iva nullable: false
     }
 }

@@ -1,5 +1,7 @@
 package mgmt.work
 
+import java.util.List;
+
 import mgmt.concept.Concept
 import mgmt.invoice.InvoiceType;
 import mgmt.movement.MovementItem
@@ -22,6 +24,7 @@ class SupplierBudget {
 	BigDecimal iva
 	String note
 	InvoiceType invoiceType
+	List items = new ArrayList()
 	
 	Date dateCreated
 	Date lastUpdated
@@ -36,12 +39,12 @@ class SupplierBudget {
 		date nullable: true
 		invoiceType nullable: true
 		amount validator: {value, object ->
-			if (object.amount < object.realExpendures.expendedAmount){
+			if (object.totalAmount < object.realExpendures.expendedAmount){
 				return ["supplierBudget.amountNotValid.error"]
 			}
         }
 		iva validator: {value, object ->
-			if (object.iva < object.realExpendures.expendedIva){
+			if (object.totalIva < object.realExpendures.expendedIva){
 				return ["supplierBudget.ivaNotValid.error"]
 			}
         }
@@ -57,10 +60,34 @@ class SupplierBudget {
 			calculatedRealExpendures.expendedAmount = calculatedRealExpendures.expendedAmount.plus(item.amount) 
 			calculatedRealExpendures.expendedIva = calculatedRealExpendures.expendedIva.plus(item.iva)
 		}
-		calculatedRealExpendures.remainingAmount = amount.minus(calculatedRealExpendures.expendedAmount)
-		calculatedRealExpendures.remainingIva = iva.minus(calculatedRealExpendures.expendedIva)
+		calculatedRealExpendures.remainingAmount = totalAmount.minus(calculatedRealExpendures.expendedAmount)
+		calculatedRealExpendures.remainingIva = totalIva.minus(calculatedRealExpendures.expendedIva)
 				
 		return calculatedRealExpendures
+	}
+	
+	BigDecimal getExtrasAmount(){
+		BigDecimal totalAmount = BigDecimal.valueOf(0)
+		for(SupplierBudgetItem item in items){
+			totalAmount += item.amount
+		}
+		return totalAmount
+	}
+	
+	BigDecimal getExtrasIva(){
+		BigDecimal totalIva = BigDecimal.valueOf(0)
+		for(SupplierBudgetItem item in items){
+			totalIva += item.iva
+		}
+		return totalIva
+	}
+	
+	BigDecimal getTotalAmount(){
+		return getExtrasAmount()+amount
+	}
+	
+	BigDecimal getTotalIva(){
+		return getExtrasIva()+iva
 	}
 	
 	String getIdAndRemainingAmount(){

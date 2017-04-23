@@ -41,6 +41,8 @@
 				<th class="center-aligned mayus"><g:message code="supplierBudget.concept.label" default="Concept" /></th>
 				<g:sortableColumn class="center-aligned mayus" property="amount" title="${message(code: 'supplierBudget.amount.label', default: 'Amount')}" />
 				<g:sortableColumn class="center-aligned mayus" property="iva" title="${message(code: 'supplierBudget.iva.label', default: 'Iva')}" />
+				<th class="center-aligned mayus"><g:message code="supplierBudget.totalAmount.label" /></th>
+				<th class="center-aligned mayus"><g:message code="supplierBudget.totalIva.label" /></th>
 				<th class="center-aligned mayus"><g:message code="supplierBudget.expendedAmount.label" /></th>
 				<th class="center-aligned mayus"><g:message code="supplierBudget.expendedIva.label" /></th>
 				<th class="center-aligned mayus"><g:message code="supplierBudget.remainingAmount.label" /></th>
@@ -51,7 +53,7 @@
 					<th class="center-aligned mayus">${message(code:'default.button.delete.label')}</th>
 				</sec:access>			
 				<sec:access url="/supplierBudget/close">
-					<th class="center-aligned mayus"><g:message code="supplierBudget.close.label" /></th>
+					<g:sortableColumn class="center-aligned mayus" property="closed" title="${message(code: 'supplierBudget.close.label')}" />
 				</sec:access>
 				<th class="center-aligned mayus"><g:message code="supplierBudget.note.label" /></th>
 			</tr>
@@ -66,6 +68,8 @@
 				<td>${fieldValue(bean: supplierBudgetInstance, field: "concept")}</td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${supplierBudgetInstance.amount}" /></td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${supplierBudgetInstance.iva}" /></td>
+				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${supplierBudgetInstance.totalAmount}" /></td>
+				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${supplierBudgetInstance.totalIva}" /></td>
 				<g:set var="realExpendures" value="${supplierBudgetInstance.realExpendures }" />
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${realExpendures.expendedAmount}" /></td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${realExpendures.expendedIva}" /></td>

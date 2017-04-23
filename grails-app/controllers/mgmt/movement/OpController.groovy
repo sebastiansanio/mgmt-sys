@@ -70,7 +70,7 @@ class OpController {
         if (movementInstance.hasErrors()) {
             respond movementInstance.errors, view:'create'
             return
-        }																									
+        }															
 
         movementInstance.save flush:true
 
