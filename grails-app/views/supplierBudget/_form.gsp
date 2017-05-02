@@ -97,7 +97,7 @@
 		<tbody id="items-table">
 			<g:each var="supplierBudgetItem" in="${supplierBudgetInstance?.items}" status="i">
 				<tr class="form-inline" id="items-${i}">
-					<td class="td-intableform"><g:field type="text" class="input-intableform form-control" id="description-${i}" name="items[${i}].description" value="${supplierBudgetItem.description}"/></td>
+					<td class="td-intableform"><g:field type="text" class="mayus input-intableform form-control" id="description-${i}" name="items[${i}].description" value="${supplierBudgetItem.description}"/></td>
 					<td class="td-intableform"><g:field type="text" class="changeTotals input-intableform form-control autonumeric right-aligned field-amount" id="amount-${i}" name="items[${i}].amount" value="${supplierBudgetItem.amount}" required=""/></td>
 					<td class="td-intableform"><g:field type="text" class="changeTotals input-intableform form-control autonumeric right-aligned field-iva" id="iva-${i}" name="items[${i}].iva" value="${supplierBudgetItem.iva}" required=""/></td>
 					<td class="center-aligned"><button type="button" onclick="$('#items-${i}').remove();refreshTotals();"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
@@ -127,7 +127,7 @@
 <div class="hide" >
 <table>
 	<tr class="form-inline" id="item-model">
-		<td class="td-intableform"><g:field disabled="disabled" type="text" class="input-intableform form-control" id="description-xyz" name="items[xyz].description" value=""/></td>
+		<td class="td-intableform"><g:field disabled="disabled" type="text" class="mayus input-intableform form-control" id="description-xyz" name="items[xyz].description" value=""/></td>
 		<td class="td-intableform"><g:field disabled="disabled" type="text" class="changeTotals input-intableform form-control autonumeric right-aligned field-amount" id="amount-xyz" name="items[xyz].amount" value="" required=""/></td>
 		<td class="td-intableform"><g:field disabled="disabled" type="text" class="changeTotals input-intableform form-control autonumeric right-aligned field-iva" id="iva-xyz" name="items[xyz].iva" value="" required=""/></td>
 		<td class="center-aligned"><button type="button" class="deleteButton" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
@@ -162,11 +162,14 @@ function addItem(){
 	$('.autonumeric',$tmc).autoNumeric('init',autoNumericOptions);
 }
 
-
 $(function() {
 	$(".select-chosen").chosen();
 	$('.autonumeric').autoNumeric('init',autoNumericOptions);
 	refreshConcepts();
+	$('.changeTotals').change(function( event ) {
+		refreshTotals();
+	});
+	refreshTotals();
 
 	$('input[type="submit"]').click(function( event ) {
 		$(".mayus" ).each(function( index ) {
@@ -178,12 +181,6 @@ $(function() {
 		});
 
 	});
-
-
-	$('.changeTotals').change(function( event ) {
-		refreshTotals();
-	});
-	refreshTotals();
 	
 });
 
@@ -212,7 +209,5 @@ function refreshConcepts(){
 		$('#concept').empty().append($("#conceptsWork > option").clone());
 	}
 }
-
-
 
 </script>	

@@ -110,3 +110,12 @@ textarea.input-intableform {display: block !important; padding-top: 3px !importa
 	font-weight: bold;
 	font-size: 14px;
 }
+
+.table-condensed-med>thead>tr>th, 
+.table-condensed-med>tbody>tr>th, 
+.table-condensed-med>tfoot>tr>th, 
+.table-condensed-med>thead>tr>td, 
+.table-condensed-med>tbody>tr>td, 
+.table-condensed-med>tfoot>tr>td{
+	padding:1px;
+}

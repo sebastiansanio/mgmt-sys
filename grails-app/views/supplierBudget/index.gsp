@@ -31,23 +31,22 @@
 
 <section id="index-supplierBudget" class="first">
 
-	<table class="table table-bordered margin-top-medium">
+	<table class="table table-condensed-med table-bordered margin-top-medium">
 		<thead>
 			<tr>
 				<th class="center-aligned mayus">${message(code:'default.edit.label')}</th>
-				<th class="center-aligned mayus">${message(code:'supplierBudget.id.label')}</th>
-				<th class="center-aligned mayus"><g:message code="supplierBudget.work.label" default="Work" /></th>
+				<th class="center-aligned mayus">Nº</th>
+				<th class="center-aligned mayus">CUENTA</th>
 				<th class="center-aligned mayus"><g:message code="supplierBudget.supplier.label" default="Supplier" /></th>
 				<th class="center-aligned mayus"><g:message code="supplierBudget.concept.label" default="Concept" /></th>
-				<g:sortableColumn class="center-aligned mayus" property="amount" title="${message(code: 'supplierBudget.amount.label', default: 'Amount')}" />
+				<g:sortableColumn class="center-aligned mayus" property="amount" title="PTO. ORIGINAL" />
 				<g:sortableColumn class="center-aligned mayus" property="iva" title="${message(code: 'supplierBudget.iva.label', default: 'Iva')}" />
-				<th class="center-aligned mayus"><g:message code="supplierBudget.totalAmount.label" /></th>
+				<th class="center-aligned mayus">PTO. TOTAL</th>
 				<th class="center-aligned mayus"><g:message code="supplierBudget.totalIva.label" /></th>
 				<th class="center-aligned mayus"><g:message code="supplierBudget.expendedAmount.label" /></th>
 				<th class="center-aligned mayus"><g:message code="supplierBudget.expendedIva.label" /></th>
 				<th class="center-aligned mayus"><g:message code="supplierBudget.remainingAmount.label" /></th>
 				<th class="center-aligned mayus"><g:message code="supplierBudget.remainingIva.label" /></th>
-				<th class="center-aligned mayus"><g:message code="supplierBudget.invoiceType.label" /></th>
 				<g:sortableColumn class="center-aligned mayus" property="dateCreated" title="${message(code: 'supplierBudget.dateCreated.label')}" />
 				<sec:access url="/supplierBudget/delete">
 					<th class="center-aligned mayus">${message(code:'default.button.delete.label')}</th>
@@ -55,6 +54,7 @@
 				<sec:access url="/supplierBudget/close">
 					<g:sortableColumn class="center-aligned mayus" property="closed" title="${message(code: 'supplierBudget.close.label')}" />
 				</sec:access>
+				<th class="center-aligned mayus">TIPO FACT</th>
 				<th class="center-aligned mayus"><g:message code="supplierBudget.note.label" /></th>
 			</tr>
 		</thead>
@@ -75,7 +75,6 @@
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${realExpendures.expendedIva}" /></td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${realExpendures.remainingAmount}" /></td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${realExpendures.remainingIva}" /></td>
-				<td>${fieldValue(bean: supplierBudgetInstance, field: "invoiceType")}</td>
 				<td class="center-aligned"><g:formatDate date="${supplierBudgetInstance.dateCreated}"/></td>
 				<sec:access url="/supplierBudget/delete">
 					<td class="center-aligned">
@@ -116,6 +115,7 @@
 						</sec:access>
 					</g:else>
 				
+				<td>${fieldValue(bean: supplierBudgetInstance, field: "invoiceType")}</td>
 				<td>${fieldValue(bean: supplierBudgetInstance, field: "note")}</td>
 			</tr>
 		</g:each>
