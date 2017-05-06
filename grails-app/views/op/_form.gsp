@@ -181,7 +181,8 @@
 <script>
 
 var itemsQuantity = ${movementInstance?.items?.size()?:0};
-	
+var isWorkMap = new Map(); 
+
 function addItem(){
 	$tmc = $("#item-model").clone();
 	$tmc.attr('id', 'items-'+ itemsQuantity);
@@ -281,12 +282,21 @@ function refreshPaymentTotal(){
 	});
 	$('#total-payment-amount').text(thousandSep(total.toFixed(2)));
 }
-
+var isWorkMap = new Map(); 
 function refreshConcepts(idx){
+	hasWorkMap = isWorkMap.has(idx);
+	isWork = isWorkMap.get(idx);
+	
 	if($('#work-'+idx).val()=='null'){
-		$('#concept-'+idx).empty().append($("#conceptsNoWork > option").clone());
+		if(!hasWorkMap || isWork){
+			isWorkMap.set(idx,false);
+			$('#concept-'+idx).empty().append($("#conceptsNoWork > option").clone());
+		}
 	}else{
-		$('#concept-'+idx).empty().append($("#conceptsWork > option").clone());
+		if(!hasWorkMap || !isWork){
+			isWorkMap.set(idx,true);
+			$('#concept-'+idx).empty().append($("#conceptsWork > option").clone());
+		}
 	}
 }
 

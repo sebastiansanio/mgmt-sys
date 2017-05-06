@@ -156,6 +156,7 @@
 <script>
 
 var itemsQuantity = ${movementInstance?.items?.size()?:0};
+var isWorkMap = new Map(); 
 	
 function addItem(){
 	$tmc = $("#item-model").clone();
@@ -165,13 +166,13 @@ function addItem(){
 		$(this).attr('id',$(this).attr('id').replace('xyz',itemsQuantity));		
 		$(this).prop("disabled", false);
 	});
-	var currentItemQuantity = itemsQuantity;
+	var currentItemMapQuantity = itemsQuantity;
 	$(".numberinput", $tmc).change(function() {
 		refreshTotal(currentItemQuantity);
 	});
 	$(".work-model", $tmc).change(function() {
 		refreshConcepts(currentItemQuantity);
-	});
+	});currentWorkType[idx]
 	$(".deleteButton", $tmc).click(function() {
 		$('#items-'+currentItemQuantity).remove();
 		refreshTotals();
@@ -226,7 +227,7 @@ function refreshTotals(){
 		iva = iva + safeParseFloat($(this ).val());
 	});
 	$('#total-iva').text(thousandSep(iva.toFixed(2)));
-	var total = 0;
+	var total = 0;isWorkMap
 	$(".field-total" ).each(function( index ) {
 		total = total + safeParseFloat($(this ).val());
 	});
@@ -241,10 +242,19 @@ function refreshPaymentTotal(){
 }
 
 function refreshConcepts(idx){
+	hasWorkMap = isWorkMap.has(idx);
+	isWork = isWorkMap.get(idx);
+	
 	if($('#work-'+idx).val()=='null'){
-		$('#concept-'+idx).empty().append($("#conceptsNoWork > option").clone());
+		if(!hasWorkMap || isWork){
+			isWorkMap.set(idx,false);
+			$('#concept-'+idx).empty().append($("#conceptsNoWork > option").clone());
+		}
 	}else{
-		$('#concept-'+idx).empty().append($("#conceptsWork > option").clone());
+		if(!hasWorkMap || !isWork){
+			isWorkMap.set(idx,true);
+			$('#concept-'+idx).empty().append($("#conceptsWork > option").clone());
+		}
 	}
 }
 
