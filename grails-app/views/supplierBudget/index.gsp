@@ -35,7 +35,7 @@
 		<thead>
 			<tr>
 				<th class="center-aligned mayus">${message(code:'default.edit.label')}</th>
-				<th class="center-aligned mayus">Nº</th>
+				<g:sortableColumn class="center-aligned mayus" property="id" title="Nº" />
 				<th class="center-aligned mayus">CUENTA</th>
 				<th class="center-aligned mayus"><g:message code="supplierBudget.supplier.label" default="Supplier" /></th>
 				<th class="center-aligned mayus"><g:message code="supplierBudget.concept.label" default="Concept" /></th>

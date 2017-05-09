@@ -384,6 +384,15 @@ $(function() {
 
 	});
 
+	for (i = 0; i < itemsQuantity; i++) {
+		if($('#work-'+i).val()=='null'){
+			isWorkMap.set(i.toString(),false);
+		
+		}else{
+			isWorkMap.set(i.toString(),true);
+		}
+	}
+
 });
 
 </script>

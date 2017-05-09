@@ -52,10 +52,17 @@
 	</div>
 </div>
 
+<div class="required">
+	<label for="ivaPercentage" class="control-label">% IVA<span class="required-indicator">* </span></label>
+	<div>
+		<g:field type="text" class="changeTotals autonumeric form-control" name="ivaPercentage" value="${supplierBudgetInstance.iva/supplierBudgetInstance.amount*100}" required=""/>
+	</div>
+</div>
+
 <div class="${hasErrors(bean: supplierBudgetInstance, field: 'iva', 'has-error')} required">
 	<label for="iva" class="control-label"><g:message code="supplierBudget.iva.label" default="Iva" /><span class="required-indicator">* </span><g:if test="${supplierBudgetInstance.id}">(Min: <g:formatNumber number="${supplierBudgetInstance.realExpendures.expendedIva}" format="###,##0.00" />) </g:if></label>
 	<div>
-		<g:field type="text" class="changeTotals autonumeric form-control" name="iva" value="${supplierBudgetInstance.iva}" required=""/>
+		<g:field type="text" class="changeTotals autonumeric form-control" name="iva" value="${supplierBudgetInstance.iva}" required="" readonly="readonly"/>
 	</div>
 </div>
 
@@ -82,17 +89,17 @@
 </div>	
 
 <div class="col-md-6">	
-<h4><g:message code="supplierBudget.items.label" /></h4>
+<h4>${message(code:"supplierBudget.items.label").toUpperCase()}</h4>
 <div id="items" class="table-responsive">
 
 	<table class="table table-condensed table-bordered">
 		<thead>
 			<tr>
-				<th class="center-aligned vertical-center-aligned">${message(code: 'supplierBudgetItem.description.label')}</th>
-				<th class="center-aligned vertical-center-aligned">${message(code: 'supplierBudgetItem.amount.label')}</th>
+				<th class="center-aligned vertical-center-aligned">${message(code: 'supplierBudgetItem.description.label').toUpperCase()}</th>
+				<th class="center-aligned vertical-center-aligned">${message(code: 'supplierBudgetItem.amount.label').toUpperCase()}</th>
 				<th class="center-aligned vertical-center-aligned">% IVA</th>
-				<th class="center-aligned vertical-center-aligned">${message(code: 'supplierBudgetItem.iva.label')}</th>
-				<th class="center-aligned vertical-center-aligned">${message(code: 'default.button.delete.label')}</th>
+				<th class="center-aligned vertical-center-aligned">${message(code: 'supplierBudgetItem.iva.label').toUpperCase()}</th>
+				<th class="center-aligned vertical-center-aligned">${message(code: 'default.button.delete.label').toUpperCase()}</th>
 			</tr>
 		</thead>
 		<tbody id="items-table">
@@ -101,7 +108,7 @@
 					<td class="td-intableform"><g:field type="text" class="mayus input-intableform form-control" id="description-${i}" name="items[${i}].description" value="${supplierBudgetItem.description}"/></td>
 					<td class="td-intableform"><g:field type="text" class="changeTotals input-intableform form-control autonumeric right-aligned field-amount" id="amount-${i}" name="items[${i}].amount" value="${supplierBudgetItem.amount}" required=""/></td>
 					<td class="td-intableform"><g:field type="text" class="changeTotals input-intableform form-control autonumeric right-aligned field-iva-percentage" id="ivaPercentage-${i}" name="items[${i}].ivaPercentage" value="${supplierBudgetItem.amount?supplierBudgetItem.iva/supplierBudgetItem.amount*100:0}" required=""/></td>
-					<td class="td-intableform"><g:field type="text" class="changeTotals input-intableform form-control autonumeric right-aligned field-iva" id="iva-${i}" name="items[${i}].iva" value="${supplierBudgetItem.iva}" required="" /></td>
+					<td class="td-intableform"><g:field type="text" class="changeTotals input-intableform form-control autonumeric right-aligned field-iva" id="iva-${i}" name="items[${i}].iva" value="${supplierBudgetItem.iva}" required="" readonly="readonly" /></td>
 					<td class="center-aligned"><button type="button" onclick="$('#items-${i}').remove();refreshTotals();"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
 				
 				</tr>
@@ -109,13 +116,13 @@
 		</tbody>
 		<tbody>
 			<tr class="important-bold">
-				<td>Subtotal</td>
+				<td>SUBTOTAL</td>
 				<td class="right-aligned" id="subtotal-amount"></td>
 				<td></td>
 				<td class="right-aligned" id="subtotal-iva"></td>
 			</tr>
 			<tr class="important-bold">
-				<td>Total</td>
+				<td>TOTAL</td>
 				<td class="right-aligned" id="total-amount"></td>
 				<td></td>
 				<td class="right-aligned" id="total-iva"></td>
@@ -134,7 +141,7 @@
 		<td class="td-intableform"><g:field disabled="disabled" type="text" class="mayus input-intableform form-control" id="description-xyz" name="items[xyz].description" value=""/></td>
 		<td class="td-intableform"><g:field disabled="disabled" type="text" class="changeTotals input-intableform form-control autonumeric right-aligned field-amount" id="amount-xyz" name="items[xyz].amount" value="" required=""/></td>
 		<td class="td-intableform"><g:field disabled="disabled" type="text" class="changeTotals input-intableform form-control autonumeric right-aligned field-ivaPercentage" id="ivaPercentage-xyz" name="items[xyz].ivaPercentage" value="21" required=""/></td>
-		<td class="td-intableform"><g:field disabled="disabled" type="text" class="changeTotals input-intableform form-control autonumeric right-aligned field-iva" id="iva-xyz" name="items[xyz].iva" value="" required=""/></td>
+		<td class="td-intableform"><g:field disabled="disabled" type="text" class="changeTotals input-intableform form-control autonumeric right-aligned field-iva" id="iva-xyz" name="items[xyz].iva" value="" required="" readonly="readonly"/></td>
 		<td class="center-aligned"><button type="button" class="deleteButton" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
 		
 	</tr>
@@ -194,6 +201,9 @@ function refreshTotals(){
 		var iva = safeParseFloat($("#amount-"+i).val())*safeParseFloat($("#ivaPercentage-"+i).val())/100;
 		$("#iva-"+i).val(thousandSep(iva.toFixed(2)));
 	}
+	
+	var iva = safeParseFloat($("#amount").val())*safeParseFloat($("#ivaPercentage").val())/100;
+	$("#iva").val(thousandSep(iva.toFixed(2)));
 	
 	var amount = 0;
 	$(".field-amount" ).each(function( index ) {

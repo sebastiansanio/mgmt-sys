@@ -380,9 +380,35 @@ $(function() {
 		
 
 	});
+	
+	for (i = 0; i < itemsQuantity; i++) {
+		if($('#work-'+i).val()=='null'){
+			isWorkMap.set(i.toString(),false);
+		
+		}else{
+			isWorkMap.set(i.toString(),true);
+		}
+	}
 
 	
 });
+
+function refreshConcepts(idx){
+	hasWorkMap = isWorkMap.has(idx);
+	isWork = isWorkMap.get(idx);
+	
+	if($('#work-'+idx).val()=='null'){
+		if(!hasWorkMap || isWork){
+			isWorkMap.set(idx,false);
+			$('#concept-'+idx).empty().append($("#conceptsNoWork > option").clone());
+		}
+	}else{
+		if(!hasWorkMap || !isWork){
+			isWorkMap.set(idx,true);
+			$('#concept-'+idx).empty().append($("#conceptsWork > option").clone());
+		}
+	}
+}
 
 </script>
 

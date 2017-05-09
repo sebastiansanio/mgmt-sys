@@ -26,6 +26,7 @@ class SupplierBudgetController {
 				eq("work", mgmt.work.Work.get(params.workFilter.toLong()))
 			}
 			order(params.sort, params.order)
+			order('id', 'desc')
 		}
 		
         respond results, model:[supplierBudgetInstanceCount: results.totalCount]

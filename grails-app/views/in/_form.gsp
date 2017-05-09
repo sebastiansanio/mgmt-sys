@@ -166,13 +166,13 @@ function addItem(){
 		$(this).attr('id',$(this).attr('id').replace('xyz',itemsQuantity));		
 		$(this).prop("disabled", false);
 	});
-	var currentItemMapQuantity = itemsQuantity;
+	var currentItemQuantity = itemsQuantity;
 	$(".numberinput", $tmc).change(function() {
 		refreshTotal(currentItemQuantity);
 	});
 	$(".work-model", $tmc).change(function() {
 		refreshConcepts(currentItemQuantity);
-	});currentWorkType[idx]
+	});
 	$(".deleteButton", $tmc).click(function() {
 		$('#items-'+currentItemQuantity).remove();
 		refreshTotals();
@@ -309,7 +309,14 @@ $(function() {
 
 	});
 
-
+	for (i = 0; i < itemsQuantity; i++) {
+		if($('#work-'+i).val()=='null'){
+			isWorkMap.set(i.toString(),false);
+		
+		}else{
+			isWorkMap.set(i.toString(),true);
+		}
+	}
 });
 
 
