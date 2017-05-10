@@ -6,13 +6,13 @@
 <g:if test="${supplierBudgetInstance.id}">
 
 <label for="id" class="control-label">
-<g:message code="supplierBudget.id.label"  />
+${message(code: 'supplierBudget.id.label').toUpperCase()}
 </label>
 <div>${supplierBudgetInstance?.id}</div>
 </g:if>
 
 <div class="${hasErrors(bean: supplierBudgetInstance, field: 'supplier', 'has-error')} required">
-	<label for="supplier" class="control-label"><g:message code="supplierBudget.supplier.label" default="Supplier" /><span class="required-indicator">*</span></label>
+	<label for="supplier" class="control-label">${message(code: 'supplierBudget.supplier.label').toUpperCase()}<span class="required-indicator">*</span></label>
 	<div>
 		<g:if test="${supplierBudgetInstance.movementItems}">
 			${supplierBudgetInstance?.supplier}
@@ -24,7 +24,7 @@
 </div>
 
 <div class="${hasErrors(bean: supplierBudgetInstance, field: 'work', 'has-error')} required">
-	<label for="work" class="control-label"><g:message code="supplierBudget.work.label" default="Work" /><span class="required-indicator">*</span></label>
+	<label for="work" class="control-label">${message(code: 'supplierBudget.work.label').toUpperCase()}<span class="required-indicator">*</span></label>
 	<div>
 		<g:if test="${supplierBudgetInstance.movementItems}">
 			${supplierBudgetInstance?.work}
@@ -35,7 +35,7 @@
 	</div>
 </div>
 <div class="${hasErrors(bean: supplierBudgetInstance, field: 'concept', 'has-error')} required">
-	<label for="concept" class="control-label"><g:message code="supplierBudget.concept.label" default="Concept" /><span class="required-indicator">*</span></label>
+	<label for="concept" class="control-label">${message(code: 'supplierBudget.concept.label').toUpperCase()}<span class="required-indicator">*</span></label>
 	<div>
 		<g:if test="${supplierBudgetInstance.movementItems}">
 			${supplierBudgetInstance?.concept}
@@ -46,7 +46,7 @@
 	</div>
 </div>
 <div class="${hasErrors(bean: supplierBudgetInstance, field: 'amount', 'has-error')} required">
-	<label for="amount" class="control-label"><g:message code="supplierBudget.amount.label" default="Amount" /><span class="required-indicator">*</span><g:if test="${supplierBudgetInstance.id}"> (Min: <g:formatNumber number="${supplierBudgetInstance.realExpendures.expendedAmount}" format="###,##0.00" />) </g:if></label>
+	<label for="amount" class="control-label">${message(code: 'supplierBudget.amount.label').toUpperCase()}<span class="required-indicator">*</span><g:if test="${supplierBudgetInstance.id}"> (Min: <g:formatNumber number="${supplierBudgetInstance.realExpendures.expendedAmount}" format="###,##0.00" />) </g:if></label>
 	<div>
 		<g:field type="text" class="changeTotals autonumeric form-control" name="amount" value="${supplierBudgetInstance.amount}" required=""/>
 	</div>
@@ -60,21 +60,21 @@
 </div>
 
 <div class="${hasErrors(bean: supplierBudgetInstance, field: 'iva', 'has-error')} required">
-	<label for="iva" class="control-label"><g:message code="supplierBudget.iva.label" default="Iva" /><span class="required-indicator">* </span><g:if test="${supplierBudgetInstance.id}">(Min: <g:formatNumber number="${supplierBudgetInstance.realExpendures.expendedIva}" format="###,##0.00" />) </g:if></label>
+	<label for="iva" class="control-label">${message(code: 'supplierBudget.iva.label').toUpperCase()}<span class="required-indicator">* </span><g:if test="${supplierBudgetInstance.id}">(Min: <g:formatNumber number="${supplierBudgetInstance.realExpendures.expendedIva}" format="###,##0.00" />) </g:if></label>
 	<div>
 		<g:field type="text" class="changeTotals autonumeric form-control" name="iva" value="${supplierBudgetInstance.iva}" required="" readonly="readonly"/>
 	</div>
 </div>
 
 <div class="${hasErrors(bean: supplierBudgetInstance, field: 'invoiceType', 'has-error')} required">
-	<label for="work" class="control-label"><g:message code="supplierBudget.invoiceType.label" /><span class="required-indicator">*</span></label>
+	<label for="work" class="control-label">${message(code: 'supplierBudget.invoiceType.label').toUpperCase()}<span class="required-indicator">*</span></label>
 	<div>
 		<g:select noSelection="${['null':'Sin selección']}" class="form-control" id="invoiceType" name="invoiceType.id" from="${mgmt.invoice.InvoiceType.list()}" optionKey="id" required="" value="${supplierBudgetInstance?.invoiceType?.id}"/>
 	</div>
 </div>
 
 <div class="${hasErrors(bean: supplierBudgetInstance, field: 'note', 'has-error')} ">
-	<label for="note" class="control-label"><g:message code="supplierBudget.note.label" default="Note" /></label>
+	<label for="note" class="control-label">${message(code: 'supplierBudget.note.label').toUpperCase()}</label>
 	<div>
 		<g:textArea class="mayus form-control" name="note" cols="40" rows="5" maxlength="4000" value="${supplierBudgetInstance?.note}"/>
 	</div>

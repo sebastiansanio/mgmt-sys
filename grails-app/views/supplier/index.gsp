@@ -26,18 +26,18 @@
 	<table class="table table-bordered margin-top-medium">
 		<thead>
 			<tr>
-				<th class="center-aligned">${message(code:'default.edit.label')}</th>
-				<g:sortableColumn class="center-aligned" params="${params}" property="name" title="${message(code: 'supplier.name.label', default: 'Name')}" />
-				<g:sortableColumn class="center-aligned" params="${params}" property="businessName" title="${message(code: 'supplier.businessName.label')}" />
-				<g:sortableColumn class="center-aligned" params="${params}" property="cuit" title="${message(code: 'supplier.cuit.label', default: 'Cuit')}" />
-				<g:sortableColumn class="center-aligned" params="${params}" property="address" title="${message(code: 'supplier.address.label', default: 'Address')}" />
-				<g:sortableColumn class="center-aligned" params="${params}" property="location" title="${message(code: 'supplier.location.label', default: 'Location')}" />
-				<g:sortableColumn class="center-aligned" params="${params}" property="province" title="${message(code: 'supplier.province.label', default: 'Province')}" />
-				<g:sortableColumn class="center-aligned" params="${params}" property="zipCode" title="${message(code: 'supplier.zipCode.label')}" />
-				<g:sortableColumn class="center-aligned" params="${params}" property="note" title="${message(code: 'supplier.note.label')}" />
-				<g:sortableColumn class="center-aligned" params="${params}" property="dateCreated" title="${message(code: 'supplier.dateCreated.label')}" />
+				<th class="center-aligned">${message(code:'default.edit.label').toUpperCase()}</th>
+				<g:sortableColumn class="center-aligned" params="${params}" property="name" title="${message(code: 'supplier.name.label').toUpperCase()}" />
+				<g:sortableColumn class="center-aligned" params="${params}" property="businessName" title="${message(code: 'supplier.businessName.label').toUpperCase()}" />
+				<g:sortableColumn class="center-aligned" params="${params}" property="cuit" title="${message(code: 'supplier.cuit.label').toUpperCase()}" />
+				<g:sortableColumn class="center-aligned" params="${params}" property="address" title="${message(code: 'supplier.address.label').toUpperCase()}" />
+				<g:sortableColumn class="center-aligned" params="${params}" property="location" title="${message(code: 'supplier.location.label').toUpperCase()}" />
+				<g:sortableColumn class="center-aligned" params="${params}" property="province" title="${message(code: 'supplier.province.label').toUpperCase()}" />
+				<g:sortableColumn class="center-aligned" params="${params}" property="zipCode" title="${message(code: 'supplier.zipCode.label').toUpperCase()}" />
+				<g:sortableColumn class="center-aligned" params="${params}" property="note" title="${message(code: 'supplier.note.label').toUpperCase()}" />
+				<g:sortableColumn class="center-aligned" params="${params}" property="dateCreated" title="${message(code: 'supplier.dateCreated.label').toUpperCase()}" />
 				<sec:access url="/supplier/delete">
-					<th class="center-aligned">${message(code:'default.button.delete.label')}</th>
+					<th class="center-aligned">${message(code:'default.button.delete.label').toUpperCase()}</th>
 				</sec:access>			
 			</tr>
 		</thead>

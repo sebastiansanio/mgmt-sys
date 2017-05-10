@@ -34,9 +34,9 @@
 	<table class="table table-condensed-med table-bordered margin-top-medium">
 		<thead>
 			<tr>
-				<th class="center-aligned mayus">${message(code:'default.edit.label')}</th>
+				<th class="center-aligned mayus"><span class="glyphicon glyphicon-pencil"></span></th>
 				<g:sortableColumn class="center-aligned mayus" property="id" title="Nº" />
-				<th class="center-aligned mayus">CUENTA</th>
+				<th class="center-aligned mayus">OBRA</th>
 				<th class="center-aligned mayus"><g:message code="supplierBudget.supplier.label" default="Supplier" /></th>
 				<th class="center-aligned mayus"><g:message code="supplierBudget.concept.label" default="Concept" /></th>
 				<g:sortableColumn class="center-aligned mayus" property="amount" title="PTO. ORIGINAL" />
@@ -116,7 +116,7 @@
 					</g:else>
 				
 				<td>${fieldValue(bean: supplierBudgetInstance, field: "invoiceType")}</td>
-				<td>${fieldValue(bean: supplierBudgetInstance, field: "note")}</td>
+				<td style="word-wrap: break-word;max-width: 100px;">${fieldValue(bean: supplierBudgetInstance, field: "note")}</td>
 			</tr>
 		</g:each>
 		</tbody>
