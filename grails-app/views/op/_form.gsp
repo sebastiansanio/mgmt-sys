@@ -338,29 +338,31 @@ $(function() {
 		var dateToMillis = ${mgmt.config.Parameter.findByCode("FECHA_HASTA").asDate().getTime()};
 		var paymentDateFromMillis = ${mgmt.config.Parameter.findByCode("FECHA_PAGO_DESDE").asDate().getTime()};
 		var paymentDateToMillis = ${mgmt.config.Parameter.findByCode("FECHA_PAGO_HASTA").asDate().getTime()};
-				
+		
 		var sinPresupuesto = false;
 		for (i = 0; i < itemsQuantity; i++) {
-    		if($('#budget-'+i).val() == 'null' && $('#work-'+i).val() != 'null'){
-    			sinPresupuesto = true;
-    		}
-    		
-    		var dateMillis = $('#date-'+i).datepicker('getDate').getTime();  
-    		if(dateMillis > dateToMillis || dateMillis < dateFromMillis){
-    			alert('${message(code:'movementItem.dateOutOfRange.save.message')}');
-				event.preventDefault();
-				return;
-    		}
-    		
+			if($('#date-'+i).length  > 0 ){
+	    		if($('#budget-'+i).val() == 'null' && $('#work-'+i).val() != 'null'){
+	    			sinPresupuesto = true;
+	    		}
+	    		var dateMillis = $('#date-'+i).datepicker('getDate').getTime();  
+	    		if(dateMillis > dateToMillis || dateMillis < dateFromMillis){
+	    			alert('${message(code:'movementItem.dateOutOfRange.save.message')}');
+					event.preventDefault();
+					return;
+	    		}
+    		}	
 		}
 		
 		for (i = 0; i < paymentsQuantity; i++) {
-    		var paymentDateMillis = $('#paymentDate-'+i).datepicker('getDate').getTime();  
-    		if(paymentDateMillis > paymentDateToMillis || paymentDateMillis < paymentDateFromMillis){
-    			alert('${message(code:'payment.dateOutOfRange.save.message')}');
-				event.preventDefault();
-				return;
-    		}
+			if($('#paymentDate-'+i).length  > 0 ){
+	    		var paymentDateMillis = $('#paymentDate-'+i).datepicker('getDate').getTime();  
+	    		if(paymentDateMillis > paymentDateToMillis || paymentDateMillis < paymentDateFromMillis){
+	    			alert('${message(code:'payment.dateOutOfRange.save.message')}');
+					event.preventDefault();
+					return;
+	    		}
+	    	}
 		}
 		
 		if(sinPresupuesto && prompt('Existen ítems sin presupuesto. Ingrese clave para continuar:') != '${mgmt.config.Parameter.findByCode("CLAVE_PRESUPUESTO").value}'){
@@ -373,11 +375,9 @@ $(function() {
 		$(".mayus" ).each(function( index ) {
 			$(this).val($(this).val().toUpperCase());
 		});
-		
 		$(".autonumeric" ).each(function( index ) {
 			$(this).val($(this).val().replace(/\./g, '').replace(/,/g,'.'));
 		});
-		
 
 	});
 	

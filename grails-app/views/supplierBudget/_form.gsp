@@ -55,7 +55,7 @@ ${message(code: 'supplierBudget.id.label').toUpperCase()}
 <div class="required">
 	<label for="ivaPercentage" class="control-label">% IVA<span class="required-indicator">* </span></label>
 	<div>
-		<g:field type="text" class="changeTotals autonumeric form-control" name="ivaPercentage" value="${supplierBudgetInstance.iva/supplierBudgetInstance.amount*100}" required=""/>
+		<g:field type="text" class="changeTotals autonumeric form-control" name="ivaPercentage" value="${!supplierBudgetInstance.amount?0:supplierBudgetInstance.iva/supplierBudgetInstance.amount*100}" required=""/>
 	</div>
 </div>
 

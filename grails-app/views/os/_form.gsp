@@ -344,27 +344,29 @@ $(function() {
 				
 		var sinPresupuesto = false;
 		for (i = 0; i < itemsQuantity; i++) {
-    		if($('#budget-'+i).val() == 'null' && $('#work-'+i).val() != 'null'){
-    			sinPresupuesto = true;
+			if($('#date-'+i).length  > 0 ){
+	    		if($('#budget-'+i).val() == 'null' && $('#work-'+i).val() != 'null'){
+	    			sinPresupuesto = true;
+	    		}
+	    		
+	    		var dateMillis = $('#date-'+i).datepicker('getDate').getTime();  
+	    		if(dateMillis > dateToMillis || dateMillis < dateFromMillis){
+	    			alert('${message(code:'movementItem.dateOutOfRange.save.message')}');
+					event.preventDefault();
+					return;
+	    		}
     		}
-    		
-    		var dateMillis = $('#date-'+i).datepicker('getDate').getTime();  
-    		if(dateMillis > dateToMillis || dateMillis < dateFromMillis){
-    			alert('${message(code:'movementItem.dateOutOfRange.save.message')}');
-				event.preventDefault();
-				return;
-    		}
-    		
 		}
 		
 		for (i = 0; i < paymentsQuantity; i++) {
-    		var paymentDateMillis = $('#paymentDate-'+i).datepicker('getDate').getTime();  
-    		if(paymentDateMillis > paymentDateToMillis || paymentDateMillis < paymentDateFromMillis){
-    			alert('${message(code:'payment.dateOutOfRange.save.message')}');
-				event.preventDefault();
-				return;
-    		}
-    		
+			if($('#paymentDate-'+i).length  > 0 ){
+	    		var paymentDateMillis = $('#paymentDate-'+i).datepicker('getDate').getTime();  
+	    		if(paymentDateMillis > paymentDateToMillis || paymentDateMillis < paymentDateFromMillis){
+	    			alert('${message(code:'payment.dateOutOfRange.save.message')}');
+					event.preventDefault();
+					return;
+	    		}
+    		}	
 		}
 		
 		if(sinPresupuesto && prompt('Existen ítems sin presupuesto. Ingrese clave para continuar:') != '${mgmt.config.Parameter.findByCode("CLAVE_PRESUPUESTO").value}'){
