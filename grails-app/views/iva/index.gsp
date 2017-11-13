@@ -8,7 +8,7 @@
 <body>
 
 <section id="index-accountStatus" class="first">
-<h4><g:message code="menu.expenses.label" /></h4>
+<h4><g:message code="menu.iva.label" /></h4>
 <div class="col-md-6">
 <g:form onsubmit="validateForm(event);" target="_blank" class="noblock" controller="report" action="downloadReport" id="${mgmt.reports.Report.findByCode('iva')?.id}" >
 <table class="col-md-6 table table-bordered">

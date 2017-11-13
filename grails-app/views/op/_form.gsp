@@ -67,7 +67,7 @@
 			eq("closed",false)
 		}?:[[id:'null',idAndRemainingAmount:'Sin presupuesto']]}" optionKey="id" optionValue="idAndRemainingAmount" required="" value="${movementItemInstance?.budget?.id}"/></td>					
 					
-					<td class="td-intableform"><g:textArea cols="60" class="mayus input-intableform form-control vertical-center-aligned" name="items[${i}].description" value="${movementItemInstance?.description}"/></td>
+					<td class="td-intableform"><g:textArea cols="60" class="mayus input-intableform form-control vertical-center-aligned" name="items[${i}].description" id="description-${i}" value="${movementItemInstance?.description}"/></td>
 					<td class="td-intableform"><g:select class="input-intableform form-control" id="items[${i}].invoiceType" name="items[${i}].invoiceType.id" from="${mgmt.invoice.InvoiceType.list()}" optionKey="id" required="" value="${movementItemInstance?.invoiceType?.id}"/></td>
 					<td class="td-intableform"><g:textField class="input-intableform form-control" name="items[${i}].invoiceNumber" value="${movementItemInstance?.invoiceNumber}"/></td>
 					<td class="td-intableform"><bs:datePicker class="input-intableform form-control center-aligned" id="date-${i}" name="items[${i}].date" precision="day"  value="${movementItemInstance?.date}"  /> </td>
@@ -140,7 +140,7 @@
 		<td class="td-intableform"><g:select disabled="disabled" class="supplier-select-model form-control" id="supplier-xyz" name="items[xyz].supplier.id" from="${mgmt.persons.Supplier.list(sort:'name')}" optionKey="id" optionValue="nameAndBusinessName" required="" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="concept-model input-intableform form-control" id="concept-xyz" name="items[xyz].concept.id" from="${mgmt.concept.Concept.findAllByValidInOpNoWork(true,[sort:'code'])}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control budgets-class" id="budget-xyz" name="items[xyz].budget.id" from="${new ArrayList()}" noSelection="['null':'Sin presupuesto']" optionKey="id" optionValue="id" required="" value=""/></td>
-		<td class="td-intableform"><g:textArea cols="60" disabled="disabled" class="mayus input-intableform form-control vertical-center-aligned" name="items[xyz].description" value=""/></td>
+		<td class="td-intableform"><g:textArea cols="60" disabled="disabled" class="mayus input-intableform form-control vertical-center-aligned" name="items[xyz].description" id="description-xyz" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" name="items[xyz].invoiceType.id" from="${mgmt.invoice.InvoiceType.list()}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:textField disabled="disabled" class="input-intableform form-control" name="items[xyz].invoiceNumber" value=""/></td>
 		<td class="td-intableform"><bs:datePicker disabled="true" class="input-intableform form-control center-aligned" id="date-xyz" name="items[xyz].date" precision="day"  value=""  /> </td>
@@ -352,6 +352,13 @@ $(function() {
 					return;
 	    		}
     		}	
+    		
+    		if($('#description-'+i).val().toUpperCase().includes('IVA') && safeParseFloat($('#amount-'+i).val())>0 ){
+    			alert('Si la descripción de un item contiene "iva", el neto debe ser cero.');
+    			event.preventDefault();
+    			return;
+    		}
+    		
 		}
 		
 		for (i = 0; i < paymentsQuantity; i++) {

@@ -198,8 +198,8 @@ b.indirect_overhead_amount,
 coalesce(sum(case when c.code between 'P100' and 'P101' then amount + iibb + other_perceptions else 0 end),0) as amount_p100,
 coalesce(sum(case when c.code between 'P100' and 'P101' then iva else 0 end),0) as iva_p100,
 coalesce(sum(case when c.code between 'P200' and 'P600' then amount + iibb + other_perceptions else 0 end),0) as amount_p200ap600,
-coalesce(sum(case when c.code between 'A000' and 'K999' then amount + iibb + other_perceptions else 0 end),0) as amount_a000ak999,
-coalesce(sum(case when c.code between 'A000' and 'K999' then iva else 0 end),0) as iva_a000ak999,
+coalesce(sum(case when c.code between 'A000' and 'I999' then amount + iibb + other_perceptions else 0 end),0) as amount_a000aI999,
+coalesce(sum(case when c.code between 'A000' and 'I999' then iva else 0 end),0) as iva_a000aI999,
 coalesce(sum(case when c.code between 'L000' and 'L899' then amount + iibb + other_perceptions else 0 end),0) as amount_l000al899,
 coalesce(sum(case when c.code between 'L000' and 'L899' then iva else 0 end),0) as iva_l000al899,
 coalesce(sum(case when c.code between 'N000' and 'N999' then amount + iibb + other_perceptions else 0 end),0) as amount_n000an999,
@@ -222,8 +222,8 @@ inner join budget b on w.budget_id = b.id
 	<field name="amount_p100" class="java.math.BigDecimal"/>
 	<field name="iva_p100" class="java.math.BigDecimal"/>
 	<field name="amount_p200ap600" class="java.math.BigDecimal"/>
-	<field name="amount_a000ak999" class="java.math.BigDecimal"/>
-	<field name="iva_a000ak999" class="java.math.BigDecimal"/>
+	<field name="amount_a000aI999" class="java.math.BigDecimal"/>
+	<field name="iva_a000aI999" class="java.math.BigDecimal"/>
 	<field name="amount_l000al899" class="java.math.BigDecimal"/>
 	<field name="iva_l000al899" class="java.math.BigDecimal"/>
 	<field name="amount_n000an999" class="java.math.BigDecimal"/>
@@ -373,7 +373,7 @@ inner join budget b on w.budget_id = b.id
 				<textElement>
 					<font size="9"/>
 				</textElement>
-				<text><![CDATA[Total costo directo de obra (A a K)]]></text>
+				<text><![CDATA[Total costo directo de obra (A a I)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="44" y="217" width="160" height="17" uuid="d4a4b957-977f-40cf-a2f7-b31671063f21"/>
@@ -401,7 +401,7 @@ inner join budget b on w.budget_id = b.id
 				<textElement>
 					<font size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Total egresos (A - K + L + M)]]></text>
+				<text><![CDATA[Total egresos (A - I + L + M)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="44" y="147" width="160" height="17" uuid="4a223157-5151-4a5f-87f7-0dd3d0bdcea9"/>
@@ -478,7 +478,7 @@ inner join budget b on w.budget_id = b.id
 				<textElement textAlignment="Right">
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{amount_a000ak999}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{amount_a000aI999}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="466" y="96" width="66" height="17" uuid="8652aac6-280b-409d-a13c-35ee5508f3d3"/>
@@ -513,7 +513,7 @@ inner join budget b on w.budget_id = b.id
 				<textElement textAlignment="Right">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{amount_a000ak999}+$F{amount_l000al899}+$F{indirect_general_expenses}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{amount_a000aI999}+$F{amount_l000al899}+$F{indirect_general_expenses}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="466" y="130" width="66" height="17" uuid="1e1bf449-9977-44fc-9767-d7aa37920a31"/>
@@ -527,7 +527,7 @@ inner join budget b on w.budget_id = b.id
 				<textElement textAlignment="Right">
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{iva_a000ak999}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{iva_a000aI999}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="466" y="164" width="66" height="17" uuid="abfa0633-8947-4ddf-9c67-170ecfd935aa"/>
@@ -541,21 +541,21 @@ inner join budget b on w.budget_id = b.id
 				<textElement textAlignment="Right">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{iva_a000ak999}+$F{iva_l000al899}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{iva_a000aI999}+$F{iva_l000al899}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="204" y="200" width="66" height="17" uuid="f0a43aae-9d30-459e-af81-3d6a63c397db"/>
 				<textElement textAlignment="Right">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{sell_price}-($F{amount_a000ak999}+$F{amount_l000al899}+$F{indirect_general_expenses})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sell_price}-($F{amount_a000aI999}+$F{amount_l000al899}+$F{indirect_general_expenses})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="204" y="217" width="66" height="17" uuid="3184058a-bc8a-4162-a178-52feabb7b622"/>
 				<textElement textAlignment="Right">
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{sell_price}-($F{amount_a000ak999}+$F{amount_l000al899})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sell_price}-($F{amount_a000aI999}+$F{amount_l000al899})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="204" y="234" width="66" height="17" uuid="97992922-13ee-4fec-8955-fd057ffae1c0"/>
@@ -597,28 +597,28 @@ inner join budget b on w.budget_id = b.id
 				<textElement textAlignment="Right">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{sell_price}-($F{amount_a000ak999}+$F{amount_l000al899}+$F{indirect_general_expenses})-$F{amount_n000an999}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sell_price}-($F{amount_a000aI999}+$F{amount_l000al899}+$F{indirect_general_expenses})-$F{amount_n000an999}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="270" y="113" width="66" height="17" uuid="c02c129b-a6d0-42f8-bd97-acbad5b29450"/>
 				<textElement textAlignment="Right">
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{amount_a000ak999}.compareTo(BigDecimal.ZERO) != 0?$F{amount_a000ak999} *100/$F{amount_a000ak999} :0]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{amount_a000aI999}.compareTo(BigDecimal.ZERO) != 0?$F{amount_a000aI999} *100/$F{amount_a000aI999} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="336" y="113" width="66" height="17" uuid="8b293beb-076b-41fa-964a-e2411e8db088"/>
 				<textElement textAlignment="Right">
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{sell_price}.compareTo(BigDecimal.ZERO) != 0? $F{amount_a000ak999}  *100/$F{sell_price} :0]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sell_price}.compareTo(BigDecimal.ZERO) != 0? $F{amount_a000aI999}  *100/$F{sell_price} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="270" y="130" width="66" height="17" uuid="c7c48cd0-f957-4e89-a2c9-f75a75be67f7"/>
 				<textElement textAlignment="Right">
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{amount_a000ak999}.compareTo(BigDecimal.ZERO) != 0?$F{amount_l000al899} *100/$F{amount_a000ak999} :0]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{amount_a000aI999}.compareTo(BigDecimal.ZERO) != 0?$F{amount_l000al899} *100/$F{amount_a000aI999} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="336" y="130" width="66" height="17" uuid="a4169ac3-76fc-40e8-b1a4-3f3aefea11a0"/>
@@ -632,7 +632,7 @@ inner join budget b on w.budget_id = b.id
 				<textElement textAlignment="Right">
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{amount_a000ak999}.compareTo(BigDecimal.ZERO) != 0?($F{indirect_general_expenses}) *100/$F{amount_a000ak999} :0]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{amount_a000aI999}.compareTo(BigDecimal.ZERO) != 0?($F{indirect_general_expenses}) *100/$F{amount_a000aI999} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="336" y="147" width="66" height="17" uuid="ee8b7a9d-2187-4a8b-a03f-ed629808bb1f"/>
@@ -646,7 +646,7 @@ inner join budget b on w.budget_id = b.id
 				<textElement textAlignment="Right">
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{amount_a000ak999}.compareTo(BigDecimal.ZERO) != 0?($F{amount_l000al899}+$F{indirect_general_expenses}) *100/$F{amount_a000ak999} :0]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{amount_a000aI999}.compareTo(BigDecimal.ZERO) != 0?($F{amount_l000al899}+$F{indirect_general_expenses}) *100/$F{amount_a000aI999} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="336" y="164" width="66" height="17" uuid="f74a9bf3-7bb5-4c8f-8b6f-450bbdfbc8ea"/>
@@ -660,42 +660,42 @@ inner join budget b on w.budget_id = b.id
 				<textElement textAlignment="Right">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{amount_a000ak999}.compareTo(BigDecimal.ZERO) != 0?($F{amount_a000ak999}+$F{amount_l000al899}+$F{indirect_general_expenses}) *100/$F{amount_a000ak999} :0]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{amount_a000aI999}.compareTo(BigDecimal.ZERO) != 0?($F{amount_a000aI999}+$F{amount_l000al899}+$F{indirect_general_expenses}) *100/$F{amount_a000aI999} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="336" y="181" width="66" height="17" uuid="a9d1ef27-a2db-49b8-900e-e9c0c9e99ade"/>
 				<textElement textAlignment="Right">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{sell_price}.compareTo(BigDecimal.ZERO) != 0?($F{amount_a000ak999}+$F{amount_l000al899}+$F{indirect_general_expenses}) *100/$F{sell_price} :0]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sell_price}.compareTo(BigDecimal.ZERO) != 0?($F{amount_a000aI999}+$F{amount_l000al899}+$F{indirect_general_expenses}) *100/$F{sell_price} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="270" y="200" width="66" height="17" uuid="1443e4a5-d912-4cdb-83e9-0175e3172f59"/>
 				<textElement textAlignment="Right">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{amount_a000ak999}.compareTo(BigDecimal.ZERO) != 0?($F{sell_price}-($F{amount_a000ak999}+$F{amount_l000al899}+$F{indirect_general_expenses})) *100/$F{amount_a000ak999} :0]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{amount_a000aI999}.compareTo(BigDecimal.ZERO) != 0?($F{sell_price}-($F{amount_a000aI999}+$F{amount_l000al899}+$F{indirect_general_expenses})) *100/$F{amount_a000aI999} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="336" y="200" width="66" height="17" uuid="f1ccbb73-5c8d-4d27-ab5c-7348a6d1eb47"/>
 				<textElement textAlignment="Right">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{sell_price}.compareTo(BigDecimal.ZERO) != 0?($F{sell_price}-($F{amount_a000ak999}+$F{amount_l000al899}+$F{indirect_general_expenses})) *100/$F{sell_price} :0]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sell_price}.compareTo(BigDecimal.ZERO) != 0?($F{sell_price}-($F{amount_a000aI999}+$F{amount_l000al899}+$F{indirect_general_expenses})) *100/$F{sell_price} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="466" y="200" width="66" height="17" uuid="25f7694a-2cf4-4b05-a353-4f336aece82a"/>
 				<textElement textAlignment="Right">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{iva_p100} - ($F{iva_a000ak999}+$F{iva_l000al899})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{iva_p100} - ($F{iva_a000aI999}+$F{iva_l000al899})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="270" y="234" width="66" height="17" uuid="a9028d9d-ba43-4114-959b-f2fe6b26a807"/>
 				<textElement textAlignment="Right">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{amount_a000ak999}.compareTo(BigDecimal.ZERO) != 0?($F{sell_price}) *100/$F{amount_a000ak999} :0]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{amount_a000aI999}.compareTo(BigDecimal.ZERO) != 0?($F{sell_price}) *100/$F{amount_a000aI999} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="336" y="234" width="66" height="17" uuid="f6d8e1e3-a5ec-4d75-a631-d342745652ab"/>
@@ -709,14 +709,14 @@ inner join budget b on w.budget_id = b.id
 				<textElement textAlignment="Right">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{amount_a000ak999}.compareTo(BigDecimal.ZERO) != 0?$F{sell_price}/$F{amount_a000ak999}:0]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{amount_a000aI999}.compareTo(BigDecimal.ZERO) != 0?$F{sell_price}/$F{amount_a000aI999}:0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="270" y="302" width="66" height="17" uuid="49ae257d-08cd-49e4-83f9-8b8183b9039e"/>
 				<textElement textAlignment="Right">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{amount_a000ak999}.compareTo(BigDecimal.ZERO) != 0?($F{amount_n000an999}) *100/$F{amount_a000ak999} :0]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{amount_a000aI999}.compareTo(BigDecimal.ZERO) != 0?($F{amount_n000an999}) *100/$F{amount_a000aI999} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="336" y="302" width="66" height="17" uuid="3f98c5a6-758a-41fb-a877-90c472716249"/>
@@ -730,14 +730,14 @@ inner join budget b on w.budget_id = b.id
 				<textElement textAlignment="Right">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{amount_a000ak999}.compareTo(BigDecimal.ZERO) != 0?($F{sell_price}-($F{amount_a000ak999}+$F{amount_l000al899}+$F{indirect_general_expenses})-$F{amount_n000an999}) *100/$F{amount_a000ak999} :0]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{amount_a000aI999}.compareTo(BigDecimal.ZERO) != 0?($F{sell_price}-($F{amount_a000aI999}+$F{amount_l000al899}+$F{indirect_general_expenses})-$F{amount_n000an999}) *100/$F{amount_a000aI999} :0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="336" y="319" width="66" height="17" uuid="02a4e784-3b71-46f5-8d1e-14ab65c2d123"/>
 				<textElement textAlignment="Right">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{sell_price}.compareTo(BigDecimal.ZERO) != 0?($F{sell_price}-($F{amount_a000ak999}+$F{amount_l000al899}+$F{indirect_general_expenses})-$F{amount_n000an999}) *100/$F{sell_price} :0]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sell_price}.compareTo(BigDecimal.ZERO) != 0?($F{sell_price}-($F{amount_a000aI999}+$F{amount_l000al899}+$F{indirect_general_expenses})-$F{amount_n000an999}) *100/$F{sell_price} :0]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

@@ -41,7 +41,7 @@ ${message(code: 'supplierBudget.id.label').toUpperCase()}
 			${supplierBudgetInstance?.concept}
 		</g:if>
 		<g:else>
-			<g:select class="form-control" id="concept" name="concept.id" from="${mgmt.concept.Concept.list()}" optionKey="id" required="" value="${supplierBudgetInstance?.concept?.id}"/>
+			<g:select class="form-control" id="concept" name="concept.id" from="${supplierBudgetInstance.work?mgmt.concept.Concept.findAllByValidInOpWork(true,[sort:'code',order:'asc']):mgmt.concept.Concept.findAllByValidInOpNoWork(true,[sort:'code',order:'asc'])}" optionKey="id" required="" value="${supplierBudgetInstance?.concept?.id}"/>
 		</g:else>
 	</div>
 </div>
@@ -177,7 +177,6 @@ function addItem(){
 $(function() {
 	$(".select-chosen").chosen();
 	$('.autonumeric').autoNumeric('init',autoNumericOptions);
-	refreshConcepts();
 	$('.changeTotals').change(function( event ) {
 		refreshTotals();
 	});

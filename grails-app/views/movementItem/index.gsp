@@ -57,8 +57,8 @@
 				<td>${movementItemInstance.movement.number}</td>
 				<td>${movementItemInstance.movement.year}</td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${movementItemInstance.amount}" /></td>
-				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${movementItemInstance.iibb}" /></td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${movementItemInstance.iva}" /></td>
+				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${movementItemInstance.iibb}" /></td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${movementItemInstance.otherPerceptions}" /></td>
 				<td class="right-aligned"><g:formatNumber format="###,##0.00" number="${movementItemInstance.total}" /></td>
 				<td>${fieldValue(bean: movementItemInstance, field: "invoiceType")}</td>

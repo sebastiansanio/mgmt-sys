@@ -51,7 +51,7 @@
 				<tr class="form-inline" id="items-${i}">
 					<td class="td-intableform"><g:select onchange="refreshConcepts('${i}');" noSelection="${['null':'00 - Gastos generales']}" class="input-intableform form-control" id="work-${i}" name="items[${i}].work.id" from="${mgmt.work.Work.findAllByFinishedOrId(false,movementItemInstance?.work?.id,[sort:'code'])}" optionKey="id" required="" value="${movementItemInstance?.work?.id}"/></td>
 					<td class="td-intableform"><g:select class="input-intableform form-control ${movementItemInstance.work?'conceptsWork':'conceptsNoWork'}" id="concept-${i}" name="items[${i}].concept.id" from="${[movementItemInstance?.concept]}" optionKey="id" required="" value="${movementItemInstance?.concept?.id}"/></td>
-					<td class="td-intableform"><g:textArea cols="60" class="mayus input-intableform form-control vertical-center-aligned" name="items[${i}].description" value="${movementItemInstance?.description}"/></td>
+					<td class="td-intableform"><g:textArea cols="60" class="mayus input-intableform form-control vertical-center-aligned" name="items[${i}].description" id="description-${i}" value="${movementItemInstance?.description}"/></td>
 					<td class="td-intableform"><g:select class="input-intableform form-control" id="items[${i}].invoiceType" name="items[${i}].invoiceType.id" from="${mgmt.invoice.InvoiceType.list()}" optionKey="id" required="" value="${movementItemInstance?.invoiceType?.id}"/></td>
 					<td class="td-intableform"><g:textField class="input-intableform form-control" name="items[${i}].invoiceNumber" value="${movementItemInstance?.invoiceNumber}"/></td>
 					<td class="td-intableform"><bs:datePicker class="input-intableform form-control center-aligned" id="date-${i}" name="items[${i}].date" precision="day"  value="${movementItemInstance?.date}"  /> </td>
@@ -117,8 +117,8 @@
 <table>
 	<tr class="form-inline" id="item-model">
 		<td class="td-intableform"><g:select noSelection="${['null':'00 - Gastos generales']}" disabled="disabled" class="work-model input-intableform form-control" id="work-xyz" name="items[xyz].work.id" from="${mgmt.work.Work.findAllByFinished(false,[sort:'code'])}" optionKey="id" required="" value=""/></td>
-		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" id="concept-xyz" name="items[xyz].concept.id" from="${mgmt.concept.Concept.findAllByValidInInNoWork(true,[sort:'code'])}" optionKey="id" required="" value=""/></td>
-		<td class="td-intableform"><g:textArea cols="60" disabled="disabled" class="mayus input-intableform form-control vertical-center-aligned" name="items[xyz].description" value=""/></td>
+		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" id="concept-xyz" name="items[xyz].concept.id" from="${mgmt.concept.Concept.findAllByValidInInNoWork(true,[sort:'code',order:'asc']).sort{it.code.replace('P','A')}}" optionKey="id" required="" value=""/></td>
+		<td class="td-intableform"><g:textArea cols="60" disabled="disabled" class="mayus input-intableform form-control vertical-center-aligned" name="items[xyz].description" id="description-xyz" value=""/></td>
 		<td class="td-intableform"><g:select disabled="disabled" class="input-intableform form-control" name="items[xyz].invoiceType.id" from="${mgmt.invoice.InvoiceType.list()}" optionKey="id" required="" value=""/></td>
 		<td class="td-intableform"><g:textField disabled="disabled" class="input-intableform form-control" name="items[xyz].invoiceNumber" value=""/></td>
 		<td class="td-intableform"><bs:datePicker disabled="true" class="input-intableform form-control center-aligned" id="date-xyz" name="items[xyz].date" precision="day"  value=""  /> </td>
@@ -138,9 +138,8 @@
 		<td class="center-aligned"><button type="button" class="deleteButton" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
 	</tr>
 </table>
-
-<g:select disabled="disabled" class="input-intableform form-control" id="conceptsWork" name="conceptsWork" from="${mgmt.concept.Concept.findAllByValidInInWork(true,[sort:'code',order:'asc'])}" optionKey="id" required="" value=""/>
-<g:select disabled="disabled" class="input-intableform form-control" id="conceptsNoWork" name="conceptsNoWork" from="${mgmt.concept.Concept.findAllByValidInInNoWork(true,[sort:'code',order:'asc'])}" optionKey="id" required="" value=""/>
+<g:select disabled="disabled" class="input-intableform form-control" id="conceptsWork" name="conceptsWork" from="${mgmt.concept.Concept.findAllByValidInInWork(true,[sort:'code',order:'asc']).sort{it.code.replace('P','A')}}" optionKey="id" required="" value=""/>
+<g:select disabled="disabled" class="input-intableform form-control" id="conceptsNoWork" name="conceptsNoWork" from="${mgmt.concept.Concept.findAllByValidInInNoWork(true,[sort:'code',order:'asc']).sort{it.code.replace('P','A')}}" optionKey="id" required="" value=""/>
 
 
 </div>
@@ -288,6 +287,12 @@ $(function() {
 				event.preventDefault();
 				return;
     		}
+    		if($('#description-'+i).val().toUpperCase().includes('IVA') && safeParseFloat($('#amount-'+i).val())>0 ){
+    			alert('Si la descripción de un item contiene "iva", el neto debe ser cero.');
+    			event.preventDefault();
+    			return;
+    		}
+    		
 		}
 		
 		for (i = 0; i < paymentsQuantity; i++) {

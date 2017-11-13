@@ -16,7 +16,7 @@ class BalanceController {
 		Map amounts = new HashMap()
 		amounts.income = calculateAmount(work.id,'P100','P101')
 		amounts.otherIncome = calculateAmount(work.id,'P200','P600')
-		amounts.directCosts = calculateAmount(work.id,'A000','K999')
+		amounts.directCosts = calculateAmount(work.id,'A000','I999')
 		amounts.generalExpenses = calculateAmount(work.id,'L000','L899')
 		amounts.retiredBenefits = calculateAmount(work.id,'N000','N999')
 		amounts.sellPrice = [amount: amounts.income.amount + amounts.otherIncome.amount, iva: amounts.income.iva + amounts.otherIncome.iva]
