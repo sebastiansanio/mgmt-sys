@@ -281,27 +281,30 @@ $(function() {
 		var paymentDateToMillis = ${mgmt.config.Parameter.findByCode("FECHA_PAGO_HASTA").asDate().getTime()};
 
 		for (i = 0; i < itemsQuantity; i++) {
-    		var dateMillis = $('#date-'+i).datepicker('getDate').getTime();  
-    		if(dateMillis > dateToMillis || dateMillis < dateFromMillis){
-    			alert('${message(code:'movementItem.dateOutOfRange.save.message')}');
-				event.preventDefault();
-				return;
+			if($('#date-'+i).length  > 0 ){
+	    		var dateMillis = $('#date-'+i).datepicker('getDate').getTime();  
+	    		if(dateMillis > dateToMillis || dateMillis < dateFromMillis){
+	    			alert('${message(code:'movementItem.dateOutOfRange.save.message')}');
+					event.preventDefault();
+					return;
+	    		}
+	    		if($('#description-'+i).val().toUpperCase().includes('IVA') && safeParseFloat($('#amount-'+i).val())>0 ){
+	    			alert('Si la descripción de un item contiene "iva", el neto debe ser cero.');
+	    			event.preventDefault();
+	    			return;
+	    		}
     		}
-    		if($('#description-'+i).val().toUpperCase().includes('IVA') && safeParseFloat($('#amount-'+i).val())>0 ){
-    			alert('Si la descripción de un item contiene "iva", el neto debe ser cero.');
-    			event.preventDefault();
-    			return;
-    		}
-    		
 		}
 		
 		for (i = 0; i < paymentsQuantity; i++) {
-    		var paymentDateMillis = $('#paymentDate-'+i).datepicker('getDate').getTime();  
-    		if(paymentDateMillis > paymentDateToMillis || paymentDateMillis < paymentDateFromMillis){
-    			alert('${message(code:'payment.dateOutOfRange.save.message')}');
-				event.preventDefault();
-				return;
-    		}
+			if($('#paymentDate-'+i).length  > 0 ){
+	    		var paymentDateMillis = $('#paymentDate-'+i).datepicker('getDate').getTime();  
+	    		if(paymentDateMillis > paymentDateToMillis || paymentDateMillis < paymentDateFromMillis){
+	    			alert('${message(code:'payment.dateOutOfRange.save.message')}');
+					event.preventDefault();
+					return;
+	    		}
+	    	}
 		}
 		
 		$(".mayus" ).each(function( index ) {

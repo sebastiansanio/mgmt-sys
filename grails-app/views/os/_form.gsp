@@ -355,12 +355,12 @@ $(function() {
 					event.preventDefault();
 					return;
 	    		}
-    		}
     		
-    		if($('#description-'+i).val().toUpperCase().includes('IVA') && safeParseFloat($('#amount-'+i).val())>0 ){
-    			alert('Si la descripción de un item contiene "iva", el neto debe ser cero.');
-    			event.preventDefault();
-    			return;
+	    		if($('#description-'+i).val().toUpperCase().includes('IVA') && safeParseFloat($('#amount-'+i).val())>0 ){
+	    			alert('Si la descripción de un item contiene "iva", el neto debe ser cero.');
+	    			event.preventDefault();
+	    			return;
+	    		}
     		}
 		}
 		
