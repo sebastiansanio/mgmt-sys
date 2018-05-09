@@ -20,6 +20,8 @@
 				<g:sortableColumn property="name" params="${params}" title="${message(code: 'priceIndex.name.label').toUpperCase()}" />
 			
 				<g:sortableColumn property="description" params="${params}" title="${message(code: 'priceIndex.description.label').toUpperCase()}" />
+
+				<g:sortableColumn property="frequency" params="${params}" title="${message(code: 'priceIndex.frequency.label').toUpperCase()}" />
 			
 			</tr>
 		</thead>
@@ -31,6 +33,8 @@
 				<td>${fieldValue(bean: priceIndexInstance, field: "name")}</td>
 			
 				<td>${fieldValue(bean: priceIndexInstance, field: "description")}</td>
+			
+				<td>${message(code: 'priceIndex.frequency.'+priceIndexInstance.frequency)}</td>
 			
 			</tr>
 		</g:each>

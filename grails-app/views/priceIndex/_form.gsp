@@ -20,6 +20,15 @@
 	</div>
 </div>
 
+<div
+	class="${hasErrors(bean: priceIndexInstance, field: 'frequency', 'has-error')} ">
+	<label for="frequency" class="control-label">${message(code: 'priceIndex.frequency.label').toUpperCase()}</label>
+	<div>
+		<g:select class="form-control" name="frequency" valueMessagePrefix="priceIndex.frequency" from="${priceIndexInstance.constraints.frequency.inList }"
+			value="${priceIndexInstance?.frequency}" />
+	</div>
+</div>
+
 <script>
 	$("form").submit(function( event ) {
 		$(".mayus" ).each(function( index ) {

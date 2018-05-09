@@ -42,6 +42,11 @@
 				
 			</tr>
 			
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="priceIndex.frequency.label" /></td>
+				
+				<td valign="top" class="value">${message(code: 'priceIndex.frequency.'+priceIndexInstance?.frequency)}</td>
+			</tr>
 					
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="default.dateCreated.label" /></td>
@@ -57,6 +62,7 @@
 				<td valign="top" class="value"><g:formatDate date="${priceIndexInstance?.lastUpdated}" /></td>
 				
 			</tr>
+			
 		
 		</tbody>
 	</table>

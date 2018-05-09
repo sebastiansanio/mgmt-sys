@@ -7,7 +7,7 @@
 		class="required-indicator">*</span>
 	</label>
 	<div>
-		<g:select class="form-control" id="index" name="index.id"
+		<g:select onchange="refreshDatepicker();" class="form-control" id="index" name="index.id"
 			from="${mgmt.index.PriceIndex.list()}" optionKey="id" required=""
 			value="${priceIndexItemInstance?.index?.id}" />
 	</div>
@@ -19,13 +19,10 @@
 	<label for="date" class="control-label"> ${message(code: 'priceIndexItem.date.label').toUpperCase()}
 		<span class="required-indicator">*</span></label>
 	<div>
-		<bs:datePicker class="form-control" name="date" precision="day"
-			value="${priceIndexItemInstance?.date}" />
+		<bs:datePicker class="form-control" id="date" name="date" precision="day"	value="${priceIndexItemInstance?.date}" />
+		<bs:datePicker class="form-control" id="dateMonth" name="date" precision="day"	value="${priceIndexItemInstance?.date}" />
 	</div>
 </div>
-
-
-
 
 <div
 	class="${hasErrors(bean: priceIndexItemInstance, field: 'indexValue', 'has-error')} required">
@@ -40,3 +37,39 @@
 	</div>
 </div>
 
+
+<script>
+
+var priceIndexes = new Object();
+
+<g:each var="index" in="${mgmt.index.PriceIndex.list()}">
+	priceIndexes[${index.id}] = '${index.frequency}';
+</g:each>
+
+function refreshDatepicker(){
+	if(priceIndexes[$('#index').val()] == "daily"){
+		$('#date').show();
+		$('#date').prop( "disabled", false );
+		
+		$('#dateMonth').hide();
+		$('#dateMonth').prop( "disabled", true );
+	}else{
+		$('#date').hide();
+		$('#date').prop( "disabled", true );
+		$('#dateMonth').show();
+		$('#dateMonth').prop( "disabled", false );
+	}
+}
+
+$(function() {
+	$("#dateMonth").datepicker( {
+	    format: "01/mm/yyyy",
+	    viewMode: "months", 
+	    minViewMode: "months"
+	});
+	$("#date").datepicker( {	});
+	refreshDatepicker();
+});
+
+
+</script>

@@ -18,4 +18,10 @@ class PriceIndexItem {
 	static constraints = { date unique: 'index' 
 							indexValue nullable: false
 	}
+	
+	def beforeValidate(){
+		if(index.frequency == 'monthly'){
+			date.putAt(Calendar.DAY_OF_MONTH, 1)
+		}
+	}
 }
