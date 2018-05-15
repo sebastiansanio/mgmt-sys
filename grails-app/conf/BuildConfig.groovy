@@ -39,7 +39,7 @@ grails.project.dependency.resolution = {
 
     dependencies {
         test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
-		runtime 'mysql:mysql-connector-java:5.1.34'
+		runtime 'mysql:mysql-connector-java:8.0.11'
 		compile 'commons-beanutils:commons-beanutils:1.8.3'
 		compile "net.sf.jasperreports:jasperreports:6.0.4"
 		compile "net.sf.jasperreports:jasperreports-fonts:6.0.0"
