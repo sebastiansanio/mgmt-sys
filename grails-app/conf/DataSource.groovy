@@ -13,11 +13,11 @@ environments {
     development {
         dataSource {
             dbCreate = "update"
-			driverClassName = "com.mysql.jdbc.Driver"
+			driverClassName = "com.mysql.cj.jdbc.Driver"
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
 			username = "urbatec"
 			password = "urbatec"
-            url = "jdbc:mysql://localhost/urbatec?useUnicode=yes&characterEncoding=UTF-8"
+            url = "jdbc:mysql://localhost/urbatec?useUnicode=yes&characterEncoding=UTF-8&useSSL=false"
             properties {
                jmxEnabled = true
                initialSize = 5
@@ -55,11 +55,11 @@ environments {
     production {
         dataSource {
             dbCreate = "validate"
-			driverClassName = "com.mysql.jdbc.Driver"
+			driverClassName = "com.mysql.cj.jdbc.Driver"
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
 			username = "urbatec"
 			password = "urbatec"
-            url = "jdbc:mysql://localhost/urbatec?useUnicode=yes&characterEncoding=UTF-8"
+            url = "jdbc:mysql://localhost/urbatec?useUnicode=yes&characterEncoding=UTF-8&useSSL=false"
             properties {
                jmxEnabled = true
                initialSize = 5

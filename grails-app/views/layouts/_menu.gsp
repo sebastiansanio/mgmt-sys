@@ -6,8 +6,7 @@
 	budget: ["budget","work","client"],
 	balance: ["income","expenses","netting","balance","movementsExport","iva",'paymentsExport'],
 	supplier: ["supplier","supplierBudget","supplierExpenses"],
-	configuration: ["accountType","unitOfMeasurement","invoiceType","requestmap","secAuthority","secUser","report","import","parameter" ],
-	index: ["priceIndex","priceIndexItem"]
+	configuration: ["accountType","unitOfMeasurement","invoiceType","requestmap","secAuthority","secUser","report","import","parameter","priceIndex","priceIndexItem" ]
 	]}" />
 	
 	<g:set var="menuGroupPriorities" value="${
