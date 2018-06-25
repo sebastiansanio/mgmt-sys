@@ -17,7 +17,7 @@ environments {
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
 			username = "urbatec"
 			password = "urbatec"
-            url = "jdbc:mysql://localhost/urbatec?useUnicode=yes&characterEncoding=UTF-8&useSSL=false"
+            url = "jdbc:mysql://localhost/urbatec?useUnicode=yes&characterEncoding=UTF-8&verifyServerCertificate=false&useSSL=true"
             properties {
                jmxEnabled = true
                initialSize = 5
@@ -59,7 +59,7 @@ environments {
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
 			username = "urbatec"
 			password = "urbatec"
-            url = "jdbc:mysql://localhost/urbatec?useUnicode=yes&characterEncoding=UTF-8&useSSL=false"
+            url = "jdbc:mysql://localhost/urbatec?useUnicode=yes&characterEncoding=UTF-8&verifyServerCertificate=false&useSSL=true"
             properties {
                jmxEnabled = true
                initialSize = 5
