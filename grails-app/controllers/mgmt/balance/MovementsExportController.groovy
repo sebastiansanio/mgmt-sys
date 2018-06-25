@@ -28,22 +28,22 @@ class MovementsExportController {
 		     work.name AS work_name, concept.code AS concept_code,
 			 supplier.name as supplier_name,
 
-			 round(coalesce(movement_item.amount*movement_item.multiplier,0)*pii.index_value/
+			 round(coalesce(movement_item.amount*movement_item.multiplier,0)/pii.index_value*
 			 (select max(pii2.index_value) from price_index_item pii2 where index_id = :priceIndexId and
 			 (pii2.date >=  :dateFrom or :dateFrom is null ) and (pii2.date < :dateTo or :dateTo is null)
 			 )
 			 ,2) amount_indexed,
-			 round(coalesce(movement_item.iibb*movement_item.multiplier,0)*pii.index_value/
+			 round(coalesce(movement_item.iibb*movement_item.multiplier,0)/pii.index_value*
 			 (select max(pii2.index_value) from price_index_item pii2 where index_id = :priceIndexId and
 			 (pii2.date >=  :dateFrom or :dateFrom is null ) and (pii2.date < :dateTo or :dateTo is null)
 			 )
 			 ,2) iibb_indexed,
-			  round(coalesce(movement_item.iva*movement_item.multiplier,0)*pii.index_value/
+			  round(coalesce(movement_item.iva*movement_item.multiplier,0)/pii.index_value*
 			 (select max(pii2.index_value) from price_index_item pii2 where index_id = :priceIndexId and
 			 (pii2.date >=  :dateFrom or :dateFrom is null ) and (pii2.date < :dateTo or :dateTo is null)
 			 )
 			 ,2) iva_indexed,
-			  round(coalesce(movement_item.total*movement_item.multiplier,0)*pii.index_value/
+			  round(coalesce(movement_item.total*movement_item.multiplier,0)/pii.index_value*
 			 (select max(pii2.index_value) from price_index_item pii2 where index_id = :priceIndexId and
 			 (pii2.date >=  :dateFrom or :dateFrom is null ) and (pii2.date < :dateTo or :dateTo is null)
 			 )
@@ -76,7 +76,7 @@ class MovementsExportController {
 		response.setHeader("Content-Disposition", "attachment; filename='Ingresos y egresos.xlsx'");
 		
 		new WebXlsxExporter().with {
-			fillHeader(["Obra","Operación","Proveedor","Cuenta","Fecha","Descripción","Monto \$","IVA \$", "IIBB","Monto indexado","IVA indexado","IIBB indexado","Total indexado"])
+			fillHeader(["Obra","Operación","Proveedor","Cuenta","Fecha","Descripción","Monto \$","IVA \$", "IIBB","Neto actualizado","IVA actualizado","IIBB actualizado","Total actualizado"])
 			
 			CellStyle cellStyle = sheet.workbook.createCellStyle();
 			CreationHelper createHelper = sheet.workbook.getCreationHelper();
