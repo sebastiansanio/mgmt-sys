@@ -20,7 +20,7 @@ class PriceIndexItem {
 	}
 	
 	def beforeValidate(){
-		if(index.frequency == 'monthly'){
+		if(index.frequency == 'monthly' || index.frequency == 'lmonth'){
 			date.putAt(Calendar.DAY_OF_MONTH, 1)
 		}
 	}

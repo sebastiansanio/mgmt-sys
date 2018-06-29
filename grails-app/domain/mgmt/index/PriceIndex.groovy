@@ -14,7 +14,7 @@ class PriceIndex {
 	static constraints = { 
 		name unique: true 
 		description nullable:false, blank:false
-		frequency inList: ["monthly","daily"], nullable: false, blank: false
+		frequency inList: ["monthly","daily","lmonth"], nullable: false, blank: false
 	}
 	
 	public String toString(){

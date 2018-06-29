@@ -29,24 +29,16 @@ class MovementsExportController {
 			 supplier.name as supplier_name,
 
 			 round(coalesce(movement_item.amount*movement_item.multiplier,0)/pii.index_value*
-			 (select max(pii2.index_value) from price_index_item pii2 where index_id = :priceIndexId and
-			 (pii2.date >=  :dateFrom or :dateFrom is null ) and (pii2.date < :dateTo or :dateTo is null)
-			 )
+			 pii_max.index_value
 			 ,2) amount_indexed,
 			 round(coalesce(movement_item.iibb*movement_item.multiplier,0)/pii.index_value*
-			 (select max(pii2.index_value) from price_index_item pii2 where index_id = :priceIndexId and
-			 (pii2.date >=  :dateFrom or :dateFrom is null ) and (pii2.date < :dateTo or :dateTo is null)
-			 )
+			 pii_max.index_value
 			 ,2) iibb_indexed,
 			  round(coalesce(movement_item.iva*movement_item.multiplier,0)/pii.index_value*
-			 (select max(pii2.index_value) from price_index_item pii2 where index_id = :priceIndexId and
-			 (pii2.date >=  :dateFrom or :dateFrom is null ) and (pii2.date < :dateTo or :dateTo is null)
-			 )
+			 pii_max.index_value
 			 ,2) iva_indexed,
 			  round(coalesce(movement_item.total*movement_item.multiplier,0)/pii.index_value*
-			 (select max(pii2.index_value) from price_index_item pii2 where index_id = :priceIndexId and
-			 (pii2.date >=  :dateFrom or :dateFrom is null ) and (pii2.date < :dateTo or :dateTo is null)
-			 )
+			 pii_max.index_value
 			 ,2) total_indexed
 		FROM
 		     movement movement INNER JOIN movement_item movement_item ON movement.id = movement_item.movement_id
@@ -54,10 +46,11 @@ class MovementsExportController {
 		     INNER JOIN concept concept ON movement_item.concept_id = concept.id
 		     left JOIN supplier supplier ON movement_item.supplier_id = supplier.id
 		LEFT OUTER JOIN concept_group cg ON concept.concept_group_id = cg.id
-		
 		left outer join price_index pi on pi.id = :priceIndexId
+		left outer join price_index_item pii_max on pii_max.index_id = pi.id and pii_max.date = (select max(pii3.date) from price_index_item pii3 where pii3.index_id = pi.id)
 		left outer join price_index_item pii on pii.index_id = pi.id 
 		and case when pi.frequency = 'daily' then DATE_FORMAT(movement_item.date, '%Y-%m-%d') = DATE_FORMAT(pii.date, '%Y-%m-%d')
+		when pi.frequency = 'monthly' then DATE_FORMAT(date_add(movement_item.date,interval -1 month), '%Y-%m-01') = DATE_FORMAT(pii.date, '%Y-%m-01')
 		else DATE_FORMAT(movement_item.date, '%Y-%m-01') = DATE_FORMAT(pii.date, '%Y-%m-01') end
 
 		where (movement_item.date >=  :dateFrom or :dateFrom is null ) and (movement_item.date < :dateTo or :dateTo is null)
@@ -85,7 +78,7 @@ class MovementsExportController {
 			Sql sql = new Sql(dataSource)
 			def rows = sql.rows(QUERY,[priceIndexId:params.long('Price_index_id'),concepts:params.concepts,workId:params.long('Work_id'),dateFrom:params.Date_from?DATE_FORMAT.parse(params.Date_from):null,dateTo:params.Date_to?DATE_FORMAT.parse(params.Date_to):null])
 			long queryCount = rows.size()
-			add(rows, ["work_code","operation","supplier_name","concept_code","movement_date_created","movement_item_description","movement_item_amount","movement_item_iva","movement_item_iibb","amount_indexed","iibb_indexed","iva_indexed","total_indexed"])
+			add(rows, ["work_code","operation","supplier_name","concept_code","movement_date_created","movement_item_description","movement_item_amount","movement_item_iva","movement_item_iibb","amount_indexed","iva_indexed","iibb_indexed","total_indexed"])
 			sql.close()
 			
 			
