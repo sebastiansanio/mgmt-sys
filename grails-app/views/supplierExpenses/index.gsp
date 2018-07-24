@@ -27,6 +27,10 @@
 			<td><bs:datePicker name="Date_to" precision="day" value="${new Date()}" /> <g:checkBox onchange="dateToCheckboxChanged();" name="dateToEnabled" checked="false" /> </td>
 		</tr>
 		<tr>
+			<td><label for="Price_index_id"><g:message code="priceIndex.label"/> </label></td>
+			<td><g:select class="select-chosen" noSelection="${['-1':'Ninguno']}" name="Price_index_id" from="${mgmt.index.PriceIndex.list(sort:'name')}" optionKey="id" optionValue="name" value="" />
+		</tr>
+		<tr>
 			<td><g:submitButton class="btn btn-default" name="download" value="${message(code:'default.download.pdf.label')}" /></td>
 			<td><g:actionSubmit class="btn btn-default" name="downloadExcel" action="downloadExcel" value="${message(code:'default.download.excel.label')}" /></td>		
 		</tr>

@@ -1,14 +1,21 @@
 package mgmt.index
 
 
-
+import org.apache.poi.ss.usermodel.CellStyle
+import org.apache.poi.ss.usermodel.CreationHelper
+import pl.touk.excel.export.WebXlsxExporter
 import static org.springframework.http.HttpStatus.*
+
+import java.util.List;
+
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class PriceIndexItemController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+	
+	private static List FIELDS = ["index","date","indexValue","dateCreated","lastUpdated"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 100, 1000)
@@ -101,4 +108,33 @@ class PriceIndexItemController {
             '*'{ render status: NOT_FOUND }
         }
     }
+	
+	def download(){
+		response.setContentType("application/ms-excel");
+		response.setHeader("Content-Disposition", "attachment; filename='Detalle de indices.xlsx'");
+		
+		def headers = FIELDS.collect{
+			message(code:'priceIndexItem.'+it+'.label')
+		}
+		new WebXlsxExporter().with {
+			fillHeader(headers)
+			add(PriceIndexItem.list(), FIELDS)
+			
+			CellStyle cellStyle = sheet.workbook.createCellStyle();
+			CreationHelper createHelper = sheet.workbook.getCreationHelper();
+			cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-mm-yy"));
+			for(int i = 1;i <= PriceIndexItem.count(); i++){
+				getCellAt(i, 1).setCellStyle(cellStyle)
+				getCellAt(i, 3).setCellStyle(cellStyle)
+				getCellAt(i, 4).setCellStyle(cellStyle)
+				
+				
+			}
+			for(int i = 0;i < FIELDS.size(); i++){
+				sheet.autoSizeColumn(i)
+			}
+			
+			save(response.outputStream)
+		}
+	}
 }
