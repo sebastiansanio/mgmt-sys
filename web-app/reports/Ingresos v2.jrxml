@@ -19,20 +19,30 @@
 		<![CDATA[SELECT
      movement_item.`id` AS movement_item_id,
      movement_item.`version` AS movement_item_version,
-     coalesce(movement_item.`amount`,0) AS movement_item_amount,
+     case when $P{Price_index_id} = -1 then coalesce(movement_item.`amount`,0) ELSE round(coalesce(movement_item.amount,0)/pii.index_value*
+			 pii_max.index_value
+			 ,2) END AS movement_item_amount,
+     case when $P{Price_index_id} = -1 then coalesce(movement_item.`iibb`,0) ELSE round(coalesce(movement_item.iibb,0)/pii.index_value*
+			 pii_max.index_value
+			 ,2) END AS movement_item_iibb,
+     case when $P{Price_index_id} = -1 then coalesce(movement_item.`iva`,0) ELSE round(coalesce(movement_item.iva,0)/pii.index_value*
+			 pii_max.index_value
+			 ,2) END AS movement_item_iva,
+     case when $P{Price_index_id} = -1 then coalesce(movement_item.`other_perceptions`,0) ELSE round(coalesce(movement_item.other_perceptions,0)/pii.index_value*
+			 pii_max.index_value
+			 ,2) END AS movement_item_other_perceptions,
+     case when $P{Price_index_id} = -1 then coalesce(movement_item.`total`,0) ELSE round(coalesce(movement_item.total,0)/pii.index_value*
+			 pii_max.index_value
+			 ,2) END AS movement_item_total,
      movement_item.`concept_id` AS movement_item_concept_id,
      movement_item.`date` AS movement_item_date,
      movement_item.`date_created` AS movement_item_date_created,
      movement_item.`description` AS movement_item_description,
-     coalesce(movement_item.`iibb`,0) AS movement_item_iibb,
      movement_item.`invoice_number` AS movement_item_invoice_number,
      movement_item.`invoice_type_id` AS movement_item_invoice_type_id,
-     coalesce(movement_item.`iva`,0) AS movement_item_iva,
      movement_item.`last_updated` AS movement_item_last_updated,
      movement_item.`movement_id` AS movement_item_movement_id,
-     coalesce(movement_item.`other_perceptions`,0) AS movement_item_other_perceptions,
      movement_item.`supplier_id` AS movement_item_supplier_id,
-     coalesce(movement_item.`total`,0) AS movement_item_total,
      movement_item.`work_id` AS movement_item_work_id,
      movement_item.`items_idx` AS movement_item_items_idx,
      movement_item.`multiplier` AS movement_item_multiplier,
@@ -92,6 +102,14 @@ FROM
      INNER JOIN `concept` concept ON movement_item.`concept_id` = concept.`id`
      left JOIN `supplier` supplier ON movement_item.`supplier_id` = supplier.`id`
 LEFT OUTER JOIN concept_group cg ON concept.concept_group_id = cg.id
+
+left outer join price_index pi on pi.id = $P{Price_index_id}
+left outer join price_index_item pii_max on pii_max.index_id = pi.id and pii_max.date = (select max(pii3.date) from price_index_item pii3 where pii3.index_id = pi.id)
+left outer join price_index_item pii on pii.index_id = pi.id 
+and case when pi.frequency = 'daily' then DATE_FORMAT(movement_item.date, '%Y-%m-%d') = DATE_FORMAT(pii.date, '%Y-%m-%d')
+when pi.frequency = 'monthly' then DATE_FORMAT(date_add(movement_item.date,interval -1 month), '%Y-%m-01') = DATE_FORMAT(pii.date, '%Y-%m-01')
+else DATE_FORMAT(movement_item.date, '%Y-%m-01') = DATE_FORMAT(pii.date, '%Y-%m-01') end
+
 where (movement.date_created >=  $P{Date_from} or $P{Date_from} is null ) and (movement.date_created < $P{Date_to} or $P{Date_to} is null)
 and (($P{Work_id} = -2 and work.id is not null) or ($P{Work_id} > -1 and work.id = $P{Work_id}) or ($P{Work_id} = -1 and work.id is null))
 and movement_item.multiplier = 1

@@ -31,10 +31,18 @@
      case when $P{Price_index_id} = -1 then coalesce(movement_item.`amount`,0) ELSE round(coalesce(movement_item.amount,0)/pii.index_value*
 			 pii_max.index_value
 			 ,2) END AS movement_item_amount,
-     coalesce(movement_item.`iibb`,0) AS movement_item_iibb,
-     coalesce(movement_item.`iva`,0) AS movement_item_iva,
-     coalesce(movement_item.`other_perceptions`,0) AS movement_item_other_perceptions,
-     coalesce( movement_item.`total`,0) AS movement_item_total,
+     case when $P{Price_index_id} = -1 then coalesce(movement_item.`iibb`,0) ELSE round(coalesce(movement_item.iibb,0)/pii.index_value*
+			 pii_max.index_value
+			 ,2) END AS movement_item_iibb,
+     case when $P{Price_index_id} = -1 then coalesce(movement_item.`iva`,0) ELSE round(coalesce(movement_item.iva,0)/pii.index_value*
+			 pii_max.index_value
+			 ,2) END AS movement_item_iva,
+     case when $P{Price_index_id} = -1 then coalesce(movement_item.`other_perceptions`,0) ELSE round(coalesce(movement_item.other_perceptions,0)/pii.index_value*
+			 pii_max.index_value
+			 ,2) END AS movement_item_other_perceptions,
+     case when $P{Price_index_id} = -1 then coalesce(movement_item.`total`,0) ELSE round(coalesce(movement_item.total,0)/pii.index_value*
+			 pii_max.index_value
+			 ,2) END AS movement_item_total,
      movement_item.`concept_id` AS movement_item_concept_id,
      movement_item.`date` AS movement_item_date,
      movement_item.`date_created` AS movement_item_date_created,
