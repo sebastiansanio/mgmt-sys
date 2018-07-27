@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Informe de Saldos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27b43501-3750-42ac-ad7d-c7726c3ab552">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
@@ -28,20 +29,20 @@
 		<![CDATA[SELECT
      movement_item.`id` AS movement_item_id,
      movement_item.`version` AS movement_item_version,
-     case when $P{Price_index_id} = -1 then coalesce(movement_item.`amount`,0) ELSE round(coalesce(movement_item.amount,0)/pii.index_value*
-			 pii_max.index_value
+     case when $P{Price_index_id} = -1 then coalesce(movement_item.`amount`,0) ELSE round(coalesce(movement_item.amount,0)/pii.index_value
+     	*(case when pi.id <> 3 then pii_max.index_value else 1 end)
 			 ,2) END AS movement_item_amount,
-     case when $P{Price_index_id} = -1 then coalesce(movement_item.`iibb`,0) ELSE round(coalesce(movement_item.iibb,0)/pii.index_value*
-			 pii_max.index_value
+     case when $P{Price_index_id} = -1 then coalesce(movement_item.`iibb`,0) ELSE round(coalesce(movement_item.iibb,0)/pii.index_value
+		*(case when pi.id <> 3 then pii_max.index_value else 1 end)
 			 ,2) END AS movement_item_iibb,
-     case when $P{Price_index_id} = -1 then coalesce(movement_item.`iva`,0) ELSE round(coalesce(movement_item.iva,0)/pii.index_value*
-			 pii_max.index_value
+     case when $P{Price_index_id} = -1 then coalesce(movement_item.`iva`,0) ELSE round(coalesce(movement_item.iva,0)/pii.index_value
+		*(case when pi.id <> 3 then pii_max.index_value else 1 end)
 			 ,2) END AS movement_item_iva,
-     case when $P{Price_index_id} = -1 then coalesce(movement_item.`other_perceptions`,0) ELSE round(coalesce(movement_item.other_perceptions,0)/pii.index_value*
-			 pii_max.index_value
+     case when $P{Price_index_id} = -1 then coalesce(movement_item.`other_perceptions`,0) ELSE round(coalesce(movement_item.other_perceptions,0)/pii.index_value
+		*(case when pi.id <> 3 then pii_max.index_value else 1 end)
 			 ,2) END AS movement_item_other_perceptions,
-     case when $P{Price_index_id} = -1 then coalesce(movement_item.`total`,0) ELSE round(coalesce(movement_item.total,0)/pii.index_value*
-			 pii_max.index_value
+     case when $P{Price_index_id} = -1 then coalesce(movement_item.`total`,0) ELSE round(coalesce(movement_item.total,0)/pii.index_value
+		*(case when pi.id <> 3 then pii_max.index_value else 1 end)
 			 ,2) END AS movement_item_total,
      movement_item.`concept_id` AS movement_item_concept_id,
      movement_item.`date` AS movement_item_date,
@@ -104,7 +105,8 @@
      supplier.`name` AS supplier_name,
      supplier.`note` AS supplier_note,
      supplier.`province` AS supplier_province,
-     supplier.`zip_code` AS supplier_zip_code
+     supplier.`zip_code` AS supplier_zip_code,
+     pi.name as price_index_name
 FROM
      `movement` movement INNER JOIN `movement_item` movement_item ON movement.`id` = movement_item.`movement_id`
      left JOIN `work` work ON movement_item.`work_id` = work.`id`
@@ -197,50 +199,51 @@ ORDER BY
 	<field name="supplier_note" class="java.lang.String"/>
 	<field name="supplier_province" class="java.lang.String"/>
 	<field name="supplier_zip_code" class="java.lang.String"/>
+	<field name="price_index_name" class="java.lang.String"/>
 	<variable name="variable1" class="java.math.BigDecimal" resetType="Group" resetGroup="CONCPET" calculation="Sum">
-		<variableExpression><![CDATA[$F{movement_item_amount}]]></variableExpression>
+		<variableExpression><![CDATA[$F{movement_item_amount}!=null?$F{movement_item_amount}:BigDecimal.valueOf(0)]]></variableExpression>
 	</variable>
 	<variable name="variable1_1" class="java.math.BigDecimal" resetType="Group" resetGroup="CONCPET" calculation="Sum">
-		<variableExpression><![CDATA[$F{movement_item_iva}]]></variableExpression>
+		<variableExpression><![CDATA[$F{movement_item_iva}!=null?$F{movement_item_iva}:BigDecimal.valueOf(0)]]></variableExpression>
 	</variable>
 	<variable name="variable1_1_2" class="java.math.BigDecimal" resetType="Group" resetGroup="CONCPET" calculation="Sum">
-		<variableExpression><![CDATA[$F{movement_item_iibb}]]></variableExpression>
+		<variableExpression><![CDATA[$F{movement_item_iibb}!=null?$F{movement_item_iibb}:BigDecimal.valueOf(0)]]></variableExpression>
 	</variable>
 	<variable name="variable1_1_2_3" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{movement_item_iibb}]]></variableExpression>
+		<variableExpression><![CDATA[$F{movement_item_iibb}!=null?$F{movement_item_iibb}:BigDecimal.valueOf(0)]]></variableExpression>
 	</variable>
 	<variable name="variable1_1_1" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{movement_item_iva}]]></variableExpression>
+		<variableExpression><![CDATA[$F{movement_item_iva}!=null?$F{movement_item_iva}:BigDecimal.valueOf(0)]]></variableExpression>
 	</variable>
 	<variable name="variable1_1_2_1" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{movement_item_amount}]]></variableExpression>
+		<variableExpression><![CDATA[$F{movement_item_amount}!=null?$F{movement_item_amount}:BigDecimal.valueOf(0)]]></variableExpression>
 	</variable>
 	<variable name="variable1_1_2_3_1" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{movement_item_iibb}]]></variableExpression>
+		<variableExpression><![CDATA[$F{movement_item_iibb}!=null?$F{movement_item_iibb}:BigDecimal.valueOf(0)]]></variableExpression>
 	</variable>
 	<variable name="variable2" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA" calculation="Sum">
-		<variableExpression><![CDATA[$F{movement_item_amount}+$F{movement_item_iibb}]]></variableExpression>
+		<variableExpression><![CDATA[$F{movement_item_amount}!=null?$F{movement_item_amount}:BigDecimal.valueOf(0)+$F{movement_item_iibb}!=null?$F{movement_item_iibb}:BigDecimal.valueOf(0)]]></variableExpression>
 	</variable>
 	<variable name="variable3" class="java.math.BigDecimal" resetType="Group" resetGroup="GRUPO" calculation="Sum">
-		<variableExpression><![CDATA[$F{movement_item_amount}]]></variableExpression>
+		<variableExpression><![CDATA[$F{movement_item_amount}!=null?$F{movement_item_amount}:BigDecimal.valueOf(0)]]></variableExpression>
 	</variable>
 	<variable name="variable3_1" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA" calculation="Sum">
-		<variableExpression><![CDATA[$F{movement_item_amount}]]></variableExpression>
+		<variableExpression><![CDATA[$F{movement_item_amount}!=null?$F{movement_item_amount}:BigDecimal.valueOf(0)]]></variableExpression>
 	</variable>
 	<variable name="variable4" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA" calculation="Sum">
-		<variableExpression><![CDATA[$F{movement_item_iva}]]></variableExpression>
+		<variableExpression><![CDATA[$F{movement_item_iva}!=null?$F{movement_item_iva}:BigDecimal.valueOf(0)]]></variableExpression>
 	</variable>
 	<variable name="variable4_1" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA" calculation="Sum">
-		<variableExpression><![CDATA[$F{movement_item_iva}]]></variableExpression>
+		<variableExpression><![CDATA[$F{movement_item_iva}!=null?$F{movement_item_iva}:BigDecimal.valueOf(0)]]></variableExpression>
 	</variable>
 	<variable name="variable1_1_2_1_2" class="java.math.BigDecimal" resetType="Group" resetGroup="GRUPO" calculation="Sum">
-		<variableExpression><![CDATA[$F{movement_item_iibb}]]></variableExpression>
+		<variableExpression><![CDATA[$F{movement_item_iibb}!=null?$F{movement_item_iibb}:BigDecimal.valueOf(0)]]></variableExpression>
 	</variable>
 	<variable name="variable1_1_2_1_2_1" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA" calculation="Sum">
-		<variableExpression><![CDATA[$F{movement_item_iibb}]]></variableExpression>
+		<variableExpression><![CDATA[$F{movement_item_iibb}!=null?$F{movement_item_iibb}:BigDecimal.valueOf(0)]]></variableExpression>
 	</variable>
 	<variable name="variable5" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA" calculation="Sum">
-		<variableExpression><![CDATA[$F{movement_item_amount}+$F{movement_item_iibb}]]></variableExpression>
+		<variableExpression><![CDATA[$F{movement_item_amount}!=null?$F{movement_item_amount}:BigDecimal.valueOf(0)+$F{movement_item_iibb}!=null?$F{movement_item_iibb}:BigDecimal.valueOf(0)]]></variableExpression>
 	</variable>
 	<group name="OBRA">
 		<groupExpression><![CDATA[$F{work_id}]]></groupExpression>
@@ -479,13 +482,6 @@ ORDER BY
 	</background>
 	<title>
 		<band height="75" splitType="Stretch">
-			<staticText>
-				<reportElement x="212" y="46" width="109" height="20" uuid="99141cc7-0ef5-4ba4-8731-f92eae458552"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Egresos]]></text>
-			</staticText>
 			<image>
 				<reportElement x="0" y="0" width="167" height="46" uuid="a6a15b92-1a90-4477-84e1-e7763758a80f"/>
 				<imageExpression><![CDATA["http://localhost:8080/urbatec/images/Logo%20Urbatec.jpg"]]></imageExpression>
@@ -500,6 +496,13 @@ ORDER BY
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="487" y="0" width="59" height="20" uuid="3a30336f-6060-46d1-b242-5adbe161181b"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="40" width="555" height="30" uuid="812f93a0-258f-4ccc-b792-6d45377b14fd"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Price_index_id}==-1?"EGRESOS A VALORES HISTORICOS":"EGRESOS ACTUALIZADOS POR "+$F{price_index_name}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
