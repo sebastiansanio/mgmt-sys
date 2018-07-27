@@ -16,19 +16,15 @@ class SupplierExpensesController {
 		movement_item.`amount` AS movement_item_amount, movement_item.`iibb` AS movement_item_iibb,
 		movement_item.`iva` AS movement_item_iva, movement_item.`other_perceptions` AS movement_item_other_perceptions,
 		movement_item.`total` AS movement_item_total, movement_item.budget_id as budget_id,
-			 round(coalesce(movement_item.amount,0)/pii.index_value*
-			 pii_max.index_value
-			 ,2) amount_indexed,
-			 round(coalesce(movement_item.iibb,0)/pii.index_value*
-			 pii_max.index_value
-			 ,2) iibb_indexed,
-			  round(coalesce(movement_item.iva,0)/pii.index_value*
-			 pii_max.index_value
-			 ,2) iva_indexed,
-			  round(coalesce(movement_item.total,0)/pii.index_value*
-			 pii_max.index_value
-			 ,2) total_indexed
-   FROM
+		round(coalesce(movement_item.amount,0)/pii.index_value
+		*(case when pi.id <> 3 then pii_max.index_value else 1 end),2) amount_indexed,
+		round(coalesce(movement_item.iibb,0)/pii.index_value
+		*(case when pi.id <> 3 then pii_max.index_value else 1 end),2) iibb_indexed,
+		round(coalesce(movement_item.iva,0)/pii.index_value
+		*(case when pi.id <> 3 then pii_max.index_value else 1 end) ,2) iva_indexed,
+		round(coalesce(movement_item.total,0)/pii.index_value
+		*(case when pi.id <> 3 then pii_max.index_value else 1 end),2) total_indexed
+   		FROM
 		`movement` movement INNER JOIN `movement_item` movement_item ON movement.`id` = movement_item.`movement_id`
 		left JOIN `work` work ON movement_item.`work_id` = work.`id`
 		INNER JOIN `concept` concept ON movement_item.`concept_id` = concept.`id`
@@ -42,10 +38,10 @@ class SupplierExpensesController {
 		else DATE_FORMAT(movement_item.date, '%Y-%m-01') = DATE_FORMAT(pii.date, '%Y-%m-01') end
 
 
-   where (movement_item.supplier_id = :supplierId or :supplierId = -1)
-   and
-   (movement.date_created >=  :dateFrom or :dateFrom is null ) and (movement.date_created < :dateTo or :dateTo is null)
-   ORDER BY
+   		where (movement_item.supplier_id = :supplierId or :supplierId = -1)
+   		and
+   		(movement.date_created >=  :dateFrom or :dateFrom is null ) and (movement.date_created < :dateTo or :dateTo is null)
+   		ORDER BY
 		supplier.id ASC, work.id ASC
 	
 	"""

@@ -14,53 +14,49 @@ class MovementsExportController {
 	
 	
 	private static final String QUERY = """	
-			 SELECT movement.date_created AS movement_date_created,
-			 coalesce(movement_item.amount*movement_item.multiplier,0) AS movement_item_amount,
-			 movement_item.date AS movement_item_date,
-		     movement_item.date_created AS movement_item_date_created,
-			 movement_item.description AS movement_item_description,
-		     coalesce(movement_item.iibb*movement_item.multiplier,0) AS movement_item_iibb,
-			 coalesce(movement_item.iva*movement_item.multiplier,0) AS movement_item_iva,
-		     coalesce(movement_item.total*movement_item.multiplier,0) AS movement_item_total, 
-			 movement.number AS movement_number,
-		     CONCAT(upper(movement.type)," ",movement.number,"/",movement.year) AS operation,
-		     movement.note AS movement_note, work.code AS work_code,
-		     work.name AS work_name, concept.code AS concept_code,
-			 supplier.name as supplier_name,
+			SELECT movement.date_created AS movement_date_created,
+			coalesce(movement_item.amount*movement_item.multiplier,0) AS movement_item_amount,
+			movement_item.date AS movement_item_date,
+		    movement_item.date_created AS movement_item_date_created,
+			movement_item.description AS movement_item_description,
+		    coalesce(movement_item.iibb*movement_item.multiplier,0) AS movement_item_iibb,
+			coalesce(movement_item.iva*movement_item.multiplier,0) AS movement_item_iva,
+		    coalesce(movement_item.total*movement_item.multiplier,0) AS movement_item_total, 
+			movement.number AS movement_number,
+		    CONCAT(upper(movement.type)," ",movement.number,"/",movement.year) AS operation,
+		    movement.note AS movement_note, work.code AS work_code,
+		    work.name AS work_name, concept.code AS concept_code,
+			supplier.name as supplier_name,
 
-			 round(coalesce(movement_item.amount*movement_item.multiplier,0)/pii.index_value*
-			 pii_max.index_value
-			 ,2) amount_indexed,
-			 round(coalesce(movement_item.iibb*movement_item.multiplier,0)/pii.index_value*
-			 pii_max.index_value
-			 ,2) iibb_indexed,
-			  round(coalesce(movement_item.iva*movement_item.multiplier,0)/pii.index_value*
-			 pii_max.index_value
-			 ,2) iva_indexed,
-			  round(coalesce(movement_item.total*movement_item.multiplier,0)/pii.index_value*
-			 pii_max.index_value
-			 ,2) total_indexed
-		FROM
-		     movement movement INNER JOIN movement_item movement_item ON movement.id = movement_item.movement_id
-		     left JOIN work work ON movement_item.work_id = work.id
-		     INNER JOIN concept concept ON movement_item.concept_id = concept.id
-		     left JOIN supplier supplier ON movement_item.supplier_id = supplier.id
-		LEFT OUTER JOIN concept_group cg ON concept.concept_group_id = cg.id
-		left outer join price_index pi on pi.id = :priceIndexId
-		left outer join price_index_item pii_max on pii_max.index_id = pi.id and pii_max.date = (select max(pii3.date) from price_index_item pii3 where pii3.index_id = pi.id)
-		left outer join price_index_item pii on pii.index_id = pi.id 
-		and case when pi.frequency = 'daily' then DATE_FORMAT(movement_item.date, '%Y-%m-%d') = DATE_FORMAT(pii.date, '%Y-%m-%d')
-		when pi.frequency = 'monthly' then DATE_FORMAT(date_add(movement_item.date,interval -1 month), '%Y-%m-01') = DATE_FORMAT(pii.date, '%Y-%m-01')
-		else DATE_FORMAT(movement_item.date, '%Y-%m-01') = DATE_FORMAT(pii.date, '%Y-%m-01') end
+			round(coalesce(movement_item.amount*movement_item.multiplier,0)/pii.index_value
+			*(case when pi.id <> 3 then pii_max.index_value else 1 end),2) amount_indexed,
+			round(coalesce(movement_item.iibb*movement_item.multiplier,0)/pii.index_value
+			*(case when pi.id <> 3 then pii_max.index_value else 1 end),2) iibb_indexed,
+			round(coalesce(movement_item.iva*movement_item.multiplier,0)/pii.index_value
+			*(case when pi.id <> 3 then pii_max.index_value else 1 end),2) iva_indexed,
+			round(coalesce(movement_item.total*movement_item.multiplier,0)/pii.index_value
+			*(case when pi.id <> 3 then pii_max.index_value else 1 end) ,2) total_indexed
+			FROM
+		    movement movement INNER JOIN movement_item movement_item ON movement.id = movement_item.movement_id
+		    left JOIN work work ON movement_item.work_id = work.id
+		    INNER JOIN concept concept ON movement_item.concept_id = concept.id
+		    left JOIN supplier supplier ON movement_item.supplier_id = supplier.id
+			LEFT OUTER JOIN concept_group cg ON concept.concept_group_id = cg.id
+			left outer join price_index pi on pi.id = :priceIndexId
+			left outer join price_index_item pii_max on pii_max.index_id = pi.id and pii_max.date = (select max(pii3.date) from price_index_item pii3 where pii3.index_id = pi.id)
+			left outer join price_index_item pii on pii.index_id = pi.id 
+			and case when pi.frequency = 'daily' then DATE_FORMAT(movement_item.date, '%Y-%m-%d') = DATE_FORMAT(pii.date, '%Y-%m-%d')
+			when pi.frequency = 'monthly' then DATE_FORMAT(date_add(movement_item.date,interval -1 month), '%Y-%m-01') = DATE_FORMAT(pii.date, '%Y-%m-01')
+			else DATE_FORMAT(movement_item.date, '%Y-%m-01') = DATE_FORMAT(pii.date, '%Y-%m-01') end
 
-		where (movement_item.date >=  :dateFrom or :dateFrom is null ) and (movement_item.date < :dateTo or :dateTo is null)
-		and ((:workId = -2 and work.id is not null) or  (:workId > -1 and work.id = :workId) or (:workId = -1 and work.id is null)
-		and (:concepts = 'all' or 
-		(:concepts = 'toM799' and (concept.code between 'M000' and 'M799' or concept.code between 'P000' and 'P799')) 
-	or (:concepts = 'fromM800'and (concept.code between 'M800' and 'M999' or concept.code between 'P800' and 'P999'))
-		))
-		ORDER BY work.code ASC, cg.name asc, concept.code asc, movement.date_created desc
-	"""
+			where (movement_item.date >=  :dateFrom or :dateFrom is null ) and (movement_item.date < :dateTo or :dateTo is null)
+			and ((:workId = -2 and work.id is not null) or  (:workId > -1 and work.id = :workId) or (:workId = -1 and work.id is null)
+			and (:concepts = 'all' or 
+			(:concepts = 'toM799' and (concept.code between 'M000' and 'M799' or concept.code between 'P000' and 'P799')) 
+			or (:concepts = 'fromM800'and (concept.code between 'M800' and 'M999' or concept.code between 'P800' and 'P999'))
+			))
+			ORDER BY work.code ASC, cg.name asc, concept.code asc, movement.date_created desc
+		"""
 	
     def index() { }
 	
