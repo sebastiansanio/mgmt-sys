@@ -19,9 +19,15 @@
 			<td><g:select class="select-chosen" name="workId" from="${mgmt.work.Work.list([sort:['type':'desc','code':'desc']])}" optionKey="id" value="" />
 		</tr>
 		<tr>
+			<td><label for="Price_index_id"><g:message code="priceIndex.label"/> </label></td>
+			<td><g:select class="select-chosen" noSelection="${['-1':'Ninguno']}" name="Price_index_id" from="${mgmt.index.PriceIndex.list(sort:'name')}" optionKey="id" optionValue="name" value="" />
+		</tr>
+		<tr>
 			<td><g:submitButton class="btn btn-default" name="show" value="${message(code:'default.show.label')}" /></td>
 			<td><g:hiddenField name="id" value="${mgmt.reports.Report.findByCode('workBalance').id}"/> <g:actionSubmit class="btn btn-default" name="download" action="download" value="${message(code:'default.download.pdf.label')}" /></td>
 		</tr>
+
+
 	</tbody>
 </table>
 </g:form>

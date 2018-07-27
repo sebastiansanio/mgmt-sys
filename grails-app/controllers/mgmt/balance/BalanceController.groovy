@@ -2,6 +2,7 @@ package mgmt.balance
 
 import groovy.sql.Sql
 import mgmt.work.Work
+import mgmt.index.PriceIndex
 
 class BalanceController {
 
@@ -13,6 +14,7 @@ class BalanceController {
 	
 	def show(){
 		Work work = Work.get(params.long('workId'))
+		PriceIndex index = PriceIndex.get(params.long('Price_index_id'))
 		Map amounts = new HashMap()
 		amounts.income = calculateAmount(work.id,'P100','P101')
 		amounts.otherIncome = calculateAmount(work.id,'P200','P600')
@@ -42,6 +44,6 @@ class BalanceController {
 	}
 	
 	def download(){
-		redirect(controller: 'report', action: 'downloadReport', params: [workId:params.workId, id: params.id])
+		redirect(controller: 'report', action: 'downloadReport', params: [workId:params.workId, Price_index_id:params.Price_index_id, id: params.id])
 	}
 }
