@@ -19,6 +19,8 @@ class PriceIndexItemController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 100, 1000)
+		params.sort = params.sort ?: 'date'
+		params.order = params.order ?: 'desc'
         respond PriceIndexItem.list(params), model:[priceIndexItemInstanceCount: PriceIndexItem.count()]
     }
 
