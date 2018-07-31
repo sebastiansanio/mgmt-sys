@@ -1,18 +1,28 @@
 package mgmt.index
 
 
+import static org.springframework.http.HttpStatus.*
+import grails.transaction.Transactional
+import groovy.sql.Sql
+
 import org.apache.poi.ss.usermodel.CellStyle
 import org.apache.poi.ss.usermodel.CreationHelper
+
 import pl.touk.excel.export.WebXlsxExporter
-import static org.springframework.http.HttpStatus.*
-
-import java.util.List;
-
-import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class PriceIndexItemController {
 
+	def dataSource
+	private static final String QUERY = """
+		select distinct STR_TO_DATE(DATE_FORMAT(mi.date, '%Y-%m-01'),'%Y-%m-%d') dateValue,
+		pi.name priceIndex, pi.id priceIndexId
+		from movement_item mi inner join price_index pi on 1=1 
+		where DATE_FORMAT(mi.date, '%Y-%m-01') not in 
+		(select DATE_FORMAT(pii.date, '%Y-%m-01') from price_index_item pii where index_id = pi.id)
+		order by 1 desc, 2 desc
+	"""
+	
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 	
 	private static List FIELDS = ["index","date","indexValue","dateCreated","lastUpdated"]
@@ -21,7 +31,14 @@ class PriceIndexItemController {
         params.max = Math.min(max ?: 100, 1000)
 		params.sort = params.sort ?: 'date'
 		params.order = params.order ?: 'desc'
-        respond PriceIndexItem.list(params), model:[priceIndexItemInstanceCount: PriceIndexItem.count()]
+		def priceIndexItemList = PriceIndexItem.createCriteria().list(params) {
+			if(params.indexId){
+				eq("index.id",params.long('indexId'))
+			}
+		}
+		
+		
+        respond priceIndexItemList, model:[priceIndexItemInstanceCount: priceIndexItemList.totalCount]
     }
 
     def show(PriceIndexItem priceIndexItemInstance) {
@@ -110,6 +127,21 @@ class PriceIndexItemController {
             '*'{ render status: NOT_FOUND }
         }
     }
+	
+	def checkMissingValues(){
+		def sql = new Sql(dataSource)
+		def rows = sql.rows(QUERY)
+		List missingValues = new ArrayList()
+		rows.each { row ->
+			Map missingValue = new HashMap()
+			missingValue.dateValue = row.dateValue
+			missingValue.priceIndex = row.priceIndex
+			missingValue.priceIndexId = row.priceIndexId
+			missingValues.add(missingValue)
+		}
+		sql.close()
+		[missingValues: missingValues]
+	}
 	
 	def download(){
 		response.setContentType("application/ms-excel");
