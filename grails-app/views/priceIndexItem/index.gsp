@@ -36,6 +36,9 @@
 				<th>${message(code: 'priceIndexItem.month.label').toUpperCase()}</th>
 				<g:sortableColumn params="${params}" property="date" title="${message(code: 'priceIndexItem.day.label').toUpperCase()}" />
 				<th>${message(code: 'priceIndexItem.indexValue.label').toUpperCase()}</th>
+				<sec:access url="/priceIndexItem/delete">
+					<th class="center-aligned">${message(code:'default.button.delete.label')}</th>
+				</sec:access>
 			</tr>
 		</thead>
 		<tbody>
@@ -46,6 +49,15 @@
 				<td>${message(code:'month.'+(priceIndexItemInstance.date[Calendar.MONTH]+1)+'.label')+" " + (priceIndexItemInstance.date[Calendar.YEAR]%100)}</td>
 				<td><g:formatDate date="${priceIndexItemInstance.date}" /></td>
 				<td><span class="pull-right"><g:formatNumber number="${fieldValue(bean: priceIndexItemInstance, field: "indexValue")}" format="#.00"/></span></td>
+				<sec:access url="/priceIndexItem/delete">
+					<td class="center-aligned">
+						<g:form action="delete">
+							<g:hiddenField name="_method" value="DELETE" />
+							<g:hiddenField name="id" value="${priceIndexItemInstance.id}" />
+							<button onclick="if(!confirm('${message(code:'default.delete.confirm.message')}')) event.preventDefault();" class="btn btn-danger btn-xs" name="delete"><span class="glyphicon glyphicon-trash"></span> </button>
+						</g:form>
+					</td>
+				</sec:access>
 			</tr>
 		</g:each>
 		</tbody>
