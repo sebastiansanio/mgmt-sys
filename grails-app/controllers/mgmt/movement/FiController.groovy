@@ -1,10 +1,10 @@
 package mgmt.movement
 
-
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import mgmt.concept.Concept
+import mgmt.config.Parameter
+import mgmt.persons.Supplier
 
 @Transactional(readOnly = true)
 class FiController {
@@ -50,6 +50,8 @@ class FiController {
 
 	private void fillItems(Movement movement, Concept concept){
 		Date date = new Date().clearTime()
+		Supplier supplier = Supplier.get(Long.valueOf(Parameter.findByCode("FI_SUPPLIER_ID").value))
+		
 		for(int i = 0; i < movement.items.size()/2; i++){
 			movement.items[2*i+1].description = movement.items[2*i].description
 			movement.items[2*i+1].unit = movement.items[2*i].unit
@@ -63,6 +65,9 @@ class FiController {
 			movement.items[2*i+1].multiplier = -1
 			movement.items[2*i].date = date
 			movement.items[2*i+1].date = date
+			
+			movement.items[2*i].supplier = supplier
+			movement.items[2*i+1].supplier = supplier
 			
 			movement.items[2*i].iibb = BigDecimal.valueOf(0)
 			movement.items[2*i+1].iibb = BigDecimal.valueOf(0)
