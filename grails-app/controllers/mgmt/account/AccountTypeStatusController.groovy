@@ -49,10 +49,11 @@ class AccountTypeStatusController {
 		
 		def accounts
 		
+		
 		if (accountTypeInstance){
-			accounts = accountTypeInstance.accounts.findAll{balances[it.id]!=0}.sort{((balances[it.id]?:0) !=0 ? ' ':'') +    it.name}
+			accounts = accountTypeInstance.accounts.findAll{balances[it.id]}.sort{((balances[it.id]?:0) !=0 ? ' ':'') +    it.name}
 		}else{
-			accounts = Account.list().findAll{balances[it.id]==0}.sort{it.name}
+			accounts = Account.list().findAll{!balances[it.id]}.sort{it.name}
 		}
 			
         respond accounts,model: [accounts:accounts,balances:balances]
