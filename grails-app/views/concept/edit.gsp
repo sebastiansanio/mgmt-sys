@@ -32,7 +32,16 @@
 	            <button class="btn" type="reset"><g:message code="default.button.reset.label" default="Reset" /></button>
 			</div>
 		</g:form>
-
+		
+		<sec:access url="/concept/delete">
+			<g:if test="${!conceptInstance.movements  && !mgmt.work.SupplierBudget.countByConcept(conceptInstance)}">
+				<g:form action="delete">
+					<g:hiddenField name="_method" value="DELETE" />
+					<g:hiddenField name="id" value="${conceptInstance.id}" />
+					<g:submitButton onclick="if(!confirm('${message(code:'default.delete.confirm.message')}')) event.preventDefault();" class="btn btn-danger" name="delete" value="${message(code:'default.button.delete.label') }" /> 
+				</g:form>
+			</g:if>
+		</sec:access>
 	</section>
 
 </body>

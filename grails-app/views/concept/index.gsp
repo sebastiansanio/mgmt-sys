@@ -34,6 +34,9 @@
 				<th class="center-aligned"><g:message code="concept.conceptGroup.label" default="Concept Group" /></th>
 				<th class="center-aligned"><g:message code="concept.conceptAccount.label" default="Concept Account" /></th>
 				<g:sortableColumn class="center-aligned" property="dateCreated" title="${message(code: 'account.dateCreated.label')}" />
+				<sec:access url="/concept/delete">
+					<th class="center-aligned">${message(code:'default.button.delete.label')}</th>
+				</sec:access>
 			</tr>
 		</thead>
 		<tbody>
@@ -45,6 +48,18 @@
 				<td>${fieldValue(bean: conceptInstance, field: "conceptGroup")}</td>
 				<td>${fieldValue(bean: conceptInstance, field: "conceptAccount")}</td>
 				<td class="center-aligned"><g:formatDate date="${conceptInstance.dateCreated}"/></td>
+			
+				<sec:access url="/concept/delete"><td class="center-aligned">
+					<g:if test="${!conceptInstance.movements && !mgmt.work.SupplierBudget.countByConcept(conceptInstance)}">
+					<g:form action="delete">
+						<g:hiddenField name="_method" value="DELETE" />
+						<g:hiddenField name="id" value="${conceptInstance.id}" />
+						<button onclick="if(!confirm('${message(code:'default.delete.confirm.message')}')) event.preventDefault();" class="btn btn-danger btn-xs" name="delete"><span class="glyphicon glyphicon-trash"></span> </button>
+					</g:form>
+					</g:if>
+				</td></sec:access>
+			
+			
 			</tr>
 		</g:each>
 		</tbody>
