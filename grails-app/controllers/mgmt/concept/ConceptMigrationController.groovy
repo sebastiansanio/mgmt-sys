@@ -7,7 +7,9 @@ import mgmt.work.SupplierBudget
 class ConceptMigrationController {
 
 	def index() {
+		[:]
 	}
+	
 	@Transactional
 	def migrate(){
 		Concept conceptFrom = Concept.get(params.long('conceptFrom'))
@@ -18,5 +20,7 @@ class ConceptMigrationController {
 		SupplierBudget.executeUpdate("update MovementItem mi set mi.concept = :conceptTo where mi.concept=:conceptFrom",
 			[conceptTo: conceptTo, conceptFrom:conceptFrom])
 		
+		flash.message = message(code: 'conceptMigration.success.message',args: [conceptFrom.toString(),conceptTo.toString()])
+		redirect action: "index"
 	}
 }
