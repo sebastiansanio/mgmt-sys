@@ -18,14 +18,14 @@
 		<g:field type="text" disabled="true" class="form-control mayus importantBig" name="toString" value="${movementInstance.toString()}"/>
 	</div>
 </div>
+</g:if>
 
 <div class="col-md-1" >
 	<label for="dateCreated" class="control-label"><g:message code="movement.dateCreated.label" /></label>
 	<div>
-		<g:field type="text" disabled="true" class="form-control mayus importantBig" name="dateCreated" value="${movementInstance.dateCreated?.format("dd/MM/yyyy")}"/>
+		<g:field type="text" disabled="true" class="form-control mayus importantBig" name="dateCreated" value="${(movementInstance.dateCreated?:new Date()).format("dd/MM/yyyy")}"/>
 	</div>
 </div>
-</g:if>
 
 </div>
 
