@@ -206,7 +206,7 @@
 	<subDataset name="Movimientos" uuid="481ed7f6-caa6-4ba4-b893-77fbc12418c9">
 		<parameter name="movement_id_m" class="java.lang.Long" isForPrompting="false"/>
 		<queryString>
-			<![CDATA[select p1.movement_id,a1.name as account_from, a2.name as account_to, p1.payment_date,p1.amount,p1.note,p1.check_number
+			<![CDATA[select p1.movement_id,concat(a1.code,' ',a1.name) as account_from, concat(a2.code,' ',a2.name) as account_to, p1.payment_date,p1.amount,p1.note,p1.check_number
 from payment p1
 left join payment p2 on p1.payments_idx +1 = p2.payments_idx
 left join account a1 on p1.account_id = a1.id

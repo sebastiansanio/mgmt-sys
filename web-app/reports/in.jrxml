@@ -166,7 +166,7 @@
 	<subDataset name="Pagos" uuid="6cbecb78-3936-4f2f-ac4e-6524a71a7c4b">
 		<parameter name="movement_id_p" class="java.lang.Long" isForPrompting="false"/>
 		<queryString language="SQL">
-			<![CDATA[select * from payment p left join account a on p.account_id = a.id where p.movement_id = $P{movement_id_p}]]>
+			<![CDATA[select concat(a.code,' ',a.name) name, p.amount,p.check_number,p.payment_date,p.note from payment p left join account a on p.account_id = a.id where p.movement_id = $P{movement_id_p}]]>
 		</queryString>
 		<field name="name" class="java.lang.String">
 			<fieldDescription><![CDATA[]]></fieldDescription>
