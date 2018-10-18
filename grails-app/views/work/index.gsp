@@ -36,6 +36,10 @@
 				<sec:access url="/work/close">
 				<th class="center-aligned"><g:message code="work.close.label" /></th>
 				</sec:access>
+				
+				<sec:access url="/work/delete">
+				<th class="center-aligned">${message(code:'default.button.delete.label')}</th>
+				</sec:access>
 			</tr>
 		</thead>
 		<tbody>
@@ -48,37 +52,47 @@
 				<td><g:formatBoolean boolean="${workInstance.finished}" /></td>
 				<td>${fieldValue(bean: workInstance, field: "client")}</td>
 				<td class="center-aligned"><g:formatDate date="${workInstance.dateCreated}" /></td>
-			
 				
-					<g:if test="${!workInstance.finished}">
-						<sec:access url="/work/close">
-							<td class="center-aligned">
-								<g:form action="close">
-									<g:hiddenField name="id" value="${workInstance.id}" />
-									<g:hiddenField name="max" value="${params.max}" />
-									<g:hiddenField name="sort" value="${params.sort}" />
-									<g:hiddenField name="order" value="${params.order}" />
-									<g:hiddenField name="offset" value="${params.offset}" />
-									<g:submitButton class="btn btn-danger btn-xs" name="close" value="${message(code:'work.close.label') }" /> 
-								</g:form>
-							</td>
-						</sec:access>
-					</g:if>
-					<g:else>
-						<sec:access url="/work/open">
-							<td class="center-aligned">
-								<g:form action="open">
-									<g:hiddenField name="id" value="${workInstance.id}" />
-									<g:hiddenField name="max" value="${params.max}" />
-									<g:hiddenField name="sort" value="${params.sort}" />
-									<g:hiddenField name="order" value="${params.order}" />
-									<g:hiddenField name="offset" value="${params.offset}" />
-									<g:submitButton class="btn btn-primary btn-xs" name="open" value="${message(code:'work.open.label') }" /> 
-								</g:form>
-							</td>
-						</sec:access>
-					</g:else>
+				<g:if test="${!workInstance.finished}">
+					<sec:access url="/work/close">
+						<td class="center-aligned">
+							<g:form action="close">
+								<g:hiddenField name="id" value="${workInstance.id}" />
+								<g:hiddenField name="max" value="${params.max}" />
+								<g:hiddenField name="sort" value="${params.sort}" />
+								<g:hiddenField name="order" value="${params.order}" />
+								<g:hiddenField name="offset" value="${params.offset}" />
+								<g:submitButton class="btn btn-danger btn-xs" name="close" value="${message(code:'work.close.label') }" /> 
+							</g:form>
+						</td>
+					</sec:access>
+				</g:if>
+				<g:else>
+					<sec:access url="/work/open">
+						<td class="center-aligned">
+							<g:form action="open">
+								<g:hiddenField name="id" value="${workInstance.id}" />
+								<g:hiddenField name="max" value="${params.max}" />
+								<g:hiddenField name="sort" value="${params.sort}" />
+								<g:hiddenField name="order" value="${params.order}" />
+								<g:hiddenField name="offset" value="${params.offset}" />
+								<g:submitButton class="btn btn-primary btn-xs" name="open" value="${message(code:'work.open.label') }" /> 
+							</g:form>
+						</td>
+					</sec:access>
+				</g:else>
 				
+				<sec:access url="/work/delete">
+				<td class="center-aligned">
+				<g:if test="${!workInstance.budget && !workInstance.movements}">
+				<g:form action="delete">
+					<g:hiddenField name="_method" value="DELETE" />
+					<g:hiddenField name="id" value="${workInstance.id}" />
+					<button onclick="if(!confirm('${message(code:'default.delete.confirm.message')}')) event.preventDefault();" class="btn btn-danger btn-xs" name="delete"><span class="glyphicon glyphicon-trash"></span> </button>
+				</g:form>
+				</g:if>
+				</td>
+				</sec:access>
 			
 			</tr>
 		</g:each>

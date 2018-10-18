@@ -46,7 +46,8 @@
 				<td>${fieldValue(bean: accountInstance, field: "type")}</td>
 				<td class="center-aligned"><g:formatDate date="${accountInstance.dateCreated}"/></td>
 				
-				<sec:access url="/account/delete"><td class="center-aligned">
+				<sec:access url="/account/delete">
+				<td class="center-aligned">
 				<g:if test="${!accountInstance.payments}">
 				<g:form action="delete">
 					<g:hiddenField name="_method" value="DELETE" />
@@ -54,7 +55,8 @@
 					<button onclick="if(!confirm('${message(code:'default.delete.confirm.message')}')) event.preventDefault();" class="btn btn-danger btn-xs" name="delete"><span class="glyphicon glyphicon-trash"></span> </button>
 				</g:form>
 				</g:if>
-				</td></sec:access>
+				</td>
+				</sec:access>
 			</tr>
 		</g:each>
 		</tbody>
