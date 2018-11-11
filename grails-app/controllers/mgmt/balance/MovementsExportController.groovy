@@ -16,7 +16,7 @@ class MovementsExportController {
 	private static final String QUERY = """	
 			SELECT movement.date_created AS movement_date_created,
 			coalesce(movement_item.amount*movement_item.multiplier,0) AS movement_item_amount,
-			movement_item.date AS movement_item_date,
+			movement.date_created AS movement_item_date,
 		    movement_item.date_created AS movement_item_date_created,
 			movement_item.description AS movement_item_description,
 		    coalesce(movement_item.iibb*movement_item.multiplier,0) AS movement_item_iibb,
@@ -49,7 +49,7 @@ class MovementsExportController {
 			when pi.frequency = 'monthly' then DATE_FORMAT(date_add(movement_item.date,interval -1 month), '%Y-%m-01') = DATE_FORMAT(pii.date, '%Y-%m-01')
 			else DATE_FORMAT(movement_item.date, '%Y-%m-01') = DATE_FORMAT(pii.date, '%Y-%m-01') end
 
-			where (movement_item.date >=  :dateFrom or :dateFrom is null ) and (movement_item.date < :dateTo or :dateTo is null)
+			where (movement.date_created >=  :dateFrom or :dateFrom is null ) and (date(movement.date_created) <= :dateTo or :dateTo is null)
 			and ((:workId = -2 and work.id is not null) or  (:workId > -1 and work.id = :workId) or (:workId = -1 and work.id is null)
 			and (:concepts = 'all' or 
 			(:concepts = 'toM799' and (concept.code between 'M000' and 'M799' or concept.code between 'P000' and 'P799')) 
@@ -74,7 +74,7 @@ class MovementsExportController {
 			Sql sql = new Sql(dataSource)
 			def rows = sql.rows(QUERY,[priceIndexId:params.long('Price_index_id'),concepts:params.concepts,workId:params.long('Work_id'),dateFrom:params.Date_from?DATE_FORMAT.parse(params.Date_from):null,dateTo:params.Date_to?DATE_FORMAT.parse(params.Date_to):null])
 			long queryCount = rows.size()
-			add(rows, ["work_code","operation","supplier_name","concept_code","movement_date_created","movement_item_description","movement_item_amount","movement_item_iva","movement_item_iibb","amount_indexed","iva_indexed","iibb_indexed","total_indexed"])
+			add(rows, ["work_code","operation","supplier_name","concept_code","movement_item_date","movement_item_description","movement_item_amount","movement_item_iva","movement_item_iibb","amount_indexed","iva_indexed","iibb_indexed","total_indexed"])
 			sql.close()
 			
 			
