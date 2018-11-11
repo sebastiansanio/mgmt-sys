@@ -48,9 +48,8 @@ class FiController {
         respond new Movement(params)
     }
 
-	private void fillItems(Movement movement, Concept concept){
-		Date date = new Date().clearTime()
-		Supplier supplier = Supplier.get(Long.valueOf(Parameter.findByCode("FI_SUPPLIER_ID").value))
+	private void fillItems(Movement movement, Concept concept, Supplier supplier){
+		Date date = movement.dateCreated?movement.dateCreated.clearTime(): new Date().clearTime()
 		
 		for(int i = 0; i < movement.items.size()/2; i++){
 			movement.items[2*i+1].description = movement.items[2*i].description
@@ -88,7 +87,8 @@ class FiController {
         }
 		movementInstance.items = movementInstance.items - [null]
 		movementInstance.payments = movementInstance.payments - [null]
-		fillItems(movementInstance,concept)
+		Supplier supplier = Supplier.get(Long.valueOf(Parameter.findByCode("FI_SUPPLIER_ID").value))
+		fillItems(movementInstance,concept,supplier)
 		movementInstance.validate()
 
         if (movementInstance.hasErrors()) {
@@ -118,6 +118,7 @@ class FiController {
     @Transactional
     def update() {
 		def concept = Concept.findByCode("P600")
+		Supplier supplier = Supplier.get(Long.valueOf(Parameter.findByCode("FI_SUPPLIER_ID").value))
 		def movementInstance = Movement.get(params.id.toLong())
         if (movementInstance == null || movementInstance.type != 'fi') {
             notFound()
@@ -149,7 +150,8 @@ class FiController {
 		movementInstance.properties = params
 		movementInstance.items = movementInstance.items - [null]
 		movementInstance.payments = movementInstance.payments - [null]
-		fillItems(movementInstance,concept)
+		
+		fillItems(movementInstance,concept,supplier)
 		movementInstance.validate()
 		if (movementInstance.hasErrors()) {
             respond movementInstance.errors, view:'edit'
