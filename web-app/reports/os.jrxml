@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="op" language="groovy" pageWidth="595" pageHeight="842" columnWidth="589" leftMargin="3" rightMargin="3" topMargin="20" bottomMargin="20" uuid="8a7719ce-943e-4e58-bcc4-17a1c4039d85">
 	<property name="ireport.zoom" value="0.9330147604194666"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -557,14 +559,18 @@ from movement m where m.id = $P{movement_id}]]>
 						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="44" height="20" uuid="c9db0fab-4d80-4510-a219-2ccea2ac8c33"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
 								<text><![CDATA[Otros]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="table 2_TD" height="28" rowSpan="1">
 							<textField pattern="#,##0.00" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="44" height="20" uuid="f0024d01-b19b-4c0d-adfc-8501c98de080"/>
-								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{other_perceptions}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -613,10 +619,10 @@ from movement m where m.id = $P{movement_id}]]>
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:column width="77" uuid="aec25bdb-e8aa-430c-a11f-3b82fbaac1c0">
+					<jr:column width="140" uuid="aec25bdb-e8aa-430c-a11f-3b82fbaac1c0">
 						<jr:columnHeader style="table 7_CH" height="20" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="76" height="20" uuid="26640491-9de3-4f0b-aa63-5d2ffc0a45f1"/>
+								<reportElement x="0" y="0" width="140" height="20" uuid="26640491-9de3-4f0b-aa63-5d2ffc0a45f1"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
@@ -625,7 +631,7 @@ from movement m where m.id = $P{movement_id}]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table 7_TD" height="20" rowSpan="1">
 							<textField isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="76" height="20" uuid="04d73317-7686-4caa-9c5b-813313b67764"/>
+								<reportElement x="0" y="0" width="140" height="20" uuid="04d73317-7686-4caa-9c5b-813313b67764"/>
 								<textElement verticalAlignment="Middle">
 									<font size="8"/>
 									<paragraph leftIndent="1"/>
@@ -646,7 +652,7 @@ from movement m where m.id = $P{movement_id}]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table 7_TD" height="20" rowSpan="1">
 							<textField pattern="#,##0.00" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="75" height="20" uuid="ab533a56-085c-461a-a2ca-58c4a15d3e92"/>
+								<reportElement x="0" y="0" width="76" height="20" uuid="ab533a56-085c-461a-a2ca-58c4a15d3e92"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
