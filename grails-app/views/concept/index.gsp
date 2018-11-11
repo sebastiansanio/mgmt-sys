@@ -50,7 +50,7 @@
 				<td class="center-aligned"><g:formatDate date="${conceptInstance.dateCreated}"/></td>
 			
 				<sec:access url="/concept/delete"><td class="center-aligned">
-					<g:if test="${!conceptInstance.movements && !mgmt.work.SupplierBudget.countByConcept(conceptInstance)}">
+					<g:if test="${!conceptInstance.movements && !mgmt.work.SupplierBudget.countByConcept(conceptInstance) && !mgmt.work.BudgetItem.countByConcept(conceptInstance)}">
 					<g:form action="delete">
 						<g:hiddenField name="_method" value="DELETE" />
 						<g:hiddenField name="id" value="${conceptInstance.id}" />

@@ -2,6 +2,7 @@ package mgmt.concept
 
 import grails.transaction.Transactional
 import mgmt.movement.MovementItem
+import mgmt.work.BudgetItem
 import mgmt.work.SupplierBudget
 
 class ConceptMigrationController {
@@ -19,7 +20,9 @@ class ConceptMigrationController {
 			[conceptTo: conceptTo, conceptFrom:conceptFrom])
 		SupplierBudget.executeUpdate("update SupplierBudget mi set mi.concept = :conceptTo where mi.concept=:conceptFrom",
 			[conceptTo: conceptTo, conceptFrom:conceptFrom])
-		
+		BudgetItem.executeUpdate("update BudgetItem mi set mi.concept = :conceptTo where mi.concept=:conceptFrom",
+			[conceptTo: conceptTo, conceptFrom:conceptFrom])
+
 		flash.message = message(code: 'conceptMigration.success.message',args: [conceptFrom.toString(),conceptTo.toString()])
 		redirect action: "index"
 	}
