@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2018-10-17T23:46:12 -->
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Informe de Saldos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27b43501-3750-42ac-ad7d-c7726c3ab552">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="168"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="824"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="Date_from" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -30,8 +31,6 @@
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT
-     movement_item.`id` AS movement_item_id,
-     movement_item.`version` AS movement_item_version,
      case when $P{Price_index_id} = -1 then coalesce(movement_item.`amount`,0) ELSE round(coalesce(movement_item.amount,0)/pii.index_value
      	*(case when pi.id <> 3 then pii_max.index_value else 1 end)
 			 ,2) END AS movement_item_amount,
@@ -47,68 +46,37 @@
      case when $P{Price_index_id} = -1 then coalesce(movement_item.`total`,0) ELSE round(coalesce(movement_item.total,0)/pii.index_value
 		*(case when pi.id <> 3 then pii_max.index_value else 1 end)
 			 ,2) END AS movement_item_total,
-     movement_item.`concept_id` AS movement_item_concept_id,
+			 
+	 case when concept.code between 'A000' and 'I999' THEN case when $P{Price_index_id} = -1 then (coalesce(movement_item.amount,0) + coalesce(movement_item.iibb,0)) ELSE round((coalesce(movement_item.amount,0) + coalesce(movement_item.iibb,0))/pii.index_value
+		*(case when pi.id <> 3 then pii_max.index_value else 1 end)
+			 ,2) END ELSE 0 END AS amount_cdo,	 
+	case when concept.code between 'L000' and 'L999' THEN case when $P{Price_index_id} = -1 then (coalesce(movement_item.amount,0) + coalesce(movement_item.iibb,0)) ELSE round((coalesce(movement_item.amount,0) + coalesce(movement_item.iibb,0))/pii.index_value
+		*(case when pi.id <> 3 then pii_max.index_value else 1 end)
+			 ,2) END ELSE 0 END AS amount_ggo,	
+	case when concept.code between 'N000' and 'N999' THEN case when $P{Price_index_id} = -1 then (coalesce(movement_item.amount,0) + coalesce(movement_item.iibb,0)) ELSE round((coalesce(movement_item.amount,0) + coalesce(movement_item.iibb,0))/pii.index_value
+		*(case when pi.id <> 3 then pii_max.index_value else 1 end)
+			 ,2) END ELSE 0 END AS amount_n,			 
+	
+			 
+			 movement.date_created movement_date_created,
+			 movement_item.work_id work_id,
      movement_item.`date` AS movement_item_date,
-     movement_item.`date_created` AS movement_item_date_created,
      movement_item.`description` AS movement_item_description,
      movement_item.`invoice_number` AS movement_item_invoice_number,
-     movement_item.`invoice_type_id` AS movement_item_invoice_type_id,
-     movement_item.`last_updated` AS movement_item_last_updated,
-     movement_item.`movement_id` AS movement_item_movement_id,
-     movement_item.`supplier_id` AS movement_item_supplier_id,
-     movement_item.`work_id` AS movement_item_work_id,
-     movement_item.`items_idx` AS movement_item_items_idx,
      movement_item.`multiplier` AS movement_item_multiplier,
-     movement_item.`quantity` AS movement_item_quantity,
-     movement_item.`unit_id` AS movement_item_unit_id,
-     movement_item.`unit_price` AS movement_item_unit_price,
-     movement.`id` AS movement_id,
-     movement.`version` AS movement_version,
-     movement.`checked` AS movement_checked,
-     movement.`date_created` AS movement_date_created,
-     movement.`last_updated` AS movement_last_updated,
      movement.`number` AS movement_number,
      upper(movement.`type`) AS movement_type,
+     cg.id concept_concept_group_id,
      movement.`year` AS movement_year,
      movement.`note` AS movement_note,
-     work.`id` AS work_id,
-     work.`version` AS work_version,
-     work.`budget_id` AS work_budget_id,
-     work.`client_id` AS work_client_id,
      work.`code` AS work_code,
-     work.`finished` AS work_finished,
-     work.`last_updated` AS work_last_updated,
      work.`name` AS work_name,
-     work.`type` AS work_type,
-     work.`date_created` AS work_date_created,
-     concept.`id` AS concept_id,
      concept.`version` AS concept_version,
      concept.`code` AS concept_code,
-     concept.`concept_account_id` AS concept_concept_account_id,
-     concept.`concept_group_id` AS concept_concept_group_id,
-     concept.`date_created` AS concept_date_created,
      concept.`description` AS concept_description,
-     concept.`last_updated` AS concept_last_updated,
-     concept.`valid_in_fi_work` AS concept_valid_in_fi_work,
-     concept.`valid_in_in_no_work` AS concept_valid_in_in_no_work,
-     concept.`valid_in_in_work` AS concept_valid_in_in_work,
-     concept.`valid_in_op_no_work` AS concept_valid_in_op_no_work,
-     concept.`valid_in_op_work` AS concept_valid_in_op_work,
-     concept.`valid_in_os_no_work` AS concept_valid_in_os_no_work,
-     concept.`valid_in_os_work` AS concept_valid_in_os_work,
      cg.name as concept_group_name,
-     supplier.`id` AS supplier_id,
-     supplier.`version` AS supplier_version,
-     supplier.`address` AS supplier_address,
      supplier.`business_name` AS supplier_business_name,
-     supplier.`cuit` AS supplier_cuit,
-     supplier.`date_created` AS supplier_date_created,
-     supplier.`last_updated` AS supplier_last_updated,
-     supplier.`location` AS supplier_location,
      supplier.`name` AS supplier_name,
-     supplier.`note` AS supplier_note,
-     supplier.`province` AS supplier_province,
-     supplier.`zip_code` AS supplier_zip_code,
      pi.name as price_index_name,
 (select round(case when main.indirect_overhead_percentage is not null then main.indirect_overhead_percentage * main.amount_p100/100 else main.indirect_overhead_amount end,2) as indirect_general_expenses
  from (
@@ -153,77 +121,112 @@ and movement_item.multiplier = -1
 ORDER BY
      work.code ASC, cg.name asc, concept.code asc, movement.date_created desc]]>
 	</queryString>
-	<field name="movement_item_id" class="java.lang.Long"/>
-	<field name="movement_item_version" class="java.lang.Long"/>
-	<field name="movement_item_amount" class="java.math.BigDecimal"/>
-	<field name="movement_item_concept_id" class="java.lang.Long"/>
-	<field name="movement_item_date" class="java.sql.Timestamp"/>
-	<field name="movement_item_date_created" class="java.sql.Timestamp"/>
-	<field name="movement_item_description" class="java.lang.String"/>
-	<field name="movement_item_iibb" class="java.math.BigDecimal"/>
-	<field name="movement_item_invoice_number" class="java.lang.String"/>
-	<field name="movement_item_invoice_type_id" class="java.lang.Long"/>
-	<field name="movement_item_iva" class="java.math.BigDecimal"/>
-	<field name="movement_item_last_updated" class="java.sql.Timestamp"/>
-	<field name="movement_item_movement_id" class="java.lang.Long"/>
-	<field name="movement_item_other_perceptions" class="java.math.BigDecimal"/>
-	<field name="movement_item_supplier_id" class="java.lang.Long"/>
-	<field name="movement_item_total" class="java.math.BigDecimal"/>
-	<field name="movement_item_work_id" class="java.lang.Long"/>
-	<field name="movement_item_items_idx" class="java.lang.Integer"/>
-	<field name="movement_item_multiplier" class="java.lang.Integer"/>
-	<field name="movement_item_quantity" class="java.math.BigDecimal"/>
-	<field name="movement_item_unit_id" class="java.lang.Long"/>
-	<field name="movement_item_unit_price" class="java.math.BigDecimal"/>
-	<field name="movement_id" class="java.lang.Long"/>
-	<field name="movement_version" class="java.lang.Long"/>
-	<field name="movement_checked" class="java.lang.Boolean"/>
-	<field name="movement_date_created" class="java.sql.Timestamp"/>
-	<field name="movement_last_updated" class="java.sql.Timestamp"/>
-	<field name="movement_number" class="java.lang.Long"/>
-	<field name="movement_type" class="java.lang.String"/>
-	<field name="movement_year" class="java.lang.Integer"/>
-	<field name="movement_note" class="java.lang.String"/>
-	<field name="work_id" class="java.lang.Long"/>
-	<field name="work_version" class="java.lang.Long"/>
-	<field name="work_budget_id" class="java.lang.Long"/>
-	<field name="work_client_id" class="java.lang.Long"/>
-	<field name="work_code" class="java.lang.Long"/>
-	<field name="work_finished" class="java.lang.Boolean"/>
-	<field name="work_last_updated" class="java.sql.Timestamp"/>
-	<field name="work_name" class="java.lang.String"/>
-	<field name="work_type" class="java.lang.String"/>
-	<field name="work_date_created" class="java.sql.Timestamp"/>
-	<field name="concept_id" class="java.lang.Long"/>
-	<field name="concept_version" class="java.lang.Long"/>
-	<field name="concept_code" class="java.lang.String"/>
-	<field name="concept_concept_account_id" class="java.lang.Long"/>
-	<field name="concept_concept_group_id" class="java.lang.Long"/>
-	<field name="concept_date_created" class="java.sql.Timestamp"/>
-	<field name="concept_description" class="java.lang.String"/>
-	<field name="concept_last_updated" class="java.sql.Timestamp"/>
-	<field name="concept_valid_in_fi_work" class="java.lang.Boolean"/>
-	<field name="concept_valid_in_in_no_work" class="java.lang.Boolean"/>
-	<field name="concept_valid_in_in_work" class="java.lang.Boolean"/>
-	<field name="concept_valid_in_op_no_work" class="java.lang.Boolean"/>
-	<field name="concept_valid_in_op_work" class="java.lang.Boolean"/>
-	<field name="concept_valid_in_os_no_work" class="java.lang.Boolean"/>
-	<field name="concept_valid_in_os_work" class="java.lang.Boolean"/>
-	<field name="concept_group_name" class="java.lang.String"/>
-	<field name="supplier_id" class="java.lang.Long"/>
-	<field name="supplier_version" class="java.lang.Long"/>
-	<field name="supplier_address" class="java.lang.String"/>
-	<field name="supplier_business_name" class="java.lang.String"/>
-	<field name="supplier_cuit" class="java.lang.String"/>
-	<field name="supplier_date_created" class="java.sql.Timestamp"/>
-	<field name="supplier_last_updated" class="java.sql.Timestamp"/>
-	<field name="supplier_location" class="java.lang.String"/>
-	<field name="supplier_name" class="java.lang.String"/>
-	<field name="supplier_note" class="java.lang.String"/>
-	<field name="supplier_province" class="java.lang.String"/>
-	<field name="supplier_zip_code" class="java.lang.String"/>
-	<field name="price_index_name" class="java.lang.String"/>
-	<field name="indirect_general_expenses" class="java.math.BigDecimal"/>
+	<field name="movement_item_amount" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="movement_item_amount"/>
+	</field>
+	<field name="movement_item_iibb" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="movement_item_iibb"/>
+	</field>
+	<field name="movement_item_iva" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="movement_item_iva"/>
+	</field>
+	<field name="movement_item_other_perceptions" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="movement_item_other_perceptions"/>
+	</field>
+	<field name="movement_item_total" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="movement_item_total"/>
+	</field>
+	<field name="amount_cdo" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="amount_cdo"/>
+	</field>
+	<field name="amount_ggo" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="amount_ggo"/>
+	</field>
+	<field name="amount_n" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="amount_n"/>
+	</field>
+	<field name="movement_date_created" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="movement_date_created"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="movement"/>
+	</field>
+	<field name="work_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="work_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="movement_item"/>
+	</field>
+	<field name="movement_item_date" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="movement_item_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="movement_item"/>
+	</field>
+	<field name="movement_item_description" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="movement_item_description"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="movement_item"/>
+	</field>
+	<field name="movement_item_invoice_number" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="movement_item_invoice_number"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="movement_item"/>
+	</field>
+	<field name="movement_item_multiplier" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="movement_item_multiplier"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="movement_item"/>
+	</field>
+	<field name="movement_number" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="movement_number"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="movement"/>
+	</field>
+	<field name="movement_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="movement_type"/>
+	</field>
+	<field name="concept_concept_group_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="concept_concept_group_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="concept_group"/>
+	</field>
+	<field name="movement_year" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="movement_year"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="movement"/>
+	</field>
+	<field name="movement_note" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="movement_note"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="movement"/>
+	</field>
+	<field name="work_code" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="work_code"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="work"/>
+	</field>
+	<field name="work_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="work_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="work"/>
+	</field>
+	<field name="concept_version" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="concept_version"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="concept"/>
+	</field>
+	<field name="concept_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="concept_code"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="concept"/>
+	</field>
+	<field name="concept_description" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="concept_description"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="concept"/>
+	</field>
+	<field name="concept_group_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="concept_group_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="concept_group"/>
+	</field>
+	<field name="supplier_business_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="supplier_business_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="supplier"/>
+	</field>
+	<field name="supplier_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="supplier_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="supplier"/>
+	</field>
+	<field name="price_index_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="price_index_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="price_index"/>
+	</field>
+	<field name="indirect_general_expenses" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="indirect_general_expenses"/>
+	</field>
 	<variable name="variable1" class="java.math.BigDecimal" resetType="Group" resetGroup="CONCPET" calculation="Sum">
 		<variableExpression><![CDATA[$F{movement_item_amount}!=null?$F{movement_item_amount}:BigDecimal.valueOf(0)]]></variableExpression>
 	</variable>
@@ -267,10 +270,19 @@ ORDER BY
 		<variableExpression><![CDATA[$F{movement_item_iibb}!=null?$F{movement_item_iibb}:BigDecimal.valueOf(0)]]></variableExpression>
 	</variable>
 	<variable name="WorkAmount" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA">
-		<variableExpression><![CDATA[$V{WorkPreAmount}+($F{indirect_general_expenses}!=null?$F{indirect_general_expenses}:BigDecimal.valueOf(0))]]></variableExpression>
+		<variableExpression><![CDATA[$V{WorkPreAmount}]]></variableExpression>
 	</variable>
 	<variable name="WorkTotal" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA">
-		<variableExpression><![CDATA[$V{WorkAmount}+$V{WorkIIBB}]]></variableExpression>
+		<variableExpression><![CDATA[$V{WorkCDO}+$V{WorkGGO}+$V{WorkBENEFITS}+$F{indirect_general_expenses}]]></variableExpression>
+	</variable>
+	<variable name="WorkCDO" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA" calculation="Sum">
+		<variableExpression><![CDATA[$F{amount_cdo}!=null?$F{amount_cdo}:BigDecimal.valueOf(0)]]></variableExpression>
+	</variable>
+	<variable name="WorkGGO" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA" calculation="Sum">
+		<variableExpression><![CDATA[$F{amount_ggo}!=null?$F{amount_ggo}:BigDecimal.valueOf(0)]]></variableExpression>
+	</variable>
+	<variable name="WorkBENEFITS" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA" calculation="Sum">
+		<variableExpression><![CDATA[$F{amount_n}!=null?$F{amount_n}:BigDecimal.valueOf(0)]]></variableExpression>
 	</variable>
 	<group name="OBRA">
 		<groupExpression><![CDATA[$F{work_id}]]></groupExpression>
@@ -300,12 +312,9 @@ ORDER BY
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="73">
-				<line>
-					<reportElement x="129" y="63" width="391" height="1" forecolor="#CCCCCC" uuid="0f70ebce-29b7-4769-ad1a-2caf0a4016e7"/>
-				</line>
+			<band height="120">
 				<staticText>
-					<reportElement x="260" y="40" width="76" height="20" uuid="db29e616-c610-44ec-8b7e-5daf4b11934d"/>
+					<reportElement x="89" y="100" width="76" height="20" uuid="db29e616-c610-44ec-8b7e-5daf4b11934d"/>
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="12" isBold="true"/>
 					</textElement>
@@ -319,7 +328,7 @@ ORDER BY
 					<textFieldExpression><![CDATA[$F{work_name}]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00" isBlankWhenNull="false">
-					<reportElement mode="Transparent" x="337" y="40" width="85" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="2df52738-aefb-4921-b9b0-767a7d0b4391"/>
+					<reportElement mode="Transparent" x="170" y="100" width="85" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="2df52738-aefb-4921-b9b0-767a7d0b4391"/>
 					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
 						<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 						<paragraph lineSpacing="Single"/>
@@ -327,7 +336,7 @@ ORDER BY
 					<textFieldExpression><![CDATA[$V{WorkTotal}]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00">
-					<reportElement x="336" y="0" width="85" height="20" uuid="f414ae46-bafc-4c4e-8c2a-f08a58875179"/>
+					<reportElement x="335" y="0" width="85" height="20" uuid="f414ae46-bafc-4c4e-8c2a-f08a58875179"/>
 					<textElement textAlignment="Right">
 						<font isBold="false"/>
 					</textElement>
@@ -341,7 +350,7 @@ ORDER BY
 					<textFieldExpression><![CDATA[$V{variable4_1}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="290" y="21" width="46" height="20" uuid="5213bb3e-26fb-4c1d-b5a3-47a5b20af34b"/>
+					<reportElement x="290" y="20" width="46" height="20" uuid="5213bb3e-26fb-4c1d-b5a3-47a5b20af34b"/>
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="9" isBold="true"/>
 					</textElement>
@@ -355,24 +364,76 @@ ORDER BY
 					<text><![CDATA[Monto]]></text>
 				</staticText>
 				<textField pattern="#,##0.00">
-					<reportElement x="336" y="21" width="84" height="20" uuid="d0bb9074-8c54-4872-9d35-394aef84d1d0"/>
+					<reportElement x="336" y="20" width="84" height="20" uuid="d0bb9074-8c54-4872-9d35-394aef84d1d0"/>
 					<textElement textAlignment="Right">
 						<font isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{WorkIIBB}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="121" y="21" width="46" height="20" uuid="0e262a1a-e26e-4acc-b515-04239bd83520">
+					<reportElement x="119" y="40" width="46" height="20" uuid="0e262a1a-e26e-4acc-b515-04239bd83520">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					</reportElement>
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="9" isBold="true"/>
 					</textElement>
-					<text><![CDATA[GGI]]></text>
+					<text><![CDATA[GGO (L)]]></text>
 				</staticText>
 				<textField pattern="#,##0.00" isBlankWhenNull="false">
-					<reportElement x="172" y="21" width="74" height="20" uuid="10dea0d2-42d3-48b6-9808-f6a62e5d5094"/>
+					<reportElement x="170" y="40" width="74" height="20" uuid="10dea0d2-42d3-48b6-9808-f6a62e5d5094"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{WorkGGO}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement x="170" y="21" width="74" height="20" uuid="a6ed76af-22d0-4a3f-a79b-22a089ab4f94"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{WorkCDO}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="90" y="21" width="75" height="20" uuid="29f9b42d-1aab-4183-8ee4-8e14fa4dfcfc">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[CDO (A-I)]]></text>
+				</staticText>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement x="170" y="60" width="74" height="20" uuid="3e4b2f49-cdca-45b3-bf3e-cea2f3dc52f5"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{WorkBENEFITS}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="80" y="60" width="85" height="20" uuid="76373d26-5d0e-444b-8abf-99aa51371053">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[BENEFICIOS (N)
+]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="119" y="80" width="46" height="20" uuid="1d1c3f76-886c-4cb6-b126-de58cef5cf51">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[GGI (M)]]></text>
+				</staticText>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement x="170" y="80" width="74" height="20" uuid="68856e18-ef0c-4650-9eb3-49f4e654fd70"/>
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="9"/>
 					</textElement>
@@ -681,7 +742,11 @@ ORDER BY
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="5" splitType="Stretch"/>
+		<band height="31" splitType="Stretch">
+			<line>
+				<reportElement x="127" y="15" width="391" height="1" forecolor="#CCCCCC" uuid="0f70ebce-29b7-4769-ad1a-2caf0a4016e7"/>
+			</line>
+		</band>
 	</columnFooter>
 	<pageFooter>
 		<band splitType="Stretch"/>
