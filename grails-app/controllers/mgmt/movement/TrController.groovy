@@ -49,7 +49,6 @@ class TrController {
 	
 	private void fillPayments(Movement movement){
 		movement.payments[1].amount = movement.payments[0].amount
-		movement.payments[1].paymentDate = (movement.dateCreated?:new Date()).clearTime()
 		movement.payments[1].note = movement.payments[0].note
 		movement.payments[1].checkNumber = movement.payments[0].checkNumber
 		movement.payments[0].multiplier = -1 

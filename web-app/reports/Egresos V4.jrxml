@@ -272,17 +272,24 @@ ORDER BY
 	<variable name="WorkAmount" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA">
 		<variableExpression><![CDATA[$V{WorkPreAmount}]]></variableExpression>
 	</variable>
-	<variable name="WorkTotal" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA">
-		<variableExpression><![CDATA[$V{WorkCDO}+$V{WorkGGO}+$V{WorkBENEFITS}+$F{indirect_general_expenses}]]></variableExpression>
-	</variable>
 	<variable name="WorkCDO" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA" calculation="Sum">
 		<variableExpression><![CDATA[$F{amount_cdo}!=null?$F{amount_cdo}:BigDecimal.valueOf(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[BigDecimal.valueOf(0)]]></initialValueExpression>
 	</variable>
 	<variable name="WorkGGO" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA" calculation="Sum">
 		<variableExpression><![CDATA[$F{amount_ggo}!=null?$F{amount_ggo}:BigDecimal.valueOf(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[BigDecimal.valueOf(0)]]></initialValueExpression>
 	</variable>
 	<variable name="WorkBENEFITS" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA" calculation="Sum">
 		<variableExpression><![CDATA[$F{amount_n}!=null?$F{amount_n}:BigDecimal.valueOf(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[BigDecimal.valueOf(0)]]></initialValueExpression>
+	</variable>
+	<variable name="WorkIndirectGeneralExpenses" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA" calculation="Highest">
+		<variableExpression><![CDATA[$F{indirect_general_expenses}!=null?$F{indirect_general_expenses}:BigDecimal.valueOf(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[BigDecimal.valueOf(0)]]></initialValueExpression>
+	</variable>
+	<variable name="WorkTotal" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA">
+		<variableExpression><![CDATA[$V{WorkCDO}+$V{WorkGGO}+$V{WorkBENEFITS}+$V{WorkIndirectGeneralExpenses}]]></variableExpression>
 	</variable>
 	<group name="OBRA">
 		<groupExpression><![CDATA[$F{work_id}]]></groupExpression>
@@ -437,7 +444,7 @@ ORDER BY
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="9"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{indirect_general_expenses}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{WorkIndirectGeneralExpenses}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
