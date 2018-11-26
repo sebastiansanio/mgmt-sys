@@ -288,6 +288,9 @@ ORDER BY
 		<variableExpression><![CDATA[$F{indirect_general_expenses}!=null?$F{indirect_general_expenses}:BigDecimal.valueOf(0)]]></variableExpression>
 		<initialValueExpression><![CDATA[BigDecimal.valueOf(0)]]></initialValueExpression>
 	</variable>
+	<variable name="WorkSubtotal" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA">
+		<variableExpression><![CDATA[$V{WorkCDO}+$V{WorkGGO}+$V{WorkIndirectGeneralExpenses}]]></variableExpression>
+	</variable>
 	<variable name="WorkTotal" class="java.math.BigDecimal" resetType="Group" resetGroup="OBRA">
 		<variableExpression><![CDATA[$V{WorkCDO}+$V{WorkGGO}+$V{WorkBENEFITS}+$V{WorkIndirectGeneralExpenses}]]></variableExpression>
 	</variable>
@@ -319,9 +322,9 @@ ORDER BY
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="120">
+			<band height="157">
 				<staticText>
-					<reportElement x="89" y="100" width="76" height="20" uuid="db29e616-c610-44ec-8b7e-5daf4b11934d"/>
+					<reportElement x="88" y="120" width="76" height="20" uuid="db29e616-c610-44ec-8b7e-5daf4b11934d"/>
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="12" isBold="true"/>
 					</textElement>
@@ -335,7 +338,7 @@ ORDER BY
 					<textFieldExpression><![CDATA[$F{work_name}]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00" isBlankWhenNull="false">
-					<reportElement mode="Transparent" x="170" y="100" width="85" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="2df52738-aefb-4921-b9b0-767a7d0b4391"/>
+					<reportElement mode="Transparent" x="170" y="120" width="85" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="2df52738-aefb-4921-b9b0-767a7d0b4391"/>
 					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
 						<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 						<paragraph lineSpacing="Single"/>
@@ -378,7 +381,7 @@ ORDER BY
 					<textFieldExpression><![CDATA[$V{WorkIIBB}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="119" y="40" width="46" height="20" uuid="0e262a1a-e26e-4acc-b515-04239bd83520">
+					<reportElement x="118" y="40" width="46" height="20" uuid="0e262a1a-e26e-4acc-b515-04239bd83520">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					</reportElement>
@@ -402,7 +405,7 @@ ORDER BY
 					<textFieldExpression><![CDATA[$V{WorkCDO}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="90" y="21" width="75" height="20" uuid="29f9b42d-1aab-4183-8ee4-8e14fa4dfcfc">
+					<reportElement x="89" y="21" width="75" height="20" uuid="29f9b42d-1aab-4183-8ee4-8e14fa4dfcfc">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					</reportElement>
@@ -412,14 +415,14 @@ ORDER BY
 					<text><![CDATA[CDO (A-I)]]></text>
 				</staticText>
 				<textField pattern="#,##0.00" isBlankWhenNull="false">
-					<reportElement x="170" y="60" width="74" height="20" uuid="3e4b2f49-cdca-45b3-bf3e-cea2f3dc52f5"/>
+					<reportElement x="170" y="100" width="74" height="20" uuid="3e4b2f49-cdca-45b3-bf3e-cea2f3dc52f5"/>
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="9"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{WorkBENEFITS}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="80" y="60" width="85" height="20" uuid="76373d26-5d0e-444b-8abf-99aa51371053">
+					<reportElement x="79" y="100" width="85" height="20" uuid="76373d26-5d0e-444b-8abf-99aa51371053">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					</reportElement>
@@ -430,7 +433,24 @@ ORDER BY
 ]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="119" y="80" width="46" height="20" uuid="1d1c3f76-886c-4cb6-b126-de58cef5cf51">
+					<reportElement x="80" y="80" width="84" height="20" uuid="1d1c3f76-886c-4cb6-b126-de58cef5cf51">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Subtotal (A-M)]]></text>
+				</staticText>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement x="170" y="60" width="74" height="20" uuid="68856e18-ef0c-4650-9eb3-49f4e654fd70"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{WorkIndirectGeneralExpenses}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="118" y="60" width="46" height="20" uuid="7b8cb436-12a0-4629-a518-3692cd8bb23c">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					</reportElement>
@@ -440,11 +460,11 @@ ORDER BY
 					<text><![CDATA[GGI (M)]]></text>
 				</staticText>
 				<textField pattern="#,##0.00" isBlankWhenNull="false">
-					<reportElement x="170" y="80" width="74" height="20" uuid="68856e18-ef0c-4650-9eb3-49f4e654fd70"/>
+					<reportElement x="170" y="80" width="74" height="20" uuid="dbf93465-88e5-43ae-98bb-a40579600e33"/>
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="9"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{WorkIndirectGeneralExpenses}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{WorkSubtotal}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
