@@ -341,7 +341,7 @@ ORDER BY
 					<reportElement mode="Transparent" x="170" y="120" width="85" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="2df52738-aefb-4921-b9b0-767a7d0b4391"/>
 					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
 						<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-						<paragraph lineSpacing="Single"/>
+						<paragraph lineSpacing="1_1_2"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{WorkTotal}]]></textFieldExpression>
 				</textField>
