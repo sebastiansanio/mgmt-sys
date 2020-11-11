@@ -62,7 +62,7 @@ class MovementsExportController {
 	
 	def downloadExcel(){
 		response.setContentType("application/ms-excel");
-		response.setHeader("Content-Disposition", "attachment; filename='Ingresos y egresos.xlsx'");
+		response.setHeader("Content-Disposition", "attachment; filename=\"Ingresos y egresos.xlsx\"");
 		
 		new WebXlsxExporter().with {
 			fillHeader(["Obra","Operación","Proveedor","Cuenta","Fecha","Descripción","Monto \$","IVA \$", "IIBB","Neto actualizado","IVA actualizado","IIBB actualizado","Total actualizado"])
