@@ -1,3 +1,10 @@
 /.settings/
 /target/
 /target-eclipse/
+/.idea/.name
+/.idea/aws.xml
+/mgmt.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/vcs.xml
+/.idea/.gitignore

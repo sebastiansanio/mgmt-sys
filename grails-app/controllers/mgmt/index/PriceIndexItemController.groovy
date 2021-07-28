@@ -22,9 +22,9 @@ class PriceIndexItemController {
 		(select DATE_FORMAT(pii.date, '%Y-%m-01') from price_index_item pii where index_id = pi.id)
 		order by 1 desc, 2 desc
 	"""
-	
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-	
+
 	private static List FIELDS = ["index","date","indexValue","dateCreated","lastUpdated"]
 
     def index(Integer max) {
@@ -36,8 +36,8 @@ class PriceIndexItemController {
 				eq("index.id",params.long('indexId'))
 			}
 		}
-		
-		
+
+
         respond priceIndexItemList, model:[priceIndexItemInstanceCount: priceIndexItemList.totalCount]
     }
 
@@ -127,7 +127,7 @@ class PriceIndexItemController {
             '*'{ render status: NOT_FOUND }
         }
     }
-	
+
 	def checkMissingValues(){
 		def sql = new Sql(dataSource)
 		def rows = sql.rows(QUERY)
@@ -142,18 +142,18 @@ class PriceIndexItemController {
 		sql.close()
 		[missingValues: missingValues]
 	}
-	
+
 	def download(){
 		response.setContentType("application/ms-excel");
-		response.setHeader("Content-Disposition", "attachment; filename='Detalle de indices.xlsx'");
-		
+		response.setHeader("Content-Disposition", "attachment; filename=\"Detalle de indices.xlsx\"");
+
 		def headers = FIELDS.collect{
 			message(code:'priceIndexItem.'+it+'.label')
 		}
 		new WebXlsxExporter().with {
 			fillHeader(headers)
 			add(PriceIndexItem.list(), FIELDS)
-			
+
 			CellStyle cellStyle = sheet.workbook.createCellStyle();
 			CreationHelper createHelper = sheet.workbook.getCreationHelper();
 			cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-mm-yy"));
@@ -161,13 +161,13 @@ class PriceIndexItemController {
 				getCellAt(i, 1).setCellStyle(cellStyle)
 				getCellAt(i, 3).setCellStyle(cellStyle)
 				getCellAt(i, 4).setCellStyle(cellStyle)
-				
-				
+
+
 			}
 			for(int i = 0;i < FIELDS.size(); i++){
 				sheet.autoSizeColumn(i)
 			}
-			
+
 			save(response.outputStream)
 		}
 	}

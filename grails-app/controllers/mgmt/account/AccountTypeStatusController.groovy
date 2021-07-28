@@ -12,19 +12,19 @@ import mgmt.utils.DateGetter
 
 
 class AccountTypeStatusController {
-	
+
 	def dataSource
 	private static final DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy")
 	private static final DATE_FORMAT_DOWNLOAD = new SimpleDateFormat("dd-MM-yy")
-	
-	
+
+
 	private static final FIELDS = ["account","movement","movement.dateCreated","paymentDate",
 		"signedAmount","checkNumber","note","movement.lastUpdated"]
-	
-    def index() { 
+
+    def index() {
 		params.sort = params.sort ?: 'name'
 		params.order = params.order ?: 'asc'
-		
+
 		Map balances = new HashMap()
 		Sql sql = new Sql(dataSource)
 		def rows = sql.rows("select a.type_id as typeId,sum(p.amount*p.multiplier) as amount from payment p inner join account a on p.account_id = a.id where payment_date <= now() group by a.type_id")
@@ -32,10 +32,10 @@ class AccountTypeStatusController {
 			balances[row.typeId] = row.amount
 		}
 		sql.close()
-		
+
         respond AccountType.list(params), model: [balances:balances]
 	}
-	
+
     def show() {
 		AccountType accountTypeInstance = AccountType.get(params.long('id'))
 		params.balanceDate = params.balanceDate? DATE_FORMAT.parse(params.balanceDate): new Date()
@@ -46,24 +46,24 @@ class AccountTypeStatusController {
 			balances[row.accountId] = row.amount
 		}
 		sql.close()
-		
+
 		def accounts
-		
-		
+
+
 		if (accountTypeInstance){
 			accounts = accountTypeInstance.accounts.findAll{balances[it.id]}.sort{((balances[it.id]?:0) !=0 ? ' ':'') +    it.name}
 		}else{
 			accounts = Account.list().findAll{!balances[it.id]}.sort{it.name}
 		}
-			
+
         respond accounts,model: [accounts:accounts,balances:balances]
     }
-	
+
 	def showPayments(Account account){
 		params.max = 100
 		params.sort = 'paymentDate'
 		params.order = 'desc'
-		
+
 		def payments = Payment.createCriteria().list (params) {
 			eq("account", account)
 			if(params.dateFrom){
@@ -74,20 +74,20 @@ class AccountTypeStatusController {
 			}
 			order(params.sort, params.order)
 		}
-		
+
 		render model: [payments: payments,account:account,paymentsCount: payments.totalCount], view: 'showPayments'
 	}
-	
+
 	def download(Account account){
 		response.setContentType("application/ms-excel");
-		response.setHeader("Content-Disposition", "attachment; filename='${message(code:'payments.label')}.xlsx'");
+		response.setHeader("Content-Disposition", "attachment; filename=\"${message(code:'payments.label')}.xlsx\"");
 		params.sort = 'paymentDate'
 		params.order = 'desc'
-		
+
 		def headers = FIELDS.collect{
 			message(code:'payment.report.'+it+'.label')
 		}
-		
+
 		def payments = Payment.createCriteria().list () {
 			eq("account", account)
 			if(params.dateFrom){
@@ -98,15 +98,15 @@ class AccountTypeStatusController {
 			}
 			order(params.sort, params.order)
 		}
-		
-		
+
+
 		new WebXlsxExporter().with {
 			CellStyle cellStyle = sheet.workbook.createCellStyle();
 			CreationHelper createHelper = sheet.workbook.getCreationHelper();
 			cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-mm-yy"));
-			
+
 			fillHeader(headers)
-			
+
 			def balance = 0
 			if(params.dateFrom){
 				Date balanceDate = DATE_FORMAT.parse(params.dateFrom).plus(-1)
@@ -116,7 +116,7 @@ class AccountTypeStatusController {
 					balance = row.amount
 				}
 				sql.close()
-				
+
 				fillRow(["", "SALDO AL "+DATE_FORMAT_DOWNLOAD.format(balanceDate) ,"","", balance], 1)
 			}
 			fillRow(["", "SALDO DEL PERIODO","","", balance + payments.sum{it.signedAmount} ], 2)

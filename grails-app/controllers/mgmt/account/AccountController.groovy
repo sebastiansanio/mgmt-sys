@@ -19,12 +19,12 @@ class AccountController {
 	def dataSource
 
 	private static List FIELDS = ["name","code","type","currentBalance","dateCreated","lastUpdated"]
-	
+
     def index(Integer max) {
         params.max = Math.min(max ?: 100, 1000)
 		params.sort = params.sort ?: 'name'
 		params.order = params.order ?: 'asc'
-		
+
 		def results = Account.createCriteria().list (params) {
 			if(params.statusFilter == "active"){
 				def sql = new Sql(dataSource)
@@ -32,21 +32,21 @@ class AccountController {
 			}
 			order(params.sort, params.order)
 		}
-		
+
 		respond results, model:[accountInstanceCount: results.totalCount]
     }
 
 	def download(){
 		response.setContentType("application/ms-excel");
-		response.setHeader("Content-Disposition", "attachment; filename='${message(code:'accounts.label')}.xlsx'");
-		
+		response.setHeader("Content-Disposition", "attachment; filename=\"${message(code:'accounts.label')}.xlsx\"");
+
 		def headers = FIELDS.collect{
 			message(code:'account.'+it+'.label')
 		}
 		new WebXlsxExporter().with {
 			fillHeader(headers)
 			add(Account.list(), FIELDS)
-			
+
 			CellStyle cellStyle = sheet.workbook.createCellStyle();
 			CreationHelper createHelper = sheet.workbook.getCreationHelper();
 			cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-mm-yy"));
@@ -60,7 +60,7 @@ class AccountController {
 			save(response.outputStream)
 		}
 	}
-	
+
     def show(Account accountInstance) {
         respond accountInstance
     }
@@ -117,7 +117,7 @@ class AccountController {
             respond accountInstance.errors, view:'edit'
             return
         }
-		
+
         accountInstance.save flush:true
 
         request.withFormat {

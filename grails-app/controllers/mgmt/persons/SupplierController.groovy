@@ -16,8 +16,8 @@ class SupplierController {
 
 	private static List FIELDS = ["name","businessName","cuit","address","location",
 		"province","zipCode","note","dateCreated","lastUpdated"]
-		
-	
+
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -26,18 +26,18 @@ class SupplierController {
 		params.order = params.order ?: 'asc'
         respond Supplier.list(params), model:[supplierInstanceCount: Supplier.count()]
     }
-	
+
 	def download(){
 		response.setContentType("application/ms-excel");
-		response.setHeader("Content-Disposition", "attachment; filename='${message(code:'menu.supplier.label')}.xlsx'");
-		
+		response.setHeader("Content-Disposition", "attachment; filename=\"${message(code:'menu.supplier.label')}.xlsx\"");
+
 		def headers = FIELDS.collect{
 			message(code:'supplier.'+it+'.label')
 		}
 		new WebXlsxExporter().with {
 			fillHeader(headers)
 			add(Supplier.list(), FIELDS)
-			
+
 			CellStyle cellStyle = sheet.workbook.createCellStyle();
 			CreationHelper createHelper = sheet.workbook.getCreationHelper();
 			cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-mm-yy"));
@@ -48,11 +48,11 @@ class SupplierController {
 			for(int i = 0;i < FIELDS.size(); i++){
 				sheet.autoSizeColumn(i)
 			}
-			
+
 			save(response.outputStream)
 		}
 	}
-	
+
 	def search(Integer max) {
 		params.max = Math.min(max ?: 100, 1000)
 		params.sort = params.sort ?: 'name'

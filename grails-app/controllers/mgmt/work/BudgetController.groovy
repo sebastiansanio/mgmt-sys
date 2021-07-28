@@ -14,7 +14,7 @@ import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class BudgetController {
-	
+
 	private static List FIELDS = ["code","client","name","directCosts","iibbPercentage","iibbAmount",
 	"indirectOverheadPercentage","indirectOverheadAmount","profitPercentage","profitAmount",
 	"ivaPercentage","totalAmount","hasWork","dateCreated","lastUpdated"]
@@ -27,7 +27,7 @@ class BudgetController {
 			redirect budgetInstance
 			return
 		}
-		
+
 		budgetInstance.hasWork = true
 		Work work = new Work()
 		work.client = budgetInstance.client
@@ -36,7 +36,7 @@ class BudgetController {
 		work.budget = budgetInstance
 		budgetInstance.save flush: true
 		work.save flush:true
-		
+
 		request.withFormat {
 			form multipartForm {
 				flash.message = message(code: 'default.created.message', args: [message(code: 'work.label'), work.id])
@@ -44,27 +44,27 @@ class BudgetController {
 			}
 			'*' { respond work, [status: CREATED] }
 		}
-		
+
 	}
-	
+
     def index(Integer max) {
         params.max = Math.min(max ?: 100, 1000)
 		params.sort = params.sort ?: 'dateCreated'
 		params.order = params.order ?: 'desc'
         respond Budget.list(params), model:[budgetInstanceCount: Budget.count()]
     }
-	
+
 	def download(){
 		response.setContentType("application/ms-excel");
-		response.setHeader("Content-Disposition", "attachment; filename='${message(code:'menu.budget.label')}.xlsx'");
-		
+		response.setHeader("Content-Disposition", "attachment; filename=\"${message(code:'menu.budget.label')}.xlsx\"");
+
 		def headers = FIELDS.collect{
 			message(code:'budget.'+it+'.label')
 		}
 		new WebXlsxExporter().with {
 			fillHeader(headers)
 			add(Budget.list(), FIELDS)
-			
+
 			CellStyle cellStyle = sheet.workbook.createCellStyle();
 			CreationHelper createHelper = sheet.workbook.getCreationHelper();
 			cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-mm-yy"));
@@ -75,11 +75,11 @@ class BudgetController {
 			for(int i = 0;i < FIELDS.size(); i++){
 				sheet.autoSizeColumn(i)
 			}
-			
+
 			save(response.outputStream)
 		}
 	}
-	
+
 	def search(Integer max) {
 		params.max = Math.min(max ?: 100, 1000)
 		String nameQuery = "%"+params.name+"%"
@@ -101,7 +101,7 @@ class BudgetController {
             notFound()
             return
         }
-		
+
 		budgetInstance.items = budgetInstance.items - [null]
 		budgetInstance.validate()
 
@@ -132,7 +132,7 @@ class BudgetController {
 			notFound()
 			return
 		}
-		
+
 		if (params.version) {
 			def version = params.version.toLong()
 			if (budgetInstance.version > version) {
@@ -141,7 +141,7 @@ class BudgetController {
 				return
 			}
 		}
-				
+
 		for (item in budgetInstance.items) {
 			item.delete()
 		}

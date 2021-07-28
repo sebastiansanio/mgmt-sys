@@ -5,8 +5,8 @@ hibernate {
     cache.use_second_level_cache = true
     cache.use_query_cache = true
     cache.region.factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
-    singleSession = true 
-    flush.mode = 'manual' 
+    singleSession = true
+    flush.mode = 'manual'
 }
 
 environments {
@@ -17,7 +17,7 @@ environments {
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
 			username = "urbatec"
 			password = "urbatec"
-            url = "jdbc:mysql://localhost/urbatec?useUnicode=yes&characterEncoding=UTF-8&verifyServerCertificate=false&useSSL=true"
+            url = "jdbc:mysql://localhost/urbatec?useUnicode=yes&characterEncoding=UTF-8&verifyServerCertificate=false&useSSL=true&serverTimezone=UTC"
             properties {
                jmxEnabled = true
                initialSize = 5

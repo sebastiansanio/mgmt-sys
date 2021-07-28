@@ -1,4 +1,4 @@
-grails.servlet.version = "3.0" 
+grails.servlet.version = "3.0"
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
@@ -18,31 +18,26 @@ grails.project.dependency.resolver = "maven"
 grails.project.dependency.resolution = {
     inherits("global") {
     }
-    log "error" 
-    checksums true 
-    legacyResolve false 
+    log "error"
+    checksums true
+    legacyResolve false
 
     repositories {
-        inherits true 
 
-		mavenRepo "http://repo.grails.org/grails/core"
-		mavenRepo "http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/"
-		mavenRepo "http://jasperreports.sourceforge.net/maven2/"
-		
-		mavenCentral()																								
-		grailsPlugins()
+		mavenRepo "https://repo.grails.org/artifactory/plugins/"
+        mavenRepo "https://repo.maven.apache.org/maven2/"
+
         grailsHome()
         mavenLocal()
-        grailsCentral()
-        
+
     }
 
     dependencies {
         test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
 		runtime 'mysql:mysql-connector-java:8.0.11'
 		compile 'commons-beanutils:commons-beanutils:1.8.3'
-		compile "net.sf.jasperreports:jasperreports:6.6.0"
-		compile "net.sf.jasperreports:jasperreports-fonts:6.0.0"
+		compile "net.sf.jasperreports:jasperreports:6.17.0"
+		compile "net.sf.jasperreports:jasperreports-fonts:6.17.0"
     }
 
     plugins {
@@ -52,11 +47,11 @@ grails.project.dependency.resolution = {
         compile ':cache:1.1.7'
         compile ":asset-pipeline:1.9.6"
 		compile ":spring-security-core:2.0-RC4"
-		
-        runtime ":hibernate4:4.3.5.5" 
+
+        runtime ":hibernate4:4.3.5.5"
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
 		compile ":excel-export:0.2.1"
-		
+
     }
 }

@@ -18,9 +18,9 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader
 
 @Transactional(readOnly = true)
 class ReportController {
-	
+
 	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy")
-	
+
 	def dataSource
 
     static allowedMethods = [save: "POST", delete: "DELETE"]
@@ -60,7 +60,7 @@ class ReportController {
             '*' { respond reportInstance, [status: CREATED] }
         }
     }
-	
+
 	def edit(Report reportInstance) {
 		respond reportInstance
 	}
@@ -118,7 +118,7 @@ class ReportController {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, variablesValues, dataSource.connection)
 		byte[] pdf = JasperExportManager.exportReportToPdf(jasperPrint)
 		response.setContentType("application/pdf");
-		response.setHeader("Content-Disposition", "inline; filename='${reportInstance.name}.pdf'");
+		response.setHeader("Content-Disposition", "inline; filename=\"${reportInstance.name}.pdf\"");
 		response.outputStream << pdf
 	}
 

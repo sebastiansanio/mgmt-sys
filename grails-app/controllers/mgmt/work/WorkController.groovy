@@ -15,20 +15,20 @@ import grails.transaction.Transactional
 class WorkController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-	
+
 	private static List FIELDS = ["code","name","finished","client","dateCreated"]
-	
+
 	def download(){
 		response.setContentType("application/ms-excel");
-		response.setHeader("Content-Disposition", "attachment; filename='${message(code:'menu.work.label')}.xlsx'");
-		
+		response.setHeader("Content-Disposition", "attachment; filename=\"${message(code:'menu.work.label')}.xlsx\"");
+
 		def headers = FIELDS.collect{
 			message(code: 'work.'+it+'.label')
 		}
 		new WebXlsxExporter().with {
 			fillHeader(headers)
 			add(Work.list(), FIELDS)
-			
+
 			CellStyle cellStyle = sheet.workbook.createCellStyle();
 			CreationHelper createHelper = sheet.workbook.getCreationHelper();
 			cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-mm-yy"));
@@ -38,11 +38,11 @@ class WorkController {
 			for(int i = 0;i < FIELDS.size(); i++){
 				sheet.autoSizeColumn(i)
 			}
-			
+
 			save(response.outputStream)
 		}
 	}
-	
+
 	def downloadPdf(){
 		redirect controller: 'report', action: 'downloadReport', id: mgmt.reports.Report.findByCode('worksList').id
 	}
@@ -61,17 +61,17 @@ class WorkController {
     def create() {
         respond new Work(params)
     }
-	
+
 	def search(Integer max) {
 		params.max = Math.min(max ?: 100, 1000)
 		Long code = params.long('code')
 		if(!code){
 			redirect action: 'index'
 		}
-		
+
 		respond Work.findAllByCode(code,params), model:[workInstanceCount: Work.countByCode(code)],  view:'index'
 	}
-	
+
     @Transactional
     def save(Work workInstance) {
         if (workInstance == null) {
@@ -160,9 +160,9 @@ class WorkController {
             '*'{ render status: NOT_FOUND }
         }
     }
-	
 
-	
+
+
 	@Transactional
 	def close(){
 		def workInstance = Work.get(params.id.toLong())
@@ -174,7 +174,7 @@ class WorkController {
 		workInstance.save flush: true
 		flash.message = message(code: 'work.close.message')
 		redirect action:"index", method:"GET", params:params
-		
+
 	}
 	@Transactional
 	def open(){

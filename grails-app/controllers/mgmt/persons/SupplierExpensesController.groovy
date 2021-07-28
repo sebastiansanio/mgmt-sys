@@ -46,45 +46,45 @@ class SupplierExpensesController {
 	
 	"""
 	def dataSource
-	
+
 	private static final DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy")
 	private static final DATE_FORMAT_DOWNLOAD = new SimpleDateFormat("dd-MM-yy")
-	
-    def index() { 
-		
+
+    def index() {
+
 	}
-	
+
 	def download(){
 		redirect(controller: 'report', action: 'downloadReport', params: params)
 	}
-	
+
 	def downloadExcel(){
 		response.setContentType("application/ms-excel");
-		response.setHeader("Content-Disposition", "attachment; filename='Gastos por proveedor.xlsx'");
-		
+		response.setHeader("Content-Disposition", "attachment; filename=\"Gastos por proveedor.xlsx\"");
+
 		new WebXlsxExporter().with {
 			fillHeader(["Obra","Operación","Proveedor","Cuenta","Fecha","Descripción","Monto \$","IVA \$", "IIBB", "Otras percepciones","Presupuesto","Neto actualizado","IVA actualizado","IIBB actualizado","Total actualizado"])
-			
+
 			CellStyle cellStyle = sheet.workbook.createCellStyle();
 			CreationHelper createHelper = sheet.workbook.getCreationHelper();
 			cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-mm-yy"));
-			
+
 			Sql sql = new Sql(dataSource)
 			def rows = sql.rows(QUERY,[priceIndexId:params.long('Price_index_id'),supplierId:params.long('Supplier_id'),dateFrom:params.Date_from?DATE_FORMAT.parse(params.Date_from):null,dateTo:params.Date_to?DATE_FORMAT.parse(params.Date_to):null])
 			long queryCount = rows.size()
 			add(rows, ["work_code","operation","supplier_name","concept_code","movement_date_created","movement_item_description","movement_item_amount","movement_item_iva","movement_item_iibb","movement_item_other_perceptions","budget_id","amount_indexed","iva_indexed","iibb_indexed","total_indexed"])
 			sql.close()
-			
-			
+
+
 			for(int i = 1;i <= queryCount; i++){
 				getCellAt(i, 4).setCellStyle(cellStyle)
 			}
 			for(int i = 0;i < 14; i++){
 				sheet.autoSizeColumn(i)
 			}
-			
+
 			save(response.outputStream)
 		}
 	}
-	
+
 }

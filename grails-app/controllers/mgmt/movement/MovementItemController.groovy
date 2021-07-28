@@ -17,15 +17,15 @@ class MovementItemController {
 	private static List FIELDS = ["movement.year","movement.type","movement.number", "work","supplier","concept","description",
 		"invoiceType","invoiceNumber","date","unit","quantity","unitPrice",
 		"amount","iva","iibb","otherPerceptions","total","multiplier",
-		"dateCreated","lastUpdated"]	
-	
+		"dateCreated","lastUpdated"]
+
     def index(Integer max) {
         params.max = Math.min(max ?: 100, 1000)
 		params.sort = params.sort ?: 'dateCreated'
 		params.order = params.order ?: 'desc'
         respond MovementItem.list(params), model:[movementItemInstanceCount: MovementItem.count()]
     }
-	
+
 	def search(Integer max) {
 		params.max = Math.min(max ?: 100, 1000)
 		params.sort = params.sort ?: 'dateCreated'
@@ -33,11 +33,11 @@ class MovementItemController {
 		String nameQuery = "%"+params.description+"%"
 		respond MovementItem.findAllByDescriptionLike(nameQuery,params), model:[movementItemInstanceCount: MovementItem.countByDescriptionLike(nameQuery)],  view:'index'
 	}
-	
+
 	def download(){
 		response.setContentType("application/ms-excel");
-		response.setHeader("Content-Disposition", "attachment; filename='${message(code:'movements.label')}.xlsx'");
-		
+		response.setHeader("Content-Disposition", "attachment; filename=\"${message(code:'movements.label')}.xlsx\"");
+
 		def headers = FIELDS.collect{
 			if(!it.contains("movement")){
 				message(code:'movementItem.'+it+'.label')
@@ -48,7 +48,7 @@ class MovementItemController {
 		new WebXlsxExporter().with {
 			fillHeader(headers)
 			add(MovementItem.list(), FIELDS)
-			
+
 			CellStyle cellStyle = sheet.workbook.createCellStyle();
 			CreationHelper createHelper = sheet.workbook.getCreationHelper();
 			cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-mm-yy"));
@@ -60,10 +60,10 @@ class MovementItemController {
 			for(int i = 0;i < FIELDS.size(); i++){
 				sheet.autoSizeColumn(i)
 			}
-			
+
 			save(response.outputStream)
 		}
 	}
 
- 
+
 }

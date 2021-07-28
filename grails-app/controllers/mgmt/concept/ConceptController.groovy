@@ -17,15 +17,15 @@ class ConceptController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
 	private static List FIELDS = ["code","description","conceptAccount","conceptGroup","dateCreated","lastUpdated"]
-	
-	
+
+
     def index(Integer max) {
         params.max = Math.min(max ?: 100, 1000)
 		params.sort = params.sort ?: 'code'
 		params.order = params.order ?: 'asc'
         respond Concept.list(params), model:[conceptInstanceCount: Concept.count()]
     }
-	
+
 	def search(Integer max) {
 		params.sort = params.sort ?: 'code'
 		params.order = params.order ?: 'asc'
@@ -38,18 +38,18 @@ class ConceptController {
 		}
 		respond results, model:[conceptInstanceCount: results.size() ],  view:'index'
 	}
-	
+
 	def download(){
 		response.setContentType("application/ms-excel");
-		response.setHeader("Content-Disposition", "attachment; filename='${message(code:'concepts.label')}.xlsx'");
-		
+		response.setHeader("Content-Disposition", "attachment; filename=\"${message(code:'concepts.label')}.xlsx\"");
+
 		def headers = FIELDS.collect{
 			message(code:'concept.'+it+'.label')
 		}
 		new WebXlsxExporter().with {
 			fillHeader(headers)
 			add(Concept.list(), FIELDS)
-			
+
 			CellStyle cellStyle = sheet.workbook.createCellStyle();
 			CreationHelper createHelper = sheet.workbook.getCreationHelper();
 			cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-mm-yy"));
@@ -60,7 +60,7 @@ class ConceptController {
 			for(int i = 0;i < FIELDS.size(); i++){
 				sheet.autoSizeColumn(i)
 			}
-			
+
 			save(response.outputStream)
 		}
 	}
@@ -145,7 +145,7 @@ class ConceptController {
 			redirect action: "show", id: conceptInstance.id
 			return
 		}
-		
+
         conceptInstance.delete flush:true
 
         request.withFormat {
