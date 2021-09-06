@@ -16,7 +16,7 @@
 	<tbody>
 		<tr>
 			<td><label for="Supplier_id"><g:message code="supplier.label"/> </label></td>
-			<td><g:select class="select-chosen" noSelection="${['-1':'Todos los proveedores']}" name="Supplier_id" from="${mgmt.persons.Supplier.list([sort:'name'])}" optionKey="id" value="" />
+			<td><g:select class="select-chosen" noSelection="${['-1':'Todos los proveedores']}" name="Supplier_id" from="${mgmt.persons.Supplier.list([sort:'name'])}" optionValue="nameAndBusinessName" optionKey="id" value="" />
 		</tr>
 		<tr>
 			<td><label for="account_id"><g:message code="default.dateFrom.label"/> </label></td>
@@ -32,7 +32,7 @@
 		</tr>
 		<tr>
 			<td><g:submitButton class="btn btn-default" name="download" value="${message(code:'default.download.pdf.label')}" /></td>
-			<td><g:actionSubmit class="btn btn-default" name="downloadExcel" action="downloadExcel" value="${message(code:'default.download.excel.label')}" /></td>		
+			<td><g:actionSubmit class="btn btn-default" name="downloadExcel" action="downloadExcel" value="${message(code:'default.download.excel.label')}" /></td>
 		</tr>
 	</tbody>
 </table>
@@ -52,14 +52,14 @@ function dateFromCheckboxChanged(){
 		$("#Date_from").prop( "disabled", false);
 	}else{
 		$("#Date_from").prop( "disabled", true );
-	} 
+	}
 }
 function dateToCheckboxChanged(){
 	if($('#dateToEnabled').prop( 'checked')){
 		$("#Date_to").prop( "disabled", false);
 	}else{
 		$("#Date_to").prop( "disabled", true );
-	} 
+	}
 }
 
 function checkFilters(event){

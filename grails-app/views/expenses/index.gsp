@@ -19,7 +19,7 @@
 		</tr>
 		<tr>
 			<td><label for="Supplier_id"><g:message code="supplier.label"/> </label></td>
-			<td><g:select class="select-chosen" noSelection="${['-1':'Todos los proveedores']}" name="Supplier_id" from="${mgmt.persons.Supplier.list([sort:'name'])}" optionKey="id" value="" />
+			<td><g:select class="select-chosen" noSelection="${['-1':'Todos los proveedores']}" name="Supplier_id" from="${mgmt.persons.Supplier.list([sort:'name'])}" optionValue="nameAndBusinessName" optionKey="id" value="" />
 		</tr>
 		<tr>
 			<td><label for="account_id"><g:message code="default.dateFrom.label"/> </label></td>
@@ -41,9 +41,9 @@
 					<option value="toM799">Todos los GGI hasta M799</option>
 					<option value="fromM800">Todos los GGI desde M800</option>
 				</select>
-				<g:hiddenField name="Concept_code_from" /> 
+				<g:hiddenField name="Concept_code_from" />
 				<g:hiddenField name="Concept_code_to" />
-				
+
 			</td>
 		</tr>
 		<tr>
@@ -69,14 +69,14 @@ function dateFromCheckboxChanged(){
 		$("#Date_from").prop( "disabled", false);
 	}else{
 		$("#Date_from").prop( "disabled", true );
-	} 
+	}
 }
 function dateToCheckboxChanged(){
 	if($('#dateToEnabled').prop( 'checked')){
 		$("#Date_to").prop( "disabled", false);
 	}else{
 		$("#Date_to").prop( "disabled", true );
-	} 
+	}
 }
 function refreshConcepts(){
 	if($("#Work_id").val() == -1 ){
