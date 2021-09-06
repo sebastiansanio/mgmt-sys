@@ -48,7 +48,7 @@
 				<td>${fieldValue(bean: priceIndexItemInstance, field: "index")}</td>
 				<td>${message(code:'month.'+(priceIndexItemInstance.date[Calendar.MONTH]+1)+'.label')+" " + (priceIndexItemInstance.date[Calendar.YEAR]%100)}</td>
 				<td><g:formatDate date="${priceIndexItemInstance.date}" /></td>
-				<td><span class="pull-right"><g:formatNumber number="${fieldValue(bean: priceIndexItemInstance, field: "indexValue")}" format="#.00"/></span></td>
+				<td><span class="pull-right"><g:formatNumber number="${fieldValue(bean: priceIndexItemInstance, field: "indexValue")}" format="#,###.00"/></span></td>
 				<sec:access url="/priceIndexItem/delete">
 					<td class="center-aligned">
 						<g:form action="delete">
