@@ -15,7 +15,9 @@ class SupplierExpensesController {
 		supplier.`name` AS supplier_name, movement_item.`description` AS movement_item_description,
 		movement_item.`amount` AS movement_item_amount, movement_item.`iibb` AS movement_item_iibb,
 		movement_item.`iva` AS movement_item_iva, movement_item.`other_perceptions` AS movement_item_other_perceptions,
-		movement_item.`total` AS movement_item_total, movement_item.budget_id as budget_id,
+		movement_item.`total` AS movement_item_total, 
+		movement_item.invoice_number AS movement_item_invoice_number,
+		movement_item.budget_id as budget_id,
 		round(coalesce(movement_item.amount,0)/pii.index_value
 		*(case when pi.id <> 3 then pii_max.index_value else 1 end),2) amount_indexed,
 		round(coalesce(movement_item.iibb,0)/pii.index_value
@@ -63,7 +65,7 @@ class SupplierExpensesController {
 		response.setHeader("Content-Disposition", "attachment; filename=\"Gastos por proveedor.xlsx\"");
 
 		new WebXlsxExporter().with {
-			fillHeader(["Obra","Operación","Proveedor","Cuenta","Fecha","Descripción","Monto \$","IVA \$", "IIBB", "Otras percepciones","Presupuesto","Neto actualizado","IVA actualizado","IIBB actualizado","Total actualizado"])
+			fillHeader(["Obra","Operación","Proveedor","Cuenta","Fecha","Descripción","Monto \$","IVA \$", "IIBB", "Otras percepciones","Presupuesto","Neto actualizado","IVA actualizado","IIBB actualizado","Total actualizado", "Factura"])
 
 			CellStyle cellStyle = sheet.workbook.createCellStyle();
 			CreationHelper createHelper = sheet.workbook.getCreationHelper();
@@ -72,7 +74,7 @@ class SupplierExpensesController {
 			Sql sql = new Sql(dataSource)
 			def rows = sql.rows(QUERY,[priceIndexId:params.long('Price_index_id'),supplierId:params.long('Supplier_id'),dateFrom:params.Date_from?DATE_FORMAT.parse(params.Date_from):null,dateTo:params.Date_to?DATE_FORMAT.parse(params.Date_to):null])
 			long queryCount = rows.size()
-			add(rows, ["work_code","operation","supplier_name","concept_code","movement_date_created","movement_item_description","movement_item_amount","movement_item_iva","movement_item_iibb","movement_item_other_perceptions","budget_id","amount_indexed","iva_indexed","iibb_indexed","total_indexed"])
+			add(rows, ["work_code","operation","supplier_name","concept_code","movement_date_created","movement_item_description","movement_item_amount","movement_item_iva","movement_item_iibb","movement_item_other_perceptions","budget_id","amount_indexed","iva_indexed","iibb_indexed","total_indexed","movement_item_invoice_number"])
 			sql.close()
 
 
