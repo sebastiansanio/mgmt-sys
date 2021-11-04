@@ -30,6 +30,10 @@
 			<td><g:select class="select-chosen" noSelection="${['-1':'Ninguno']}" name="Price_index_id" from="${mgmt.index.PriceIndex.list(sort:'name')}" optionKey="id" optionValue="name" value="" />
 		</tr>
 		<tr>
+			<td><label for="onlyP100"><g:message code="onlyP100"/> </label></td>
+			<td><g:select class="select-chosen" name="onlyP100" from="${[[id: 0, name: 'No'],[id: 1, name: 'Sí']]}" optionKey="id" optionValue="name" value="${0}" /></td>
+		</tr>
+		<tr>
 			<td colspan="2">
 				<g:submitButton class="btn btn-default" name="download" value="${message(code:'default.download.pdf.label')}" />
 			</td>
@@ -52,14 +56,14 @@ function dateFromCheckboxChanged(){
 		$("#Date_from").prop( "disabled", false);
 	}else{
 		$("#Date_from").prop( "disabled", true );
-	} 
+	}
 }
 function dateToCheckboxChanged(){
 	if($('#dateToEnabled').prop( 'checked')){
 		$("#Date_to").prop( "disabled", false);
 	}else{
 		$("#Date_to").prop( "disabled", true );
-	} 
+	}
 }
 
 function validateForm(event){
