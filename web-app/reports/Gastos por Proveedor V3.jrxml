@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Informe de Saldos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27b43501-3750-42ac-ad7d-c7726c3ab552">
 	<property name="ireport.zoom" value="1.3310000000000044"/>
 	<property name="ireport.x" value="0"/>
@@ -102,10 +102,10 @@ FROM
      left JOIN `work` work ON movement_item.`work_id` = work.`id`
      INNER JOIN `concept` concept ON movement_item.`concept_id` = concept.`id`
      Inner JOIN `supplier` supplier ON movement_item.`supplier_id` = supplier.`id`
-     
+
 left outer join price_index pi on pi.id = $P{Price_index_id}
 left outer join price_index_item pii_max on pii_max.index_id = pi.id and pii_max.date = (select max(pii3.date) from price_index_item pii3 where pii3.index_id = pi.id)
-left outer join price_index_item pii on pii.index_id = pi.id 
+left outer join price_index_item pii on pii.index_id = pi.id
 and case when pi.frequency = 'daily' then DATE_FORMAT(movement_item.date, '%Y-%m-%d') = DATE_FORMAT(pii.date, '%Y-%m-%d')
 when pi.frequency = 'monthly' then DATE_FORMAT(date_add(movement_item.date,interval -1 month), '%Y-%m-01') = DATE_FORMAT(pii.date, '%Y-%m-01')
 else DATE_FORMAT(movement_item.date, '%Y-%m-01') = DATE_FORMAT(pii.date, '%Y-%m-01') end
@@ -387,7 +387,7 @@ ORDER BY
 			</textField>
 			<image>
 				<reportElement x="0" y="0" width="134" height="31" uuid="acee86b0-7e40-49c5-897f-fab2e35a068a"/>
-				<imageExpression><![CDATA["http://localhost:8080/urbatec/images/Logo%20Urbatec.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["http://localhost/urbatec/images/Logo%20Urbatec.jpg"]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="1" y="40" width="547" height="30" uuid="508fba79-9eda-4351-b48b-d0c35f3d95dd"/>
@@ -399,45 +399,47 @@ ORDER BY
 		</band>
 	</title>
 	<pageHeader>
-		<band height="27" splitType="Stretch">
+		<band height="28" splitType="Stretch">
 			<staticText>
-				<reportElement x="1" y="3" width="82" height="20" uuid="86c31710-27eb-40e4-8788-fda6bce47470"/>
+				<reportElement x="0" y="3" width="59" height="20" uuid="86c31710-27eb-40e4-8788-fda6bce47470">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Operación]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="201" y="3" width="71" height="20" uuid="a6e76761-f4f8-4521-b767-15ec4f347ae3"/>
+				<reportElement x="167" y="3" width="71" height="20" uuid="a6e76761-f4f8-4521-b767-15ec4f347ae3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Proveedor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="83" y="3" width="42" height="20" uuid="f65c45cf-7d90-4b07-a9f1-2f0b69416acf"/>
+				<reportElement x="60" y="3" width="42" height="20" uuid="f65c45cf-7d90-4b07-a9f1-2f0b69416acf"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cuenta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="272" y="3" width="88" height="20" uuid="ac227f42-924e-4b57-8ace-c82fd138d2bc"/>
+				<reportElement x="240" y="3" width="88" height="20" uuid="ac227f42-924e-4b57-8ace-c82fd138d2bc"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Descripción]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="360" y="3" width="82" height="20" uuid="a87433e9-497d-4dcb-b4e6-56ddd42d7187"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="328" y="3" width="72" height="20" uuid="a87433e9-497d-4dcb-b4e6-56ddd42d7187"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Monto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="442" y="3" width="52" height="20" uuid="6ef21abf-1ace-40f0-8ab3-cf9ec3f1afbf"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="400" y="3" width="52" height="20" uuid="6ef21abf-1ace-40f0-8ab3-cf9ec3f1afbf"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[IVA]]></text>
@@ -446,18 +448,25 @@ ORDER BY
 				<reportElement x="5" y="3" width="539" height="1" forecolor="#666666" uuid="b5a6e0fa-acf3-4f6d-aaa9-60b25412c44e"/>
 			</line>
 			<staticText>
-				<reportElement x="125" y="3" width="76" height="20" uuid="c9382013-f8bb-49af-b9fd-e9f40fc51314"/>
+				<reportElement x="102" y="3" width="48" height="20" uuid="c9382013-f8bb-49af-b9fd-e9f40fc51314"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="494" y="3" width="47" height="20" uuid="57345698-3487-4440-b33c-5b604d4fda8f"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="452" y="3" width="47" height="20" uuid="57345698-3487-4440-b33c-5b604d4fda8f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[IIBB]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="3" width="50" height="20" uuid="dab9369f-b51b-4305-9db9-398b775a80f0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -469,58 +478,61 @@ ORDER BY
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="25" splitType="Stretch">
+		<band height="28" splitType="Stretch">
 			<textField>
-				<reportElement x="2" y="3" width="81" height="20" uuid="e6b35ad5-55e8-4fc4-8053-ed0ac3daa999"/>
+				<reportElement x="0" y="3" width="59" height="20" uuid="e6b35ad5-55e8-4fc4-8053-ed0ac3daa999">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
 				<textElement verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{movement_type}+" "+ $F{movement_number}+" / "+$F{movement_year}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="494" y="5" width="47" height="20" uuid="8dd2725f-2ec8-46a0-948a-7b1ca993b675"/>
+				<reportElement x="452" y="3" width="47" height="20" uuid="8dd2725f-2ec8-46a0-948a-7b1ca993b675"/>
 				<textElement textAlignment="Right" verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{movement_item_iibb}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="432" y="5" width="62" height="20" uuid="fe77675a-c49e-49c5-974d-dfdf465e614f"/>
+				<reportElement x="400" y="3" width="52" height="20" uuid="fe77675a-c49e-49c5-974d-dfdf465e614f"/>
 				<textElement textAlignment="Right" verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{movement_item_iva}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="125" y="3" width="76" height="20" uuid="3f907abf-a20f-47f1-940d-b75b796c847c"/>
+				<reportElement x="103" y="3" width="64" height="20" uuid="3f907abf-a20f-47f1-940d-b75b796c847c"/>
 				<textElement verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{movement_date_created}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="83" y="3" width="42" height="20" uuid="baade5aa-035a-4782-be51-f15610d859d4"/>
+				<reportElement x="60" y="3" width="42" height="20" uuid="baade5aa-035a-4782-be51-f15610d859d4"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{concept_code}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="360" y="4" width="72" height="20" uuid="2fd6ee93-b7ce-47c6-a5c2-a24c5a4e25aa"/>
+				<reportElement x="328" y="3" width="72" height="20" uuid="2fd6ee93-b7ce-47c6-a5c2-a24c5a4e25aa"/>
 				<textElement textAlignment="Right" verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{movement_item_amount}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="272" y="4" width="88" height="20" uuid="6aecc4d7-f8f8-4213-a6c1-06175f2f29f2"/>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="240" y="3" width="88" height="20" uuid="6aecc4d7-f8f8-4213-a6c1-06175f2f29f2"/>
 				<textElement verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{movement_item_description}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="201" y="3" width="71" height="20" uuid="682c06fa-4063-493a-b952-6bf5467fbfcb"/>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="167" y="3" width="71" height="20" uuid="682c06fa-4063-493a-b952-6bf5467fbfcb"/>
 				<textElement verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
@@ -529,6 +541,13 @@ ORDER BY
 			<line>
 				<reportElement x="17" y="1" width="508" height="1" forecolor="#CCCCCC" uuid="9f95f876-a030-4100-910a-184392e1f347"/>
 			</line>
+			<textField pattern="#,##0.00">
+				<reportElement x="500" y="3" width="50" height="20" uuid="ce0a924e-8c9b-44f1-aa7b-03f214e1a018"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{movement_item_total}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
