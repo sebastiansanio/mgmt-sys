@@ -57,9 +57,9 @@ environments {
             dbCreate = "validate"
 			driverClassName = "com.mysql.cj.jdbc.Driver"
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
-			username = "urbatec"
-			password = "urbatec"
-            url = "jdbc:mysql://localhost/urbatec?useUnicode=yes&characterEncoding=UTF-8&verifyServerCertificate=false&useSSL=true"
+			username = "admin"
+			password = "hF54TY9bEhQsZ6phD8XJ"
+            url = "jdbc:mysql://database-1-instance-1.cy3qy88ykvlh.us-east-1.rds.amazonaws.com:3306/urbatec?useUnicode=yes&characterEncoding=UTF-8&verifyServerCertificate=false&useSSL=true&serverTimezone=UTC"
             properties {
                jmxEnabled = true
                initialSize = 5
