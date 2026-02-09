@@ -14,6 +14,7 @@
 <asset:stylesheet src="chosen.min.css" />
 
 
+<asset:javascript src="jquery.min.js" />
 <asset:javascript src="bootstrap.min.js" />
 <asset:javascript src="bootstrap-datepicker.js" />
 <asset:javascript src="scripts.js" />

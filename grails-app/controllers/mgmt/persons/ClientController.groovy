@@ -9,7 +9,7 @@ import java.util.List;
 import org.apache.poi.ss.usermodel.CellStyle
 import org.apache.poi.ss.usermodel.CreationHelper
 import pl.touk.excel.export.WebXlsxExporter
-import grails.transaction.Transactional
+import grails.gorm.transactions.Transactional
 
 @Transactional(readOnly = true)
 class ClientController {

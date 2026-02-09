@@ -1,11 +1,26 @@
-/.settings/
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Build output
+*.class
+*.log
+*.jar
+*.war
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.settings/
+.classpath
+.project
+
+# OS
+.DS_Store
+
+# Grails
 /target/
 /target-eclipse/
-/.idea/.name
-/.idea/aws.xml
-/mgmt.iml
-/.idea/misc.xml
-/.idea/modules.xml
-/.idea/vcs.xml
-/.idea/.gitignore
-/.idea/runConfigurations.xml

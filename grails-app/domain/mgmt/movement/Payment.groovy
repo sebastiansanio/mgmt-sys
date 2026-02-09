@@ -2,7 +2,7 @@ package mgmt.movement
 
 import mgmt.account.Account
 
-import org.grails.databinding.BindUsing
+import grails.databinding.BindUsing
 
 class Payment {
 

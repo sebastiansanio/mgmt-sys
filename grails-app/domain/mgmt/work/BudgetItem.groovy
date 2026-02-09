@@ -2,7 +2,7 @@ package mgmt.work
 
 import mgmt.concept.Concept
 
-import org.grails.databinding.BindUsing
+import grails.databinding.BindUsing
 
 class BudgetItem {
 

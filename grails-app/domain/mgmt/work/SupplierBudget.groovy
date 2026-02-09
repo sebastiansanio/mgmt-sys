@@ -7,7 +7,7 @@ import mgmt.invoice.InvoiceType;
 import mgmt.movement.MovementItem
 import mgmt.persons.Supplier
 
-import org.grails.databinding.BindUsing
+import grails.databinding.BindUsing
 
 class SupplierBudget {
 

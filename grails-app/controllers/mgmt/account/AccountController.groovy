@@ -6,7 +6,7 @@ import static org.springframework.http.HttpStatus.*
 
 import java.util.List;
 
-import grails.transaction.Transactional
+import grails.gorm.transactions.Transactional
 import groovy.sql.Sql
 import org.apache.poi.ss.usermodel.CellStyle
 import org.apache.poi.ss.usermodel.CreationHelper

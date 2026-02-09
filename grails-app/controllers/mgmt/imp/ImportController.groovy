@@ -1,6 +1,6 @@
 package mgmt.imp
 
-import grails.transaction.Transactional
+import grails.gorm.transactions.Transactional
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import mgmt.account.Account

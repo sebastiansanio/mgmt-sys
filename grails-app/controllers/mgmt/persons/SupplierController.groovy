@@ -6,7 +6,7 @@ import static org.springframework.http.HttpStatus.*
 
 import java.util.Date;
 
-import grails.transaction.Transactional
+import grails.gorm.transactions.Transactional
 import org.apache.poi.ss.usermodel.CellStyle
 import org.apache.poi.ss.usermodel.CreationHelper
 import pl.touk.excel.export.WebXlsxExporter

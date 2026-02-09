@@ -1,6 +1,6 @@
 package mgmt.concept
 
-import grails.transaction.Transactional
+import grails.gorm.transactions.Transactional
 import mgmt.movement.MovementItem
 import mgmt.work.BudgetItem
 import mgmt.work.SupplierBudget

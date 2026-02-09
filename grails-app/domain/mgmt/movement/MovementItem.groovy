@@ -8,7 +8,7 @@ import mgmt.work.SupplierBudget
 import mgmt.work.Work
 
 
-import org.grails.databinding.BindUsing
+import grails.databinding.BindUsing
 
 class MovementItem {
 	

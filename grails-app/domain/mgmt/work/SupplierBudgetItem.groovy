@@ -1,6 +1,6 @@
 package mgmt.work
 
-import org.grails.databinding.BindUsing
+import grails.databinding.BindUsing
 
 class SupplierBudgetItem {
 

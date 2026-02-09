@@ -3,7 +3,7 @@ package mgmt.movement
 
 
 import static org.springframework.http.HttpStatus.*
-import grails.transaction.Transactional
+import grails.gorm.transactions.Transactional
 
 @Transactional(readOnly = true)
 class InController {

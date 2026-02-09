@@ -1,6 +1,6 @@
 package mgmt.index
 
-import org.grails.databinding.BindUsing
+import grails.databinding.BindUsing
 
 class PriceIndexItem {
 

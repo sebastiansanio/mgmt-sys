@@ -8,19 +8,19 @@
 
 	<hr/>
 	<div class="col-md-offset-4 col-md-2 text-center">
-		<form action='${request.contextPath}/j_spring_security_check' method='POST'
+		<form action='${request.contextPath}/login/authenticate' method='POST'
 			id='loginForm'>
 			<p>
 				<label class="control-label" for='username'>Usuario</label>
 			</p>
 			<p>
-				<input class="form-control" type='text' class='text_' name='j_username' id='username' />
+				<input class="form-control" type='text' class='text_' name='username' id='username' />
 			</p>
 			<p>
 				<label class="control-label" for='password'>Clave</label>
 			</p>
 			<p>
-				<input class="form-control" type='password' class='text_' name='j_password' id='password' />
+				<input class="form-control" type='password' class='text_' name='password' id='password' />
 			</p>
 			<p>
 				<input class="btn btn-primary" type='submit' id="submit" value='Login' />
